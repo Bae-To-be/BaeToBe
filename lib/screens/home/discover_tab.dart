@@ -5,6 +5,7 @@ class DiscoverTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('discover'));
+    return Center(
+        child: Text('discover', style: Theme.of(context).textTheme.headline3));
   }
 }

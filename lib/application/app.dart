@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/boot_callback.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/infrastructure/router_logger.dart';
 import 'package:baetobe/screens/boot/something_went_wrong_screen.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
@@ -27,6 +28,7 @@ class LoadedApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _appRouter = ref.read(routerProvider);
     return MaterialApp.router(
+      theme: theme,
       routerDelegate: AutoRouterDelegate(
         _appRouter,
         navigatorObservers: () => [RouterLogger()],
