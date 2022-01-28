@@ -59,11 +59,13 @@ class AppRouter extends _i8.RootStackRouter {
 
   @override
   List<_i8.RouteConfig> get routes => [
+        _i8.RouteConfig('/#redirect',
+            path: '/', redirectTo: '/splash', fullMatch: true),
         _i8.RouteConfig(SplashScreenRoute.name, path: '/splash'),
         _i8.RouteConfig(LoginScreenRoute.name, path: '/login'),
-        _i8.RouteConfig(HomepageScreenRoute.name, path: '/', children: [
+        _i8.RouteConfig(HomepageScreenRoute.name, path: '/home', children: [
           _i8.RouteConfig(DiscoverTabRoute.name,
-              path: 'discover', parent: HomepageScreenRoute.name),
+              path: '', parent: HomepageScreenRoute.name),
           _i8.RouteConfig(LikesTabRoute.name,
               path: 'likes', parent: HomepageScreenRoute.name),
           _i8.RouteConfig(MatchesTabRoute.name,
@@ -73,7 +75,7 @@ class AppRouter extends _i8.RootStackRouter {
           _i8.RouteConfig('*#redirect',
               path: '*',
               parent: HomepageScreenRoute.name,
-              redirectTo: 'discover',
+              redirectTo: '',
               fullMatch: true)
         ]),
         _i8.RouteConfig('*#redirect',
@@ -108,14 +110,14 @@ class LoginScreenRoute extends _i8.PageRouteInfo<void> {
 /// generated route for [_i3.HomepageScreen]
 class HomepageScreenRoute extends _i8.PageRouteInfo<void> {
   const HomepageScreenRoute({List<_i8.PageRouteInfo>? children})
-      : super(name, path: '/', initialChildren: children);
+      : super(name, path: '/home', initialChildren: children);
 
   static const String name = 'HomepageScreenRoute';
 }
 
 /// generated route for [_i4.DiscoverTab]
 class DiscoverTabRoute extends _i8.PageRouteInfo<void> {
-  const DiscoverTabRoute() : super(name, path: 'discover');
+  const DiscoverTabRoute() : super(name, path: '');
 
   static const String name = 'DiscoverTabRoute';
 }

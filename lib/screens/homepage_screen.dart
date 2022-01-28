@@ -7,6 +7,15 @@ class HomepageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageWrapper(child: AutoRouter());
+    return PageWrapper(
+        child: Column(
+      children: [
+        SizedBox(
+            height: MediaQuery.of(context).size.height * .7,
+            child: const AutoRouter()),
+        Expanded(child: Container()),
+        const Text('home')
+      ],
+    ));
   }
 }

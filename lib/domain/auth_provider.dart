@@ -13,7 +13,6 @@ import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,11 +26,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   GoogleSignIn? googleSignIn;
   final Ref ref;
   AuthNotifier(this.ref) : super(const AsyncValue.loading()) {
-    attachGoogleCallbacks()
-        .then((_) => loadFromStorage())
-        .catchError((error, stacktrace) {
+    attachGoogleCallbacks().then((_) => loadFromStorage()).then((_) {
+      if (state.value == null) {
+        state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+      }
+    }).catchError((error, stacktrace) {
       state = AsyncValue.error(error, stackTrace: stacktrace);
     });
+  }
+
+  bool isLoading() {
+    return (state is AsyncLoading);
   }
 
   Future<void> attachGoogleCallbacks() async {
@@ -53,7 +58,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           if (gKey.idToken == null) {
             // await logout();
           } else {
-            await _authenticateUser('google', gKey.idToken!);
+            await _authenticateUser(LoginProviders.google, gKey.idToken!);
           }
         } catch (e, stacktrace) {
           await FirebaseCrashlytics.instance.recordError(e, stacktrace);
@@ -73,11 +78,15 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   Future<void> loginWithFacebook() async {
     state = const AsyncValue.loading();
     final _error = ref.read(errorProvider.notifier);
+    final _router = ref.read(routerProvider);
     try {
       final LoginResult result = await FacebookAuth.instance.login();
       if (result.status == LoginStatus.success) {
-        await _authenticateUser('facebook', result.accessToken!.token);
+        await _authenticateUser(
+            LoginProviders.facebook, result.accessToken!.token);
+        await _router.replaceNamed(AppLinks.homePage);
       } else {
+        state = AsyncValue.error(Exception(result.message));
         _error.updateError(
           result.message ?? ErrorMessages.somethingWentWrong,
         );
@@ -85,6 +94,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     } on DioError catch (e) {
       _error.updateError(
           e.response?.data?['error'] ?? ErrorMessages.somethingWentWrong);
+      state = AsyncValue.error(e);
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, null);
       _error.updateError(ErrorMessages.somethingWentWrong);
@@ -92,11 +102,13 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     }
   }
 
-  Future<void> loginWithGoogle(BuildContext ctx) async {
+  Future<void> loginWithGoogle() async {
     state = const AsyncValue.loading();
+    final _router = ref.read(routerProvider);
     final _error = ref.read(errorProvider.notifier);
     try {
       await googleSignIn?.signIn();
+      await _router.replaceNamed(AppLinks.homePage);
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
       _error.updateError(ErrorMessages.somethingWentWrong);
@@ -107,7 +119,6 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   Future<void> _authenticateUser(
       String loginMethod, String providerToken) async {
     final client = ref.read(authNetworkClientProvider);
-    final _appRouter = ref.read(routerProvider);
     final _error = ref.read(errorProvider.notifier);
     final _storage = ref.read(secureStorageProvider);
     try {
@@ -125,11 +136,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
         DateTime.now(),
       ));
       await Future.wait([
-        _storage.write(key: StorageKeys.auth, value: jsonEncode(state)),
+        _storage.write(key: StorageKeys.auth, value: jsonEncode(state.value)),
         _analyticsEvent(
             response.data['data']['is_new_user'] as bool, loginMethod)
       ]);
-      await _appRouter.pushNamed(AppLinks.homePage);
     } on DioError catch (e) {
       _error.updateError(
           e.response?.data?['error'] ?? ErrorMessages.somethingWentWrong);

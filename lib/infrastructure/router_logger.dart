@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class RouterLogger extends AutoRouterObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
-    _log('New route pushed: ${route.settings.name}');
+    _log('New route pushed: ${route.settings.name} ');
   }
 
   @override

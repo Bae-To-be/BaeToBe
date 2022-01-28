@@ -9,7 +9,7 @@ class AppLinks {
   static const String updateImages = '/images';
   static const String selfieVerification = '/selfie_verification';
   static const String identityVerification = '/identity_verification';
-  static const String homePage = '/';
+  static const String homePage = '/home';
   static const String splash = '/splash';
   static const String underVerification = '/under_verification';
   static const String verificationRejected = '/rejected';
@@ -37,7 +37,7 @@ class AppLinks {
 }
 
 class HomepageTabs {
-  static const String discover = 'discover';
+  static const String discover = '';
   static const String likes = 'likes';
   static const String matches = 'matches';
   static const String profile = 'profile';

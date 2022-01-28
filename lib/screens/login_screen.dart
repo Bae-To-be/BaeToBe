@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:styled_widget/styled_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends HookConsumerWidget {
@@ -18,17 +19,17 @@ class LoginScreen extends HookConsumerWidget {
       : throw 'Could not launch $_url';
 
   List<Widget> loginButtons(BuildContext context, AuthNotifier auth) {
-    // if (_loading.loading.value) {
-    //   return [
-    //     CircularProgressIndicator(color: Theme.of(context).primaryColor)
-    //         .padding(bottom: 20)
-    //   ];
-    // }
+    if (auth.isLoading()) {
+      return [
+        CircularProgressIndicator(color: Theme.of(context).primaryColor)
+            .padding(bottom: 20)
+      ];
+    }
     return [
       Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: GFButton(
-          onPressed: () => {},
+          onPressed: auth.loginWithFacebook,
           shape: GFButtonShape.pills,
           color: const Color(0xFF1877F2),
           size: GFSize.LARGE,
@@ -50,7 +51,7 @@ class LoginScreen extends HookConsumerWidget {
       Padding(
         padding: const EdgeInsets.only(bottom: 16),
         child: GFButton(
-          onPressed: () => auth.loginWithGoogle(context),
+          onPressed: auth.loginWithGoogle,
           color: Colors.red,
           shape: GFButtonShape.pills,
           size: GFSize.LARGE,
@@ -73,7 +74,7 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.read(authProvider.notifier);
+    final auth = ref.watch(authProvider.notifier);
 
     return PageWrapper(
       child: Padding(

@@ -1,4 +1,3 @@
-import 'package:baetobe/application/page_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTab extends StatelessWidget {
@@ -6,6 +5,6 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageWrapper(child: Center(child: Text('profiles')));
+    return const Center(child: Text('profile'));
   }
 }
