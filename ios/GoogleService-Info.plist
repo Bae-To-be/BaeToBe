@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>549498625641-sq5cvgr59jg42fa21mt057g633jncaku.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.549498625641-sq5cvgr59jg42fa21mt057g633jncaku</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCJlp-6NZzYxOG9cD212Dwkb3Sj77D5Ed4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>549498625641</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.baetobe.baetobe</string>
+	<key>PROJECT_ID</key>
+	<string>bae-to-be-49037</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bae-to-be-49037.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:549498625641:ios:8f014983b2422b384f8cf8</string>
+</dict>
+</plist>

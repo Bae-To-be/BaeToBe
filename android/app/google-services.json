@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "549498625641",
+    "project_id": "bae-to-be-49037",
+    "storage_bucket": "bae-to-be-49037.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549498625641:android:4eaa90f6912b23534f8cf8",
+        "android_client_info": {
+          "package_name": "com.baetobe.baetobe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549498625641-ilmfdtjoagacdrqlo1kft4h17nm7f259.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwQlPyQUcWZ3aNrtrQyfLi-ep72Ru0TAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549498625641-ilmfdtjoagacdrqlo1kft4h17nm7f259.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

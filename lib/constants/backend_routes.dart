@@ -1,0 +1,41 @@
+class BackendRoutes {
+  static const String authorize = '/api/v1/auth';
+  static const String logout = '/api/v1/logout';
+  static const String refreshToken = '/api/v1/refresh_token';
+  static const String updateUser = '/api/v1/user';
+  static const String userDetails = '/api/v1/me';
+  static const String listGenders = '/api/v1/genders';
+  static const String listIndustries = '/api/v1/industries';
+  static const String listCountries = '/api/v1/countries';
+  static const String searchCities = '/api/v1/cities';
+  static const String searchWorkTitles = '/api/v1/work_titles';
+  static const String searchCompanies = '/api/v1/companies';
+  static const String searchCourses = '/api/v1/courses';
+  static const String searchUniversities = '/api/v1/universities';
+  static const String listImages = '/api/v1/images';
+  static const String uploadImage = '/api/v1/images';
+  static const String deleteImage = '/api/v1/images/%{position}';
+  static const String listVerificationFiles = '/api/v1/verification_files';
+  static const String uploadVerificationFile = '/api/v1/verification_files';
+  static const String deleteVerificationFile =
+      '/api/v1/verification_files/%{file_type}';
+  static const String verificationInfo = '/api/v1/verification_info';
+  static const String articles = '/api/v1/articles';
+  static const String listReligions = '/api/v1/religions';
+  static const String listLanguages = '/api/v1/languages';
+  static const String listChildrenPreferences = '/api/v1/children_preferences';
+  static const String listFoodPreferences = '/api/v1/food_preferences';
+  static const String listSmokingPreferences = '/api/v1/smoking_preferences';
+  static const String listDrinkingPreferences = '/api/v1/drinking_preferences';
+  static const String deleteAccount = '/api/v1/me';
+  static const String potentialMatches = '/api/v1/potential_matches';
+  static const String swipe = '/api/v1/swipes';
+  static const String userProfile = '/api/v1/users/%{id}';
+  static const String listLikesSent = '/api/v1/likes/sent';
+  static const String listLikesReceived = '/api/v1/likes/received';
+  static const String listMatches = '/api/v1/matches';
+  static const String listMessages = '/api/v1/matches/%{match_id}/messages';
+  static const String closeMatch = '/api/v1/matches/%{match_id}/close';
+  static const String listReportReasons = '/api/v1/user_report_reasons';
+  static const String reportUser = '/api/v1/user_reports';
+}

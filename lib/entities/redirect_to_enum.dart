@@ -1,0 +1,4 @@
+enum Redirect {
+  none,
+  back,
+}
