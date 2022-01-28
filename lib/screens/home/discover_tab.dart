@@ -6,6 +6,6 @@ class DiscoverTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageWrapper(child: Container());
+    return const PageWrapper(child: Center(child: Text('discover')));
   }
 }

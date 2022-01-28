@@ -12,7 +12,7 @@ class RemoteConfigs {
   static const String googleClientId = 'GOOGLE_CLIENT_ID';
 }
 
-class ErrorBodies {
+class ErrorMessages {
   static const String somethingWentWrong = 'Something went wrong';
 }
 

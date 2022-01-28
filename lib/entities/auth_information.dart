@@ -27,4 +27,8 @@ class AuthInformation {
         'expires_in': expiresIn,
         'fetched_at': dateFormat.format(fetchedAt)
       };
+
+  bool isLoggedIn() {
+    return accessToken != '';
+  }
 }
