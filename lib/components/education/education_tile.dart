@@ -66,6 +66,7 @@ class EducationTile extends HookConsumerWidget {
           courseController.text != education.courseName) {
         courseController.text = education.courseName;
       }
+      return null;
     }, [education]);
 
     if (isEditing) {

@@ -117,6 +117,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
           workTitleController.text != state.workTitleName) {
         workTitleController.text = state.workTitleName!;
       }
+      return null;
     }, [state]);
     return FormLayout(
         children: [
