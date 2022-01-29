@@ -9,6 +9,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/post_login_route.dart';
 import 'package:baetobe/entities/auth_information.dart';
+import 'package:baetobe/infrastructure/location_service.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -138,12 +139,12 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
 
   Future<String> getAccessToken() async {
     if (state.value!.shouldRefresh() == true) {
-      await refreshToken();
+      await _refreshToken();
     }
     return state.value!.accessToken;
   }
 
-  Future<void> refreshToken() async {
+  Future<void> _refreshToken() async {
     final storage = ref.read(secureStorageProvider);
     final client = ref.read(authNetworkClientProvider);
     final error = ref.read(errorProvider.notifier);
@@ -190,6 +191,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await Future.wait([
             storage.write(
                 key: StorageKeys.auth, value: jsonEncode(state.value)),
+            ref.read(locationProvider).syncLocationIfRequired(),
             _analyticsEvent(
                 response.data['data']['is_new_user'] as bool, loginMethod)
           ]);
@@ -214,6 +216,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     }
     state = AsyncValue.data(AuthInformation.fromJson(jsonDecode(value)));
     final router = ref.read(routerProvider);
-    await router.replaceNamed(await postLoginRoute(ref));
+    await Future.wait([
+      ref.read(locationProvider).syncLocationIfRequired(),
+      router.replaceNamed(await postLoginRoute(ref))
+    ]);
   }
 }

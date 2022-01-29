@@ -7,6 +7,8 @@ class Headings {
   static const String sellingPoint =
       'India\'s first professional only matchmaking app';
   static const String enterBirthday = 'When were you born?';
+  static const String enterGender = 'Which gender describes you?';
+  static const String gender = 'Gender';
 }
 
 class InfoLabels {
@@ -21,6 +23,8 @@ class ButtonTexts {
 class LinkTexts {
   static const String termsAndConditions = 'Terms and Conditions ';
   static const String privacyPolicy = 'Privacy Policy.';
+  static const String viewMore = 'View More';
+  static const String cont = 'Continue';
 }
 
 class BodyTexts {

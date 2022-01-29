@@ -18,4 +18,5 @@ class ErrorMessages {
 
 class StorageKeys {
   static const auth = 'auth_info';
+  static const locationUpdatedAt = 'location_updated_at';
 }

@@ -13,7 +13,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 final _eighteenYearsAgo = DateTime.now().subtract(const Duration(days: 6935));
 
-final _selected = StateProvider<DateTime?>((ref) {
+final _selected = StateProvider.autoDispose<DateTime?>((ref) {
   final user = ref.watch(userProvider);
   DateTime? result;
   if (user.value?.birthday != null) {
@@ -22,7 +22,7 @@ final _selected = StateProvider<DateTime?>((ref) {
   return result;
 });
 
-final _age = Provider<num?>((ref) {
+final _age = Provider.autoDispose<num?>((ref) {
   final s = ref.watch(_selected);
   if (s == null) {
     return null;
