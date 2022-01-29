@@ -46,11 +46,11 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
     await error.safelyExecute(
         command: client.patch(BackendRoutes.updateUser, data: attributes),
         onSuccess: (response) async {
+          state = AsyncValue.data(User.fromJson(response.data['data']));
+          await _addAnalyticAttributes();
           if (routeTo != null) {
             await router.pushNamed(routeTo);
           }
-          state = AsyncValue.data(User.fromJson(response.data['data']));
-          await _addAnalyticAttributes();
         },
         onError: (error) => state = AsyncValue.error(error));
   }

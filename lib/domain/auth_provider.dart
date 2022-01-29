@@ -30,7 +30,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   AuthNotifier(this.ref) : super(const AsyncValue.loading()) {
     final router = ref.read(routerProvider);
 
-    attachGoogleCallbacks().then((_) => loadFromStorage()).then((_) {
+    initialize().then((_) {
       if (state.value == null) {
         state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
         router.replaceNamed(AppLinks.login);
@@ -44,7 +44,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     return (state is AsyncLoading);
   }
 
-  Future<void> attachGoogleCallbacks() async {
+  Future<void> initialize() async {
     state = const AsyncValue.loading();
     final error = ref.read(errorProvider.notifier);
     googleSignIn = GoogleSignIn(
@@ -72,7 +72,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
       }
     });
     try {
-      await googleSignIn?.signInSilently();
+      final result = await loadFromStorage();
+      if (!result) {
+        await googleSignIn?.signInSilently();
+      }
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
       error.updateError(ErrorMessages.somethingWentWrong);
@@ -208,11 +211,11 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     return FirebaseAnalytics.instance.logLogin(loginMethod: loginMethod);
   }
 
-  Future<void> loadFromStorage() async {
+  Future<bool> loadFromStorage() async {
     final _storage = ref.read(secureStorageProvider);
     String? value = await _storage.read(key: StorageKeys.auth);
     if (value == null) {
-      return;
+      return false;
     }
     state = AsyncValue.data(AuthInformation.fromJson(jsonDecode(value)));
     final router = ref.read(routerProvider);
@@ -220,5 +223,6 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
       ref.read(locationProvider).syncLocationIfRequired(),
       router.replaceNamed(await postLoginRoute(ref))
     ]);
+    return true;
   }
 }

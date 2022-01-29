@@ -78,6 +78,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
     final genderListing = ref.watch(genderProvider);
     final state = ref.watch(_selected);
     final user = ref.watch(userProvider);
+
     void onSubmit() {
       if (state.isEmpty) {
         return;
@@ -89,7 +90,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
 
     return FormLayout(
         children: <Widget>[
-          const Heading5(text: Headings.enterGender)
+          const Heading5(text: Headings.enterInterestedGender)
               .padding(top: 32, bottom: 36, left: 15),
           genderListing.maybeWhen(
               data: (GenderListing listing) => ListView(
@@ -103,9 +104,14 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                             currentState.where((id) => id != value).toList();
                         return;
                       }
-                      if (allGenders != null && value == allGenders.id) {
-                        ref.read(_selected.notifier).state = [value];
-                        return;
+                      if (allGenders != null) {
+                        if (currentState.contains(allGenders.id)) {
+                          return;
+                        }
+                        if (value == allGenders.id) {
+                          ref.read(_selected.notifier).state = [value];
+                          return;
+                        }
                       }
                       ref.read(_selected.notifier).state = [
                         ...currentState,
