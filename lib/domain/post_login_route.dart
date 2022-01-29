@@ -10,5 +10,8 @@ Future<String> postLoginRoute(ref) async {
   if (userNotifier.user.gender == null) {
     return AppLinks.updateGender;
   }
+  if (userNotifier.user.interestedGenders.isEmpty) {
+    return AppLinks.updateInterestedGenders;
+  }
   return AppLinks.homePage;
 }

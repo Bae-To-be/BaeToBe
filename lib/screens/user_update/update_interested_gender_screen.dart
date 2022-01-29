@@ -18,13 +18,11 @@ final _selected = StateProvider.autoDispose<List<int>>((ref) {
   final user = ref.watch(userProvider);
   final genders = ref.watch(genderProvider);
   user.whenData((value) {
-    if (value.gender != null) {
+    if (value.interestedGenders.isNotEmpty) {
       genders.whenData((listing) {
-        final match = listing.allGenders
-            .firstWhereOrNull((gender) => gender.name == value.gender);
-        if (match != null) {
-          result = [match.id];
-        }
+        final matches = listing.allGenders
+            .where((gender) => value.interestedGenders.contains(gender.name));
+        result = matches.map((gender) => gender.id).toList();
       });
     }
   });
@@ -32,8 +30,8 @@ final _selected = StateProvider.autoDispose<List<int>>((ref) {
   return result;
 });
 
-class UpdateGenderScreen extends HookConsumerWidget {
-  const UpdateGenderScreen({Key? key}) : super(key: key);
+class UpdateInterestedGenderScreen extends HookConsumerWidget {
+  const UpdateInterestedGenderScreen({Key? key}) : super(key: key);
 
   List<Widget> _tiles(
       BuildContext context,
@@ -43,40 +41,34 @@ class UpdateGenderScreen extends HookConsumerWidget {
       void Function() onSubmit) {
     List<Widget> result = [];
 
-    bool defaultSelected = false;
-
     for (var gender in genderListing.defaultGenders) {
       bool isSelected = selected.contains(gender.id);
-
-      if (gender.name == 'All') {
-        continue;
-      }
 
       result.add(SelectTile(
           title: gender.name,
           selected: isSelected,
           onTap: () => onTap(gender.id)));
-
-      if (isSelected) {
-        defaultSelected = true;
-      }
     }
 
-    if (selected.isNotEmpty && !defaultSelected) {
-      Gender selection = genderListing.allGenders
-          .firstWhere((gender) => selected.contains(gender.id));
+    if (selected.isNotEmpty) {
+      Iterable<Gender> selections = genderListing.allGenders.where((gender) =>
+          selected.contains(gender.id) &&
+          !genderListing.defaultGenders.contains(gender));
 
-      result.add(SelectTile(
-          title: selection.name,
-          selected: true,
-          onTap: () => onTap(selection.id)));
+      for (var selection in selections) {
+        result.add(SelectTile(
+            title: selection.name,
+            selected: true,
+            onTap: () => onTap(selection.id)));
+      }
     }
 
     result.add(ViewMoreGenders(
       onSubmit: onSubmit,
+      excludeAll: false,
       onSelect: (int id) => onTap(id),
       selectionNotifier: _selected,
-      heading: Headings.gender,
+      heading: Headings.interestedIn,
     ));
     return result;
   }
@@ -91,8 +83,8 @@ class UpdateGenderScreen extends HookConsumerWidget {
         return;
       }
       ref.read(userProvider.notifier).updateAttributes(
-          {'gender_id': state.first},
-          routeTo: AppLinks.updateInterestedGenders);
+          {'interested_gender_ids': state},
+          routeTo: AppLinks.updateWorkDetails);
     }
 
     return FormLayout(
@@ -100,9 +92,25 @@ class UpdateGenderScreen extends HookConsumerWidget {
           const Heading5(text: Headings.enterGender)
               .padding(top: 32, bottom: 36, left: 15),
           genderListing.maybeWhen(
-              data: (GenderListing listing) => Column(
+              data: (GenderListing listing) => ListView(
+                    shrinkWrap: true,
                     children: _tiles(context, listing, state, (int value) {
-                      ref.read(_selected.notifier).state = [value];
+                      final currentState = ref.read(_selected.notifier).state;
+                      final allGenders = genderListing.value?.defaultGenders
+                          .firstWhereOrNull((gender) => gender.name == 'All');
+                      if (currentState.contains(value)) {
+                        ref.read(_selected.notifier).state =
+                            currentState.where((id) => id != value).toList();
+                        return;
+                      }
+                      if (allGenders != null && value == allGenders.id) {
+                        ref.read(_selected.notifier).state = [value];
+                        return;
+                      }
+                      ref.read(_selected.notifier).state = [
+                        ...currentState,
+                        value
+                      ];
                     }, onSubmit),
                   ),
               orElse: () => Center(

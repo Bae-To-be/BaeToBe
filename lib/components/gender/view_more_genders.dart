@@ -10,6 +10,7 @@ import 'package:baetobe/entities/gender.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:styled_widget/styled_widget.dart';
 
 final _searchResults = StateProvider.autoDispose<List<Gender>>((ref) {
   List<Gender> results = [];
@@ -25,17 +26,26 @@ final _searchResults = StateProvider.autoDispose<List<Gender>>((ref) {
           .toList();
     }
   });
+  return results;
+});
+
+final _searchResultsWithoutAll = StateProvider.autoDispose<List<Gender>>((ref) {
+  final results = ref.watch(_searchResults);
   return results.whereNot((gender) => gender.name == 'All').toList();
 });
 
 class ViewMoreGenders extends HookConsumerWidget {
   final void Function() onSubmit;
   final void Function(int id) onSelect;
+  final String heading;
   final AutoDisposeStateProvider<List<int>> selectionNotifier;
+  final bool excludeAll;
 
   const ViewMoreGenders(
       {Key? key,
       required this.onSubmit,
+      this.excludeAll = true,
+      required this.heading,
       required this.selectionNotifier,
       required this.onSelect})
       : super(key: key);
@@ -53,11 +63,12 @@ class ViewMoreGenders extends HookConsumerWidget {
           builder: (BuildContext context) {
             return Column(
               children: [
-                const BottomSheetHeader(text: Headings.gender),
+                BottomSheetHeader(text: heading),
                 const SearchField(),
                 Expanded(
                   child: Consumer(builder: (context, ref, child) {
-                    final results = ref.watch(_searchResults);
+                    final results = ref.watch(
+                        excludeAll ? _searchResultsWithoutAll : _searchResults);
                     final selected = ref.watch(selectionNotifier);
 
                     return ListView.builder(
@@ -67,7 +78,7 @@ class ViewMoreGenders extends HookConsumerWidget {
                             title: results[index].name,
                             selected: selected.contains(results[index].id),
                             onTap: () => onSelect(results[index].id),
-                          );
+                          ).padding(horizontal: 10);
                         });
                   }),
                 ),

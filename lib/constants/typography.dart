@@ -8,7 +8,9 @@ class Headings {
       'India\'s first professional only matchmaking app';
   static const String enterBirthday = 'When were you born?';
   static const String enterGender = 'Which gender describes you?';
+  static const String enterInterestedGender = 'Who are you interested in?';
   static const String gender = 'Gender';
+  static const String interestedIn = 'Interested In';
 }
 
 class InfoLabels {

@@ -9,6 +9,7 @@ import 'package:baetobe/screens/homepage_screen.dart';
 import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/user_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/user_update/update_gender_screen.dart';
+import 'package:baetobe/screens/user_update/update_interested_gender_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -29,6 +30,10 @@ import 'package:baetobe/screens/user_update/update_gender_screen.dart';
     AutoRoute(
       path: AppLinks.updateGender,
       page: UpdateGenderScreen,
+    ),
+    AutoRoute(
+      path: AppLinks.updateInterestedGenders,
+      page: UpdateInterestedGenderScreen,
     ),
     //user routes with a nested router
     AutoRoute(
