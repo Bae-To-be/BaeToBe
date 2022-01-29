@@ -5,7 +5,7 @@ import 'package:baetobe/components/gender/view_more_genders.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/gender_provider.dart';
+import 'package:baetobe/domain/background_fields/gender_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/gender.dart';
 import 'package:collection/collection.dart';
@@ -90,8 +90,9 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
 
     return FormLayout(
         children: <Widget>[
+          const SizedBox(height: 32),
           const Heading5(text: Headings.enterInterestedGender)
-              .padding(top: 32, bottom: 36, left: 15),
+              .padding(top: 32, bottom: 36, left: 10),
           genderListing.maybeWhen(
               data: (GenderListing listing) => ListView(
                     shrinkWrap: true,

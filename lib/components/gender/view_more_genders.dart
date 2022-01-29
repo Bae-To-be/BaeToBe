@@ -3,7 +3,7 @@ import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/gender_provider.dart';
+import 'package:baetobe/domain/background_fields/gender_provider.dart';
 import 'package:baetobe/domain/search_query_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/gender.dart';

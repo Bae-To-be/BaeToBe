@@ -1,5 +1,6 @@
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
+import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/user_provider.dart';
@@ -50,15 +51,9 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
 
     return FormLayout(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                Headings.enterBirthday,
-                style: Theme.of(context).textTheme.headline5,
-              ).padding(top: 32, bottom: 36, left: 15),
-            ],
-          ),
+          const SizedBox(height: 32),
+          const Heading5(text: Headings.enterBirthday)
+              .padding(top: 32, bottom: 36, left: 10),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

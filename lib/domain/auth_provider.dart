@@ -48,7 +48,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     state = const AsyncValue.loading();
     final error = ref.read(errorProvider.notifier);
     googleSignIn = GoogleSignIn(
-      clientId: RemoteConfig.instance.getString(RemoteConfigs.googleClientId),
+      clientId:
+          FirebaseRemoteConfig.instance.getString(RemoteConfigs.googleClientId),
       scopes: [
         'profile',
         'email',
@@ -167,7 +168,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await storage.write(
               key: StorageKeys.auth, value: jsonEncode(state.value));
         },
-        onError: (error) => state = AsyncValue.error(error));
+        onError: (error) => logout());
   }
 
   Future<void> _authenticateUser(

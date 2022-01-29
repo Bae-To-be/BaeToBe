@@ -111,7 +111,7 @@ class LoginScreen extends HookConsumerWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           launchURL(
-                              '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('TERMS_AND_CONDITIONS')}');
+                              '${FirebaseRemoteConfig.instance.getString('API_HOST')}${FirebaseRemoteConfig.instance.getString('TERMS_AND_CONDITIONS')}');
                         },
                     ),
                     const TextSpan(text: 'and '),
@@ -122,7 +122,7 @@ class LoginScreen extends HookConsumerWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           launchURL(
-                              '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('PRIVACY_POLICY')}');
+                              '${FirebaseRemoteConfig.instance.getString('API_HOST')}${FirebaseRemoteConfig.instance.getString('PRIVACY_POLICY')}');
                         },
                     ),
                   ],

@@ -11,10 +11,43 @@ class Headings {
   static const String enterInterestedGender = 'Who are you interested in?';
   static const String gender = 'Gender';
   static const String interestedIn = 'Interested In';
+  static const String work = 'Work';
+  static const String enterIndustry = "What's your work industry?";
+  static const String educationBackground = 'Where did you study?';
+  static const String enterWorkTitle = "What's your designation?";
+  static const String enterCompany = 'Where do you work?';
+  static const String enterLinkedIn = 'Add your LinkedIn Profile';
+  static const String universityName = 'School Name';
+  static const String courseName = 'What did you study?';
+  static const String year = 'Class Year';
+  static const String addPhotos = 'Add photos';
+  static const String selfieVerification = 'Selfie Verification';
+  static const String identityVerification = 'Identity Verification';
+  static const String enterHometown = 'Where do you live?';
+  static const String enterReligion = 'What\'s your religion?';
+  static const String childrenPreference = 'Children';
+  static const String foodPreference = 'Food';
+  static const String smokingPreference = 'Smoking';
+  static const String drinkingPreference = 'Drinking';
+  static const String updateHeight = 'Height';
 }
 
 class InfoLabels {
   static const String age = 'Your age will be displayed on your profile';
+  static const String selectIndustry = 'Select your industry';
+  static const String selectYear = 'Select year';
+  static const String schoolDetails = 'School Details';
+  static const String classYearHelper = 'the year you finished this course';
+  static const String cityHint = 'Enter your city';
+  static const String countryHint = 'Enter your country';
+}
+
+class Placeholders {
+  static const String company = 'Add your workplace';
+  static const String workTitle = 'Eg: Designer, Architect';
+  static const String linkedInURL = 'Add Profile URL';
+  static const String university = 'Eg: IIT, BITS Pilani';
+  static const String course = 'Eg: BCA, MBA';
 }
 
 class ButtonTexts {

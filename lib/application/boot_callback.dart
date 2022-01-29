@@ -6,7 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final bootCallback = FutureProvider<void>((ref) async {
   await Firebase.initializeApp();
-  final RemoteConfig remoteConfig = RemoteConfig.instance;
+  final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
   // Enable for debugging
   // await remoteConfig.setConfigSettings(RemoteConfigSettings(
   //   fetchTimeout: const Duration(seconds: 10),
