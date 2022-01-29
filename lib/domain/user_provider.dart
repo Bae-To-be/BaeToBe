@@ -1,3 +1,4 @@
+import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/entities/user.dart';
@@ -21,7 +22,7 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
             hometown: UserHometown('', ''),
             languages: [])));
 
-  get user => state.value;
+  User? get user => state.value;
 
   Future<void> loadUser() async {
     state = const AsyncValue.loading();
@@ -36,13 +37,18 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
         onError: (error) => AsyncValue.error(error));
   }
 
-  Future<void> updateAttributes(Map<String, dynamic> attributes) async {
+  Future<void> updateAttributes(Map<String, dynamic> attributes,
+      {String? routeTo}) async {
     state = const AsyncValue.loading();
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
+    final router = ref.read(routerProvider);
     await error.safelyExecute(
         command: client.patch(BackendRoutes.updateUser, data: attributes),
         onSuccess: (response) async {
+          if (routeTo != null) {
+            await router.pushNamed(routeTo);
+          }
           state = AsyncValue.data(User.fromJson(response.data['data']));
           await _addAnalyticAttributes();
         },

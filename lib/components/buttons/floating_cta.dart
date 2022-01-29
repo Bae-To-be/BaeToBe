@@ -7,6 +7,7 @@ class FloatingCta extends StatelessWidget {
   final String heroTag;
   final Widget body;
   final Color? color;
+  final bool loading;
   final void Function() onPressed;
 
   final Alignment alignment;
@@ -17,12 +18,18 @@ class FloatingCta extends StatelessWidget {
       this.body =
           const Icon(FontAwesomeIcons.chevronRight, color: Colors.white),
       this.onPressed = doNothing,
+      this.loading = false,
       this.color,
       this.alignment = Alignment.bottomRight})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return CircularProgressIndicator(color: Theme.of(context).primaryColor)
+          .alignment(Alignment.bottomRight);
+    }
+
     return FloatingActionButton(
             heroTag: 'submit',
             backgroundColor: color ?? Theme.of(context).primaryColor,
