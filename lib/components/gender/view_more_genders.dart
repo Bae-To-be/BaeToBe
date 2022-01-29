@@ -1,6 +1,6 @@
 import 'package:baetobe/components/bottomsheet_utils.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
-import 'package:baetobe/components/forms/selet_tile.dart';
+import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/gender_provider.dart';
@@ -12,7 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-final _searchResults = StateProvider.autoDispose<List<Gender>>((ref) {
+final _searchResults =
+    StateProvider.autoDispose.family<List<Gender>, bool>((ref, excludeAll) {
   List<Gender> results = [];
   final genders = ref.watch(genderProvider);
   final query = ref.watch(searchQueryProvider);
@@ -26,12 +27,10 @@ final _searchResults = StateProvider.autoDispose<List<Gender>>((ref) {
           .toList();
     }
   });
+  if (excludeAll) {
+    return results.whereNot((gender) => gender.name == 'All').toList();
+  }
   return results;
-});
-
-final _searchResultsWithoutAll = StateProvider.autoDispose<List<Gender>>((ref) {
-  final results = ref.watch(_searchResults);
-  return results.whereNot((gender) => gender.name == 'All').toList();
 });
 
 class ViewMoreGenders extends HookConsumerWidget {
@@ -67,8 +66,7 @@ class ViewMoreGenders extends HookConsumerWidget {
                 const SearchField(),
                 Expanded(
                   child: Consumer(builder: (context, ref, child) {
-                    final results = ref.watch(
-                        excludeAll ? _searchResultsWithoutAll : _searchResults);
+                    final results = ref.watch(_searchResults(excludeAll));
                     final selected = ref.watch(selectionNotifier);
 
                     return ListView.builder(

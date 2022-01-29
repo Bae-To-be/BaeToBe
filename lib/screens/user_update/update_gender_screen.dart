@@ -1,6 +1,6 @@
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
-import 'package:baetobe/components/forms/selet_tile.dart';
+import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/gender/view_more_genders.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
