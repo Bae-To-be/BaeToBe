@@ -34,7 +34,7 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
           state = AsyncValue.data(User.fromJson(response.data['data']));
           await _addAnalyticAttributes();
         },
-        onError: (error) => AsyncValue.error(error));
+        onError: (error) => state = AsyncValue.error(error));
   }
 
   Future<void> updateAttributes(Map<String, dynamic> attributes,
@@ -52,7 +52,7 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
           state = AsyncValue.data(User.fromJson(response.data['data']));
           await _addAnalyticAttributes();
         },
-        onError: (error) => AsyncValue.error(error));
+        onError: (error) => state = AsyncValue.error(error));
   }
 
   Future<void> _addAnalyticAttributes() async {

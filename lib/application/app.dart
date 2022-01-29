@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/boot_callback.dart';
+import 'package:baetobe/application/page_wrapper.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/domain/auth_provider.dart';
@@ -37,6 +38,12 @@ class LoadedApp extends HookConsumerWidget {
                 _appRouter,
                 navigatorObservers: () => [RouterLogger()],
               ),
+              builder: (context, child) {
+                if (child == null) {
+                  return Container();
+                }
+                return PageWrapper(child: child);
+              },
               routeInformationParser: _appRouter.defaultRouteParser(),
               debugShowCheckedModeBanner: false,
             ));

@@ -4,7 +4,7 @@ import 'package:styled_widget/styled_widget.dart';
 ShapeBorder bottomSheetShape() {
   return const RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(
-      top: Radius.circular(20),
+      top: Radius.circular(30),
     ),
   );
 }

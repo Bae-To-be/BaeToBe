@@ -164,7 +164,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await storage.write(
               key: StorageKeys.auth, value: jsonEncode(state.value));
         },
-        onError: (error) => AsyncValue.error(error));
+        onError: (error) => state = AsyncValue.error(error));
   }
 
   Future<void> _authenticateUser(
@@ -197,7 +197,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           ]);
           await router.replaceNamed(await postLoginRoute(ref));
         },
-        onError: (error) => AsyncValue.error(error));
+        onError: (error) => state = AsyncValue.error(error));
   }
 
   Future<void> _analyticsEvent(bool isNewLogin, String loginMethod) {

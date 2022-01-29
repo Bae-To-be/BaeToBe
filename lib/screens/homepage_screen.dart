@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:baetobe/application/page_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class HomepageScreen extends StatelessWidget {
@@ -7,8 +6,7 @@ class HomepageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageWrapper(
-        child: Column(
+    return Column(
       children: [
         SizedBox(
             height: MediaQuery.of(context).size.height * .7,
@@ -16,6 +14,6 @@ class HomepageScreen extends StatelessWidget {
         Expanded(child: Container()),
         const Text('home')
       ],
-    ));
+    );
   }
 }

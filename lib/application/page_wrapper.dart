@@ -12,20 +12,27 @@ class PageWrapper extends StatelessWidget {
       backgroundColor: const Color(0xFFF2F2F2),
       body: SafeArea(
         child: Stack(
-          children: [
-            child,
-            Consumer(builder: (context, ref, child) {
-              final errorMessage = ref.watch(errorProvider);
-              if (errorMessage != null) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(errorMessage),
-                ));
-              }
-              return Container();
-            })
-          ],
+          children: [child, const ErrorConsumer()],
         ),
       ),
     );
+  }
+}
+
+class ErrorConsumer extends HookConsumerWidget {
+  const ErrorConsumer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final errorMessage = ref.watch(errorProvider);
+
+    if (errorMessage != null) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(errorMessage),
+        ));
+      });
+    }
+    return Container();
   }
 }

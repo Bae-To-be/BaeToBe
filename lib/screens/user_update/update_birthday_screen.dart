@@ -1,4 +1,3 @@
-import 'package:baetobe/application/page_wrapper.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/constants/app_links.dart';
@@ -49,52 +48,49 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
     AsyncValue<User> _user = ref.watch(userProvider);
     final _state = ref.watch(_selected);
 
-    return PageWrapper(
-      child: FormLayout(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  Headings.enterBirthday,
-                  style: Theme.of(context).textTheme.headline5,
-                ).padding(top: 32, bottom: 36),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SfDateRangePicker(
-                    showNavigationArrow: true,
-                    selectionColor: Theme.of(context).primaryColor,
-                    initialDisplayDate: _state,
-                    initialSelectedDate: _state,
-                    onSelectionChanged: (value) =>
-                        ref.read(_selected.notifier).state = value.value,
-                    maxDate: _eighteenYearsAgo,
-                    minDate: DateTime(1950, 01, 01)),
-              ],
-            ),
-            _AgeBar(),
-            Text(
-              InfoLabels.age,
-              style: Theme.of(context).textTheme.caption,
-            ).padding(vertical: 8).alignment(Alignment.center),
-          ],
-          floatingSubmit: FloatingCta(
-            color:
-                _state != null ? Theme.of(context).primaryColor : Colors.grey,
-            loading: _user is AsyncLoading,
-            onPressed: () {
-              if (_state == null) {
-                return;
-              }
-              ref.read(userProvider.notifier).updateAttributes(
-                  {'birthday': onlyDate.format(_state)},
-                  routeTo: AppLinks.updateGender);
-            },
-          )),
-    );
+    return FormLayout(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                Headings.enterBirthday,
+                style: Theme.of(context).textTheme.headline5,
+              ).padding(top: 32, bottom: 36, left: 15),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SfDateRangePicker(
+                  showNavigationArrow: true,
+                  selectionColor: Theme.of(context).primaryColor,
+                  initialDisplayDate: _state,
+                  initialSelectedDate: _state,
+                  onSelectionChanged: (value) =>
+                      ref.read(_selected.notifier).state = value.value,
+                  maxDate: _eighteenYearsAgo,
+                  minDate: DateTime(1950, 01, 01)),
+            ],
+          ),
+          _AgeBar(),
+          Text(
+            InfoLabels.age,
+            style: Theme.of(context).textTheme.caption,
+          ).padding(vertical: 8).alignment(Alignment.center),
+        ],
+        floatingSubmit: FloatingCta(
+          color: _state != null ? Theme.of(context).primaryColor : Colors.grey,
+          loading: _user is AsyncLoading,
+          onPressed: () {
+            if (_state == null) {
+              return;
+            }
+            ref.read(userProvider.notifier).updateAttributes(
+                {'birthday': onlyDate.format(_state)},
+                routeTo: AppLinks.updateGender);
+          },
+        ));
   }
 }
 
