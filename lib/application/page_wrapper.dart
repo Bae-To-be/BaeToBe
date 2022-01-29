@@ -31,6 +31,9 @@ class ErrorConsumer extends HookConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(errorMessage),
         ));
+
+        Future.delayed(const Duration(seconds: 1),
+            () => ref.read(errorProvider.notifier).updateError(null));
       });
     }
     return Container();

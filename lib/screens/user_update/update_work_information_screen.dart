@@ -97,15 +97,19 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
     workTitleController.addListener(() {
       if (ref.read(workFormStateProvider.notifier).state.workTitleName !=
           workTitleController.text) {
-        ref.read(workFormStateProvider.notifier).state =
-            state.copyWith(newWorkTitleName: workTitleController.text);
+        ref.read(workFormStateProvider.notifier).state = ref
+            .read(workFormStateProvider.notifier)
+            .state
+            .copyWith(newWorkTitleName: workTitleController.text);
       }
     });
     companyController.addListener(() {
       if (ref.read(workFormStateProvider.notifier).state.companyName !=
           companyController.text) {
-        ref.read(workFormStateProvider.notifier).state =
-            state.copyWith(newCompanyName: companyController.text);
+        ref.read(workFormStateProvider.notifier).state = ref
+            .read(workFormStateProvider.notifier)
+            .state
+            .copyWith(newCompanyName: companyController.text);
       }
     });
     useEffect(() {

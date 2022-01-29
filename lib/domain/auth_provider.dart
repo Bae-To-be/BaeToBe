@@ -125,7 +125,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
 
     await error.safelyExecute(
         command: client.post(BackendRoutes.logout,
-            data: {'refresh_token': state.value!.refreshToken}),
+            data: {'refresh_token': state.value?.refreshToken}),
         onSuccess: (_) async {
           if (await FacebookAuth.instance.accessToken != null) {
             await FacebookAuth.instance.logOut();
@@ -144,6 +144,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   Future<String> getAccessToken() async {
     if (state.value!.shouldRefresh() == true) {
       await _refreshToken();
+    }
+    if (state.value == null) {
+      await logout();
+      return '';
     }
     return state.value!.accessToken;
   }
@@ -168,7 +172,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await storage.write(
               key: StorageKeys.auth, value: jsonEncode(state.value));
         },
-        onError: (error) => logout());
+        onError: (error) => AsyncValue.error(error));
   }
 
   Future<void> _authenticateUser(

@@ -24,8 +24,10 @@ class IndustryField extends HookConsumerWidget {
         isExpanded: true,
         value: state.industryId,
         onChanged: (Object? value) {
-          ref.read(workFormStateProvider.notifier).state =
-              state.copyWith(newIndustryId: value as int);
+          ref.read(workFormStateProvider.notifier).state = ref
+              .read(workFormStateProvider.notifier)
+              .state
+              .copyWith(newIndustryId: value as int);
         },
         hint: const Text(
           InfoLabels.selectIndustry,
