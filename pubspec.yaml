@@ -52,6 +52,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   flutter_facebook_auth: ^4.0.1
   styled_widget: ^0.4.0+3
+  syncfusion_flutter_datepicker: ^19.4.47
 
 dev_dependencies:
   integration_test:

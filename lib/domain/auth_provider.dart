@@ -1,15 +1,16 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+import 'dart:io';
 
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
+import 'package:baetobe/domain/post_login_route.dart';
 import 'package:baetobe/entities/auth_information.dart';
-import 'package:baetobe/infrastructure/network_service.dart';
+import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -26,9 +27,12 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   GoogleSignIn? googleSignIn;
   final Ref ref;
   AuthNotifier(this.ref) : super(const AsyncValue.loading()) {
+    final router = ref.read(routerProvider);
+
     attachGoogleCallbacks().then((_) => loadFromStorage()).then((_) {
       if (state.value == null) {
         state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+        router.replaceNamed(AppLinks.login);
       }
     }).catchError((error, stacktrace) {
       state = AsyncValue.error(error, stackTrace: stacktrace);
@@ -41,7 +45,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
 
   Future<void> attachGoogleCallbacks() async {
     state = const AsyncValue.loading();
-    final _error = ref.read(errorProvider.notifier);
+    final error = ref.read(errorProvider.notifier);
     googleSignIn = GoogleSignIn(
       clientId: RemoteConfig.instance.getString(RemoteConfigs.googleClientId),
       scopes: [
@@ -56,13 +60,13 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await account.clearAuthCache();
           GoogleSignInAuthentication gKey = await account.authentication;
           if (gKey.idToken == null) {
-            // await logout();
+            await logout();
           } else {
             await _authenticateUser(LoginProviders.google, gKey.idToken!);
           }
         } catch (e, stacktrace) {
           await FirebaseCrashlytics.instance.recordError(e, stacktrace);
-          _error.updateError(ErrorMessages.somethingWentWrong);
+          error.updateError(ErrorMessages.somethingWentWrong);
         }
       }
     });
@@ -70,84 +74,128 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
       await googleSignIn?.signInSilently();
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
-      _error.updateError(ErrorMessages.somethingWentWrong);
+      error.updateError(ErrorMessages.somethingWentWrong);
       state = AsyncValue.error(e, stackTrace: stacktrace);
     }
   }
 
   Future<void> loginWithFacebook() async {
     state = const AsyncValue.loading();
-    final _error = ref.read(errorProvider.notifier);
-    final _router = ref.read(routerProvider);
+    final error = ref.read(errorProvider.notifier);
     try {
       final LoginResult result = await FacebookAuth.instance.login();
       if (result.status == LoginStatus.success) {
         await _authenticateUser(
             LoginProviders.facebook, result.accessToken!.token);
-        await _router.replaceNamed(AppLinks.homePage);
       } else {
         state = AsyncValue.error(Exception(result.message));
-        _error.updateError(
+        error.updateError(
           result.message ?? ErrorMessages.somethingWentWrong,
         );
       }
-    } on DioError catch (e) {
-      _error.updateError(
-          e.response?.data?['error'] ?? ErrorMessages.somethingWentWrong);
-      state = AsyncValue.error(e);
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, null);
-      _error.updateError(ErrorMessages.somethingWentWrong);
+      error.updateError(ErrorMessages.somethingWentWrong);
       state = AsyncValue.error(e, stackTrace: stacktrace);
     }
   }
 
   Future<void> loginWithGoogle() async {
     state = const AsyncValue.loading();
-    final _router = ref.read(routerProvider);
-    final _error = ref.read(errorProvider.notifier);
+    final error = ref.read(errorProvider.notifier);
     try {
       await googleSignIn?.signIn();
-      await _router.replaceNamed(AppLinks.homePage);
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
-      _error.updateError(ErrorMessages.somethingWentWrong);
+      error.updateError(ErrorMessages.somethingWentWrong);
       state = AsyncValue.error(e, stackTrace: stacktrace);
     }
+  }
+
+  Future<void> logout() async {
+    final client = ref.read(authNetworkClientProvider);
+    final error = ref.read(errorProvider.notifier);
+    final storage = ref.read(secureStorageProvider);
+    final router = ref.read(routerProvider);
+
+    await error.safelyExecute(
+        command: client.post(BackendRoutes.logout,
+            data: {'refresh_token': state.value!.refreshToken}),
+        onSuccess: (_) async {
+          if (await FacebookAuth.instance.accessToken != null) {
+            await FacebookAuth.instance.logOut();
+          }
+          if (googleSignIn?.currentUser != null) {
+            await googleSignIn!.signOut();
+          }
+          if (await storage.containsKey(key: StorageKeys.auth)) {
+            await storage.delete(key: StorageKeys.auth);
+          }
+          state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+          await router.replaceAll([const LoginScreenRoute()]);
+        });
+  }
+
+  Future<String> getAccessToken() async {
+    if (state.value!.shouldRefresh() == true) {
+      await refreshToken();
+    }
+    return state.value!.accessToken;
+  }
+
+  Future<void> refreshToken() async {
+    final storage = ref.read(secureStorageProvider);
+    final client = ref.read(authNetworkClientProvider);
+    final error = ref.read(errorProvider.notifier);
+    final refreshToken = state.value!.refreshToken;
+
+    state = const AsyncValue.loading();
+    await error.safelyExecute(
+        command: client.post(BackendRoutes.refreshToken,
+            data: {'refresh_token': refreshToken}),
+        onSuccess: (response) async {
+          state = AsyncValue.data(AuthInformation(
+            response.data['data']['access_token'],
+            refreshToken,
+            response.data['data']['expires_in'] as int,
+            DateTime.now(),
+          ));
+          await storage.write(
+              key: StorageKeys.auth, value: jsonEncode(state.value));
+        },
+        onError: (error) => AsyncValue.error(error));
   }
 
   Future<void> _authenticateUser(
       String loginMethod, String providerToken) async {
     final client = ref.read(authNetworkClientProvider);
-    final _error = ref.read(errorProvider.notifier);
-    final _storage = ref.read(secureStorageProvider);
-    try {
-      final response = await client.post(BackendRoutes.authorize, data: {
-        'auth_method': loginMethod,
-        'platform': Platform.isAndroid
-            ? PlatformConstants.android
-            : PlatformConstants.ios,
-        'token': providerToken,
-      });
-      state = AsyncValue.data(AuthInformation(
-        response.data['data']['access_token'],
-        response.data['data']['refresh_token'],
-        response.data['data']['expires_in'] as int,
-        DateTime.now(),
-      ));
-      await Future.wait([
-        _storage.write(key: StorageKeys.auth, value: jsonEncode(state.value)),
-        _analyticsEvent(
-            response.data['data']['is_new_user'] as bool, loginMethod)
-      ]);
-    } on DioError catch (e) {
-      _error.updateError(
-          e.response?.data?['error'] ?? ErrorMessages.somethingWentWrong);
-    } catch (e, stacktrace) {
-      await FirebaseCrashlytics.instance.recordError(e, stacktrace);
-      _error.updateError(ErrorMessages.somethingWentWrong);
-      state = AsyncValue.error(e, stackTrace: stacktrace);
-    }
+    final error = ref.read(errorProvider.notifier);
+    final storage = ref.read(secureStorageProvider);
+    final router = ref.read(routerProvider);
+    await error.safelyExecute(
+        command: client.post(BackendRoutes.authorize, data: {
+          'auth_method': loginMethod,
+          'platform': Platform.isAndroid
+              ? PlatformConstants.android
+              : PlatformConstants.ios,
+          'token': providerToken,
+        }),
+        onSuccess: (response) async {
+          state = AsyncValue.data(AuthInformation(
+            response.data['data']['access_token'],
+            response.data['data']['refresh_token'],
+            response.data['data']['expires_in'] as int,
+            DateTime.now(),
+          ));
+          await Future.wait([
+            storage.write(
+                key: StorageKeys.auth, value: jsonEncode(state.value)),
+            _analyticsEvent(
+                response.data['data']['is_new_user'] as bool, loginMethod)
+          ]);
+          await router.replaceNamed(await postLoginRoute(ref));
+        },
+        onError: (error) => AsyncValue.error(error));
   }
 
   Future<void> _analyticsEvent(bool isNewLogin, String loginMethod) {
@@ -165,5 +213,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
       return;
     }
     state = AsyncValue.data(AuthInformation.fromJson(jsonDecode(value)));
+    final router = ref.read(routerProvider);
+    await router.replaceNamed(await postLoginRoute(ref));
   }
 }

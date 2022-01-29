@@ -1,12 +1,13 @@
 import 'package:baetobe/application/page_wrapper.dart';
+import 'package:baetobe/components/buttons/rounded_cta.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/auth_provider.dart';
+import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,62 +20,33 @@ class LoginScreen extends HookConsumerWidget {
       : throw 'Could not launch $_url';
 
   List<Widget> loginButtons(BuildContext context, AuthNotifier auth) {
-    if (auth.isLoading()) {
-      return [
-        CircularProgressIndicator(color: Theme.of(context).primaryColor)
-            .padding(bottom: 20)
-      ];
-    }
     return [
-      Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: GFButton(
-          onPressed: auth.loginWithFacebook,
-          shape: GFButtonShape.pills,
-          color: const Color(0xFF1877F2),
-          size: GFSize.LARGE,
-          blockButton: true,
-          buttonBoxShadow: true,
-          child: Stack(
-            children: const <Widget>[
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(FontAwesomeIcons.facebook, color: Colors.white)),
-              Align(
-                alignment: Alignment.center,
-                child: Text(ButtonTexts.continueWithFb),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: GFButton(
-          onPressed: auth.loginWithGoogle,
-          color: Colors.red,
-          shape: GFButtonShape.pills,
-          size: GFSize.LARGE,
-          blockButton: true,
-          child: Stack(
-            children: const <Widget>[
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(FontAwesomeIcons.google, color: Colors.white)),
-              Align(
-                alignment: Alignment.center,
-                child: Text(ButtonTexts.continueWithGoogle),
-              ),
-            ],
-          ),
-        ),
-      ),
+      RoundedCta(
+              onPressed: auth.loginWithFacebook,
+              text: ButtonTexts.continueWithFb,
+              color: const Color(0xFF1877F2),
+              icon: FontAwesomeIcons.facebook)
+          .padding(bottom: 16),
+      RoundedCta(
+              onPressed: auth.loginWithGoogle,
+              text: ButtonTexts.continueWithGoogle,
+              color: Colors.red,
+              icon: FontAwesomeIcons.google)
+          .padding(bottom: 16),
+    ];
+  }
+
+  List<Widget> loader(BuildContext context) {
+    return [
+      CircularProgressIndicator(color: Theme.of(context).primaryColor)
+          .padding(bottom: 20)
     ];
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final auth = ref.watch(authProvider.notifier);
+    final auth = ref.watch(authProvider);
+    final user = ref.watch(userProvider);
 
     return PageWrapper(
       child: Padding(
@@ -110,54 +82,54 @@ class LoginScreen extends HookConsumerWidget {
             Expanded(flex: 3, child: Container()),
             Column(
               children: [
-                ...loginButtons(context, auth),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: RichText(
-                    text: const TextSpan(
-                      text: 'We don’t post anything on your ',
-                      style: TextStyle(fontSize: 12, color: Colors.black),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: 'Social accounts.',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ],
-                    ),
+                ...auth.maybeWhen(
+                    loading: () => loader(context),
+                    orElse: () => user.maybeWhen(
+                        loading: () => loader(context),
+                        orElse: () => loginButtons(
+                            context, ref.read(authProvider.notifier)))),
+                // ...loginButtons(context, auth),
+                RichText(
+                  text: const TextSpan(
+                    text: BodyTexts.weDontPostAnything,
+                    style: TextStyle(fontSize: 12, color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: BodyTexts.socialAccounts,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 40),
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: 'By continuing you agree to our ',
-                      style: const TextStyle(fontSize: 12, color: Colors.black),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Terms and Conditions ',
-                          style: const TextStyle(
-                              decoration: TextDecoration.underline),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              launchURL(
-                                  '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('TERMS_AND_CONDITIONS')}');
-                            },
-                        ),
-                        const TextSpan(text: 'and '),
-                        TextSpan(
-                          text: 'Privacy Policy.',
-                          style: const TextStyle(
-                              decoration: TextDecoration.underline),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              launchURL(
-                                  '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('PRIVACY_POLICY')}');
-                            },
-                        ),
-                      ],
-                    ),
+                ).padding(bottom: 8),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: BodyTexts.byContinuingYouAgree,
+                    style: const TextStyle(fontSize: 12, color: Colors.black),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: LinkTexts.termsAndConditions,
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchURL(
+                                '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('TERMS_AND_CONDITIONS')}');
+                          },
+                      ),
+                      const TextSpan(text: 'and '),
+                      TextSpan(
+                        text: LinkTexts.privacyPolicy,
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            launchURL(
+                                '${RemoteConfig.instance.getString('API_HOST')}${RemoteConfig.instance.getString('PRIVACY_POLICY')}');
+                          },
+                      ),
+                    ],
                   ),
-                ),
+                ).padding(bottom: 40),
               ],
             ),
           ],

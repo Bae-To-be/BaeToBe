@@ -1,4 +1,4 @@
-import 'package:baetobe/application/datetime.dart';
+import 'package:baetobe/utils/datetime.dart';
 
 class AuthInformation {
   String accessToken;
@@ -27,8 +27,4 @@ class AuthInformation {
         'expires_in': expiresIn,
         'fetched_at': dateFormat.format(fetchedAt)
       };
-
-  bool isLoggedIn() {
-    return accessToken != '';
-  }
 }
