@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:baetobe/entities/language.dart';
 import 'package:baetobe/entities/preference.dart';
 import 'package:baetobe/entities/religion.dart';
@@ -167,6 +169,12 @@ class UserEducation {
         json['course'], json['university'], json['year'].toString());
   }
 
+  UserEducation copyWith(
+      {String? newCourseName, String? newUniversityName, String? newYear}) {
+    return UserEducation(newCourseName ?? courseName,
+        newUniversityName ?? universityName, newYear ?? year);
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'course_name': courseName,
@@ -174,6 +182,18 @@ class UserEducation {
       'year': year
     };
   }
+
+  @override
+  bool operator ==(other) {
+    return other is UserEducation &&
+        (other.courseName == courseName) &&
+        (other.universityName == universityName) &&
+        (other.year == year);
+  }
+
+  @override
+  int get hashCode =>
+      hashValues(courseName.hashCode, universityName.hashCode, year.hashCode);
 
   @override
   String toString() {

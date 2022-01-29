@@ -5,9 +5,8 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/components/work_information/industry_field.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/background_fields/company_suggestions_provider.dart';
 import 'package:baetobe/domain/background_fields/industries_provider.dart';
-import 'package:baetobe/domain/background_fields/work_title_suggestions.dart';
+import 'package:baetobe/domain/background_fields/suggestions.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -96,13 +95,29 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
     final workTitleController = useTextEditingController
         .fromValue(TextEditingValue(text: state.workTitleName ?? ''));
     workTitleController.addListener(() {
-      ref.read(workFormStateProvider.notifier).state =
-          state.copyWith(newWorkTitleName: workTitleController.text);
+      if (ref.read(workFormStateProvider.notifier).state.workTitleName !=
+          workTitleController.text) {
+        ref.read(workFormStateProvider.notifier).state =
+            state.copyWith(newWorkTitleName: workTitleController.text);
+      }
     });
     companyController.addListener(() {
-      ref.read(workFormStateProvider.notifier).state =
-          state.copyWith(newCompanyName: companyController.text);
+      if (ref.read(workFormStateProvider.notifier).state.companyName !=
+          companyController.text) {
+        ref.read(workFormStateProvider.notifier).state =
+            state.copyWith(newCompanyName: companyController.text);
+      }
     });
+    useEffect(() {
+      if (state.companyName != null &&
+          companyController.text != state.companyName) {
+        companyController.text = state.companyName!;
+      }
+      if (state.workTitleName != null &&
+          workTitleController.text != state.workTitleName) {
+        workTitleController.text = state.workTitleName!;
+      }
+    }, [state]);
     return FormLayout(
         children: [
           const SizedBox(height: 32),
@@ -118,7 +133,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
               workTitleController.text = selection;
             },
             suggestionsCallback: (String pattern) {
-              return workTitleSuggestions(ref, pattern);
+              return suggestionsFor(SuggestionEntity.workTitle, pattern, ref);
             },
           ).padding(horizontal: 15, vertical: 10),
           const Heading5(text: Headings.enterCompany)
@@ -130,7 +145,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
               companyController.text = selection;
             },
             suggestionsCallback: (String pattern) {
-              return companySuggestions(ref, pattern);
+              return suggestionsFor(SuggestionEntity.company, pattern, ref);
             },
           ).padding(horizontal: 15, vertical: 10),
         ],

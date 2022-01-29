@@ -17,7 +17,7 @@ class Headings {
   static const String enterWorkTitle = "What's your designation?";
   static const String enterCompany = 'Where do you work?';
   static const String enterLinkedIn = 'Add your LinkedIn Profile';
-  static const String universityName = 'School Name';
+  static const String schoolName = 'School Name';
   static const String courseName = 'What did you study?';
   static const String year = 'Class Year';
   static const String addPhotos = 'Add photos';
@@ -37,7 +37,7 @@ class InfoLabels {
   static const String selectIndustry = 'Select your industry';
   static const String selectYear = 'Select year';
   static const String schoolDetails = 'School Details';
-  static const String classYearHelper = 'the year you finished this course';
+  static const String classYearHelper = 'mentioned the year you graduated in';
   static const String cityHint = 'Enter your city';
   static const String countryHint = 'Enter your country';
 }
@@ -60,6 +60,9 @@ class LinkTexts {
   static const String privacyPolicy = 'Privacy Policy.';
   static const String viewMore = 'View More';
   static const String cont = 'Continue';
+  static const String addSchool = 'Add Another School';
+  static const String doneEditing = 'Done Editing';
+  static const String removeRow = 'Remove Row';
 }
 
 class BodyTexts {

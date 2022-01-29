@@ -26,6 +26,27 @@ class Heading5 extends StatelessWidget {
   }
 }
 
+class Heading6 extends StatelessWidget {
+  final String text;
+
+  const Heading6({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Flexible(
+          child: Text(
+            text,
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class SearchField extends HookConsumerWidget {
   const SearchField({Key? key}) : super(key: key);
 

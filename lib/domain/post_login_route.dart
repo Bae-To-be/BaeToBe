@@ -16,8 +16,11 @@ Future<String> postLoginRoute(ref) async {
   if (!userNotifier.user.workInformationPresent()) {
     return AppLinks.updateWorkDetails;
   }
-  if(userNotifier.user.education.isEmpty) {
+  if (userNotifier.user.education.isEmpty) {
     return AppLinks.updateEducationHistory;
+  }
+  if (userNotifier.user.linkedInURL == null) {
+    return AppLinks.updateLinkedInURL;
   }
   return AppLinks.homePage;
 }

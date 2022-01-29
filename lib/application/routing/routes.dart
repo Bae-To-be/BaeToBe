@@ -9,6 +9,7 @@ import 'package:baetobe/screens/home/profile_tab.dart';
 import 'package:baetobe/screens/homepage_screen.dart';
 import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/user_update/education_history_screen.dart';
+import 'package:baetobe/screens/user_update/linkedin_url_screen.dart';
 import 'package:baetobe/screens/user_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/user_update/update_gender_screen.dart';
 import 'package:baetobe/screens/user_update/update_interested_gender_screen.dart';
@@ -41,6 +42,10 @@ import 'package:baetobe/screens/user_update/update_work_information_screen.dart'
     AutoRoute(
         path: AppLinks.updateEducationHistory,
         page: EducationHistoryScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.updateLinkedInURL,
+        page: LinkedinUrlScreen,
         guards: [AuthGuard]),
     //user routes with a nested router
     AutoRoute(
