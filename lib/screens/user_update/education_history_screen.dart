@@ -7,6 +7,7 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -85,13 +86,20 @@ class EducationHistoryScreen extends HookConsumerWidget {
             itemCount: state.length + 1,
             itemBuilder: (context, index) {
               if (index == state.length) {
-                return TextButton(
-                    onPressed: ref
-                        .read(educationFormStateProvider.notifier)
-                        .addEducation,
-                    child: Text(LinkTexts.addSchool,
-                        style:
-                            TextStyle(color: Theme.of(context).primaryColor)));
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(FontAwesomeIcons.plus,
+                        color: Theme.of(context).primaryColor, size: 15),
+                    TextButton(
+                        onPressed: ref
+                            .read(educationFormStateProvider.notifier)
+                            .addEducation,
+                        child: Text(LinkTexts.addSchool,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor))),
+                  ],
+                ).padding(left: 15);
               }
 
               return EducationTile(
