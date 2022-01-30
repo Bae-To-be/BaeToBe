@@ -14,6 +14,7 @@ class RemoteConfigs {
 
 class ErrorMessages {
   static const String somethingWentWrong = 'Something went wrong';
+  static const String noInternetConnection = 'No internet connection';
 }
 
 class StorageKeys {

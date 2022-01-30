@@ -121,23 +121,20 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     final client = ref.read(authNetworkClientProvider);
     final error = ref.read(errorProvider.notifier);
     final storage = ref.read(secureStorageProvider);
-    final router = ref.read(routerProvider);
+    String? refreshToken;
+    String? storedAuth = await storage.read(key: StorageKeys.auth);
+    if (storedAuth == null) {
+      await _logoutCallbacks();
+      return;
+    }
+    refreshToken =
+        AuthInformation.fromJson(jsonDecode(storedAuth)).refreshToken;
 
     await error.safelyExecute(
-        command: client.post(BackendRoutes.logout,
-            data: {'refresh_token': state.value?.refreshToken}),
+        command: client
+            .post(BackendRoutes.logout, data: {'refresh_token': refreshToken}),
         onSuccess: (_) async {
-          if (await FacebookAuth.instance.accessToken != null) {
-            await FacebookAuth.instance.logOut();
-          }
-          if (googleSignIn?.currentUser != null) {
-            await googleSignIn!.signOut();
-          }
-          if (await storage.containsKey(key: StorageKeys.auth)) {
-            await storage.delete(key: StorageKeys.auth);
-          }
-          state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
-          await router.replaceAll([const LoginScreenRoute()]);
+          await _logoutCallbacks();
         });
   }
 
@@ -229,5 +226,21 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
       router.replaceNamed(await postLoginRoute(ref))
     ]);
     return true;
+  }
+
+  Future<void> _logoutCallbacks() async {
+    final router = ref.read(routerProvider);
+    final storage = ref.read(secureStorageProvider);
+    if (await FacebookAuth.instance.accessToken != null) {
+      await FacebookAuth.instance.logOut();
+    }
+    if (googleSignIn?.currentUser != null) {
+      await googleSignIn!.signOut();
+    }
+    if (await storage.containsKey(key: StorageKeys.auth)) {
+      await storage.delete(key: StorageKeys.auth);
+    }
+    state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+    await router.replaceAll([const LoginScreenRoute()]);
   }
 }

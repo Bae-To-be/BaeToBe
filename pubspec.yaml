@@ -31,6 +31,7 @@ dependencies:
   geocoding: ^2.0.2
   location: ^4.3.0
   flutter_typeahead: ^3.2.4
+  connectivity_plus: ^2.2.0
 dev_dependencies:
   integration_test:
     sdk: flutter
