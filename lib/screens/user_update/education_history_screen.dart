@@ -140,7 +140,7 @@ class EducationHistoryScreen extends HookConsumerWidget {
             : Colors.grey,
         loading: user is AsyncLoading,
         onPressed: () {
-          if (state.isEmpty) {
+          if (state.allInformationValid()) {
             return;
           }
 
