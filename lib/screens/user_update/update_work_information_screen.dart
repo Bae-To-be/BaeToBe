@@ -62,28 +62,35 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
           const IndustryField().padding(horizontal: 10),
           const Heading5(text: Headings.enterWorkTitle)
               .padding(top: 32, left: 15),
-          AutoCompleteField(
-            textController: workTitleController,
-            hintText: state.companyName == null ? Placeholders.workTitle : '',
-            onSuggestionSelected: (String selection) {
-              workTitleController.text = selection;
-            },
-            suggestionsCallback: (String pattern) {
-              return suggestionsFor(SuggestionEntity.workTitle, pattern, ref);
-            },
-          ).padding(horizontal: 15, vertical: 10),
-          const Heading5(text: Headings.enterCompany)
-              .padding(top: 32, left: 15),
-          AutoCompleteField(
-            textController: companyController,
-            hintText: state.companyName == null ? Placeholders.company : '',
-            onSuggestionSelected: (String selection) {
-              companyController.text = selection;
-            },
-            suggestionsCallback: (String pattern) {
-              return suggestionsFor(SuggestionEntity.company, pattern, ref);
-            },
-          ).padding(horizontal: 15, vertical: 10),
+          Expanded(
+              child: ListView(
+            children: [
+              AutoCompleteField(
+                textController: workTitleController,
+                hintText:
+                    state.companyName == null ? Placeholders.workTitle : '',
+                onSuggestionSelected: (String selection) {
+                  workTitleController.text = selection;
+                },
+                suggestionsCallback: (String pattern) {
+                  return suggestionsFor(
+                      SuggestionEntity.workTitle, pattern, ref);
+                },
+              ).padding(horizontal: 15, vertical: 10),
+              const Heading5(text: Headings.enterCompany)
+                  .padding(top: 32, left: 15),
+              AutoCompleteField(
+                textController: companyController,
+                hintText: state.companyName == null ? Placeholders.company : '',
+                onSuggestionSelected: (String selection) {
+                  companyController.text = selection;
+                },
+                suggestionsCallback: (String pattern) {
+                  return suggestionsFor(SuggestionEntity.company, pattern, ref);
+                },
+              ).padding(horizontal: 15, vertical: 10),
+            ],
+          ))
         ],
         floatingSubmit: FloatingCta(
           enabled: state.allFilled(),

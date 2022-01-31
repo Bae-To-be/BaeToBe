@@ -24,7 +24,7 @@ Future<String> postLoginRoute(ref) async {
   if (user.interestedGenders.isEmpty) {
     return AppLinks.updateInterestedGenders;
   }
-  if (!user.workInformationPresent()) {
+  if (user.workInformationPresent()) {
     return AppLinks.updateWorkDetails;
   }
   if (user.education.isEmpty) {
