@@ -59,7 +59,7 @@ class CustomNavigationBar extends StatelessWidget {
     this.backgroundColor,
     this.height,
     // this.labelBehavior,
-  }) :  assert(destinations != null && destinations.length >= 2),
+  })  : assert(destinations != null && destinations.length >= 2),
         assert(0 <= selectedIndex && selectedIndex < destinations.length),
         super(key: key);
 
@@ -132,17 +132,21 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final NavigationBarThemeData navigationBarTheme = NavigationBarTheme.of(context);
+    final NavigationBarThemeData navigationBarTheme =
+        NavigationBarTheme.of(context);
     final double effectiveHeight = height ?? navigationBarTheme.height ?? 80;
-    const CustomNavigationDestinationLabelBehavior effectiveLabelBehavior = CustomNavigationDestinationLabelBehavior.alwaysHide;
-    final double additionalBottomPadding = MediaQuery.of(context).padding.bottom;
+    const CustomNavigationDestinationLabelBehavior effectiveLabelBehavior =
+        CustomNavigationDestinationLabelBehavior.alwaysHide;
+    final double additionalBottomPadding =
+        MediaQuery.of(context).padding.bottom;
 
     return Material(
       // With Material 3, the NavigationBar uses an overlay blend for the
       // default color regardless of light/dark mode.
-      color: backgroundColor
-          ?? navigationBarTheme.backgroundColor
-          ?? ElevationOverlay.colorWithOverlay(colorScheme.surface, colorScheme.onSurface, 3.0),
+      color: backgroundColor ??
+          navigationBarTheme.backgroundColor ??
+          ElevationOverlay.colorWithOverlay(
+              colorScheme.surface, colorScheme.onSurface, 3.0),
       child: Padding(
         padding: EdgeInsets.only(bottom: additionalBottomPadding),
         child: MediaQuery.removePadding(
@@ -155,9 +159,11 @@ class CustomNavigationBar extends StatelessWidget {
                 for (int i = 0; i < destinations.length; i++)
                   Expanded(
                     child: _SelectableAnimatedBuilder(
-                      duration: animationDuration ?? const Duration(milliseconds: 500),
+                      duration: animationDuration ??
+                          const Duration(milliseconds: 500),
                       isSelected: i == selectedIndex,
-                      builder: (BuildContext context, Animation<double> animation) {
+                      builder:
+                          (BuildContext context, Animation<double> animation) {
                         return _CustomNavigationDestinationInfo(
                           index: i,
                           totalNumberOfDestinations: destinations.length,
@@ -261,8 +267,10 @@ class CustomNavigationDestination extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final NavigationBarThemeData navigationBarTheme = NavigationBarTheme.of(context);
-    final Animation<double> animation = _CustomNavigationDestinationInfo.of(context).selectedAnimation;
+    final NavigationBarThemeData navigationBarTheme =
+        NavigationBarTheme.of(context);
+    final Animation<double> animation =
+        _CustomNavigationDestinationInfo.of(context).selectedAnimation;
 
     return _CustomNavigationDestinationBuilder(
       label: label,
@@ -273,11 +281,14 @@ class CustomNavigationDestination extends StatelessWidget {
           color: colorScheme.onSurface,
         );
         final Widget selectedIconWidget = IconTheme.merge(
-          data: navigationBarTheme.iconTheme?.resolve(<MaterialState>{MaterialState.selected}) ?? defaultIconTheme,
+          data: navigationBarTheme.iconTheme
+                  ?.resolve(<MaterialState>{MaterialState.selected}) ??
+              defaultIconTheme,
           child: selectedIcon ?? icon,
         );
         final Widget unselectedIconWidget = IconTheme.merge(
-          data: navigationBarTheme.iconTheme?.resolve(<MaterialState>{}) ?? defaultIconTheme,
+          data: navigationBarTheme.iconTheme?.resolve(<MaterialState>{}) ??
+              defaultIconTheme,
           child: icon,
         );
 
@@ -303,8 +314,13 @@ class CustomNavigationDestination extends StatelessWidget {
         final TextStyle? defaultTextStyle = theme.textTheme.overline?.copyWith(
           color: colorScheme.onSurface,
         );
-        final TextStyle? effectiveSelectedLabelTextStyle = navigationBarTheme.labelTextStyle?.resolve(<MaterialState>{MaterialState.selected}) ?? defaultTextStyle;
-        final TextStyle? effectiveUnselectedLabelTextStyle = navigationBarTheme.labelTextStyle?.resolve(<MaterialState>{}) ?? defaultTextStyle;
+        final TextStyle? effectiveSelectedLabelTextStyle = navigationBarTheme
+                .labelTextStyle
+                ?.resolve(<MaterialState>{MaterialState.selected}) ??
+            defaultTextStyle;
+        final TextStyle? effectiveUnselectedLabelTextStyle =
+            navigationBarTheme.labelTextStyle?.resolve(<MaterialState>{}) ??
+                defaultTextStyle;
         return Padding(
           padding: const EdgeInsets.only(top: 4),
           child: _ClampTextScaleFactor(
@@ -384,7 +400,8 @@ class _CustomNavigationDestinationBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _CustomNavigationDestinationInfo info = _CustomNavigationDestinationInfo.of(context);
+    final _CustomNavigationDestinationInfo info =
+        _CustomNavigationDestinationInfo.of(context);
     return _NavigationBarDestinationSemantics(
       child: _NavigationBarDestinationTooltip(
         message: tooltip ?? label,
@@ -472,22 +489,23 @@ class _CustomNavigationDestinationInfo extends InheritedWidget {
   /// Used by widgets that are implementing a navigation destination info to
   /// get information like the selected animation and destination number.
   static _CustomNavigationDestinationInfo of(BuildContext context) {
-    final _CustomNavigationDestinationInfo? result = context.dependOnInheritedWidgetOfExactType<_CustomNavigationDestinationInfo>();
+    final _CustomNavigationDestinationInfo? result = context
+        .dependOnInheritedWidgetOfExactType<_CustomNavigationDestinationInfo>();
     assert(
-    result != null,
-    'Navigation destinations need a _CustomNavigationDestinationInfo parent, '
-        'which is usually provided by NavigationBar.',
+      result != null,
+      'Navigation destinations need a _CustomNavigationDestinationInfo parent, '
+      'which is usually provided by NavigationBar.',
     );
     return result!;
   }
 
   @override
   bool updateShouldNotify(_CustomNavigationDestinationInfo oldWidget) {
-    return index != oldWidget.index
-        || totalNumberOfDestinations != oldWidget.totalNumberOfDestinations
-        || selectedAnimation != oldWidget.selectedAnimation
-        || labelBehavior != oldWidget.labelBehavior
-        || onTap != oldWidget.onTap;
+    return index != oldWidget.index ||
+        totalNumberOfDestinations != oldWidget.totalNumberOfDestinations ||
+        selectedAnimation != oldWidget.selectedAnimation ||
+        labelBehavior != oldWidget.labelBehavior ||
+        onTap != oldWidget.onTap;
   }
 }
 
@@ -531,7 +549,8 @@ class _NavigationIndicator extends StatelessWidget {
         final double scale = animation.isDismissed
             ? 0.0
             : Tween<double>(begin: .4, end: 1.0).transform(
-            CurveTween(curve: Curves.easeInOutCubicEmphasized).transform(animation.value));
+                CurveTween(curve: Curves.easeInOutCubicEmphasized)
+                    .transform(animation.value));
 
         return Transform(
           alignment: Alignment.center,
@@ -649,7 +668,8 @@ class _NavigationBarDestinationLayout extends StatelessWidget {
 class _DestinationLayoutAnimationBuilder extends StatelessWidget {
   /// Builds a child with the appropriate animation [Curve] based on the
   /// [_CustomNavigationDestinationInfo.labelBehavior].
-  const _DestinationLayoutAnimationBuilder({Key? key, required this.builder}) : super(key: key);
+  const _DestinationLayoutAnimationBuilder({Key? key, required this.builder})
+      : super(key: key);
 
   /// Builds the child of this widget.
   ///
@@ -660,7 +680,8 @@ class _DestinationLayoutAnimationBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _CustomNavigationDestinationInfo info = _CustomNavigationDestinationInfo.of(context);
+    final _CustomNavigationDestinationInfo info =
+        _CustomNavigationDestinationInfo.of(context);
     switch (info.labelBehavior) {
       case CustomNavigationDestinationLabelBehavior.alwaysShow:
         return builder(context, kAlwaysCompleteAnimation);
@@ -701,8 +722,10 @@ class _NavigationBarDestinationSemantics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final _CustomNavigationDestinationInfo destinationInfo = _CustomNavigationDestinationInfo.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
+    final _CustomNavigationDestinationInfo destinationInfo =
+        _CustomNavigationDestinationInfo.of(context);
     // The AnimationStatusBuilder will make sure that the semantics update to
     // "selected" when the animation status changes.
     return _StatusTransitionWidgetBuilder(
@@ -776,8 +799,10 @@ class _NavigationBarDestinationTooltip extends StatelessWidget {
 ///
 /// Used in a [CustomMultiChildLayout] widget in the
 /// [_CustomNavigationDestinationBuilder].
-class _CustomNavigationDestinationLayoutDelegate extends MultiChildLayoutDelegate {
-  _CustomNavigationDestinationLayoutDelegate({required this.animation}) : super(relayout: animation);
+class _CustomNavigationDestinationLayoutDelegate
+    extends MultiChildLayoutDelegate {
+  _CustomNavigationDestinationLayoutDelegate({required this.animation})
+      : super(relayout: animation);
 
   /// The selection animation that indicates whether or not this destination is
   /// selected.
@@ -891,9 +916,9 @@ class _ClampTextScaleFactor extends StatelessWidget {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(
         textScaleFactor: MediaQuery.of(context).textScaleFactor.clamp(
-          lowerLimit,
-          upperLimit,
-        ),
+              lowerLimit,
+              upperLimit,
+            ),
       ),
       child: child,
     );
@@ -1113,13 +1138,16 @@ class _CurvedAnimationBuilderState extends State<_CurvedAnimationBuilder> {
       });
     }
 
-    if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+    if (status == AnimationStatus.completed ||
+        status == AnimationStatus.dismissed) {
       setState(() {
         _preservedDirection = null;
       });
     }
 
-    if (_preservedDirection == null && (status == AnimationStatus.forward || status == AnimationStatus.reverse)) {
+    if (_preservedDirection == null &&
+        (status == AnimationStatus.forward ||
+            status == AnimationStatus.reverse)) {
       setState(() {
         _preservedDirection = status;
       });
@@ -1128,7 +1156,8 @@ class _CurvedAnimationBuilderState extends State<_CurvedAnimationBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    final bool shouldUseForwardCurve = (_preservedDirection ?? _animationDirection) != AnimationStatus.reverse;
+    final bool shouldUseForwardCurve =
+        (_preservedDirection ?? _animationDirection) != AnimationStatus.reverse;
 
     final Animation<double> curvedAnimation = CurveTween(
       curve: shouldUseForwardCurve ? widget.curve : widget.reverseCurve,
@@ -1141,6 +1170,6 @@ class _CurvedAnimationBuilderState extends State<_CurvedAnimationBuilder> {
 /// Returns `true` if this animation is ticking forward, or has completed,
 /// based on [status].
 bool _isForwardOrCompleted(Animation<double> animation) {
-  return animation.status == AnimationStatus.forward
-      || animation.status == AnimationStatus.completed;
+  return animation.status == AnimationStatus.forward ||
+      animation.status == AnimationStatus.completed;
 }
