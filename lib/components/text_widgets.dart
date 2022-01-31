@@ -49,18 +49,27 @@ class Heading6 extends StatelessWidget {
 
 class Caption extends StatelessWidget {
   final String text;
+  final bool withRow;
+  const Caption({Key? key, required this.text, this.withRow = true})
+      : super(key: key);
 
-  const Caption({Key? key, required this.text}) : super(key: key);
+  Widget body(context) {
+    return Text(
+      text,
+      style: Theme.of(context).textTheme.caption,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (!withRow) {
+      return body(context);
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          text,
-          style: Theme.of(context).textTheme.caption,
-        ),
+        body(context),
       ],
     );
   }

@@ -24,6 +24,10 @@ class ErrorMessages {
   static const String noInternetConnection = 'No internet connection';
   static const String invalidLinkedinUrl = 'must be a valid linkedin url';
   static const String googleLoginCancelled = 'google login cancelled';
+  static const String couldNotLoadCamera = 'could not load camera';
+  static const String pleaseGrantCameraPermission =
+      'Please grant camera permission';
+  static const String couldNotTakePicture = 'Could not take picture';
 }
 
 class StorageKeys {
@@ -32,6 +36,6 @@ class StorageKeys {
 }
 
 class VerificationTypes {
-  static const String selfie = 'selfie';
+  static const String selfie = 'verification';
   static const String identity = 'identity';
 }
