@@ -3,6 +3,10 @@ class PlatformConstants {
   static const String ios = 'ios';
 }
 
+class CustomColors {
+  static const int bottomNavBarInactiveColor = 0xFFACC5C7;
+}
+
 class LoginProviders {
   static const String facebook = 'facebook';
   static const String google = 'google';

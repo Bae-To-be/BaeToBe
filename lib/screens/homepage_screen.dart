@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/custom_icons.dart';
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 
@@ -93,7 +94,7 @@ BottomNavigationBar buildBottomNavigationBar(
           ),
           label: 'Tab 4'),
     ],
-    unselectedItemColor: Theme.of(context).primaryColorLight,
+    unselectedItemColor: const Color(CustomColors.bottomNavBarInactiveColor),
     selectedItemColor: Theme.of(context).primaryColor,
   );
 }
