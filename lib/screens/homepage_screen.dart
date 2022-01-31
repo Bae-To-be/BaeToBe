@@ -83,7 +83,7 @@ BottomNavigationBar buildBottomNavigationBar(
           ),
           label: 'Tab 2'),
       const BottomNavigationBarItem(
-          icon: const Icon(
+          icon: Icon(
             BTBCustomIcons.chat,
           ),
           label: 'Tab 3'),
