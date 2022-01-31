@@ -30,3 +30,8 @@ class StorageKeys {
   static const String auth = 'auth_info';
   static const String locationUpdatedAt = 'location_updated_at';
 }
+
+class VerificationTypes {
+  static const String selfie = 'selfie';
+  static const String identity = 'identity';
+}

@@ -3,6 +3,7 @@ import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/form_states/birthday_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:flutter/material.dart';
@@ -12,40 +13,12 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 final _eighteenYearsAgo = DateTime.now().subtract(const Duration(days: 6935));
 
-final _selected = StateProvider.autoDispose<DateTime?>((ref) {
-  final user = ref.watch(userProvider);
-  DateTime? result;
-  if (user.birthday != null) {
-    result = onlyDate.parse(user.birthday!);
-  }
-  return result;
-});
-
-final _age = Provider.autoDispose<num?>((ref) {
-  final s = ref.watch(_selected);
-  if (s == null) {
-    return null;
-  }
-
-  DateTime currentDate = DateTime.now();
-  num result = currentDate.year - s.year;
-
-  if (s.month > currentDate.month) {
-    result = result - 1;
-  } else if (s.month == currentDate.month) {
-    if (s.day > currentDate.day) {
-      result = result - 1;
-    }
-  }
-  return result;
-});
-
 class UpdateBirthdayScreen extends HookConsumerWidget {
   const UpdateBirthdayScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(_selected);
+    final state = ref.watch(birthdayStateProvider);
 
     return FormLayout(
         children: [
@@ -60,8 +33,9 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
                   selectionColor: Theme.of(context).primaryColor,
                   initialDisplayDate: state,
                   initialSelectedDate: state,
-                  onSelectionChanged: (value) =>
-                      ref.read(_selected.notifier).state = value.value,
+                  onSelectionChanged: (value) => ref
+                      .read(birthdayStateProvider.notifier)
+                      .state = value.value,
                   maxDate: _eighteenYearsAgo,
                   minDate: DateTime(1950, 01, 01)),
             ],
@@ -86,7 +60,7 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
 class _AgeBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ageState = ref.watch(_age);
+    final ageState = ref.watch(ageProvider);
 
     if (ageState == null) {
       return Container();

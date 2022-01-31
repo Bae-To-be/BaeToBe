@@ -5,29 +5,12 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/form_states/linkedin_info_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-final urlFormat = RegExp('https:\\/\\/[a-z]{2,3}\\.linkedin\\.com\\/.*');
-
-extension LinkedinUrl on String? {
-  bool isValidLinkedinUrl() {
-    return urlFormat.hasMatch(this ?? '');
-  }
-}
-
-final _urlStateProvider = StateProvider.autoDispose<String?>((ref) {
-  final user = ref.watch(userProvider);
-  return user.linkedInURL;
-});
-
-final _isPublicStateProvider = StateProvider.autoDispose<bool>((ref) {
-  final user = ref.watch(userProvider);
-  return user.linkedInPublic ?? false;
-});
 
 class LinkedinUrlScreen extends HookConsumerWidget {
   const LinkedinUrlScreen({
@@ -36,13 +19,14 @@ class LinkedinUrlScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final urlState = ref.watch(_urlStateProvider);
-    final isPublicState = ref.watch(_isPublicStateProvider);
+    final urlState = ref.watch(linkedinUrlStateProvider);
+    final isPublicState = ref.watch(linkedinPublicStateProvider);
     final urlController = useTextEditingController
         .fromValue(TextEditingValue(text: urlState ?? ''));
     urlController.addListener(() {
-      if (ref.read(_urlStateProvider.notifier).state != urlController.text) {
-        ref.read(_urlStateProvider.notifier).state = urlController.text;
+      if (ref.read(linkedinUrlStateProvider.notifier).state !=
+          urlController.text) {
+        ref.read(linkedinUrlStateProvider.notifier).state = urlController.text;
       }
     });
     useEffect(() {
@@ -71,7 +55,7 @@ class LinkedinUrlScreen extends HookConsumerWidget {
           selected: isPublicState,
           subtitleText: InfoLabels.linkedinPublic,
           onChanged: (bool value) {
-            ref.read(_isPublicStateProvider.notifier).state = value;
+            ref.read(linkedinPublicStateProvider.notifier).state = value;
           },
         ),
       ],

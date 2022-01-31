@@ -1,9 +1,19 @@
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+extension EnoughImages on List<UserImage> {
+  bool hasMinimumRequired() {
+    return length >=
+        FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount);
+  }
+}
 
 final imagesProvider =
     StateNotifierProvider<ImagesNotifier, List<UserImage>>((ref) {
@@ -34,5 +44,53 @@ class ImagesNotifier extends StateNotifier<List<UserImage>> {
           return Future.value(null);
         });
     loading.state = false;
+  }
+
+  Future<void> addImage(int index, String filePath, String filename) async {
+    final client = ref.read(networkClientProvider);
+    final error = ref.read(errorProvider.notifier);
+    await error.safelyExecute(
+        command: client.post(BackendRoutes.uploadImage,
+            data: FormData.fromMap({
+              'position': index,
+              'image': await MultipartFile.fromFile(
+                filePath,
+                filename: filename,
+              )
+            })),
+        onSuccess: (response) {
+          _addOrReplaceImage(
+              response.data['data']['id'] as int,
+              response.data['data']['position'] as int,
+              response.data['data']['url']);
+          return Future.value(null);
+        });
+  }
+
+  Future<void> removeImage(int position) async {
+    final matchIndex = state.indexWhere((image) => image.position == position);
+    if (matchIndex != -1) {
+      final client = ref.read(networkClientProvider);
+      final error = ref.read(errorProvider.notifier);
+      await error.safelyExecute(
+          command: client.delete(BackendRoutes.deleteImage
+              .replaceAll('%{position}', position.toString())),
+          onSuccess: (response) {
+            state = List.from(state)..removeAt(matchIndex);
+            return Future.value(null);
+          });
+    }
+  }
+
+  void _addOrReplaceImage(int id, int position, String url) {
+    final newImage = UserImage(id, position, url);
+    final matchIndex = state.indexWhere((image) => image.position == position);
+    if (matchIndex == -1) {
+      state = [...state, newImage];
+      return;
+    }
+    state = List.from(state)
+      ..removeAt(matchIndex)
+      ..insert(matchIndex, newImage);
   }
 }

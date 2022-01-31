@@ -6,29 +6,12 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/gender_provider.dart';
+import 'package:baetobe/domain/form_states/gender_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/gender.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-final _selected = StateProvider.autoDispose<List<int>>((ref) {
-  List<int> result = [];
-  final user = ref.watch(userProvider);
-  final genders = ref.watch(genderProvider);
-  if (user.gender != null) {
-    genders.whenData((listing) {
-      final match = listing.allGenders
-          .firstWhereOrNull((gender) => gender.name == user.gender);
-      if (match != null) {
-        result = [match.id];
-      }
-    });
-  }
-
-  return result;
-});
 
 class UpdateGenderScreen extends HookConsumerWidget {
   const UpdateGenderScreen({Key? key}) : super(key: key);
@@ -73,7 +56,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
     result.add(ViewMoreGenders(
       onSubmit: onSubmit,
       onSelect: (int id) => onTap(id),
-      selectionNotifier: _selected,
+      selectionNotifier: genderStateProvider,
       heading: Headings.gender,
     ));
     return result;
@@ -82,7 +65,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final genderListing = ref.watch(genderProvider);
-    final state = ref.watch(_selected);
+    final state = ref.watch(genderStateProvider);
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
           {'gender_id': state.first},
@@ -97,7 +80,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
           genderListing.maybeWhen(
               data: (GenderListing listing) => Column(
                     children: _tiles(context, listing, state, (int value) {
-                      ref.read(_selected.notifier).state = [value];
+                      ref.read(genderStateProvider.notifier).state = [value];
                     }, onSubmit),
                   ),
               orElse: () => Center(

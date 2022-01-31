@@ -1,9 +1,7 @@
-import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/user.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 Future<String> postLoginRoute(ref) async {
   final UserNotifier userNotifier = ref.read(userProvider.notifier);
@@ -34,8 +32,7 @@ Future<String> postLoginRoute(ref) async {
     return AppLinks.updateLinkedInURL;
   }
   await imagesNotifier.loadImages();
-  if (imagesNotifier.images.length <
-      FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount)) {
+  if (!imagesNotifier.images.hasMinimumRequired()) {
     return AppLinks.updateImages;
   }
   return AppLinks.homePage;

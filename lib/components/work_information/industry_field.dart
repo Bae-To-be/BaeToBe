@@ -1,6 +1,6 @@
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/industries_provider.dart';
-import 'package:baetobe/screens/user_update/update_work_information_screen.dart';
+import 'package:baetobe/domain/form_states/work_information_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +13,7 @@ class IndustryField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final industries = ref.watch(industriesProvider);
-    final state = ref.watch(workFormStateProvider);
+    final state = ref.watch(workInformationStateProvider);
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 32,
@@ -24,8 +24,8 @@ class IndustryField extends HookConsumerWidget {
         isExpanded: true,
         value: state.industryId,
         onChanged: (Object? value) {
-          ref.read(workFormStateProvider.notifier).state = ref
-              .read(workFormStateProvider.notifier)
+          ref.read(workInformationStateProvider.notifier).state = ref
+              .read(workInformationStateProvider.notifier)
               .state
               .copyWith(newIndustryId: value as int);
         },

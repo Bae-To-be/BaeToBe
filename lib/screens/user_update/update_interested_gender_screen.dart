@@ -6,27 +6,13 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/gender_provider.dart';
+import 'package:baetobe/domain/form_states/interested_gender_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/gender.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-final _selected = StateProvider.autoDispose<List<int>>((ref) {
-  List<int> result = [];
-  final user = ref.watch(userProvider);
-  final genders = ref.watch(genderProvider);
-  if (user.interestedGenders.isNotEmpty) {
-    genders.whenData((listing) {
-      final matches = listing.allGenders
-          .where((gender) => user.interestedGenders.contains(gender.name));
-      result = matches.map((gender) => gender.id).toList();
-    });
-  }
-
-  return result;
-});
 
 class UpdateInterestedGenderScreen extends HookConsumerWidget {
   const UpdateInterestedGenderScreen({Key? key}) : super(key: key);
@@ -65,7 +51,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
       onSubmit: onSubmit,
       excludeAll: false,
       onSelect: (int id) => onTap(id),
-      selectionNotifier: _selected,
+      selectionNotifier: interestedGenderStateProvider,
       heading: Headings.interestedIn,
     ));
     return result;
@@ -74,7 +60,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final genderListing = ref.watch(genderProvider);
-    final state = ref.watch(_selected);
+    final state = ref.watch(interestedGenderStateProvider);
 
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
@@ -91,11 +77,13 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
               data: (GenderListing listing) => ListView(
                     shrinkWrap: true,
                     children: _tiles(context, listing, state, (int value) {
-                      final currentState = ref.read(_selected.notifier).state;
+                      final currentState = ref
+                          .read(interestedGenderStateProvider.notifier)
+                          .state;
                       final allGenders = genderListing.value?.defaultGenders
                           .firstWhereOrNull((gender) => gender.name == 'All');
                       if (currentState.contains(value)) {
-                        ref.read(_selected.notifier).state =
+                        ref.read(interestedGenderStateProvider.notifier).state =
                             currentState.where((id) => id != value).toList();
                         return;
                       }
@@ -104,11 +92,13 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                           return;
                         }
                         if (value == allGenders.id) {
-                          ref.read(_selected.notifier).state = [value];
+                          ref
+                              .read(interestedGenderStateProvider.notifier)
+                              .state = [value];
                           return;
                         }
                       }
-                      ref.read(_selected.notifier).state = [
+                      ref.read(interestedGenderStateProvider.notifier).state = [
                         ...currentState,
                         value
                       ];

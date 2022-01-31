@@ -221,7 +221,6 @@ class UserImage {
     return {
       'id': id,
       'position': position,
-      'url': url,
     }.toString();
   }
 }

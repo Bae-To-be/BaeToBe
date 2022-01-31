@@ -5,79 +5,13 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/components/work_information/industry_field.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/background_fields/industries_provider.dart';
 import 'package:baetobe/domain/background_fields/suggestions.dart';
+import 'package:baetobe/domain/form_states/work_information_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-class WorkFormState {
-  int? industryId;
-  String? workTitleName;
-  String? companyName;
-
-  WorkFormState({this.industryId, this.companyName, this.workTitleName});
-
-  @override
-  bool operator ==(other) {
-    return other is WorkFormState &&
-        (other.industryId == industryId) &&
-        (other.workTitleName == workTitleName) &&
-        (other.companyName == companyName);
-  }
-
-  @override
-  int get hashCode => hashValues(
-      industryId.hashCode, workTitleName.hashCode, companyName.hashCode);
-
-  @override
-  String toString() {
-    return {
-      'industryId': industryId,
-      'workTitleName': workTitleName,
-      'companyName': companyName
-    }.toString();
-  }
-
-  WorkFormState copyWith(
-      {int? newIndustryId, String? newWorkTitleName, String? newCompanyName}) {
-    return WorkFormState(
-        workTitleName: newWorkTitleName ?? workTitleName,
-        companyName: newCompanyName ?? companyName,
-        industryId: newIndustryId ?? industryId);
-  }
-
-  bool allFilled() {
-    return industryId != null &&
-        companyName?.isNotEmpty == true &&
-        workTitleName?.isNotEmpty == true;
-  }
-}
-
-final workFormStateProvider = StateProvider.autoDispose<WorkFormState>((ref) {
-  final result = WorkFormState();
-  final user = ref.watch(userProvider);
-  final industries = ref.watch(industriesProvider);
-  industries.whenData((industriesList) {
-    if (user.industry != null) {
-      final match = industriesList
-          .firstWhereOrNull((industry) => industry.name == user.industry);
-      if (match != null) {
-        result.industryId = match.id;
-      }
-    }
-    if (user.company != null) {
-      result.companyName = user.company;
-    }
-    if (user.workTitle != null) {
-      result.workTitleName = user.workTitle;
-    }
-  });
-  return result;
-});
 
 class UpdateWorkInformationScreen extends HookConsumerWidget {
   const UpdateWorkInformationScreen({
@@ -86,25 +20,25 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(workFormStateProvider);
+    final state = ref.watch(workInformationStateProvider);
     final companyController = useTextEditingController
         .fromValue(TextEditingValue(text: state.companyName ?? ''));
     final workTitleController = useTextEditingController
         .fromValue(TextEditingValue(text: state.workTitleName ?? ''));
     workTitleController.addListener(() {
-      if (ref.read(workFormStateProvider.notifier).state.workTitleName !=
+      if (ref.read(workInformationStateProvider.notifier).state.workTitleName !=
           workTitleController.text) {
-        ref.read(workFormStateProvider.notifier).state = ref
-            .read(workFormStateProvider.notifier)
+        ref.read(workInformationStateProvider.notifier).state = ref
+            .read(workInformationStateProvider.notifier)
             .state
             .copyWith(newWorkTitleName: workTitleController.text);
       }
     });
     companyController.addListener(() {
-      if (ref.read(workFormStateProvider.notifier).state.companyName !=
+      if (ref.read(workInformationStateProvider.notifier).state.companyName !=
           companyController.text) {
-        ref.read(workFormStateProvider.notifier).state = ref
-            .read(workFormStateProvider.notifier)
+        ref.read(workInformationStateProvider.notifier).state = ref
+            .read(workInformationStateProvider.notifier)
             .state
             .copyWith(newCompanyName: companyController.text);
       }
