@@ -21,6 +21,11 @@ class SelfieState {
         uploading: newUploading ?? uploading,
         controller: newController ?? controller);
   }
+
+  @override
+  String toString() {
+    return {'url': url, 'uploading': uploading}.toString();
+  }
 }
 
 final selfieStateProvider =
@@ -65,8 +70,20 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
     await ref
         .read(verificationFilesProvider.notifier)
         .addFile(VerificationTypes.selfie, file.path, file.name);
-    state = state.copyWith(newUploading: false);
     loading.state = false;
+  }
+
+  // ignore: avoid_void_async
+  void clearPicture() async {
+    if (state.url != null) {
+      state = state.copyWith(newUploading: true);
+      final loading = ref.read(loadingProvider.notifier);
+      loading.state = true;
+      await ref
+          .read(verificationFilesProvider.notifier)
+          .removeFile(VerificationTypes.selfie);
+      loading.state = false;
+    }
   }
 
   Future<void> _setupCamera() async {

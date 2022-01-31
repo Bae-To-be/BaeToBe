@@ -1,3 +1,4 @@
+import 'package:baetobe/components/forms/function_helpers.dart';
 import 'package:baetobe/domain/form_states/images_state_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -7,6 +8,7 @@ import 'package:styled_widget/styled_widget.dart';
 
 class ImageTile extends StatelessWidget {
   final ImageFormState state;
+  final bool enableEdit;
   final void Function() onAddPressed;
   final void Function() onRemovePressed;
 
@@ -14,12 +16,13 @@ class ImageTile extends StatelessWidget {
       {Key? key,
       required this.state,
       required this.onAddPressed,
+      required this.enableEdit,
       required this.onRemovePressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (state.uploading) {
+    if (state.loading) {
       return CircularProgressIndicator(color: Theme.of(context).primaryColor)
           .padding(all: 24);
     }
@@ -44,14 +47,14 @@ class ImageTile extends StatelessWidget {
           InkWell(
                   child: Icon(FontAwesomeIcons.timesCircle,
                       color: Theme.of(context).errorColor, size: 26),
-                  onTap: onRemovePressed)
+                  onTap: enableEdit ? onRemovePressed : doNothing)
               .positioned(top: 5, right: 5),
         ],
       );
     }
 
     return InkWell(
-      onTap: onAddPressed,
+      onTap: enableEdit ? onAddPressed : doNothing,
       child: DottedBorder(
           color: Theme.of(context).primaryColor,
           strokeWidth: 1,

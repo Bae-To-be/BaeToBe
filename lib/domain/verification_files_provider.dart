@@ -10,12 +10,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 extension FileGetters on List<UserVerificationFile> {
   UserVerificationFile? getSelfie() {
-    firstWhereOrNull(
+    return firstWhereOrNull(
         (verification) => verification.fileType == VerificationTypes.selfie);
   }
 
   UserVerificationFile? getIdentity() {
-    firstWhereOrNull(
+    return firstWhereOrNull(
         (verification) => verification.fileType == VerificationTypes.identity);
   }
 }

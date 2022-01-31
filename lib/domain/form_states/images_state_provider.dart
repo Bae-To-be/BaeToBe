@@ -4,12 +4,18 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+extension AnyLoading on Map<int, ImageFormState> {
+  bool anyUploading() {
+    return values.any((state) => state.loading);
+  }
+}
+
 class ImageFormState {
   String? url;
   int? id;
-  bool uploading;
+  bool loading;
 
-  ImageFormState({this.url, this.id, this.uploading = false});
+  ImageFormState({this.url, this.id, this.loading = false});
 
   ImageFormState copyWith({
     String? newUrl,
@@ -19,7 +25,7 @@ class ImageFormState {
     return ImageFormState(
       url: newUrl ?? url,
       id: newId ?? id,
-      uploading: newUploading ?? uploading,
+      loading: newUploading ?? loading,
     );
   }
 
@@ -27,7 +33,7 @@ class ImageFormState {
   String toString() {
     return {
       'url': url,
-      'uploading': uploading,
+      'uploading': loading,
       'id': id,
     }.toString();
   }

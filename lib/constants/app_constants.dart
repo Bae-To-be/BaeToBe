@@ -36,6 +36,6 @@ class StorageKeys {
 }
 
 class VerificationTypes {
-  static const String selfie = 'verification';
+  static const String selfie = 'selfie';
   static const String identity = 'identity';
 }

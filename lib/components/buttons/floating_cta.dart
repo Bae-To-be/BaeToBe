@@ -9,6 +9,7 @@ class FloatingCta extends HookConsumerWidget {
   final String heroTag;
   final IconData? icon;
   final bool enabled;
+  final Color? color;
   final void Function() onPressed;
 
   final Alignment alignment;
@@ -18,6 +19,7 @@ class FloatingCta extends HookConsumerWidget {
       this.heroTag = 'submit',
       this.enabled = true,
       this.icon,
+      this.color,
       this.onPressed = doNothing,
       this.alignment = Alignment.bottomRight})
       : super(key: key);
@@ -33,8 +35,8 @@ class FloatingCta extends HookConsumerWidget {
 
     return FloatingActionButton(
             heroTag: heroTag,
-            backgroundColor:
-                enabled ? Theme.of(context).primaryColor : Colors.grey,
+            backgroundColor: color ??
+                (enabled ? Theme.of(context).primaryColor : Colors.grey),
             onPressed: enabled ? onPressed : doNothing,
             child: Icon(icon ?? FontAwesomeIcons.chevronRight,
                 color: Colors.white))

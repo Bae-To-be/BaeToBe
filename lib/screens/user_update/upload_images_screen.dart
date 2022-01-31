@@ -49,6 +49,7 @@ class UploadImagesScreen extends HookConsumerWidget {
                     ref.read(imagesStateProvider.notifier);
 
                 return ImageTile(
+                  enableEdit: !imageStates.anyUploading(),
                   state: imageStates[index]!,
                   onAddPressed: () => imageNotifier.pickImage(index),
                   onRemovePressed: () => imageNotifier.removeImage(index),
