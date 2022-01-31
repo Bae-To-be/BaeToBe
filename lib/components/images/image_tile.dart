@@ -1,27 +1,20 @@
-import 'package:baetobe/components/forms/function_helpers.dart';
-import 'package:baetobe/domain/form_states/images_state_provider.dart';
+import 'package:baetobe/domain/form_states/image_state_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class ImageTile extends StatelessWidget {
-  final ImageFormState state;
-  final bool enableEdit;
-  final void Function() onAddPressed;
-  final void Function() onRemovePressed;
+class ImageTile extends HookConsumerWidget {
+  final int position;
 
-  const ImageTile(
-      {Key? key,
-      required this.state,
-      required this.onAddPressed,
-      required this.enableEdit,
-      required this.onRemovePressed})
-      : super(key: key);
+  const ImageTile({Key? key, required this.position}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(imageStateProvider(position));
+
     if (state.loading) {
       return CircularProgressIndicator(color: Theme.of(context).primaryColor)
           .padding(all: 24);
@@ -47,14 +40,16 @@ class ImageTile extends StatelessWidget {
           InkWell(
                   child: Icon(FontAwesomeIcons.timesCircle,
                       color: Theme.of(context).errorColor, size: 26),
-                  onTap: enableEdit ? onRemovePressed : doNothing)
+                  onTap: ref
+                      .read(imageStateProvider(position).notifier)
+                      .removeImage)
               .positioned(top: 5, right: 5),
         ],
       );
     }
 
     return InkWell(
-      onTap: enableEdit ? onAddPressed : doNothing,
+      onTap: ref.read(imageStateProvider(position).notifier).pickImage,
       child: DottedBorder(
           color: Theme.of(context).primaryColor,
           strokeWidth: 1,

@@ -6,7 +6,6 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/form_states/images_state_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +19,7 @@ class UploadImagesScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageStates = ref.watch(imagesStateProvider);
-    final images = ref.watch(imagesProvider);
+    final images = ref.read(imagesProvider);
 
     return FormLayout(
         children: [
@@ -41,19 +39,12 @@ class UploadImagesScreen extends HookConsumerWidget {
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
                   maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
-              itemCount: imageStates.keys.length,
+              itemCount: FirebaseRemoteConfig.instance
+                  .getInt(RemoteConfigs.maxPhotoCount),
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.only(left: 10, right: 10),
               itemBuilder: (BuildContext ctx, index) {
-                ImageFormStateNotifier imageNotifier =
-                    ref.read(imagesStateProvider.notifier);
-
-                return ImageTile(
-                  enableEdit: !imageStates.anyUploading(),
-                  state: imageStates[index]!,
-                  onAddPressed: () => imageNotifier.pickImage(index),
-                  onRemovePressed: () => imageNotifier.removeImage(index),
-                );
+                return ImageTile(position: index);
               },
             ),
           )
