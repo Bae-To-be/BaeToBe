@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/components/navbar/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 
@@ -26,14 +27,13 @@ class HomepageScreen extends StatelessWidget {
               height: 60,
               indicatorColor: Theme.of(context).primaryColorLight,
             ),
-            child: NavigationBar(
+            child: CustomNavigationBar(
               animationDuration: const Duration(milliseconds: 400),
-              labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
               selectedIndex: tabsRouter.activeIndex,
               onDestinationSelected: tabsRouter.setActiveIndex,
               backgroundColor: Colors.white,
               destinations: [
-                NavigationDestination(
+                CustomNavigationDestination(
                     icon: Stack(
                       clipBehavior: Clip.none,
                       children: const [
@@ -70,7 +70,7 @@ class HomepageScreen extends StatelessWidget {
                       ],
                     ),
                     label: 'Discover'),
-                NavigationDestination(
+                CustomNavigationDestination(
                     icon: const Icon(BTBCustomIcons.likes,
                         color: Color(CustomColors.bottomNavBarInactiveColor)),
                     selectedIcon: Icon(
@@ -78,7 +78,7 @@ class HomepageScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                     label: 'Likes'),
-                NavigationDestination(
+                CustomNavigationDestination(
                     icon: const Icon(BTBCustomIcons.chat,
                         color: Color(CustomColors.bottomNavBarInactiveColor)),
                     selectedIcon: Icon(
@@ -86,7 +86,7 @@ class HomepageScreen extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                     label: 'Matches'),
-                NavigationDestination(
+                CustomNavigationDestination(
                     icon: const Icon(BTBCustomIcons.profile,
                         color: Color(CustomColors.bottomNavBarInactiveColor)),
                     selectedIcon: Icon(
