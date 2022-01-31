@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Setup Java environment in order to build the Android app.
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
