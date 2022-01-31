@@ -38,8 +38,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         if: github.ref == 'refs/heads/main'
         with:
-          commit_message: Bump up build version
-          tagging_message: "${{ env.build_version }}"
+          commit_message: "Bump up version to ${{ env.build_version }}"
       - run: flutter build apk
       - run: 'echo build/app/outputs/apk/release/app-release.apk > app-release.apk'
       - uses: MeilCli/slack-upload-file@v1
