@@ -27,8 +27,17 @@ jobs:
 #       - run: flutter test
       # Build apk.
       - name: Increment build number
-        if: github.ref == 'refs/heads/master'
-        run: ./build-version.sh
+        if: "${{ github.ref }}" == 'refs/heads/master'
+        run: perl -i -pe 's/^(version:\s+\d+\.\d+\.\d+\+)(\d+)$/$1.($2+1)/e' pubspec.yaml
+      - name: Set Version in environment
+        if: "${{ github.ref }}" == 'refs/heads/master'
+        run: |
+          echo "build_version=$(grep 'version: ' pubspec.yaml | sed 's/version: //')" >> $GITHUB_ENV
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        if: "${{ github.ref }}" == 'refs/heads/master'
+        with:
+          commit_message: Bump up build version
+          tagging_message: "${{ env.build_version }}"
       - run: flutter build apk
       - run: 'echo build/app/outputs/apk/release/app-release.apk > app-release.apk'
       - uses: MeilCli/slack-upload-file@v1
