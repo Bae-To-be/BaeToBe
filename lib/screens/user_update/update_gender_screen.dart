@@ -17,17 +17,15 @@ final _selected = StateProvider.autoDispose<List<int>>((ref) {
   List<int> result = [];
   final user = ref.watch(userProvider);
   final genders = ref.watch(genderProvider);
-  user.whenData((value) {
-    if (value.gender != null) {
-      genders.whenData((listing) {
-        final match = listing.allGenders
-            .firstWhereOrNull((gender) => gender.name == value.gender);
-        if (match != null) {
-          result = [match.id];
-        }
-      });
-    }
-  });
+  if (user.gender != null) {
+    genders.whenData((listing) {
+      final match = listing.allGenders
+          .firstWhereOrNull((gender) => gender.name == user.gender);
+      if (match != null) {
+        result = [match.id];
+      }
+    });
+  }
 
   return result;
 });
@@ -86,9 +84,6 @@ class UpdateGenderScreen extends HookConsumerWidget {
     final genderListing = ref.watch(genderProvider);
     final state = ref.watch(_selected);
     void onSubmit() {
-      if (state.isEmpty) {
-        return;
-      }
       ref.read(userProvider.notifier).updateAttributes(
           {'gender_id': state.first},
           routeTo: AppLinks.updateInterestedGenders);
@@ -110,8 +105,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
                       color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
-          color:
-              state.isNotEmpty ? Theme.of(context).primaryColor : Colors.grey,
+          enabled: state.isNotEmpty,
           onPressed: onSubmit,
         ));
   }

@@ -61,22 +61,20 @@ final workFormStateProvider = StateProvider.autoDispose<WorkFormState>((ref) {
   final result = WorkFormState();
   final user = ref.watch(userProvider);
   final industries = ref.watch(industriesProvider);
-  user.whenData((userValue) {
-    industries.whenData((industriesList) {
-      if (userValue.industry != null) {
-        final match = industriesList.firstWhereOrNull(
-            (industry) => industry.name == userValue.industry);
-        if (match != null) {
-          result.industryId = match.id;
-        }
+  industries.whenData((industriesList) {
+    if (user.industry != null) {
+      final match = industriesList
+          .firstWhereOrNull((industry) => industry.name == user.industry);
+      if (match != null) {
+        result.industryId = match.id;
       }
-      if (userValue.company != null) {
-        result.companyName = userValue.company;
-      }
-      if (userValue.workTitle != null) {
-        result.workTitleName = userValue.workTitle;
-      }
-    });
+    }
+    if (user.company != null) {
+      result.companyName = user.company;
+    }
+    if (user.workTitle != null) {
+      result.workTitleName = user.workTitle;
+    }
   });
   return result;
 });
@@ -154,12 +152,8 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
           ).padding(horizontal: 15, vertical: 10),
         ],
         floatingSubmit: FloatingCta(
-          color:
-              state.allFilled() ? Theme.of(context).primaryColor : Colors.grey,
+          enabled: state.allFilled(),
           onPressed: () {
-            if (!state.allFilled()) {
-              return;
-            }
             ref.read(userProvider.notifier).updateAttributes({
               'industry_id': state.industryId,
               'company_name': state.companyName,

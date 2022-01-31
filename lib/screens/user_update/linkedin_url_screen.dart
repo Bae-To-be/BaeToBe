@@ -21,12 +21,12 @@ extension LinkedinUrl on String? {
 
 final _urlStateProvider = StateProvider.autoDispose<String?>((ref) {
   final user = ref.watch(userProvider);
-  return user.value?.linkedInURL;
+  return user.linkedInURL;
 });
 
 final _isPublicStateProvider = StateProvider.autoDispose<bool>((ref) {
   final user = ref.watch(userProvider);
-  return user.value?.linkedInPublic ?? false;
+  return user.linkedInPublic ?? false;
 });
 
 class LinkedinUrlScreen extends HookConsumerWidget {
@@ -76,13 +76,8 @@ class LinkedinUrlScreen extends HookConsumerWidget {
         ),
       ],
       floatingSubmit: FloatingCta(
-        color: urlState.isValidLinkedinUrl()
-            ? Theme.of(context).primaryColor
-            : Colors.grey,
+        enabled: urlState.isValidLinkedinUrl(),
         onPressed: () {
-          if (!urlState.isValidLinkedinUrl()) {
-            return;
-          }
           ref.read(userProvider.notifier).updateAttributes({
             'linkedin_url': urlState,
             'linkedin_public': isPublicState,

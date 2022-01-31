@@ -15,8 +15,8 @@ final _eighteenYearsAgo = DateTime.now().subtract(const Duration(days: 6935));
 final _selected = StateProvider.autoDispose<DateTime?>((ref) {
   final user = ref.watch(userProvider);
   DateTime? result;
-  if (user.value?.birthday != null) {
-    result = onlyDate.parse(user.value!.birthday!);
+  if (user.birthday != null) {
+    result = onlyDate.parse(user.birthday!);
   }
   return result;
 });
@@ -73,13 +73,10 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
           ).padding(vertical: 8).alignment(Alignment.center),
         ],
         floatingSubmit: FloatingCta(
-          color: state != null ? Theme.of(context).primaryColor : Colors.grey,
+          enabled: state != null,
           onPressed: () {
-            if (state == null) {
-              return;
-            }
             ref.read(userProvider.notifier).updateAttributes(
-                {'birthday': onlyDate.format(state)},
+                {'birthday': onlyDate.format(state!)},
                 routeTo: AppLinks.updateGender);
           },
         ));

@@ -47,6 +47,25 @@ class Heading6 extends StatelessWidget {
   }
 }
 
+class Caption extends StatelessWidget {
+  final String text;
+
+  const Caption({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ],
+    );
+  }
+}
+
 class SearchField extends HookConsumerWidget {
   const SearchField({Key? key}) : super(key: key);
 

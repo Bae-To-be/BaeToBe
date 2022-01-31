@@ -41,6 +41,14 @@ class InfoLabels {
   static const String cityHint = 'Enter your city';
   static const String countryHint = 'Enter your country';
   static const String linkedinPublic = 'Show my LinkedIn on my profile';
+  static const String addMinimumPhotos =
+      'Add at least %{image_count} photos to continue';
+  static const String selfieVerification =
+      'This picture is for our references and will not be shown on your profile';
+  static const String identityVerification =
+      'Upload a copy of any government approved identity document';
+
+  static const String loadingCamera = 'waiting for camera access';
 }
 
 class Placeholders {

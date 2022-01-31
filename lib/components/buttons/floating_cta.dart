@@ -8,7 +8,7 @@ import 'package:styled_widget/styled_widget.dart';
 class FloatingCta extends HookConsumerWidget {
   final String heroTag;
   final Widget body;
-  final Color? color;
+  final bool enabled;
   final void Function() onPressed;
 
   final Alignment alignment;
@@ -16,10 +16,10 @@ class FloatingCta extends HookConsumerWidget {
   const FloatingCta(
       {Key? key,
       this.heroTag = 'submit',
+      this.enabled = true,
       this.body =
           const Icon(FontAwesomeIcons.chevronRight, color: Colors.white),
       this.onPressed = doNothing,
-      this.color,
       this.alignment = Alignment.bottomRight})
       : super(key: key);
 
@@ -33,9 +33,10 @@ class FloatingCta extends HookConsumerWidget {
     }
 
     return FloatingActionButton(
-            heroTag: 'submit',
-            backgroundColor: color ?? Theme.of(context).primaryColor,
-            onPressed: onPressed,
+            heroTag: heroTag,
+            backgroundColor:
+                enabled ? Theme.of(context).primaryColor : Colors.grey,
+            onPressed: enabled ? onPressed : doNothing,
             child: body)
         .alignment(Alignment.bottomRight);
   }
