@@ -39,47 +39,61 @@ BottomNavigationBar buildBottomNavigationBar(
     showUnselectedLabels: false,
     onTap: tabsRouter.setActiveIndex,
     currentIndex: tabsRouter.activeIndex,
-    items: [
+    items: <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-          icon: Icon(
-            BTBCustomIcons.home,
-            color: Theme.of(context).primaryColorLight,
+          icon: Stack(
+            clipBehavior: Clip.none,
+            children: const [
+              Icon(
+                BTBCustomIcons.b,
+              ),
+              Positioned(
+                bottom: 0,
+                right: -3,
+                child: Icon(
+                  BTBCustomIcons.btbheart,
+                  color: Colors.red,
+                  size: 5,
+                ),
+              ),
+            ],
           ),
-          activeIcon: Icon(
-            BTBCustomIcons.home,
-            color: Theme.of(context).primaryColor,
+          activeIcon: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Icon(
+                BTBCustomIcons.b,
+                color: Theme.of(context).primaryColor,
+              ),
+              const Positioned(
+                bottom: 0,
+                right: -3,
+                child: Icon(
+                  BTBCustomIcons.btbheart,
+                  color: Colors.red,
+                  size: 5,
+                ),
+              ),
+            ],
           ),
           label: 'Discover'),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
             BTBCustomIcons.likes,
-            color: Theme.of(context).primaryColorLight,
-          ),
-          activeIcon: Icon(
-            BTBCustomIcons.likes,
-            color: Theme.of(context).primaryColor,
           ),
           label: 'Tab 2'),
-      BottomNavigationBarItem(
-          icon: Icon(
+      const BottomNavigationBarItem(
+          icon: const Icon(
             BTBCustomIcons.chat,
-            color: Theme.of(context).primaryColorLight,
-          ),
-          activeIcon: Icon(
-            BTBCustomIcons.chat,
-            color: Theme.of(context).primaryColor,
           ),
           label: 'Tab 3'),
-      BottomNavigationBarItem(
+      const BottomNavigationBarItem(
           icon: Icon(
             BTBCustomIcons.profile,
-            color: Theme.of(context).primaryColorLight,
-          ),
-          activeIcon: Icon(
-            BTBCustomIcons.profile,
-            color: Theme.of(context).primaryColor,
           ),
           label: 'Tab 4'),
     ],
+    unselectedItemColor: Theme.of(context).primaryColorLight,
+    selectedItemColor: Theme.of(context).primaryColor,
   );
 }

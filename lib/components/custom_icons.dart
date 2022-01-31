@@ -31,4 +31,6 @@ class BTBCustomIcons {
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData likes =
       IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData b =
+      IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
