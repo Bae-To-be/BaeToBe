@@ -71,7 +71,7 @@ class LoginScreen extends HookConsumerWidget {
               children: [
                 TextSpan(text: Headings.sellingPoint),
                 WidgetSpan(
-                  child: Icon(CustomIcons.btbheart,
+                  child: Icon(BTBCustomIcons.btbheart,
                       size: 12, color: Color(0xFFEC505C)),
                 ),
               ],

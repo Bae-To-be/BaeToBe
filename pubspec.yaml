@@ -62,6 +62,6 @@ flutter:
   - assets/launcher/
   - assets/splash_logo/
   fonts:
-  - family: BTBHeart
+  - family: BTBCustomIcons
     fonts:
-    - asset: assets/fonts/BTBHeart.ttf
+    - asset: assets/fonts/BTBCustomIcons.ttf
