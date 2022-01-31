@@ -2,7 +2,7 @@ import 'package:baetobe/components/buttons/rounded_cta.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/auth_provider.dart';
-import 'package:baetobe/domain/user_provider.dart';
+import 'package:baetobe/domain/loading_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.watch(authProvider);
-    final user = ref.watch(userProvider);
+    final loading = ref.watch(loadingProvider);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -82,11 +82,9 @@ class LoginScreen extends HookConsumerWidget {
             children: [
               ...auth.maybeWhen(
                   loading: () => loader(context),
-                  orElse: () => user.maybeWhen(
-                      loading: () => loader(context),
-                      orElse: () => loginButtons(
-                          context, ref.read(authProvider.notifier)))),
-              // ...loginButtons(context, auth),
+                  orElse: () => loading
+                      ? loader(context)
+                      : loginButtons(context, ref.read(authProvider.notifier))),
               RichText(
                 text: const TextSpan(
                   text: BodyTexts.weDontPostAnything,

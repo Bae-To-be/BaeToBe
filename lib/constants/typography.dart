@@ -40,6 +40,7 @@ class InfoLabels {
   static const String classYearHelper = 'mentioned the year you graduated in';
   static const String cityHint = 'Enter your city';
   static const String countryHint = 'Enter your country';
+  static const String linkedinPublic = 'Show my LinkedIn on my profile';
 }
 
 class Placeholders {

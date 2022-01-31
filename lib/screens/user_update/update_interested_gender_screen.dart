@@ -77,7 +77,6 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final genderListing = ref.watch(genderProvider);
     final state = ref.watch(_selected);
-    final user = ref.watch(userProvider);
 
     void onSubmit() {
       if (state.isEmpty) {
@@ -127,7 +126,6 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
         floatingSubmit: FloatingCta(
           color:
               state.isNotEmpty ? Theme.of(context).primaryColor : Colors.grey,
-          loading: user is AsyncLoading,
           onPressed: onSubmit,
         ));
   }

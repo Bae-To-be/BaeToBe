@@ -10,11 +10,14 @@ class LoginProviders {
 
 class RemoteConfigs {
   static const String googleClientId = 'GOOGLE_CLIENT_ID';
+  static const String debugNavEnabled = 'SHOW_DEBUG_NAV';
 }
 
 class ErrorMessages {
   static const String somethingWentWrong = 'Something went wrong';
   static const String noInternetConnection = 'No internet connection';
+  static const String invalidLinkedinUrl = 'must be a valid linkedin url';
+  static const String googleLoginCancelled = 'google login cancelled';
 }
 
 class StorageKeys {

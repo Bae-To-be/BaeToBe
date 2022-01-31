@@ -4,7 +4,6 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -46,8 +45,7 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AsyncValue<User> _user = ref.watch(userProvider);
-    final _state = ref.watch(_selected);
+    final state = ref.watch(_selected);
 
     return FormLayout(
         children: [
@@ -60,8 +58,8 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
               SfDateRangePicker(
                   showNavigationArrow: true,
                   selectionColor: Theme.of(context).primaryColor,
-                  initialDisplayDate: _state,
-                  initialSelectedDate: _state,
+                  initialDisplayDate: state,
+                  initialSelectedDate: state,
                   onSelectionChanged: (value) =>
                       ref.read(_selected.notifier).state = value.value,
                   maxDate: _eighteenYearsAgo,
@@ -75,14 +73,13 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
           ).padding(vertical: 8).alignment(Alignment.center),
         ],
         floatingSubmit: FloatingCta(
-          color: _state != null ? Theme.of(context).primaryColor : Colors.grey,
-          loading: _user is AsyncLoading,
+          color: state != null ? Theme.of(context).primaryColor : Colors.grey,
           onPressed: () {
-            if (_state == null) {
+            if (state == null) {
               return;
             }
             ref.read(userProvider.notifier).updateAttributes(
-                {'birthday': onlyDate.format(_state)},
+                {'birthday': onlyDate.format(state)},
                 routeTo: AppLinks.updateGender);
           },
         ));

@@ -1,6 +1,7 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
+import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -39,7 +40,8 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
 
   Future<void> updateAttributes(Map<String, dynamic> attributes,
       {String? routeTo}) async {
-    state = const AsyncValue.loading();
+    final loading = ref.read(loadingProvider.notifier);
+    loading.state = true;
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
     final router = ref.read(routerProvider);
@@ -48,11 +50,12 @@ class UserNotifier extends StateNotifier<AsyncValue<User>> {
         onSuccess: (response) async {
           state = AsyncValue.data(User.fromJson(response.data['data']));
           await _addAnalyticAttributes();
+          loading.state = false;
           if (routeTo != null) {
             await router.pushNamed(routeTo);
           }
         },
-        onError: (error) => state = AsyncValue.error(error));
+        onError: (_) => loading.state = false);
   }
 
   Future<void> _addAnalyticAttributes() async {

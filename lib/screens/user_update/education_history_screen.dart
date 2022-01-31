@@ -70,7 +70,6 @@ class EducationHistoryScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
     final state = ref.watch(educationFormStateProvider);
     final editing = ref.watch(_editingEducationProvider);
 
@@ -138,9 +137,8 @@ class EducationHistoryScreen extends HookConsumerWidget {
         color: state.allInformationValid()
             ? Theme.of(context).primaryColor
             : Colors.grey,
-        loading: user is AsyncLoading,
         onPressed: () {
-          if (state.allInformationValid()) {
+          if (!state.allInformationValid()) {
             return;
           }
 

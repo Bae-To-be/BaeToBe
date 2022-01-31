@@ -40,10 +40,6 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     });
   }
 
-  bool isLoading() {
-    return (state is AsyncLoading);
-  }
-
   Future<void> initialize() async {
     state = const AsyncValue.loading();
     final error = ref.read(errorProvider.notifier);
@@ -109,7 +105,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     state = const AsyncValue.loading();
     final error = ref.read(errorProvider.notifier);
     try {
-      await googleSignIn?.signIn();
+      if (await googleSignIn?.signIn() == null) {
+        state = const AsyncValue.error(ErrorMessages.googleLoginCancelled);
+      }
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
       error.updateError(ErrorMessages.somethingWentWrong);
