@@ -19,7 +19,7 @@ class UploadImagesScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final images = ref.read(imagesProvider);
+    final images = ref.watch(imagesProvider);
 
     return FormLayout(
         children: [

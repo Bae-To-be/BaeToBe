@@ -1,6 +1,5 @@
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,7 +15,6 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
   ImageStateNotifier(this.ref, this.position) : super(ImageFormState()) {
     final image = ref.watch(imagesProvider.select((images) =>
         images.firstWhereOrNull((image) => image.position == position)));
-    debugPrint('Updating: $position with ${image.toString()}');
     if (image != null) {
       state = ImageFormState(
         url: image.url,
