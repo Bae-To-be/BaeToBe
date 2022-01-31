@@ -19,8 +19,8 @@ class HomepageScreen extends StatelessWidget {
       bottomNavigationBuilder: (_, tabsRouter) {
         return Theme(
           data: ThemeData(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent),
+            splashColor: Colors.transparent,
+          ),
           child: NavigationBarTheme(
             data: NavigationBarThemeData(
               height: 60,
@@ -39,7 +39,7 @@ class HomepageScreen extends StatelessWidget {
                       children: const [
                         Icon(BTBCustomIcons.b,
                             color:
-                            Color(CustomColors.bottomNavBarInactiveColor)),
+                                Color(CustomColors.bottomNavBarInactiveColor)),
                         Positioned(
                           bottom: 0,
                           right: -3,
