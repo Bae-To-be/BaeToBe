@@ -14,6 +14,7 @@ import 'package:baetobe/screens/user_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/user_update/update_gender_screen.dart';
 import 'package:baetobe/screens/user_update/update_interested_gender_screen.dart';
 import 'package:baetobe/screens/user_update/update_work_information_screen.dart';
+import 'package:baetobe/screens/user_update/upload_images_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -46,6 +47,10 @@ import 'package:baetobe/screens/user_update/update_work_information_screen.dart'
     AutoRoute(
         path: AppLinks.updateLinkedInURL,
         page: LinkedinUrlScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.updateImages,
+        page: UploadImagesScreen,
         guards: [AuthGuard]),
     //user routes with a nested router
     AutoRoute(

@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Setup Java environment in order to build the Android app.
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
@@ -26,6 +28,18 @@ jobs:
       # Run widget tests for our flutter project.
 #       - run: flutter test
       # Build apk.
+      - name: Increment build number
+        if: github.ref == 'refs/heads/main'
+        run: perl -i -pe 's/^(version:\s+\d+\.\d+\.\d+\+)(\d+)$/$1.($2+1)/e' pubspec.yaml
+      - name: Set Version in environment
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "build_version=$(grep 'version: ' pubspec.yaml | sed 's/version: //')" >> $GITHUB_ENV
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          commit_message: Bump up build version
+          tagging_message: "${{ env.build_version }}"
       - run: flutter build apk
       - run: 'echo build/app/outputs/apk/release/app-release.apk > app-release.apk'
       - uses: MeilCli/slack-upload-file@v1

@@ -1,19 +1,19 @@
+import 'package:baetobe/domain/loading_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CustomTextButton extends StatelessWidget {
+class CustomTextButton extends HookConsumerWidget {
   final String text;
-  final bool loading;
   final void Function() onPressed;
 
   const CustomTextButton(
-      {Key? key,
-      required this.text,
-      required this.loading,
-      required this.onPressed})
+      {Key? key, required this.text, required this.onPressed})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final loading = ref.watch(loadingProvider);
+
     if (loading) {
       return CircularProgressIndicator(color: Theme.of(context).primaryColor);
     }

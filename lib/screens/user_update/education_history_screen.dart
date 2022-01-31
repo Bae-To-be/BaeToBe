@@ -29,13 +29,11 @@ class EducationFormState extends StateNotifier<List<UserEducation>> {
   final Ref ref;
   EducationFormState(this.ref) : super([]) {
     final user = ref.watch(userProvider);
-    user.whenData((userValue) {
-      if (userValue.education.isEmpty) {
-        addEducation();
-      } else {
-        state = userValue.education;
-      }
-    });
+    if (user.education.isEmpty) {
+      addEducation();
+    } else {
+      state = user.education;
+    }
   }
 
   void addEducation() {
@@ -70,7 +68,6 @@ class EducationHistoryScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
     final state = ref.watch(educationFormStateProvider);
     final editing = ref.watch(_editingEducationProvider);
 
@@ -135,15 +132,8 @@ class EducationHistoryScreen extends HookConsumerWidget {
         )
       ],
       floatingSubmit: FloatingCta(
-        color: state.allInformationValid()
-            ? Theme.of(context).primaryColor
-            : Colors.grey,
-        loading: user is AsyncLoading,
+        enabled: state.allInformationValid(),
         onPressed: () {
-          if (state.allInformationValid()) {
-            return;
-          }
-
           ref.read(userProvider.notifier).updateAttributes({
             'education': state.map((education) => education.toJson()).toList()
           }, routeTo: AppLinks.updateLinkedInURL);

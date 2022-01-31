@@ -17,15 +17,13 @@ final _selected = StateProvider.autoDispose<List<int>>((ref) {
   List<int> result = [];
   final user = ref.watch(userProvider);
   final genders = ref.watch(genderProvider);
-  user.whenData((value) {
-    if (value.interestedGenders.isNotEmpty) {
-      genders.whenData((listing) {
-        final matches = listing.allGenders
-            .where((gender) => value.interestedGenders.contains(gender.name));
-        result = matches.map((gender) => gender.id).toList();
-      });
-    }
-  });
+  if (user.interestedGenders.isNotEmpty) {
+    genders.whenData((listing) {
+      final matches = listing.allGenders
+          .where((gender) => user.interestedGenders.contains(gender.name));
+      result = matches.map((gender) => gender.id).toList();
+    });
+  }
 
   return result;
 });
@@ -77,12 +75,8 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final genderListing = ref.watch(genderProvider);
     final state = ref.watch(_selected);
-    final user = ref.watch(userProvider);
 
     void onSubmit() {
-      if (state.isEmpty) {
-        return;
-      }
       ref.read(userProvider.notifier).updateAttributes(
           {'interested_gender_ids': state},
           routeTo: AppLinks.updateWorkDetails);
@@ -125,9 +119,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                       color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
-          color:
-              state.isNotEmpty ? Theme.of(context).primaryColor : Colors.grey,
-          loading: user is AsyncLoading,
+          enabled: state.isNotEmpty,
           onPressed: onSubmit,
         ));
   }
