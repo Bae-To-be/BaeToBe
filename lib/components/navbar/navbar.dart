@@ -59,7 +59,7 @@ class CustomNavigationBar extends StatelessWidget {
     this.backgroundColor,
     this.height,
     // this.labelBehavior,
-  })  : assert(destinations != null && destinations.length >= 2),
+  })  : assert(destinations.length >= 2),
         assert(0 <= selectedIndex && selectedIndex < destinations.length),
         super(key: key);
 
@@ -773,17 +773,7 @@ class _NavigationBarDestinationTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (message == null) {
-      return child;
-    }
-    return Tooltip(
-      message: message,
-      // TODO(johnsonmh): Make this value configurable/themable.
-      verticalOffset: 42,
-      excludeFromSemantics: true,
-      preferBelow: false,
-      child: child,
-    );
+    return child;
   }
 }
 
