@@ -20,11 +20,6 @@ class HelpPage extends HookConsumerWidget {
 
   HelpPage({Key? key}) : super(key: key);
 
-  static String encodeURI(String uri) {
-    print(Uri.encodeFull(uri));
-    return Uri.encodeFull(uri);
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.read(routerProvider);
@@ -39,7 +34,9 @@ class HelpPage extends HookConsumerWidget {
               icon: IconButton(
                 icon: Icon(FontAwesomeIcons.solidTimesCircle,
                     color: Theme.of(context).primaryColor, size: 20),
-                onPressed: () {},
+                onPressed: () {
+                  router.navigateBack();
+                },
               )),
           const CustomDivider(),
           Expanded(
