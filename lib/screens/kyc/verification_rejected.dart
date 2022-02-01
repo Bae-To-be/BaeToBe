@@ -30,6 +30,10 @@ class VerificationRejected extends HookConsumerWidget {
           .replaceNamed(AppLinks.underVerification);
     }
 
+    if (verificationInfo.status == ApprovalStatuses.approved) {
+      ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
+    }
+
     return Column(children: [
       const SizedBox(height: 32),
       const Heading5(text: Headings.verificationRejected, withRow: false)

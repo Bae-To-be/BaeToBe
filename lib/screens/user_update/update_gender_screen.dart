@@ -76,7 +76,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
         children: <Widget>[
           const SizedBox(height: 32),
           const Heading5(text: Headings.enterGender)
-              .padding(top: 32, bottom: 36, left: 10),
+              .padding(top: 32, bottom: 36, horizontal: 10),
           genderListing.maybeWhen(
               data: (GenderListing listing) => Column(
                     children: _tiles(context, listing, state, (int value) {

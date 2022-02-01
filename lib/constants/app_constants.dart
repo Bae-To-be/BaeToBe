@@ -36,6 +36,7 @@ class ErrorMessages {
 class StorageKeys {
   static const String auth = 'auth_info';
   static const String locationUpdatedAt = 'location_updated_at';
+  static const String fcmTimestamp = 'fcm_updated_at';
 }
 
 class VerificationTypes {
@@ -56,4 +57,11 @@ class ApprovalFields {
   static const selfie = 'selfie';
   static const identity = 'identity';
   static const birthday = 'birthday';
+}
+
+class NotificationEvents {
+  static const String verificationUpdate = 'verification_update';
+  static const String newMessage = 'new_message';
+  static const String newMatch = 'new_match';
+  static const String newLike = 'new_like';
 }

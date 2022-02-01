@@ -11,10 +11,12 @@ import 'package:baetobe/domain/post_login_route.dart';
 import 'package:baetobe/entities/auth_information.dart';
 import 'package:baetobe/infrastructure/location_service.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
+import 'package:baetobe/infrastructure/notifications_service.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -197,10 +199,18 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
             _analyticsEvent(
                 response.data['data']['is_new_user'] as bool, loginMethod)
           ]);
+          await postLoginCallbacks();
           await router.replaceNamed(await postLoginRoute(ref));
-          await ref.read(locationProvider).syncLocationIfRequired();
         },
         onError: (error) => state = AsyncValue.error(error));
+  }
+
+  Future<void> postLoginCallbacks() async {
+    debugPrint('running');
+    await Future.wait([
+      ref.read(locationProvider).syncLocationIfRequired(),
+      ref.read(notificationsProvider).setupNotifications(ref)
+    ]);
   }
 
   Future<void> _analyticsEvent(bool isNewLogin, String loginMethod) {
@@ -219,8 +229,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     }
     state = AsyncValue.data(AuthInformation.fromJson(jsonDecode(value)));
     final router = ref.read(routerProvider);
+    await postLoginCallbacks();
     await router.replaceNamed(await postLoginRoute(ref));
-    await ref.read(locationProvider).syncLocationIfRequired();
     return true;
   }
 
