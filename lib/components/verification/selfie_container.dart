@@ -1,9 +1,10 @@
+import 'dart:io';
+
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/selfie_verification_state_provider.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class SelfieContainer extends StatelessWidget {
@@ -25,34 +26,13 @@ class SelfieContainer extends StatelessWidget {
       ]).padding(horizontal: 15);
     }
 
-    if (state.uploading) {
+    if (state.file != null) {
       return SelfieTile(
         child: SizedBox(
           width: width / state.controller!.value.aspectRatio,
           height: width,
-          child: GFShimmer(
-            child: Container(color: Colors.white),
-          ),
-        ),
-      );
-    }
-
-    if (state.url != null) {
-      return SelfieTile(
-        child: SizedBox(
-          width: width / state.controller!.value.aspectRatio,
-          height: width,
-          child: Image.network(
-            state.url!,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: GFShimmer(
-                  child: Container(color: Colors.white),
-                ),
-              );
-            },
+          child: Image.file(
+            File(state.file!.path),
           ),
         ),
       );

@@ -53,8 +53,9 @@ class VerificationFilesNotifier
     loading.state = false;
   }
 
-  Future<void> addFile(
+  Future<bool> addFile(
       String fileType, String filePath, String? filename) async {
+    bool result = false;
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
     await error.safelyExecute(
@@ -67,10 +68,12 @@ class VerificationFilesNotifier
               )
             })),
         onSuccess: (response) {
+          result = true;
           _addOrReplaceFile(
               response.data['data']['file_type'], response.data['data']['url']);
           return Future.value(null);
         });
+    return result;
   }
 
   Future<void> removeFile(String fileType) async {

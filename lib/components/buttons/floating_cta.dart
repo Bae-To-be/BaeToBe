@@ -10,6 +10,7 @@ class FloatingCta extends HookConsumerWidget {
   final IconData? icon;
   final bool enabled;
   final Color? color;
+  final bool? loadingOverride;
   final void Function() onPressed;
 
   final Alignment alignment;
@@ -18,6 +19,7 @@ class FloatingCta extends HookConsumerWidget {
       {Key? key,
       this.heroTag = 'submit',
       this.enabled = true,
+      this.loadingOverride,
       this.icon,
       this.color,
       this.onPressed = doNothing,
@@ -28,7 +30,7 @@ class FloatingCta extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final loading = ref.watch(loadingProvider);
 
-    if (loading) {
+    if (loadingOverride ?? loading) {
       return CircularProgressIndicator(color: Theme.of(context).primaryColor)
           .alignment(Alignment.bottomRight);
     }
