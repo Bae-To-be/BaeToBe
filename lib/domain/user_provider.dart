@@ -1,7 +1,10 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
+import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -51,7 +54,15 @@ class UserNotifier extends StateNotifier<User> {
           state = User.fromJson(response.data['data']);
           await _addAnalyticAttributes();
           loading.state = false;
+          if (ref.read(verificationInfoProvider.notifier).info?.status ==
+              ApprovalStatuses.rejected) {
+            await ref.read(verificationInfoProvider.notifier).loadInfo();
+          }
           if (routeTo != null) {
+            if (routeTo == AppLinks.back) {
+              await router.pop();
+              return;
+            }
             await router.pushNamed(routeTo);
           }
         },

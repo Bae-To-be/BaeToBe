@@ -16,18 +16,36 @@ final selfieStateProvider =
   return SelfieFormStateNotifier(ref);
 });
 
-class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
+class SelfieFormStateNotifier extends StateNotifier<SelfieState>
+    with WidgetsBindingObserver {
   CameraDescription? _camera;
   final Ref ref;
 
   SelfieFormStateNotifier(this.ref) : super(SelfieState()) {
+    WidgetsBinding.instance?.addObserver(this);
     _setupCamera();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
     state.controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  //ignore: avoid_renaming_method_parameters
+  void didChangeAppLifecycleState(AppLifecycleState appState) {
+    super.didChangeAppLifecycleState(appState);
+    if (state.controller == null ||
+        state.controller?.value.isInitialized != true) {
+      return;
+    }
+    if (appState == AppLifecycleState.inactive) {
+      state.controller?.dispose();
+    } else if (appState == AppLifecycleState.resumed) {
+      _setupCamera();
+    }
   }
 
   void clearPicture() {
@@ -37,11 +55,11 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
     state = newState;
   }
 
-  Future<void> handleSubmission() {
+  Future<void> handleSubmission(bool? redirectBack) {
     if (state.file == null) {
       return _clickPicture();
     } else {
-      return _submitSelection();
+      return _submitSelection(redirectBack);
     }
   }
 
@@ -58,13 +76,17 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
     }
   }
 
-  Future<void> _submitSelection() async {
+  Future<void> _submitSelection(bool? redirectBack) async {
     if (state.file != null) {
       final loading = ref.read(loadingProvider.notifier);
       loading.state = true;
       if (await ref.read(verificationFilesProvider.notifier).addFile(
           VerificationTypes.selfie, state.file!.path, state.file!.name)) {
         loading.state = false;
+        if (redirectBack == true) {
+          await ref.read(routerProvider.notifier).pop();
+          return;
+        }
         await ref
             .read(routerProvider.notifier)
             .pushNamed(AppLinks.identityVerification);
@@ -83,6 +105,8 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
       error.updateError(ErrorMessages.couldNotLoadCamera);
       return;
     }
+    await state.controller?.dispose();
+
     final controller = CameraController(_camera!, ResolutionPreset.medium);
     try {
       await controller.initialize();

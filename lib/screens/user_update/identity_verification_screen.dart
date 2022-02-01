@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
@@ -11,9 +12,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class IdentityVerificationScreen extends HookConsumerWidget {
-  const IdentityVerificationScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool? redirectBack;
+
+  const IdentityVerificationScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,9 +42,15 @@ class IdentityVerificationScreen extends HookConsumerWidget {
         ],
         floatingSubmit: FloatingCta(
           enabled: state.uploaded,
-          onPressed: () => ref
-              .read(routerProvider.notifier)
-              .pushNamed(AppLinks.underVerification),
+          onPressed: () {
+            if (redirectBack == true) {
+              ref.read(routerProvider.notifier).pop();
+              return;
+            }
+            ref
+                .read(routerProvider.notifier)
+                .pushNamed(AppLinks.underVerification);
+          },
         ));
   }
 }

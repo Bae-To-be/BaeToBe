@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/custom_checkbox.dart';
 import 'package:baetobe/components/forms/layout.dart';
@@ -13,9 +14,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class LinkedinUrlScreen extends HookConsumerWidget {
-  const LinkedinUrlScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool? redirectBack;
+  const LinkedinUrlScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,7 +67,9 @@ class LinkedinUrlScreen extends HookConsumerWidget {
           ref.read(userProvider.notifier).updateAttributes({
             'linkedin_url': urlState,
             'linkedin_public': isPublicState,
-          }, routeTo: AppLinks.updateImages);
+          },
+              routeTo:
+                  redirectBack == true ? AppLinks.back : AppLinks.updateImages);
         },
       ),
     );

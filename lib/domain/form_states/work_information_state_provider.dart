@@ -61,12 +61,12 @@ final workInformationStateProvider =
         result.industryId = match.id;
       }
     }
-    if (user.company != null) {
-      result.companyName = user.company;
-    }
-    if (user.workTitle != null) {
-      result.workTitleName = user.workTitle;
-    }
   });
+  if (user.company != null) {
+    result.companyName = user.company;
+  }
+  if (user.workTitle != null) {
+    result.workTitleName = user.workTitle;
+  }
   return result;
 });

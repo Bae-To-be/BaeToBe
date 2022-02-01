@@ -16,12 +16,7 @@ class VerificationInfoNotifier extends StateNotifier<UserVerificationInfo?> {
 
   VerificationInfoNotifier(this.ref) : super(null);
 
-  Future<UserVerificationInfo?> getLatestInfo() async {
-    if (state == null) {
-      await loadInfo();
-    }
-    return state;
-  }
+  UserVerificationInfo? get info => state;
 
   Future<void> loadInfo() async {
     final loading = ref.read(loadingProvider.notifier);

@@ -2,6 +2,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
+import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';
@@ -67,11 +68,15 @@ class VerificationFilesNotifier
                 filename: filename,
               )
             })),
-        onSuccess: (response) {
+        onSuccess: (response) async {
           result = true;
           _addOrReplaceFile(
               response.data['data']['file_type'], response.data['data']['url']);
-          return Future.value(null);
+          if (ref.read(verificationInfoProvider.notifier).info?.status ==
+              ApprovalStatuses.rejected) {
+            await ref.read(verificationInfoProvider.notifier).loadInfo();
+          }
+          return;
         });
     return result;
   }

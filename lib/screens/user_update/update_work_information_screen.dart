@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/auto_complete_field.dart';
 import 'package:baetobe/components/forms/layout.dart';
@@ -14,9 +15,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class UpdateWorkInformationScreen extends HookConsumerWidget {
-  const UpdateWorkInformationScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool? redirectBack;
+
+  const UpdateWorkInformationScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -99,7 +102,10 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
               'industry_id': state.industryId,
               'company_name': state.companyName,
               'work_title_name': state.workTitleName,
-            }, routeTo: AppLinks.updateEducationHistory);
+            },
+                routeTo: redirectBack == true
+                    ? AppLinks.back
+                    : AppLinks.updateEducationHistory);
           },
         ));
   }

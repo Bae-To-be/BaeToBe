@@ -32,6 +32,8 @@ class Headings {
   static const String updateHeight = 'Height';
   static const String accountUnderVerification =
       'Your account is under verification';
+  static const verificationRejected =
+      'Your profile failed our verification process';
 }
 
 class InfoLabels {
@@ -59,6 +61,9 @@ class InfoLabels {
   static const socialAccounts = 'Social accounts.';
   static const String underVerificationHelper =
       'Hi, we have collected your information and our team is currently verifying your profile. We will get back to you soon!';
+  static const pleaseChangeField = 'Please update this information';
+  static const correctionSubmitted = 'Correction Submitted';
+  static const allGood = 'All good';
 }
 
 class Placeholders {
@@ -82,4 +87,14 @@ class LinkTexts {
   static const String addSchool = 'Add Another School';
   static const String doneEditing = 'Done Editing';
   static const String removeRow = 'Remove Row';
+  static const String refreshStatus = 'Refresh Status';
+}
+
+class ApprovalFieldLabels {
+  static const linkedinUrl = 'Linkedin Url';
+  static const workDetails = 'Work Details';
+  static const education = 'Education';
+  static const selfie = 'Selfie Verification';
+  static const identity = 'Identity Verification';
+  static const birthday = 'Birthday';
 }

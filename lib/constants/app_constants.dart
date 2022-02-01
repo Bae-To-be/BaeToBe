@@ -29,6 +29,8 @@ class ErrorMessages {
       'Please grant camera permission';
   static const String couldNotTakePicture = 'Could not take picture';
   static const String couldNotPickFile = 'Could not pick file';
+  static const String couldNotLoadVerificationinfo =
+      'could not load verification info';
 }
 
 class StorageKeys {
@@ -45,4 +47,13 @@ class ApprovalStatuses {
   static const String inReview = 'in_review';
   static const String approved = 'approved';
   static const String rejected = 'rejected';
+}
+
+class ApprovalFields {
+  static const linkedin = 'linkedin_url';
+  static const workDetails = 'work_info';
+  static const education = 'education';
+  static const selfie = 'selfie';
+  static const identity = 'identity';
+  static const birthday = 'birthday';
 }

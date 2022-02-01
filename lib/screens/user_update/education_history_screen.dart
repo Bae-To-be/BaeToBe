@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/education/education_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
@@ -12,9 +13,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class EducationHistoryScreen extends HookConsumerWidget {
-  const EducationHistoryScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool? redirectBack;
+
+  const EducationHistoryScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -86,7 +89,10 @@ class EducationHistoryScreen extends HookConsumerWidget {
         onPressed: () {
           ref.read(userProvider.notifier).updateAttributes({
             'education': state.map((education) => education.toJson()).toList()
-          }, routeTo: AppLinks.updateLinkedInURL);
+          },
+              routeTo: redirectBack == true
+                  ? AppLinks.back
+                  : AppLinks.updateLinkedInURL);
         },
       ),
     );

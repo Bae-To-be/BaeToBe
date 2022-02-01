@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/text_widgets.dart';
@@ -14,7 +15,11 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 final _eighteenYearsAgo = DateTime.now().subtract(const Duration(days: 6935));
 
 class UpdateBirthdayScreen extends HookConsumerWidget {
-  const UpdateBirthdayScreen({Key? key}) : super(key: key);
+  final bool? redirectBack;
+
+  const UpdateBirthdayScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +56,9 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
           onPressed: () {
             ref.read(userProvider.notifier).updateAttributes(
                 {'birthday': onlyDate.format(state!)},
-                routeTo: AppLinks.updateGender);
+                routeTo: redirectBack == true
+                    ? AppLinks.back
+                    : AppLinks.updateGender);
           },
         ));
   }

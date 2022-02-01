@@ -34,6 +34,8 @@ class AppLinks {
   static String messages({int? matchId}) {
     return '/matches/${matchId == null ? ":id" : matchId.toString()}/messages';
   }
+
+  static String back = 'back';
 }
 
 class HomepageTabs {

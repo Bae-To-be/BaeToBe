@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/text_widgets.dart';
@@ -10,9 +11,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class SelfieVerificationScreen extends HookConsumerWidget {
-  const SelfieVerificationScreen({
-    Key? key,
-  }) : super(key: key);
+  final bool? redirectBack;
+
+  const SelfieVerificationScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +44,9 @@ class SelfieVerificationScreen extends HookConsumerWidget {
           : null,
       floatingSubmit: FloatingCta(
         icon: state.file == null ? FontAwesomeIcons.camera : null,
-        onPressed: ref.read(selfieStateProvider.notifier).handleSubmission,
+        onPressed: () => ref
+            .read(selfieStateProvider.notifier)
+            .handleSubmission(redirectBack),
       ),
     );
   }

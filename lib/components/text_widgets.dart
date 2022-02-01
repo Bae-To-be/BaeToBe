@@ -92,11 +92,9 @@ class GenericTextWidget extends StatelessWidget {
       : super(key: key);
 
   Widget body(context) {
-    return Flexible(
-      child: Text(
-        text,
-        style: textStyle,
-      ),
+    return Text(
+      text,
+      style: textStyle,
     );
   }
 

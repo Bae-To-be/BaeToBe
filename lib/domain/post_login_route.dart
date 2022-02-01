@@ -52,8 +52,8 @@ Future<String> postLoginRoute(ref) async {
     return AppLinks.identityVerification;
   }
 
-  final info = await verificationInfoNotifier.getLatestInfo();
-  switch (info?.status) {
+  await verificationInfoNotifier.loadInfo();
+  switch (verificationInfoNotifier.info?.status) {
     case ApprovalStatuses.approved:
       return AppLinks.homePage;
     case ApprovalStatuses.rejected:

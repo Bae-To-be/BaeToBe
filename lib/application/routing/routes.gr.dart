@@ -56,8 +56,14 @@ class AppRouter extends _i19.RootStackRouter {
           routeData: routeData, child: const _i2.LoginScreen());
     },
     UpdateBirthdayScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<UpdateBirthdayScreenRouteArgs>(
+          orElse: () => UpdateBirthdayScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i3.UpdateBirthdayScreen());
+          routeData: routeData,
+          child: _i3.UpdateBirthdayScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     UpdateGenderScreenRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
@@ -69,28 +75,58 @@ class AppRouter extends _i19.RootStackRouter {
           child: const _i5.UpdateInterestedGenderScreen());
     },
     UpdateWorkInformationScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<UpdateWorkInformationScreenRouteArgs>(
+          orElse: () => UpdateWorkInformationScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i6.UpdateWorkInformationScreen());
+          routeData: routeData,
+          child: _i6.UpdateWorkInformationScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     EducationHistoryScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<EducationHistoryScreenRouteArgs>(
+          orElse: () => EducationHistoryScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i7.EducationHistoryScreen());
+          routeData: routeData,
+          child: _i7.EducationHistoryScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     LinkedinUrlScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<LinkedinUrlScreenRouteArgs>(
+          orElse: () => LinkedinUrlScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i8.LinkedinUrlScreen());
+          routeData: routeData,
+          child: _i8.LinkedinUrlScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     UploadImagesScreenRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i9.UploadImagesScreen());
     },
     SelfieVerificationScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<SelfieVerificationScreenRouteArgs>(
+          orElse: () => SelfieVerificationScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i10.SelfieVerificationScreen());
+          routeData: routeData,
+          child: _i10.SelfieVerificationScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     IdentityVerificationScreenRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<IdentityVerificationScreenRouteArgs>(
+          orElse: () => IdentityVerificationScreenRouteArgs(
+              redirectBack: queryParams.optBool('redirectBack')));
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i11.IdentityVerificationScreen());
+          routeData: routeData,
+          child: _i11.IdentityVerificationScreen(
+              key: args.key, redirectBack: args.redirectBack));
     },
     UnderVerificationRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
@@ -190,11 +226,29 @@ class LoginScreenRoute extends _i19.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.UpdateBirthdayScreen]
-class UpdateBirthdayScreenRoute extends _i19.PageRouteInfo<void> {
-  const UpdateBirthdayScreenRoute()
-      : super(UpdateBirthdayScreenRoute.name, path: '/birthday');
+class UpdateBirthdayScreenRoute
+    extends _i19.PageRouteInfo<UpdateBirthdayScreenRouteArgs> {
+  UpdateBirthdayScreenRoute({_i20.Key? key, bool? redirectBack})
+      : super(UpdateBirthdayScreenRoute.name,
+            path: '/birthday',
+            args: UpdateBirthdayScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'UpdateBirthdayScreenRoute';
+}
+
+class UpdateBirthdayScreenRouteArgs {
+  const UpdateBirthdayScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'UpdateBirthdayScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
 }
 
 /// generated route for
@@ -218,29 +272,83 @@ class UpdateInterestedGenderScreenRoute extends _i19.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.UpdateWorkInformationScreen]
-class UpdateWorkInformationScreenRoute extends _i19.PageRouteInfo<void> {
-  const UpdateWorkInformationScreenRoute()
-      : super(UpdateWorkInformationScreenRoute.name, path: '/work_details');
+class UpdateWorkInformationScreenRoute
+    extends _i19.PageRouteInfo<UpdateWorkInformationScreenRouteArgs> {
+  UpdateWorkInformationScreenRoute({_i20.Key? key, bool? redirectBack})
+      : super(UpdateWorkInformationScreenRoute.name,
+            path: '/work_details',
+            args: UpdateWorkInformationScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'UpdateWorkInformationScreenRoute';
 }
 
+class UpdateWorkInformationScreenRouteArgs {
+  const UpdateWorkInformationScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'UpdateWorkInformationScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
+}
+
 /// generated route for
 /// [_i7.EducationHistoryScreen]
-class EducationHistoryScreenRoute extends _i19.PageRouteInfo<void> {
-  const EducationHistoryScreenRoute()
-      : super(EducationHistoryScreenRoute.name, path: '/education_history');
+class EducationHistoryScreenRoute
+    extends _i19.PageRouteInfo<EducationHistoryScreenRouteArgs> {
+  EducationHistoryScreenRoute({_i20.Key? key, bool? redirectBack})
+      : super(EducationHistoryScreenRoute.name,
+            path: '/education_history',
+            args: EducationHistoryScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'EducationHistoryScreenRoute';
 }
 
+class EducationHistoryScreenRouteArgs {
+  const EducationHistoryScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'EducationHistoryScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
+}
+
 /// generated route for
 /// [_i8.LinkedinUrlScreen]
-class LinkedinUrlScreenRoute extends _i19.PageRouteInfo<void> {
-  const LinkedinUrlScreenRoute()
-      : super(LinkedinUrlScreenRoute.name, path: '/linkedin_url');
+class LinkedinUrlScreenRoute
+    extends _i19.PageRouteInfo<LinkedinUrlScreenRouteArgs> {
+  LinkedinUrlScreenRoute({_i20.Key? key, bool? redirectBack})
+      : super(LinkedinUrlScreenRoute.name,
+            path: '/linkedin_url',
+            args: LinkedinUrlScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'LinkedinUrlScreenRoute';
+}
+
+class LinkedinUrlScreenRouteArgs {
+  const LinkedinUrlScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'LinkedinUrlScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
 }
 
 /// generated route for
@@ -254,21 +362,56 @@ class UploadImagesScreenRoute extends _i19.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.SelfieVerificationScreen]
-class SelfieVerificationScreenRoute extends _i19.PageRouteInfo<void> {
-  const SelfieVerificationScreenRoute()
-      : super(SelfieVerificationScreenRoute.name, path: '/selfie_verification');
+class SelfieVerificationScreenRoute
+    extends _i19.PageRouteInfo<SelfieVerificationScreenRouteArgs> {
+  SelfieVerificationScreenRoute({_i20.Key? key, bool? redirectBack})
+      : super(SelfieVerificationScreenRoute.name,
+            path: '/selfie_verification',
+            args: SelfieVerificationScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'SelfieVerificationScreenRoute';
 }
 
+class SelfieVerificationScreenRouteArgs {
+  const SelfieVerificationScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'SelfieVerificationScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
+}
+
 /// generated route for
 /// [_i11.IdentityVerificationScreen]
-class IdentityVerificationScreenRoute extends _i19.PageRouteInfo<void> {
-  const IdentityVerificationScreenRoute()
+class IdentityVerificationScreenRoute
+    extends _i19.PageRouteInfo<IdentityVerificationScreenRouteArgs> {
+  IdentityVerificationScreenRoute({_i20.Key? key, bool? redirectBack})
       : super(IdentityVerificationScreenRoute.name,
-            path: '/identity_verification');
+            path: '/identity_verification',
+            args: IdentityVerificationScreenRouteArgs(
+                key: key, redirectBack: redirectBack),
+            rawQueryParams: {'redirectBack': redirectBack});
 
   static const String name = 'IdentityVerificationScreenRoute';
+}
+
+class IdentityVerificationScreenRouteArgs {
+  const IdentityVerificationScreenRouteArgs({this.key, this.redirectBack});
+
+  final _i20.Key? key;
+
+  final bool? redirectBack;
+
+  @override
+  String toString() {
+    return 'IdentityVerificationScreenRouteArgs{key: $key, redirectBack: $redirectBack}';
+  }
 }
 
 /// generated route for
