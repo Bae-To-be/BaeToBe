@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/auth_guard.dart';
+import 'package:baetobe/components/webview.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
 import 'package:baetobe/screens/home/discover_tab.dart';
@@ -89,7 +90,10 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
       ],
     ),
     AutoRoute(path: AppLinks.editProfile, page: EditProfile),
-    AutoRoute(path: AppLinks.helpPage, page: HelpPage),
+    AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
+      AutoRoute(path: '', page: HelpPage, initial: true),
+      AutoRoute(path: AppLinks.webview, page: Webview),
+    ]),
     AutoRoute(path: AppLinks.updatePreferences, page: UpdatePreferences),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),
   ],

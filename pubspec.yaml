@@ -38,6 +38,7 @@ dependencies:
   camera: ^0.9.4+9
   file_picker: ^4.3.3
   flutter_local_notifications: ^9.2.0
+  webview_flutter: ^3.0.0
 dev_dependencies:
   integration_test:
     sdk: flutter

@@ -17,6 +17,7 @@ class RemoteConfigs {
   static const String debugNavEnabled = 'SHOW_DEBUG_NAV';
   static const String maxPhotoCount = 'MAXIMUM_PHOTO_COUNT';
   static const String minPhotoCount = 'MINIMUM_PHOTO_COUNT';
+  static const String apiHostURL = 'API_HOST';
 }
 
 class ErrorMessages {

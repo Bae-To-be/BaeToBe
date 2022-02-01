@@ -14,7 +14,7 @@ class AppLinks {
   static const String underVerification = '/under_verification';
   static const String verificationRejected = '/rejected';
   static const String helpPage = 'help';
-  static const String webview = '/webview';
+  static const String webview = 'webview';
   static const String editProfile = 'edit_profile';
   static const String editHometown = '/edit_hometown';
   static const String editReligion = '/edit_religion';
