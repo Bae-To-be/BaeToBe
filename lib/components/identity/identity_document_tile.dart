@@ -45,7 +45,7 @@ class IdentityDocumentTile extends HookConsumerWidget {
                     Icon(FontAwesomeIcons.solidCheckCircle,
                             size: 20, color: Theme.of(context).primaryColor)
                         .padding(horizontal: 24),
-                    Text(InfoLabels.fileAdded,
+                    Text(state.fileName ?? InfoLabels.fileAdded,
                         style: TextStyle(color: Theme.of(context).primaryColor))
                   ],
                 ),
