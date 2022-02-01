@@ -52,7 +52,9 @@ class HelpPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const Center(child: Text('Help Page'),);
+    return const Center(
+      child: Text('Help Page'),
+    );
     //   return Column(
     //     children: [
     //       GFListTile(
@@ -72,4 +74,3 @@ class HelpPage extends HookConsumerWidget {
     //   );
   }
 }
-

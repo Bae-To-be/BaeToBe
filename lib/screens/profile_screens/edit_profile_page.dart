@@ -59,8 +59,7 @@ class EditProfile extends HookConsumerWidget {
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
-                  maxCrossAxisExtent:
-                  MediaQuery.of(context).size.width / 3),
+                  maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
               itemCount: FirebaseRemoteConfig.instance
                   .getInt(RemoteConfigs.maxPhotoCount),
               physics: const ClampingScrollPhysics(),
@@ -113,7 +112,8 @@ class EditProfile extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    AutoRouter.of(context).pushNamed('${AppLinks.updateGender}?redirectBack=true');
+                    AutoRouter.of(context).pushNamed(
+                        '${AppLinks.updateGender}?redirectBack=true');
                   },
                 ),
                 EditProfileContentTile(
@@ -124,8 +124,9 @@ class EditProfile extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    AutoRouter.of(context).pushNamed('${AppLinks.updateInterestedGenders}?redirectBack=true');
-                    },
+                    AutoRouter.of(context).pushNamed(
+                        '${AppLinks.updateInterestedGenders}?redirectBack=true');
+                  },
                 ),
                 EditProfileContentTile(
                   title: 'Hometown',
@@ -156,13 +157,8 @@ class EditProfile extends HookConsumerWidget {
                 EditProfileContentTile(
                   title: 'Languages',
                   content: Text(
-                    _user.languages
-                        .map((e) => e.name)
-                        .join(', ') !=
-                        ''
-                        ? _user.languages
-                        .map((e) => e.name)
-                        .join(', ')
+                    _user.languages.map((e) => e.name).join(', ') != ''
+                        ? _user.languages.map((e) => e.name).join(', ')
                         : ErrorMessages.pleaseUpdatePreferences,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
                   ),
@@ -188,8 +184,7 @@ class EditProfile extends HookConsumerWidget {
                   title: 'Height',
                   content: Text(
                     _user.height != null
-                        ? cmToFeetAndInchesAndCmString(
-                        _user.height!)
+                        ? cmToFeetAndInchesAndCmString(_user.height!)
                         : ErrorMessages.pleaseUpdatePreferences,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
                   ),
@@ -207,18 +202,19 @@ class EditProfile extends HookConsumerWidget {
                       Text(
                         _user.workTitle!,
                         style:
-                        const TextStyle(color: Colors.grey, fontSize: 16),
+                            const TextStyle(color: Colors.grey, fontSize: 16),
                       ).padding(bottom: 4),
                       Text(
                         '${_user.company!} | ${_user.industry!}',
                         style:
-                        const TextStyle(color: Colors.grey, fontSize: 16),
+                            const TextStyle(color: Colors.grey, fontSize: 16),
                       ),
                     ],
                   ),
                   button: true,
                   callback: () {
-                    AutoRouter.of(context).pushNamed('${AppLinks.updateWorkDetails}?redirectBack=true');
+                    AutoRouter.of(context).pushNamed(
+                        '${AppLinks.updateWorkDetails}?redirectBack=true');
                     // Get.toNamed(AppLinks.updateWorkDetails, arguments: false);
                   },
                 ),
@@ -229,7 +225,8 @@ class EditProfile extends HookConsumerWidget {
                       children: _allEducationList(context, ref)),
                   button: true,
                   callback: () {
-                    AutoRouter.of(context).pushNamed('${AppLinks.updateEducationHistory}?redirectBack=true');
+                    AutoRouter.of(context).pushNamed(
+                        '${AppLinks.updateEducationHistory}?redirectBack=true');
                   },
                 ),
                 const EditProfileSectionTile(title: 'Lifestyle'),
@@ -316,9 +313,9 @@ class EditProfile extends HookConsumerWidget {
     return result;
   }
 }
+
 //
 class _BioTextField extends HookConsumerWidget {
-
   const _BioTextField({Key? key}) : super(key: key);
 
   @override
