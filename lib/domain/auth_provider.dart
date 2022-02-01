@@ -194,11 +194,11 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
           await Future.wait([
             storage.write(
                 key: StorageKeys.auth, value: jsonEncode(state.value)),
-            ref.read(locationProvider).syncLocationIfRequired(),
             _analyticsEvent(
                 response.data['data']['is_new_user'] as bool, loginMethod)
           ]);
           await router.replaceNamed(await postLoginRoute(ref));
+          await ref.read(locationProvider).syncLocationIfRequired();
         },
         onError: (error) => state = AsyncValue.error(error));
   }
@@ -219,10 +219,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     }
     state = AsyncValue.data(AuthInformation.fromJson(jsonDecode(value)));
     final router = ref.read(routerProvider);
-    await Future.wait([
-      ref.read(locationProvider).syncLocationIfRequired(),
-      router.replaceNamed(await postLoginRoute(ref))
-    ]);
+    await router.replaceNamed(await postLoginRoute(ref));
+    await ref.read(locationProvider).syncLocationIfRequired();
     return true;
   }
 
