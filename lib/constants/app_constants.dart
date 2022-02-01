@@ -28,6 +28,7 @@ class ErrorMessages {
   static const String pleaseGrantCameraPermission =
       'Please grant camera permission';
   static const String couldNotTakePicture = 'Could not take picture';
+  static const String couldNotPickFile = 'Could not pick file';
 }
 
 class StorageKeys {

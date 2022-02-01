@@ -10,23 +10,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SelfieState {
-  XFile? file;
-  CameraController? controller;
-
-  SelfieState({this.controller, this.file});
-
-  SelfieState copyWith({CameraController? newController, XFile? newFile}) {
-    return SelfieState(
-        file: newFile ?? file, controller: newController ?? controller);
-  }
-
-  @override
-  String toString() {
-    return {'file': file}.toString();
-  }
-}
-
 final selfieStateProvider =
     StateNotifierProvider.autoDispose<SelfieFormStateNotifier, SelfieState>(
         (ref) {
@@ -107,5 +90,22 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState> {
       error.updateError(ErrorMessages.pleaseGrantCameraPermission);
     }
     state = state.copyWith(newController: controller);
+  }
+}
+
+class SelfieState {
+  XFile? file;
+  CameraController? controller;
+
+  SelfieState({this.controller, this.file});
+
+  SelfieState copyWith({CameraController? newController, XFile? newFile}) {
+    return SelfieState(
+        file: newFile ?? file, controller: newController ?? controller);
+  }
+
+  @override
+  String toString() {
+    return {'file': file}.toString();
   }
 }

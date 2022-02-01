@@ -87,11 +87,11 @@ class LoginScreen extends HookConsumerWidget {
                       : loginButtons(context, ref.read(authProvider.notifier))),
               RichText(
                 text: const TextSpan(
-                  text: BodyTexts.weDontPostAnything,
+                  text: InfoLabels.weDontPostAnything,
                   style: TextStyle(fontSize: 12, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
-                        text: BodyTexts.socialAccounts,
+                        text: InfoLabels.socialAccounts,
                         style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -99,7 +99,7 @@ class LoginScreen extends HookConsumerWidget {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: BodyTexts.byContinuingYouAgree,
+                  text: InfoLabels.byContinuingYouAgree,
                   style: const TextStyle(fontSize: 12, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(

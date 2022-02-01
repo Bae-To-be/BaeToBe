@@ -47,8 +47,14 @@ class InfoLabels {
       'This picture is for our references and will not be shown on your profile';
   static const String identityVerification =
       'Upload a copy of any government approved identity document';
-
+  static const String identityDocumentGuidelines =
+      'Please submit a document that can confirm your photo and age such as Aadhar Card, Passport, Driving License, Election Commission ID Card';
+  static const String fileAdded = 'File Added';
+  static const String addAFile = 'Add a file';
   static const String loadingCamera = 'waiting for camera access';
+  static const byContinuingYouAgree = 'By continuing you agree to our ';
+  static const weDontPostAnything = 'We don’t post anything on your ';
+  static const socialAccounts = 'Social accounts.';
 }
 
 class Placeholders {
@@ -72,10 +78,4 @@ class LinkTexts {
   static const String addSchool = 'Add Another School';
   static const String doneEditing = 'Done Editing';
   static const String removeRow = 'Remove Row';
-}
-
-class BodyTexts {
-  static const byContinuingYouAgree = 'By continuing you agree to our ';
-  static const weDontPostAnything = 'We don’t post anything on your ';
-  static const socialAccounts = 'Social accounts.';
 }

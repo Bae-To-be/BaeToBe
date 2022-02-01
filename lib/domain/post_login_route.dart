@@ -43,5 +43,8 @@ Future<String> postLoginRoute(ref) async {
   if (verificationNotifier.files.getSelfie() == null) {
     return AppLinks.selfieVerification;
   }
+  if (verificationNotifier.files.getIdentity() == null) {
+    return AppLinks.identityVerification;
+  }
   return AppLinks.homePage;
 }

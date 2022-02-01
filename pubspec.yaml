@@ -36,6 +36,7 @@ dependencies:
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.4+5
   camera: ^0.9.4+9
+  file_picker: ^4.3.3
 dev_dependencies:
   integration_test:
     sdk: flutter

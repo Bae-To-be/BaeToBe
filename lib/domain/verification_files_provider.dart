@@ -76,7 +76,8 @@ class VerificationFilesNotifier
     return result;
   }
 
-  Future<void> removeFile(String fileType) async {
+  Future<bool> removeFile(String fileType) async {
+    bool result = false;
     final matchIndex = state.indexWhere((image) => image.fileType == fileType);
     if (matchIndex != -1) {
       final client = ref.read(networkClientProvider);
@@ -85,10 +86,12 @@ class VerificationFilesNotifier
           command: client.delete(BackendRoutes.deleteVerificationFile
               .replaceAll('%{file_type}', fileType)),
           onSuccess: (response) {
+            result = true;
             state = List.from(state)..removeAt(matchIndex);
             return Future.value(null);
           });
     }
+    return result;
   }
 
   void _addOrReplaceFile(String verificationType, String url) {
