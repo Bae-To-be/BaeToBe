@@ -40,8 +40,11 @@ jobs:
         with:
           commit_message: "Bump up version to ${{ env.build_version }}"
       - run: flutter build apk
+        if: github.ref == 'refs/heads/main'
       - run: 'echo build/app/outputs/apk/release/app-release.apk > app-release.apk'
+        if: github.ref == 'refs/heads/main'
       - uses: MeilCli/slack-upload-file@v1
+        if: github.ref == 'refs/heads/main'
         with:
           slack_token: ${{ secrets.SLACK_READ_WRITE_TOKEN }}
           channels: ${{ secrets.SLACK_CHANNEL_DEPLOY }}
