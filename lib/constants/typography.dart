@@ -30,6 +30,8 @@ class Headings {
   static const String smokingPreference = 'Smoking';
   static const String drinkingPreference = 'Drinking';
   static const String updateHeight = 'Height';
+  static const String accountUnderVerification =
+      'Your account is under verification';
 }
 
 class InfoLabels {
@@ -55,6 +57,8 @@ class InfoLabels {
   static const byContinuingYouAgree = 'By continuing you agree to our ';
   static const weDontPostAnything = 'We don’t post anything on your ';
   static const socialAccounts = 'Social accounts.';
+  static const String underVerificationHelper =
+      'Hi, we have collected your information and our team is currently verifying your profile. We will get back to you soon!';
 }
 
 class Placeholders {

@@ -1,7 +1,9 @@
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_files_provider.dart';
+import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/user.dart';
 
 Future<String> postLoginRoute(ref) async {
@@ -9,6 +11,9 @@ Future<String> postLoginRoute(ref) async {
   final ImagesNotifier imagesNotifier = ref.read(imagesProvider.notifier);
   final VerificationFilesNotifier verificationNotifier =
       ref.read(verificationFilesProvider.notifier);
+  final VerificationInfoNotifier verificationInfoNotifier =
+      ref.read(verificationInfoProvider.notifier);
+
   await userNotifier.loadUser();
   final User? user = userNotifier.user;
 
@@ -46,5 +51,14 @@ Future<String> postLoginRoute(ref) async {
   if (verificationNotifier.files.getIdentity() == null) {
     return AppLinks.identityVerification;
   }
-  return AppLinks.homePage;
+
+  final info = await verificationInfoNotifier.getLatestInfo();
+  switch (info?.status) {
+    case ApprovalStatuses.approved:
+      return AppLinks.homePage;
+    case ApprovalStatuses.rejected:
+      return AppLinks.verificationRejected;
+    default:
+      return AppLinks.underVerification;
+  }
 }

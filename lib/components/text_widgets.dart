@@ -5,45 +5,63 @@ import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class Heading5 extends StatelessWidget {
+class Heading4 extends StatelessWidget {
   final String text;
-
-  const Heading5({Key? key, required this.text}) : super(key: key);
+  final bool withRow;
+  const Heading4({Key? key, required this.text, this.withRow = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Flexible(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.headline5,
-          ),
-        ),
-      ],
-    );
+    return GenericTextWidget(
+        text: text,
+        withRow: withRow,
+        textStyle: Theme.of(context).textTheme.headline2!);
+  }
+}
+
+class Heading5 extends StatelessWidget {
+  final String text;
+  final bool withRow;
+  const Heading5({Key? key, required this.text, this.withRow = true})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GenericTextWidget(
+        text: text,
+        withRow: withRow,
+        textStyle: Theme.of(context).textTheme.headline5!);
   }
 }
 
 class Heading6 extends StatelessWidget {
   final String text;
-
-  const Heading6({Key? key, required this.text}) : super(key: key);
+  final bool withRow;
+  const Heading6({Key? key, required this.text, this.withRow = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Flexible(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ),
-      ],
-    );
+    return GenericTextWidget(
+        text: text,
+        withRow: withRow,
+        textStyle: Theme.of(context).textTheme.headline6!);
+  }
+}
+
+class Subtitle1 extends StatelessWidget {
+  final String text;
+  final bool withRow;
+  const Subtitle1({Key? key, required this.text, this.withRow = true})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GenericTextWidget(
+        text: text,
+        withRow: withRow,
+        textStyle: Theme.of(context).textTheme.subtitle1!);
   }
 }
 
@@ -53,10 +71,32 @@ class Caption extends StatelessWidget {
   const Caption({Key? key, required this.text, this.withRow = true})
       : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return GenericTextWidget(
+        text: text,
+        withRow: withRow,
+        textStyle: Theme.of(context).textTheme.caption!);
+  }
+}
+
+class GenericTextWidget extends StatelessWidget {
+  final String text;
+  final bool withRow;
+  final TextStyle textStyle;
+  const GenericTextWidget(
+      {Key? key,
+      required this.text,
+      this.withRow = true,
+      required this.textStyle})
+      : super(key: key);
+
   Widget body(context) {
-    return Text(
-      text,
-      style: Theme.of(context).textTheme.caption,
+    return Flexible(
+      child: Text(
+        text,
+        style: textStyle,
+      ),
     );
   }
 

@@ -7,6 +7,8 @@ import 'package:baetobe/screens/home/likes_tab.dart';
 import 'package:baetobe/screens/home/matches_tab.dart';
 import 'package:baetobe/screens/home/profile_tab.dart';
 import 'package:baetobe/screens/homepage_screen.dart';
+import 'package:baetobe/screens/kyc/under_verification.dart';
+import 'package:baetobe/screens/kyc/verification_rejected.dart';
 import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/user_update/education_history_screen.dart';
 import 'package:baetobe/screens/user_update/identity_verification_screen.dart';
@@ -62,7 +64,14 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         path: AppLinks.identityVerification,
         page: IdentityVerificationScreen,
         guards: [AuthGuard]),
-    //user routes with a nested router
+    AutoRoute(
+        path: AppLinks.underVerification,
+        page: UnderVerification,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.verificationRejected,
+        page: VerificationRejected,
+        guards: [AuthGuard]),
     AutoRoute(
       path: AppLinks.homePage,
       page: HomepageScreen,

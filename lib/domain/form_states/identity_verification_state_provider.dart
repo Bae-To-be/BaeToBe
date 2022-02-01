@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/constants/app_constants.dart';
-import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_files_provider.dart';
@@ -75,12 +73,6 @@ class IdentityFormStateNotifier extends StateNotifier<IdentityState> {
       loading.state = false;
       state = state.copyWith(newUploading: false);
     }
-  }
-
-  Future<void> routeToNextPage() async {
-    await ref
-        .read(routerProvider.notifier)
-        .pushNamed(AppLinks.underVerification);
   }
 }
 

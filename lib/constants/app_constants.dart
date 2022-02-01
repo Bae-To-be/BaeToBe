@@ -40,3 +40,9 @@ class VerificationTypes {
   static const String selfie = 'selfie';
   static const String identity = 'identity';
 }
+
+class ApprovalStatuses {
+  static const String inReview = 'in_review';
+  static const String approved = 'approved';
+  static const String rejected = 'rejected';
+}
