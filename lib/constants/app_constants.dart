@@ -31,6 +31,8 @@ class ErrorMessages {
   static const String couldNotPickFile = 'Could not pick file';
   static const String couldNotLoadVerificationinfo =
       'could not load verification info';
+  static const String pleaseUpdatePreferences = 'Please update preferences';
+
 }
 
 class StorageKeys {

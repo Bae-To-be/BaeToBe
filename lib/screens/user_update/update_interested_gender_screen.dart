@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
@@ -15,7 +16,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class UpdateInterestedGenderScreen extends HookConsumerWidget {
-  const UpdateInterestedGenderScreen({Key? key}) : super(key: key);
+  final bool? redirectBack;
+
+  const UpdateInterestedGenderScreen(
+      {Key? key, @QueryParam('redirectBack') this.redirectBack})
+      : super(key: key);
 
   List<Widget> _tiles(
       BuildContext context,
@@ -65,7 +70,9 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
           {'interested_gender_ids': state},
-          routeTo: AppLinks.updateWorkDetails);
+          routeTo: redirectBack == true
+              ? AppLinks.back
+              : AppLinks.updateWorkDetails);
     }
 
     return FormLayout(

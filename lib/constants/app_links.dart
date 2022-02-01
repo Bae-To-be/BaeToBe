@@ -13,9 +13,9 @@ class AppLinks {
   static const String splash = '/splash';
   static const String underVerification = '/under_verification';
   static const String verificationRejected = '/rejected';
-  static const String helpPage = '/help';
+  static const String helpPage = 'help';
   static const String webview = '/webview';
-  static const String editProfile = '/edit_profile';
+  static const String editProfile = 'edit_profile';
   static const String editHometown = '/edit_hometown';
   static const String editReligion = '/edit_religion';
   static const String editLanguage = '/edit_language';
@@ -24,7 +24,7 @@ class AppLinks {
   static const String editSmokingPreference = '/edit_smoking_preference';
   static const String editDrinkingPreference = '/edit_drinking_preference';
   static const String editHeight = '/edit_height';
-  static const String updatePreferences = '/update_preferences';
+  static const String updatePreferences = 'update_preferences';
   static const String accountSettings = '/account_settings';
   static const String reportUser = '/users/report';
   static String profileDetails({int? id}) {

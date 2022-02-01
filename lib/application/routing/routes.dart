@@ -10,6 +10,9 @@ import 'package:baetobe/screens/homepage_screen.dart';
 import 'package:baetobe/screens/kyc/under_verification.dart';
 import 'package:baetobe/screens/kyc/verification_rejected.dart';
 import 'package:baetobe/screens/login_screen.dart';
+import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
+import 'package:baetobe/screens/profile_screens/help_page.dart';
+import 'package:baetobe/screens/profile_screens/update_preferences_page.dart';
 import 'package:baetobe/screens/user_update/education_history_screen.dart';
 import 'package:baetobe/screens/user_update/identity_verification_screen.dart';
 import 'package:baetobe/screens/user_update/linkedin_url_screen.dart';
@@ -85,6 +88,9 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         RedirectRoute(path: '*', redirectTo: HomepageTabs.discover),
       ],
     ),
+    AutoRoute(path: AppLinks.editProfile, page: EditProfile),
+    AutoRoute(path: AppLinks.helpPage, page: HelpPage),
+    AutoRoute(path: AppLinks.updatePreferences, page: UpdatePreferences),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),
   ],
 )
