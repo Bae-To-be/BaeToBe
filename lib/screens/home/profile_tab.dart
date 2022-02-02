@@ -5,6 +5,7 @@ import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -17,6 +18,14 @@ class ProfileTab extends HookConsumerWidget {
     final router = ref.read(routerProvider);
     final _user = ref.watch(userProvider);
     final profilePicture = ref.watch(imagesProvider).profilePicture();
+    final isMounted = useIsMounted();
+
+    useEffect(() {
+      if (isMounted()) {
+        ref.read(imagesProvider.notifier).loadImages();
+        return null;
+      }
+    }, []);
 
     return SingleChildScrollView(
       child: Column(
