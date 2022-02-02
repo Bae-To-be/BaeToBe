@@ -14,8 +14,8 @@ import 'package:getwidget/components/dropdown/gf_dropdown.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class UpdateHometown extends HookConsumerWidget {
-  const UpdateHometown({Key? key}) : super(key: key);
+class UpdateHometownScreen extends HookConsumerWidget {
+  const UpdateHometownScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

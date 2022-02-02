@@ -39,7 +39,8 @@ import 'package:baetobe/screens/update_update/selfie_verification_screen.dart'
 import 'package:baetobe/screens/update_update/update_birthday_screen.dart'
     as _i3;
 import 'package:baetobe/screens/update_update/update_gender_screen.dart' as _i4;
-import 'package:baetobe/screens/update_update/update_hometown.dart' as _i20;
+import 'package:baetobe/screens/update_update/update_hometown_screen.dart'
+    as _i20;
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart'
     as _i5;
 import 'package:baetobe/screens/update_update/update_religion_screen.dart'
@@ -192,9 +193,9 @@ class AppRouter extends _i18.RootStackRouter {
       return _i18.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i19.UpdatePreferences());
     },
-    UpdateHometownRoute.name: (routeData) {
+    UpdateHometownScreenRoute.name: (routeData) {
       return _i18.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i20.UpdateHometown());
+          routeData: routeData, child: const _i20.UpdateHometownScreen());
     },
     UpdateReligionScreenRoute.name: (routeData) {
       return _i18.AdaptivePage<dynamic>(
@@ -311,7 +312,7 @@ class AppRouter extends _i18.RootStackRouter {
         ]),
         _i18.RouteConfig(UpdatePreferencesRoute.name,
             path: 'update_preferences', guards: [authGuard]),
-        _i18.RouteConfig(UpdateHometownRoute.name,
+        _i18.RouteConfig(UpdateHometownScreenRoute.name,
             path: '/edit_hometown', guards: [authGuard]),
         _i18.RouteConfig(UpdateReligionScreenRoute.name,
             path: '/edit_religion', guards: [authGuard]),
@@ -668,12 +669,12 @@ class UpdatePreferencesRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.UpdateHometown]
-class UpdateHometownRoute extends _i18.PageRouteInfo<void> {
-  const UpdateHometownRoute()
-      : super(UpdateHometownRoute.name, path: '/edit_hometown');
+/// [_i20.UpdateHometownScreen]
+class UpdateHometownScreenRoute extends _i18.PageRouteInfo<void> {
+  const UpdateHometownScreenRoute()
+      : super(UpdateHometownScreenRoute.name, path: '/edit_hometown');
 
-  static const String name = 'UpdateHometownRoute';
+  static const String name = 'UpdateHometownScreenRoute';
 }
 
 /// generated route for

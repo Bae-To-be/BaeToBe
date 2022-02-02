@@ -22,7 +22,7 @@ import 'package:baetobe/screens/update_update/linkedin_url_screen.dart';
 import 'package:baetobe/screens/update_update/selfie_verification_screen.dart';
 import 'package:baetobe/screens/update_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/update_update/update_gender_screen.dart';
-import 'package:baetobe/screens/update_update/update_hometown.dart';
+import 'package:baetobe/screens/update_update/update_hometown_screen.dart';
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
 import 'package:baetobe/screens/update_update/update_religion_screen.dart';
 import 'package:baetobe/screens/update_update/update_work_information_screen.dart';
@@ -118,7 +118,9 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         page: UpdatePreferences,
         guards: [AuthGuard]),
     AutoRoute(
-        path: AppLinks.editHometown, page: UpdateHometown, guards: [AuthGuard]),
+        path: AppLinks.editHometown,
+        page: UpdateHometownScreen,
+        guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.editReligion,
         page: UpdateReligionScreen,
