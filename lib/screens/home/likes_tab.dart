@@ -91,7 +91,13 @@ class LikesTab extends HookConsumerWidget {
                     ),
                   ),
                 )),
-            body: child);
+            body: SlideTransition(
+                position: Tween<Offset>(
+                        begin: Offset(
+                            tabRouter.activeIndex == 0 ? -1.0 : 1.0, 0.0),
+                        end: Offset.zero)
+                    .animate(animation),
+                child: FadeTransition(opacity: animation, child: child)));
       },
     );
   }
