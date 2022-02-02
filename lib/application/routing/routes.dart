@@ -106,7 +106,7 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
       ],
     ),
     AutoRoute(
-        path: AppLinks.editProfile, page: EditProfile, guards: [AuthGuard]),
+        path: AppLinks.editProfile, page: EditProfilePage, guards: [AuthGuard]),
     AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
       AutoRoute(path: '', page: HelpPage, initial: true),
       AutoRoute(path: AppLinks.webview, page: Webview),

@@ -15,8 +15,8 @@ import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class EditProfile extends HookConsumerWidget {
-  const EditProfile({Key? key}) : super(key: key);
+class EditProfilePage extends HookConsumerWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   String cmToFeetAndInchesAndCmString(int heightInCm) {
     int heightInInches = (heightInCm / 2.54).round();

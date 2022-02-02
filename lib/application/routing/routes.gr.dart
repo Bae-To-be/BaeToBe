@@ -181,9 +181,9 @@ class AppRouter extends _i18.RootStackRouter {
       return _i18.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i16.HomepageScreen());
     },
-    EditProfileRoute.name: (routeData) {
+    EditProfilePageRoute.name: (routeData) {
       return _i18.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i17.EditProfile());
+          routeData: routeData, child: const _i17.EditProfilePage());
     },
     EmptyRouterPageRoute.name: (routeData) {
       return _i18.AdaptivePage<dynamic>(
@@ -300,7 +300,7 @@ class AppRouter extends _i18.RootStackRouter {
               redirectTo: '',
               fullMatch: true)
         ]),
-        _i18.RouteConfig(EditProfileRoute.name,
+        _i18.RouteConfig(EditProfilePageRoute.name,
             path: 'edit_profile', guards: [authGuard]),
         _i18.RouteConfig(EmptyRouterPageRoute.name, path: 'help', guards: [
           authGuard
@@ -642,11 +642,12 @@ class HomepageScreenRoute extends _i18.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.EditProfile]
-class EditProfileRoute extends _i18.PageRouteInfo<void> {
-  const EditProfileRoute() : super(EditProfileRoute.name, path: 'edit_profile');
+/// [_i17.EditProfilePage]
+class EditProfilePageRoute extends _i18.PageRouteInfo<void> {
+  const EditProfilePageRoute()
+      : super(EditProfilePageRoute.name, path: 'edit_profile');
 
-  static const String name = 'EditProfileRoute';
+  static const String name = 'EditProfilePageRoute';
 }
 
 /// generated route for
