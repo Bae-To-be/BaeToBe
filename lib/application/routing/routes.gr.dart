@@ -21,8 +21,8 @@ import 'package:baetobe/screens/home/likes_tab.dart' as _i20;
 import 'package:baetobe/screens/home/matches_tab.dart' as _i21;
 import 'package:baetobe/screens/home/profile_tab.dart' as _i22;
 import 'package:baetobe/screens/homepage_screen.dart' as _i14;
-import 'package:baetobe/screens/kyc/under_verification.dart' as _i12;
-import 'package:baetobe/screens/kyc/verification_rejected.dart' as _i13;
+import 'package:baetobe/screens/kyc/under_verification_screen.dart' as _i12;
+import 'package:baetobe/screens/kyc/verification_rejected_screen.dart' as _i13;
 import 'package:baetobe/screens/login_screen.dart' as _i2;
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart' as _i15;
 import 'package:baetobe/screens/profile_screens/help_page.dart' as _i25;
@@ -147,13 +147,13 @@ class AppRouter extends _i16.RootStackRouter {
           child: _i11.IdentityVerificationScreen(
               key: args.key, redirectBack: args.redirectBack));
     },
-    UnderVerificationRoute.name: (routeData) {
+    UnderVerificationScreenRoute.name: (routeData) {
       return _i16.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i12.UnderVerification());
+          routeData: routeData, child: const _i12.UnderVerificationScreen());
     },
-    VerificationRejectedRoute.name: (routeData) {
+    VerificationRejectedScreenRoute.name: (routeData) {
       return _i16.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i13.VerificationRejected());
+          routeData: routeData, child: const _i13.VerificationRejectedScreen());
     },
     HomepageScreenRoute.name: (routeData) {
       return _i16.AdaptivePage<dynamic>(
@@ -239,9 +239,9 @@ class AppRouter extends _i16.RootStackRouter {
             path: '/selfie_verification', guards: [authGuard]),
         _i16.RouteConfig(IdentityVerificationScreenRoute.name,
             path: '/identity_verification', guards: [authGuard]),
-        _i16.RouteConfig(UnderVerificationRoute.name,
+        _i16.RouteConfig(UnderVerificationScreenRoute.name,
             path: '/under_verification', guards: [authGuard]),
-        _i16.RouteConfig(VerificationRejectedRoute.name,
+        _i16.RouteConfig(VerificationRejectedScreenRoute.name,
             path: '/rejected', guards: [authGuard]),
         _i16.RouteConfig(HomepageScreenRoute.name, path: '/home', guards: [
           authGuard
@@ -255,7 +255,12 @@ class AppRouter extends _i16.RootStackRouter {
                 _i16.RouteConfig(LikesReceivedTabRoute.name,
                     path: '', parent: LikesTabRoute.name),
                 _i16.RouteConfig(LikesSentTabRoute.name,
-                    path: 'sent', parent: LikesTabRoute.name)
+                    path: 'sent', parent: LikesTabRoute.name),
+                _i16.RouteConfig('*#redirect',
+                    path: '*',
+                    parent: LikesTabRoute.name,
+                    redirectTo: '',
+                    fullMatch: true)
               ]),
           _i16.RouteConfig(MatchesTabRoute.name,
               path: 'matches', parent: HomepageScreenRoute.name),
@@ -528,21 +533,21 @@ class IdentityVerificationScreenRouteArgs {
 }
 
 /// generated route for
-/// [_i12.UnderVerification]
-class UnderVerificationRoute extends _i16.PageRouteInfo<void> {
-  const UnderVerificationRoute()
-      : super(UnderVerificationRoute.name, path: '/under_verification');
+/// [_i12.UnderVerificationScreen]
+class UnderVerificationScreenRoute extends _i16.PageRouteInfo<void> {
+  const UnderVerificationScreenRoute()
+      : super(UnderVerificationScreenRoute.name, path: '/under_verification');
 
-  static const String name = 'UnderVerificationRoute';
+  static const String name = 'UnderVerificationScreenRoute';
 }
 
 /// generated route for
-/// [_i13.VerificationRejected]
-class VerificationRejectedRoute extends _i16.PageRouteInfo<void> {
-  const VerificationRejectedRoute()
-      : super(VerificationRejectedRoute.name, path: '/rejected');
+/// [_i13.VerificationRejectedScreen]
+class VerificationRejectedScreenRoute extends _i16.PageRouteInfo<void> {
+  const VerificationRejectedScreenRoute()
+      : super(VerificationRejectedScreenRoute.name, path: '/rejected');
 
-  static const String name = 'VerificationRejectedRoute';
+  static const String name = 'VerificationRejectedScreenRoute';
 }
 
 /// generated route for

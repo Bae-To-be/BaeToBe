@@ -10,8 +10,8 @@ import 'package:baetobe/screens/home/likes_tab.dart';
 import 'package:baetobe/screens/home/matches_tab.dart';
 import 'package:baetobe/screens/home/profile_tab.dart';
 import 'package:baetobe/screens/homepage_screen.dart';
-import 'package:baetobe/screens/kyc/under_verification.dart';
-import 'package:baetobe/screens/kyc/verification_rejected.dart';
+import 'package:baetobe/screens/kyc/under_verification_screen.dart';
+import 'package:baetobe/screens/kyc/verification_rejected_screen.dart';
 import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
 import 'package:baetobe/screens/profile_screens/help_page.dart';
@@ -73,11 +73,11 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.underVerification,
-        page: UnderVerification,
+        page: UnderVerificationScreen,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.verificationRejected,
-        page: VerificationRejected,
+        page: VerificationRejectedScreen,
         guards: [AuthGuard]),
     AutoRoute(
       path: AppLinks.homePage,

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class UnderVerification extends HookConsumerWidget {
-  const UnderVerification({Key? key}) : super(key: key);
+class UnderVerificationScreen extends HookConsumerWidget {
+  const UnderVerificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

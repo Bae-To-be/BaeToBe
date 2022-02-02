@@ -10,8 +10,8 @@ import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class VerificationRejected extends HookConsumerWidget {
-  const VerificationRejected({Key? key}) : super(key: key);
+class VerificationRejectedScreen extends HookConsumerWidget {
+  const VerificationRejectedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

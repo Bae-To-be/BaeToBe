@@ -140,7 +140,7 @@ class NotificationService {
           await ref.read(verificationInfoProvider.notifier).loadInfo();
           await ref
               .read(routerProvider.notifier)
-              .replaceAll([const VerificationRejectedRoute()]);
+              .replaceAll([const VerificationRejectedScreenRoute()]);
           break;
         case NotificationEvents.newMatch:
           // if (Get.isRegistered<MatchesController>()) {
