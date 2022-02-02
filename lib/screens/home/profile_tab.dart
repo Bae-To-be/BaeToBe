@@ -23,8 +23,8 @@ class ProfileTab extends HookConsumerWidget {
     useEffect(() {
       if (isMounted()) {
         ref.read(imagesProvider.notifier).loadImages();
-        return null;
       }
+      return null;
     }, []);
 
     return SingleChildScrollView(
