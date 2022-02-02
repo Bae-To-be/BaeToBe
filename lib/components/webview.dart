@@ -23,7 +23,7 @@ class Webview extends HookConsumerWidget {
           children: [
             TextButton(
               onPressed: () {
-                router.navigateBack();
+                router.pop();
               },
               child: Icon(
                 FontAwesomeIcons.chevronLeft,

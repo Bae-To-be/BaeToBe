@@ -16,6 +16,7 @@ import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
 import 'package:baetobe/screens/profile_screens/help_page.dart';
 import 'package:baetobe/screens/profile_screens/update_preferences_page.dart';
+import 'package:baetobe/screens/user_profile_screen.dart';
 import 'package:baetobe/screens/user_update/education_history_screen.dart';
 import 'package:baetobe/screens/user_update/identity_verification_screen.dart';
 import 'package:baetobe/screens/user_update/linkedin_url_screen.dart';
@@ -78,6 +79,10 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
     AutoRoute(
         path: AppLinks.verificationRejected,
         page: VerificationRejectedScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.profileDetailsRoute,
+        page: UserProfileScreen,
         guards: [AuthGuard]),
     AutoRoute(
       path: AppLinks.homePage,

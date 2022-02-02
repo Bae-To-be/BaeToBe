@@ -50,7 +50,7 @@ class EditProfile extends HookConsumerWidget {
                 icon: IconButton(
                   icon: Icon(FontAwesomeIcons.solidTimesCircle,
                       color: Theme.of(context).primaryColor, size: 20),
-                  onPressed: () => router.navigateBack(),
+                  onPressed: () => router.pop(),
                 )),
             const CustomDivider(),
             const SizedBox(height: 24),

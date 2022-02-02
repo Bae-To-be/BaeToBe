@@ -8,10 +8,17 @@ import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-extension EnoughImages on List<UserImage> {
+extension UserImageExt on List<UserImage> {
   bool hasMinimumRequired() {
     return length >=
         FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount);
+  }
+
+  UserImage? profilePicture() {
+    if (isEmpty) {
+      return null;
+    }
+    return reduce((curr, next) => curr.position < next.position ? curr : next);
   }
 }
 

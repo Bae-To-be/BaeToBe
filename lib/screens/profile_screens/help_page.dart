@@ -35,7 +35,7 @@ class HelpPage extends HookConsumerWidget {
                 icon: Icon(FontAwesomeIcons.solidTimesCircle,
                     color: Theme.of(context).primaryColor, size: 20),
                 onPressed: () {
-                  router.navigateBack();
+                  router.pop();
                 },
               )),
           const CustomDivider(),

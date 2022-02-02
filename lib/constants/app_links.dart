@@ -27,8 +27,9 @@ class AppLinks {
   static const String updatePreferences = 'update_preferences';
   static const String accountSettings = '/account_settings';
   static const String reportUser = '/users/report';
-  static String profileDetails({int? id}) {
-    return '/profile_details/${id == null ? ":id" : id.toString()}';
+  static const String profileDetailsRoute = '/profile_details/:id';
+  static String profileDetails(int id) {
+    return '/profile_details/${id.toString()}';
   }
 
   static String messages({int? matchId}) {

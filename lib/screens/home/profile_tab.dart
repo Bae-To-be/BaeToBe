@@ -1,7 +1,9 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,6 +16,8 @@ class ProfileTab extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.read(routerProvider);
     final _user = ref.watch(userProvider);
+    final profilePicture = ref.watch(imagesProvider).profilePicture();
+
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -31,9 +35,10 @@ class ProfileTab extends HookConsumerWidget {
           Stack(
             children: <Widget>[
               CircleAvatar(
-                // backgroundImage: CachedNetworkImageProvider(
-                //     _user.images.first.value.url,
-                //     cacheKey: _userController.images.first.value.id.toString()),
+                backgroundImage: profilePicture != null
+                    ? CachedNetworkImageProvider(profilePicture.url,
+                        cacheKey: profilePicture.id.toString())
+                    : Image.asset('assets/profile_placeholder.png').image,
                 backgroundColor: Theme.of(context).primaryColorLight,
                 radius: 75,
               ),

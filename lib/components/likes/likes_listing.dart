@@ -105,8 +105,7 @@ class LikesListing extends HookConsumerWidget {
                           color: Theme.of(context).primaryColor),
                       onPressed: () {
                         ref.read(routerProvider.notifier).pushNamed(
-                            AppLinks.profileDetails(
-                                id: likesListing[i].userId));
+                            AppLinks.profileDetails(likesListing[i].userId));
                       },
                     ),
                   ],
