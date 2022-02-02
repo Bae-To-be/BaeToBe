@@ -42,8 +42,6 @@ class InfoLabels {
   static const String selectYear = 'Select year';
   static const String schoolDetails = 'School Details';
   static const String classYearHelper = 'mentioned the year you graduated in';
-  static const String cityHint = 'Enter your city';
-  static const String countryHint = 'Enter your country';
   static const String linkedinPublic = 'Show my LinkedIn on my profile';
   static const String addMinimumPhotos =
       'Add at least %{image_count} photos to continue';
@@ -72,6 +70,8 @@ class Placeholders {
   static const String linkedInURL = 'Add Profile URL';
   static const String university = 'Eg: IIT, BITS Pilani';
   static const String course = 'Eg: BCA, MBA';
+  static const String cityHint = 'Enter your city';
+  static const String countryHint = 'Enter your country';
 }
 
 class ButtonTexts {

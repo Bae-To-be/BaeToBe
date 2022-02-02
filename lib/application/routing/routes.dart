@@ -20,6 +20,7 @@ import 'package:baetobe/screens/user_update/linkedin_url_screen.dart';
 import 'package:baetobe/screens/user_update/selfie_verification_screen.dart';
 import 'package:baetobe/screens/user_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/user_update/update_gender_screen.dart';
+import 'package:baetobe/screens/user_update/update_hometown.dart';
 import 'package:baetobe/screens/user_update/update_interested_gender_screen.dart';
 import 'package:baetobe/screens/user_update/update_work_information_screen.dart';
 import 'package:baetobe/screens/user_update/upload_images_screen.dart';
@@ -89,12 +90,20 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         RedirectRoute(path: '*', redirectTo: HomepageTabs.discover),
       ],
     ),
-    AutoRoute(path: AppLinks.editProfile, page: EditProfile),
+    AutoRoute(
+        path: AppLinks.editProfile, page: EditProfile, guards: [AuthGuard]),
     AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
       AutoRoute(path: '', page: HelpPage, initial: true),
       AutoRoute(path: AppLinks.webview, page: Webview),
+    ], guards: [
+      AuthGuard
     ]),
-    AutoRoute(path: AppLinks.updatePreferences, page: UpdatePreferences),
+    AutoRoute(
+        path: AppLinks.updatePreferences,
+        page: UpdatePreferences,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.editHometown, page: UpdateHometown, guards: [AuthGuard]),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),
   ],
 )

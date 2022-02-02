@@ -2,13 +2,14 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 
-enum SuggestionEntity { university, company, workTitle, course }
+enum SuggestionEntity { university, company, workTitle, course, city }
 
 final _routeMap = {
   SuggestionEntity.university: BackendRoutes.searchUniversities,
   SuggestionEntity.company: BackendRoutes.searchCompanies,
   SuggestionEntity.workTitle: BackendRoutes.searchWorkTitles,
   SuggestionEntity.course: BackendRoutes.searchCourses,
+  SuggestionEntity.city: BackendRoutes.searchCities
 };
 
 Future<List<String>> suggestionsFor(
