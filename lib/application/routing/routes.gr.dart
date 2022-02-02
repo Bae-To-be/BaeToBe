@@ -219,10 +219,8 @@ class AppRouter extends _i18.RootStackRouter {
           routeData: routeData, child: const _i26.LikesSentTab());
     },
     HelpPageRoute.name: (routeData) {
-      final args = routeData.argsAs<HelpPageRouteArgs>(
-          orElse: () => const HelpPageRouteArgs());
       return _i18.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i27.HelpPage(key: args.key));
+          routeData: routeData, child: const _i27.HelpPage());
     },
     WebviewRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
@@ -721,22 +719,10 @@ class LikesSentTabRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i27.HelpPage]
-class HelpPageRoute extends _i18.PageRouteInfo<HelpPageRouteArgs> {
-  HelpPageRoute({_i29.Key? key})
-      : super(HelpPageRoute.name, path: '', args: HelpPageRouteArgs(key: key));
+class HelpPageRoute extends _i18.PageRouteInfo<void> {
+  const HelpPageRoute() : super(HelpPageRoute.name, path: '');
 
   static const String name = 'HelpPageRoute';
-}
-
-class HelpPageRouteArgs {
-  const HelpPageRouteArgs({this.key});
-
-  final _i29.Key? key;
-
-  @override
-  String toString() {
-    return 'HelpPageRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

@@ -2,7 +2,6 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/images/image_grid.dart';
-import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
