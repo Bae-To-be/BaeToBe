@@ -22,8 +22,7 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
   final Ref ref;
 
   SelfieFormStateNotifier(this.ref) : super(SelfieState()) {
-    _setupCamera();
-    WidgetsBinding.instance?.addObserver(this);
+    _setupCamera().then((_) => WidgetsBinding.instance?.addObserver(this));
   }
 
   @override

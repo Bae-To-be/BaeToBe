@@ -68,5 +68,6 @@ class NotificationEvents {
   static const String verificationUpdate = 'verification_update';
   static const String newMessage = 'new_message';
   static const String newMatch = 'new_match';
+  static const String leftSwiped = 'left_swiped';
   static const String newLike = 'new_like';
 }

@@ -88,6 +88,7 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         AutoRoute(path: HomepageTabs.likes, page: LikesTab, children: [
           AutoRoute(path: LikePageTabs.received, page: LikesReceivedTab),
           AutoRoute(path: LikePageTabs.sent, page: LikesSentTab),
+          RedirectRoute(path: '*', redirectTo: LikePageTabs.received),
         ]),
         AutoRoute(path: HomepageTabs.matches, page: MatchesTab),
         AutoRoute(path: HomepageTabs.profile, page: ProfileTab),

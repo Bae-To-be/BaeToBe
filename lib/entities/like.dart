@@ -5,6 +5,7 @@ enum likeDirection { sent, received }
 class Like {
   int id;
   String userName;
+  String summary;
   int userId;
   UserImage? profilePicture;
   String timeSinceCreation;
@@ -13,6 +14,7 @@ class Like {
       {required this.id,
       required this.userName,
       required this.userId,
+      required this.summary,
       required this.timeSinceCreation,
       required this.profilePicture});
 
@@ -21,6 +23,7 @@ class Like {
         userName: json['user']['name'],
         id: json['id'],
         userId: json['user']['id'],
+        summary: json['user']['summary'],
         timeSinceCreation: json['time_since_creation'],
         profilePicture: json['user']['profile_picture'] != null
             ? UserImage.fromJson(json['user']['profile_picture'])

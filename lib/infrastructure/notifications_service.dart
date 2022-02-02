@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
+import 'package:baetobe/entities/like.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -46,8 +50,9 @@ class NotificationService {
           // Get.offNamed(HomeRoutes.matches, id: homeRouterKey);
           break;
         case NotificationEvents.newLike:
-          // Get.until((route) => Get.currentRoute == AppLinks.homePage);
-          // Get.offNamed(HomeRoutes.likes, id: homeRouterKey);
+          ref
+              .read(routerProvider.notifier)
+              .push(const HomepageScreenRoute(children: [LikesTabRoute()]));
           break;
       }
     });
@@ -64,14 +69,13 @@ class NotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;
 
+      _messageDataReactions(message, false);
       // If `onMessage` is triggered with a notification, construct our own
       // local notification to show to users using the created channel.
       if (notification != null) {
-        _messageDataReactions(message, false);
         // if (!_notificationPreferences.whileAppOpen.value) {
         //   return;
         // }
-        debugPrint(message.data.toString());
         switch (message.data['event']) {
           case NotificationEvents.newMessage:
             // final matchId = int.parse(message.data['match_id']);
@@ -79,6 +83,8 @@ class NotificationService {
             //   showNotification(flutterLocalNotificationsPlugin, notification,
             //       channel, message.data['event']);
             // }
+            break;
+          case NotificationEvents.leftSwiped:
             break;
           default:
             _showNotification(flutterLocalNotificationsPlugin, notification,
@@ -146,14 +152,21 @@ class NotificationService {
           // }
           break;
         case NotificationEvents.newLike:
-          // if (Get.isRegistered<LikesController>(
-          //     tag: likeDirection.received.toString())) {
-          //   Get.find<LikesController>(tag: likeDirection.received.toString())
-          //       .addOrUpdateLike(Like.fromJson(jsonDecode(message.data['like'])));
-          // } else if (appOpen) {
-          //   await Get.offNamed(AppLinks.homePage);
-          //   await Get.offNamed(HomeRoutes.likes, id: homeRouterKey);
-          // }
+          if (appOpen) {
+            await ref
+                .read(routerProvider.notifier)
+                .push(const HomepageScreenRoute(children: [LikesTabRoute()]));
+            return;
+          }
+          ref
+              .read(likesProvider(likeDirection.received).notifier)
+              .addOrUpdateLike(Like.fromJson(jsonDecode(message.data['like'])));
+          break;
+        case NotificationEvents.leftSwiped:
+          debugPrint(message.data.toString());
+          ref
+              .read(likesProvider(likeDirection.sent).notifier)
+              .removeLike(int.parse(message.data['like_id']));
           break;
         case NotificationEvents.newMessage:
           // if (Get.isRegistered<MatchesController>()) {

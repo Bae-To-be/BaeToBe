@@ -23,8 +23,7 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
   final likeDirection direction;
 
   LikesNotifier(this.ref, this.direction) : super(const AsyncValue.loading()) {
-    fetchLikes(1, true);
-    WidgetsBinding.instance?.addObserver(this);
+    fetchLikes(1, true).then((_) => WidgetsBinding.instance?.addObserver(this));
   }
 
   @override
@@ -37,6 +36,9 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
   //ignore: avoid_renaming_method_parameters
   void didChangeAppLifecycleState(AppLifecycleState appState) {
     super.didChangeAppLifecycleState(appState);
+    if (state is AsyncLoading) {
+      return;
+    }
     if (appState == AppLifecycleState.resumed) {
       fetchLikes(1, true);
     }
@@ -79,5 +81,14 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
     state = AsyncValue.data(List.from(state.value ?? [])
       ..removeWhere((like) => like.id == newLike.id)
       ..add(newLike));
+  }
+
+  void removeLike(int likeId) {
+    if (state is AsyncLoading) {
+      return;
+    }
+
+    state = AsyncValue.data(
+        List.from(state.value ?? [])..removeWhere((like) => like.id == likeId));
   }
 }

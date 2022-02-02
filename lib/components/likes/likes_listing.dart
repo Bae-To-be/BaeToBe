@@ -89,7 +89,7 @@ class LikesListing extends HookConsumerWidget {
                       : Image.asset('assets/profile_placeholder.png').image,
                 ),
                 color: offWhite,
-                subTitle: Text(likesListing[i].userName,
+                subTitle: Text(likesListing[i].summary,
                     style: Theme.of(context).textTheme.caption),
                 title: Text(likesListing[i].userName,
                     style: Theme.of(context)

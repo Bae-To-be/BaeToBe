@@ -32,7 +32,7 @@ class LikesTab extends HookConsumerWidget {
       ],
       builder: (context, child, animation) {
         final tabRouter = AutoTabsRouter.of(context);
-        final tabBarHeight = MediaQuery.of(context).size.height * 0.1;
+        final tabBarHeight = MediaQuery.of(context).size.height * 0.08;
         return Scaffold(
             backgroundColor: offWhite,
             appBar: AppBar(
