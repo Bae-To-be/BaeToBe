@@ -332,19 +332,20 @@ class _BioTextField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _user = ref.read(userProvider);
+    final bioFieldController = TextEditingController();
 
     return Focus(
       onFocusChange: (hasFocus) async {
         if (!hasFocus) {
           await ref.read(userProvider.notifier).updateAttributes({
-            'bio': _user.bio,
+            'bio': bioFieldController.text,
           });
         }
       },
       child: BigFomField(
           value: _user.bio ?? '',
           onChanged: (text) {
-            _user.bio = text;
+            bioFieldController.text = text;
           }),
     );
   }
