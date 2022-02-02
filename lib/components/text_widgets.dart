@@ -25,8 +25,13 @@ class Heading4 extends StatelessWidget {
 
 class Heading5 extends StatelessWidget {
   final String text;
+  final bool withFlexible;
   final bool withRow;
-  const Heading5({Key? key, required this.text, this.withRow = true})
+  const Heading5(
+      {Key? key,
+      required this.text,
+      this.withRow = true,
+      this.withFlexible = false})
       : super(key: key);
 
   @override
@@ -34,6 +39,7 @@ class Heading5 extends StatelessWidget {
     return GenericTextWidget(
         text: text,
         withRow: withRow,
+        withFlexible: withFlexible,
         textStyle: Theme.of(context).textTheme.headline5!);
   }
 }
@@ -86,11 +92,13 @@ class Caption extends StatelessWidget {
 class GenericTextWidget extends StatelessWidget {
   final String text;
   final bool withRow;
+  final bool withFlexible;
   final TextStyle textStyle;
   const GenericTextWidget(
       {Key? key,
       required this.text,
       this.withRow = true,
+      this.withFlexible = false,
       required this.textStyle})
       : super(key: key);
 
@@ -103,16 +111,22 @@ class GenericTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!withRow) {
-      return body(context);
+    Widget result = body(context);
+    if (withRow) {
+      result = Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          result,
+        ],
+      );
+    }
+    if (withFlexible) {
+      result = Flexible(
+        child: result,
+      );
     }
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        body(context),
-      ],
-    );
+    return result;
   }
 }
 

@@ -23,7 +23,7 @@ Future<String> postLoginRoute(ref) async {
   if (user.birthday == null) {
     return AppLinks.updateBirthday;
   }
-  if (user.gender == null) {
+  if (user.gender != null) {
     return AppLinks.updateGender;
   }
   if (user.interestedGenders.isEmpty) {
