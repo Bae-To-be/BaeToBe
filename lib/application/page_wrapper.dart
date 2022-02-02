@@ -15,14 +15,12 @@ class PageWrapper extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<String?>(errorProvider, (String? _, String? errorMessage) {
       if (errorMessage != null) {
-        WidgetsBinding.instance?.addPostFrameCallback((_) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(errorMessage),
-          ));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(errorMessage),
+        ));
 
-          Future.delayed(const Duration(seconds: 1),
-              () => ref.read(errorProvider.notifier).updateError(null));
-        });
+        Future.delayed(const Duration(seconds: 1),
+            () => ref.read(errorProvider.notifier).updateError(null));
       }
     });
 

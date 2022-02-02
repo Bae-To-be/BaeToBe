@@ -73,7 +73,7 @@ class UpdateGenderScreen extends HookConsumerWidget {
     final state = ref.watch(genderStateProvider);
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
-          {'gender_id': state.first},
+          {'gender_idxex': state.first},
           routeTo: redirectBack == true
               ? AppLinks.back
               : AppLinks.updateInterestedGenders);
