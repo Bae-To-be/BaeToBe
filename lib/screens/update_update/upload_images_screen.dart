@@ -1,6 +1,7 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
+import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -33,21 +34,7 @@ class UploadImagesScreen extends HookConsumerWidget {
                           .getInt(RemoteConfigs.minPhotoCount)
                           .toString()))
               .padding(left: 15, bottom: 15),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
-              itemCount: FirebaseRemoteConfig.instance
-                  .getInt(RemoteConfigs.maxPhotoCount),
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              itemBuilder: (BuildContext ctx, index) {
-                return ImageTile(position: index);
-              },
-            ),
-          )
+          const Expanded(child: ImageGrid())
         ],
         floatingSubmit: FloatingCta(
           enabled: images.hasMinimumRequired(),

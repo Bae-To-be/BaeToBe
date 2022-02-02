@@ -3,6 +3,7 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
+import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
@@ -38,8 +39,8 @@ class EditProfile extends HookConsumerWidget {
       });
       return null;
     }, []);
-    // return const Center(child: Text('EDIT PROFILE'),);
     return GestureDetector(
+      //hides keyboard when tapped outside the keyboard
       onVerticalDragCancel: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -64,20 +65,7 @@ class EditProfile extends HookConsumerWidget {
                 )),
             const CustomDivider(),
             const SizedBox(height: 24),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
-              itemCount: FirebaseRemoteConfig.instance
-                  .getInt(RemoteConfigs.maxPhotoCount),
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemBuilder: (BuildContext ctx, index) {
-                return ImageTile(position: index);
-              },
-            ),
+            const ImageGrid(),
             Row(
               children: [
                 const Text(
