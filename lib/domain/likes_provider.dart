@@ -44,7 +44,7 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
     }
   }
 
-  Future<bool> fetchLikes(int? pageOverride, bool updateLoading) async {
+  Future<bool> fetchLikes(int? pageOverride, bool initialLoading) async {
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
 
@@ -56,7 +56,7 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
     } else {
       toSend = pageOverride;
     }
-    if (updateLoading) {
+    if (initialLoading) {
       state = const AsyncValue.loading();
     }
     await error.safelyExecute(
@@ -66,8 +66,14 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
           if (response.data['data'].isNotEmpty) {
             gotData = true;
           }
-          for (var likeData in response.data['data']) {
-            addOrUpdateLike(Like.fromJson(likeData));
+          if (initialLoading) {
+            state = AsyncValue.data(response.data['data']
+                .map<Like>((likeData) => Like.fromJson(likeData))
+                .toList());
+          } else {
+            for (var likeData in response.data['data']) {
+              addOrUpdateLike(Like.fromJson(likeData));
+            }
           }
           return Future.value(null);
         });
