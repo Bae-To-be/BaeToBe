@@ -34,6 +34,9 @@ class Headings {
       'Your account is under verification';
   static const verificationRejected =
       'Your profile failed our verification process';
+  static const likes = 'Likes';
+  static const received = 'Received';
+  static const sent = 'Sent';
 }
 
 class InfoLabels {

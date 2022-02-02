@@ -44,3 +44,8 @@ class HomepageTabs {
   static const String matches = 'matches';
   static const String profile = 'profile';
 }
+
+class LikePageTabs {
+  static const String received = '';
+  static const String sent = 'sent';
+}

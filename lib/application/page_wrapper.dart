@@ -1,3 +1,4 @@
+import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,7 +23,7 @@ class PageWrapper extends HookConsumerWidget {
     });
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F2F2),
+      backgroundColor: offWhite,
       body: SafeArea(
         child: child,
       ),

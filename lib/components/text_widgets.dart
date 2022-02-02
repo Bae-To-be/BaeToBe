@@ -16,7 +16,10 @@ class Heading4 extends StatelessWidget {
     return GenericTextWidget(
         text: text,
         withRow: withRow,
-        textStyle: Theme.of(context).textTheme.headline2!);
+        textStyle: Theme.of(context)
+            .textTheme
+            .headline4!
+            .copyWith(fontWeight: FontWeight.bold));
   }
 }
 

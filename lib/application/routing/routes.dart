@@ -4,6 +4,8 @@ import 'package:baetobe/components/webview.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
 import 'package:baetobe/screens/home/discover_tab.dart';
+import 'package:baetobe/screens/home/likes/likes_received_tab.dart';
+import 'package:baetobe/screens/home/likes/likes_sent_tab.dart';
 import 'package:baetobe/screens/home/likes_tab.dart';
 import 'package:baetobe/screens/home/matches_tab.dart';
 import 'package:baetobe/screens/home/profile_tab.dart';
@@ -83,7 +85,10 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
       guards: [AuthGuard],
       children: [
         AutoRoute(path: HomepageTabs.discover, page: DiscoverTab),
-        AutoRoute(path: HomepageTabs.likes, page: LikesTab),
+        AutoRoute(path: HomepageTabs.likes, page: LikesTab, children: [
+          AutoRoute(path: LikePageTabs.received, page: LikesReceivedTab),
+          AutoRoute(path: LikePageTabs.sent, page: LikesSentTab),
+        ]),
         AutoRoute(path: HomepageTabs.matches, page: MatchesTab),
         AutoRoute(path: HomepageTabs.profile, page: ProfileTab),
         // redirect all other paths
