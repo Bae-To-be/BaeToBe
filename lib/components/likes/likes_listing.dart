@@ -79,7 +79,7 @@ class LikesListing extends HookConsumerWidget {
             separatorBuilder: (BuildContext context, int index) =>
                 const CustomDivider(),
             itemBuilder: (c, i) => GFListTile(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.symmetric(horizontal: 15),
                 avatar: GFAvatar(
                   shape: GFAvatarShape.circle,
                   backgroundColor: offWhite,
@@ -96,20 +96,12 @@ class LikesListing extends HookConsumerWidget {
                         .textTheme
                         .subtitle1
                         ?.copyWith(fontWeight: FontWeight.w500)),
-                icon: Row(
-                  children: [
-                    Text(likesListing[i].timeSinceCreation,
-                        style: Theme.of(context).textTheme.caption),
-                    IconButton(
-                      icon: Icon(FontAwesomeIcons.chevronRight,
-                          color: Theme.of(context).primaryColor),
-                      onPressed: () {
-                        ref.read(routerProvider.notifier).pushNamed(
-                            AppLinks.profileDetails(likesListing[i].userId));
-                      },
-                    ),
-                  ],
-                )),
+                onTap: () {
+                  ref.read(routerProvider.notifier).pushNamed(
+                      AppLinks.profileDetails(likesListing[i].userId));
+                },
+                icon: Icon(FontAwesomeIcons.chevronRight,
+                    color: Theme.of(context).primaryColor)),
             itemCount: likesListing.length,
           ),
         ).padding(bottom: 10);
