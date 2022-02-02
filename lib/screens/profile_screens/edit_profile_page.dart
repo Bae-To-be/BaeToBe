@@ -148,7 +148,7 @@ class EditProfile extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editReligion, arguments: false);
+                    router.navigateNamed(AppLinks.editReligion);
                   },
                 ),
                 EditProfileContentTile(
