@@ -76,11 +76,7 @@ class Placeholders {
   static const String course = 'Eg: BCA, MBA';
   static const String cityHint = 'Enter your city';
   static const String countryHint = 'Enter your country';
-}
-
-class ButtonTexts {
-  static const String continueWithGoogle = 'Continue with Google';
-  static const String continueWithFb = 'Continue with Facebook';
+  static const String tellUsMore = 'tell us more';
 }
 
 class LinkTexts {
@@ -92,6 +88,10 @@ class LinkTexts {
   static const String doneEditing = 'Done Editing';
   static const String removeRow = 'Remove Row';
   static const String refreshStatus = 'Refresh Status';
+  static const String reportUser = 'Report User';
+  static const String continueWithGoogle = 'Continue with Google';
+  static const String continueWithFb = 'Continue with Facebook';
+  static const String submit = 'Submit';
 }
 
 class ApprovalFieldLabels {

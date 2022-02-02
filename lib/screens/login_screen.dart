@@ -22,13 +22,13 @@ class LoginScreen extends HookConsumerWidget {
     return [
       RoundedCta(
               onPressed: auth.loginWithFacebook,
-              text: ButtonTexts.continueWithFb,
+              text: LinkTexts.continueWithFb,
               color: const Color(0xFF1877F2),
               icon: FontAwesomeIcons.facebook)
           .padding(bottom: 16),
       RoundedCta(
               onPressed: auth.loginWithGoogle,
-              text: ButtonTexts.continueWithGoogle,
+              text: LinkTexts.continueWithGoogle,
               color: Colors.red,
               icon: FontAwesomeIcons.google)
           .padding(bottom: 16),

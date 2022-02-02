@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +19,7 @@ class UserProfileScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileRequest = ref.watch(profileDetailsProvider(id));
+    final isReported = ref.watch(isReportedProvider(id));
 
     return profileRequest.maybeWhen(
         orElse: () => Center(
@@ -32,7 +36,23 @@ class UserProfileScreen extends HookConsumerWidget {
               CustomHeaderTile(text: profile.name),
               Expanded(
                   child: SingleChildScrollView(
-                      child: Text(profile.toString()).padding(horizontal: 15)))
+                      child: Text(profile.toString()).padding(horizontal: 15))),
+              isReported
+                  ? Container()
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                            onPressed: () => ref
+                                .read(routerProvider.notifier)
+                                .push(ReportUserScreenRoute(profile: profile)),
+                            child: Text(LinkTexts.reportUser,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption!
+                                    .copyWith(fontSize: 15))),
+                      ],
+                    )
             ],
           );
         });

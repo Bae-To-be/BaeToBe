@@ -16,17 +16,18 @@ import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
 import 'package:baetobe/screens/profile_screens/help_page.dart';
 import 'package:baetobe/screens/profile_screens/update_preferences_page.dart';
-import 'package:baetobe/screens/user_profile_screen.dart';
-import 'package:baetobe/screens/user_update/education_history_screen.dart';
-import 'package:baetobe/screens/user_update/identity_verification_screen.dart';
-import 'package:baetobe/screens/user_update/linkedin_url_screen.dart';
-import 'package:baetobe/screens/user_update/selfie_verification_screen.dart';
-import 'package:baetobe/screens/user_update/update_birthday_screen.dart';
-import 'package:baetobe/screens/user_update/update_gender_screen.dart';
-import 'package:baetobe/screens/user_update/update_hometown.dart';
-import 'package:baetobe/screens/user_update/update_interested_gender_screen.dart';
-import 'package:baetobe/screens/user_update/update_work_information_screen.dart';
-import 'package:baetobe/screens/user_update/upload_images_screen.dart';
+import 'package:baetobe/screens/update_update/education_history_screen.dart';
+import 'package:baetobe/screens/update_update/identity_verification_screen.dart';
+import 'package:baetobe/screens/update_update/linkedin_url_screen.dart';
+import 'package:baetobe/screens/update_update/selfie_verification_screen.dart';
+import 'package:baetobe/screens/update_update/update_birthday_screen.dart';
+import 'package:baetobe/screens/update_update/update_gender_screen.dart';
+import 'package:baetobe/screens/update_update/update_hometown.dart';
+import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
+import 'package:baetobe/screens/update_update/update_work_information_screen.dart';
+import 'package:baetobe/screens/update_update/upload_images_screen.dart';
+import 'package:baetobe/screens/user_profile/report_user_screen.dart';
+import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -84,6 +85,8 @@ import 'package:baetobe/screens/user_update/upload_images_screen.dart';
         path: AppLinks.profileDetailsRoute,
         page: UserProfileScreen,
         guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.reportUser, page: ReportUserScreen, guards: [AuthGuard]),
     AutoRoute(
       path: AppLinks.homePage,
       page: HomepageScreen,

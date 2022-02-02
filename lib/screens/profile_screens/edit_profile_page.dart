@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
+import 'package:baetobe/components/forms/big_text_field.dart';
 import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
@@ -331,31 +332,11 @@ class _BioTextField extends HookConsumerWidget {
           });
         }
       },
-      child: TextFormField(
-        initialValue: _user.bio ?? '',
-        minLines: 3,
-        style: const TextStyle(fontSize: 14),
-        maxLines: 20,
-        maxLength: 500,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(12),
-          fillColor: Colors.white,
-          filled: true,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: Theme.of(context).primaryColorLight, width: 1),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(
-                color: Theme.of(context).primaryColorLight, width: 1),
-          ),
-        ),
-        onChanged: (text) {
-          _user.bio = text;
-        },
-      ),
+      child: BigFomField(
+          value: _user.bio ?? '',
+          onChanged: (text) {
+            _user.bio = text;
+          }),
     );
   }
 }

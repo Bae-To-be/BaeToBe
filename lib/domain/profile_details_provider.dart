@@ -18,3 +18,17 @@ final profileDetailsProvider =
       });
   return result;
 });
+
+final isReportedProvider =
+    StateProvider.autoDispose.family<bool, int>((ref, id) {
+  return ref.watch(profileDetailsProvider(id)
+          .select((result) => result.value?.isReported)) ==
+      true;
+});
+
+final isMatchClosedProvider =
+    StateProvider.autoDispose.family<bool, int>((ref, id) {
+  return ref.watch(profileDetailsProvider(id)
+          .select((result) => result.value?.match?.isClosed)) ==
+      true;
+});
