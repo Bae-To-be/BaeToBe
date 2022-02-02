@@ -1,13 +1,12 @@
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
-import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/entities/like.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final likesProvider =
-    StateNotifierProvider.family<LikesNotifier, List<Like>, likeDirection>(
-        (ref, direction) {
+final likesProvider = StateNotifierProvider.family<LikesNotifier,
+    AsyncValue<List<Like>>, likeDirection>((ref, direction) {
   return LikesNotifier(ref, direction);
 });
 
@@ -16,18 +15,34 @@ const likeRouteMap = {
   likeDirection.sent: BackendRoutes.listLikesSent
 };
 
-class LikesNotifier extends StateNotifier<List<Like>> {
+class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
+    with WidgetsBindingObserver {
   int pageNumber = 0;
 
   final Ref ref;
   final likeDirection direction;
 
-  LikesNotifier(this.ref, this.direction) : super([]) {
+  LikesNotifier(this.ref, this.direction) : super(const AsyncValue.loading()) {
     fetchLikes(1, true);
+    WidgetsBinding.instance?.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  //ignore: avoid_renaming_method_parameters
+  void didChangeAppLifecycleState(AppLifecycleState appState) {
+    super.didChangeAppLifecycleState(appState);
+    if (appState == AppLifecycleState.resumed) {
+      fetchLikes(1, true);
+    }
   }
 
   Future<bool> fetchLikes(int? pageOverride, bool updateLoading) async {
-    final loading = ref.read(loadingProvider.notifier);
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
 
@@ -40,7 +55,7 @@ class LikesNotifier extends StateNotifier<List<Like>> {
       toSend = pageOverride;
     }
     if (updateLoading) {
-      loading.state = true;
+      state = const AsyncValue.loading();
     }
     await error.safelyExecute(
         command: client
@@ -54,13 +69,15 @@ class LikesNotifier extends StateNotifier<List<Like>> {
           }
           return Future.value(null);
         });
-    loading.state = false;
+    if (state is AsyncLoading) {
+      state = const AsyncValue.data([]);
+    }
     return gotData;
   }
 
   void addOrUpdateLike(Like newLike) {
-    state = List.from(state)
+    state = AsyncValue.data(List.from(state.value ?? [])
       ..removeWhere((like) => like.id == newLike.id)
-      ..add(newLike);
+      ..add(newLike));
   }
 }

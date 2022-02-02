@@ -22,8 +22,8 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
   final Ref ref;
 
   SelfieFormStateNotifier(this.ref) : super(SelfieState()) {
-    WidgetsBinding.instance?.addObserver(this);
     _setupCamera();
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
@@ -41,7 +41,8 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
         state.controller?.value.isInitialized != true) {
       return;
     }
-    if (appState == AppLifecycleState.inactive) {
+    if ([AppLifecycleState.inactive, AppLifecycleState.paused]
+        .contains(appState)) {
       state.controller?.dispose();
     } else if (appState == AppLifecycleState.resumed) {
       _setupCamera();

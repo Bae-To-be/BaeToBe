@@ -21,7 +21,7 @@ class VerificationRejected extends HookConsumerWidget {
       return const Center(
           child: Heading5(
               withRow: false,
-              text: ErrorMessages.couldNotLoadVerificationinfo));
+              text: ErrorMessages.couldNotLoadVerificationInfo));
     }
 
     if (verificationInfo.status == ApprovalStatuses.inReview) {

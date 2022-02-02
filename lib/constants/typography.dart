@@ -65,6 +65,7 @@ class InfoLabels {
   static const pleaseChangeField = 'Please update this information';
   static const correctionSubmitted = 'Correction Submitted';
   static const allGood = 'All good';
+  static const likesLoaded = 'likes loaded';
 }
 
 class Placeholders {

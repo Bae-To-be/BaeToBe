@@ -22,6 +22,8 @@ class RemoteConfigs {
 
 class ErrorMessages {
   static const String somethingWentWrong = 'Something went wrong';
+  static const String somethingWentWrongTryAgain =
+      'Something went wrong! Try again?';
   static const String noInternetConnection = 'No internet connection';
   static const String invalidLinkedinUrl = 'must be a valid linkedin url';
   static const String googleLoginCancelled = 'google login cancelled';
@@ -30,9 +32,10 @@ class ErrorMessages {
       'Please grant camera permission';
   static const String couldNotTakePicture = 'Could not take picture';
   static const String couldNotPickFile = 'Could not pick file';
-  static const String couldNotLoadVerificationinfo =
+  static const String couldNotLoadVerificationInfo =
       'could not load verification info';
   static const String pleaseUpdatePreferences = 'Please update preferences';
+  static const String noLikesFound = 'No likes found! Try again?';
 }
 
 class StorageKeys {
