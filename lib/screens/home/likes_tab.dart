@@ -54,32 +54,37 @@ class LikesTab extends HookConsumerWidget {
                     ),
                     child: Row(
                       children: [
-                        SizedBox(
-                          height: tabBarHeight,
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: GestureDetector(
-                            onTap: () => tabRouter.setActiveIndex(0),
-                            child: Center(
-                                child: GenericTextWidget(
-                              textStyle: tabTextStyleFor(
-                                  tabRouter.activeIndex == 0, context),
-                              text: Headings.received,
-                              withRow: false,
-                            )),
+                        GestureDetector(
+                          onTap: () => tabRouter.setActiveIndex(0),
+                          child: AbsorbPointer(
+                            child: SizedBox(
+                              height: tabBarHeight,
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: Center(
+                                  child: GenericTextWidget(
+                                textStyle: tabTextStyleFor(
+                                    tabRouter.activeIndex == 0, context),
+                                text: Headings.received,
+                                withRow: false,
+                              )),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          height: tabBarHeight,
-                          width: MediaQuery.of(context).size.width / 2,
-                          child: GestureDetector(
-                            onTap: () => tabRouter.setActiveIndex(1),
-                            child: Center(
+                        GestureDetector(
+                          onTap: () => tabRouter.setActiveIndex(1),
+                          child: AbsorbPointer(
+                            child: SizedBox(
+                              height: tabBarHeight,
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: Center(
                                 child: GenericTextWidget(
-                              textStyle: tabTextStyleFor(
-                                  tabRouter.activeIndex == 1, context),
-                              text: Headings.sent,
-                              withRow: false,
-                            )),
+                                  textStyle: tabTextStyleFor(
+                                      tabRouter.activeIndex == 1, context),
+                                  text: Headings.sent,
+                                  withRow: false,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
