@@ -21,8 +21,9 @@ class ReportUserScreen extends HookConsumerWidget {
     return ListView(children: [
       CustomHeaderTile(color: Colors.red[300], text: 'Report ${profile.name}'),
       reasonsRequest.maybeWhen(
-          orElse: () => CircularProgressIndicator(color: Colors.red[300])
-              .padding(top: 10),
+          orElse: () => Center(
+              child: CircularProgressIndicator(color: Colors.red[300])
+                  .padding(top: 10)),
           data: (reasons) {
             return Column(
               children: [
