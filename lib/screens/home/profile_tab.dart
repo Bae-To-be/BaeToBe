@@ -18,12 +18,11 @@ class ProfileTab extends HookConsumerWidget {
     final router = ref.read(routerProvider);
     final _user = ref.watch(userProvider);
     final profilePicture = ref.watch(imagesProvider).profilePicture();
-    final isMounted = useIsMounted();
 
     useEffect(() {
-      if (isMounted()) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
         ref.read(imagesProvider.notifier).loadImages();
-      }
+      });
       return null;
     }, []);
 

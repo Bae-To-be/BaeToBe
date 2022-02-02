@@ -6,9 +6,11 @@ import 'package:baetobe/components/forms/big_text_field.dart';
 import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,6 +31,13 @@ class EditProfile extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.read(routerProvider);
     final _user = ref.read(userProvider);
+
+    useEffect(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        ref.read(imagesProvider.notifier).loadImages();
+      });
+      return null;
+    }, []);
     // return const Center(child: Text('EDIT PROFILE'),);
     return GestureDetector(
       onVerticalDragCancel: () {
