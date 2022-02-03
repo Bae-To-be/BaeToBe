@@ -78,7 +78,9 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
     return FormLayout(
         children: <Widget>[
           const SizedBox(height: 32),
-          const Heading5(text: Headings.enterInterestedGender)
+          const CustomTextWidget(
+                  type: textWidgetType.heading5,
+                  text: Headings.enterInterestedGender)
               .padding(top: 32, bottom: 36, left: 10),
           genderListing.maybeWhen(
               data: (GenderListing listing) => ListView(

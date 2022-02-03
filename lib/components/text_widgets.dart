@@ -5,34 +5,50 @@ import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class Heading4 extends StatelessWidget {
-  final String text;
-  final bool withRow;
-  const Heading4({Key? key, required this.text, this.withRow = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GenericTextWidget(
-        text: text,
-        withRow: withRow,
-        textStyle: Theme.of(context)
-            .textTheme
-            .headline4!
-            .copyWith(fontWeight: FontWeight.bold));
-  }
+enum textWidgetType {
+  heading1,
+  heading2,
+  heading3,
+  heading4,
+  heading5,
+  heading6,
+  caption,
 }
 
-class Heading5 extends StatelessWidget {
+class CustomTextWidget extends StatelessWidget {
+  final textWidgetType type;
   final String text;
-  final bool withFlexible;
   final bool withRow;
-  const Heading5(
+  final bool withFlexible;
+
+  const CustomTextWidget(
       {Key? key,
+      required this.type,
       required this.text,
       this.withRow = true,
       this.withFlexible = false})
       : super(key: key);
+
+  TextStyle textStyleForWidget(BuildContext context) {
+    switch (type) {
+      case textWidgetType.heading1:
+        return Theme.of(context).textTheme.headline1!;
+      case textWidgetType.heading2:
+        return Theme.of(context).textTheme.headline2!;
+      case textWidgetType.heading3:
+        return Theme.of(context).textTheme.headline3!;
+      case textWidgetType.heading4:
+        return Theme.of(context).textTheme.headline4!;
+      case textWidgetType.heading5:
+        return Theme.of(context).textTheme.headline5!;
+      case textWidgetType.heading6:
+        return Theme.of(context).textTheme.headline6!;
+      case textWidgetType.caption:
+        return Theme.of(context).textTheme.caption!;
+      default:
+        return Theme.of(context).textTheme.bodyText1!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,52 +56,7 @@ class Heading5 extends StatelessWidget {
         text: text,
         withRow: withRow,
         withFlexible: withFlexible,
-        textStyle: Theme.of(context).textTheme.headline5!);
-  }
-}
-
-class Heading6 extends StatelessWidget {
-  final String text;
-  final bool withRow;
-  const Heading6({Key? key, required this.text, this.withRow = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GenericTextWidget(
-        text: text,
-        withRow: withRow,
-        textStyle: Theme.of(context).textTheme.headline6!);
-  }
-}
-
-class Subtitle1 extends StatelessWidget {
-  final String text;
-  final bool withRow;
-  const Subtitle1({Key? key, required this.text, this.withRow = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GenericTextWidget(
-        text: text,
-        withRow: withRow,
-        textStyle: Theme.of(context).textTheme.subtitle1!);
-  }
-}
-
-class Caption extends StatelessWidget {
-  final String text;
-  final bool withRow;
-  const Caption({Key? key, required this.text, this.withRow = true})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GenericTextWidget(
-        text: text,
-        withRow: withRow,
-        textStyle: Theme.of(context).textTheme.caption!);
+        textStyle: textStyleForWidget(context));
   }
 }
 
@@ -112,17 +83,18 @@ class GenericTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget result = body(context);
+    if (withFlexible) {
+      result = Flexible(
+        child: result,
+      );
+    }
+
     if (withRow) {
       result = Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           result,
         ],
-      );
-    }
-    if (withFlexible) {
-      result = Flexible(
-        child: result,
       );
     }
 

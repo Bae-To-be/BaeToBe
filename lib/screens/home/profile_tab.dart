@@ -43,7 +43,7 @@ class ProfileTab extends HookConsumerWidget {
           Stack(
             children: <Widget>[
               CircleAvatar(
-                backgroundImage: profilePicture != null
+                foregroundImage: profilePicture != null
                     ? CachedNetworkImageProvider(profilePicture.url,
                         cacheKey: profilePicture.id.toString())
                     : Image.asset('assets/profile_placeholder.png').image,

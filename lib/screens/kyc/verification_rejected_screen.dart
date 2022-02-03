@@ -19,7 +19,8 @@ class VerificationRejectedScreen extends HookConsumerWidget {
 
     if (verificationInfo == null) {
       return const Center(
-          child: Heading5(
+          child: CustomTextWidget(
+              type: textWidgetType.heading5,
               withRow: false,
               text: ErrorMessages.couldNotLoadVerificationInfo));
     }
@@ -36,7 +37,10 @@ class VerificationRejectedScreen extends HookConsumerWidget {
 
     return Column(children: [
       const SizedBox(height: 32),
-      const Heading5(text: Headings.verificationRejected, withRow: false)
+      const CustomTextWidget(
+              type: textWidgetType.heading5,
+              text: Headings.verificationRejected,
+              withRow: false)
           .padding(top: 32, bottom: 10, horizontal: 30),
       Expanded(
         child: ListView(
@@ -85,8 +89,9 @@ class VerificationRejectedScreen extends HookConsumerWidget {
                 : GFCard(
                     color: Colors.red[100],
                     boxFit: BoxFit.cover,
-                    content: Caption(
+                    content: CustomTextWidget(
                         text: verificationInfo.rejectionReason!,
+                        type: textWidgetType.caption,
                         withRow: false),
                   ),
           ],

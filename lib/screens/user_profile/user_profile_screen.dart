@@ -28,7 +28,9 @@ class UserProfileScreen extends HookConsumerWidget {
         data: (profile) {
           if (profile == null) {
             return const Center(
-                child: Heading5(text: ErrorMessages.userNotFound));
+                child: CustomTextWidget(
+                    type: textWidgetType.heading5,
+                    text: ErrorMessages.userNotFound));
           }
 
           return Column(

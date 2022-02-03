@@ -24,20 +24,24 @@ class IdentityVerificationScreen extends HookConsumerWidget {
     return FormLayout(
         children: [
           const SizedBox(height: 32),
-          const Heading5(text: Headings.identityVerification)
+          const CustomTextWidget(
+                  type: textWidgetType.heading5,
+                  text: Headings.identityVerification)
               .padding(top: 32, bottom: 10, left: 15),
-          const Caption(
-            text: InfoLabels.identityVerification,
-            withRow: false,
-          ).padding(horizontal: 15, bottom: 20),
+          const CustomTextWidget(
+                  text: InfoLabels.identityVerification,
+                  withRow: false,
+                  type: textWidgetType.caption)
+              .padding(horizontal: 15, bottom: 20),
           const SizedBox(
             height: 64,
             child: IdentityDocumentTile(),
           ),
-          const Caption(
-            text: InfoLabels.identityDocumentGuidelines,
-            withRow: false,
-          ).padding(horizontal: 15, vertical: 20),
+          const CustomTextWidget(
+                  text: InfoLabels.identityDocumentGuidelines,
+                  withRow: false,
+                  type: textWidgetType.caption)
+              .padding(horizontal: 15, vertical: 20),
           Expanded(child: Container()),
         ],
         floatingSubmit: FloatingCta(

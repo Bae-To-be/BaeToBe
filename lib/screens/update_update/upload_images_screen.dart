@@ -24,14 +24,16 @@ class UploadImagesScreen extends HookConsumerWidget {
     return FormLayout(
         children: [
           const SizedBox(height: 32),
-          const Heading5(text: Headings.addPhotos)
+          const CustomTextWidget(
+                  type: textWidgetType.heading5, text: Headings.addPhotos)
               .padding(top: 32, bottom: 10, left: 15),
-          Caption(
+          CustomTextWidget(
                   text: InfoLabels.addMinimumPhotos.replaceAll(
                       '%{image_count}',
                       FirebaseRemoteConfig.instance
                           .getInt(RemoteConfigs.minPhotoCount)
-                          .toString()))
+                          .toString()),
+                  type: textWidgetType.caption)
               .padding(left: 15, bottom: 15),
           Expanded(
             child: GridView.builder(

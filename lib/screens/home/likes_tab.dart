@@ -38,7 +38,8 @@ class LikesTab extends HookConsumerWidget {
             appBar: AppBar(
                 backgroundColor: offWhite,
                 elevation: 0,
-                title: const Heading4(text: Headings.likes),
+                title: const CustomTextWidget(
+                    text: Headings.likes, type: textWidgetType.heading4),
                 bottom: PreferredSize(
                   preferredSize: Size(
                     MediaQuery.of(context).size.width,

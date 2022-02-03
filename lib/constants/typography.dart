@@ -44,7 +44,8 @@ class InfoLabels {
   static const String selectIndustry = 'Select your industry';
   static const String selectYear = 'Select year';
   static const String schoolDetails = 'School Details';
-  static const String classYearHelper = 'mentioned the year you graduated in';
+  static const String classYearHelper =
+      'Mention the year you graduated in/will be graduating in';
   static const String linkedinPublic = 'Show my LinkedIn on my profile';
   static const String addMinimumPhotos =
       'Add at least %{image_count} photos to continue';

@@ -23,10 +23,10 @@ class UnderVerificationScreen extends HookConsumerWidget {
           ),
         ]),
       ).padding(bottom: 20),
-      const Heading6(
-        text: InfoLabels.underVerificationHelper,
-        withRow: false,
-      ),
+      const CustomTextWidget(
+          text: InfoLabels.underVerificationHelper,
+          withRow: false,
+          type: textWidgetType.heading6),
       Expanded(child: Container()),
       CustomTextButton(
               text: LinkTexts.refreshStatus,
