@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
@@ -22,7 +21,6 @@ class HelpPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.read(routerProvider);
     final articleListing = ref.watch(articleProvider);
     return articleListing.maybeWhen(
       data: (List<Article> listing) => Column(

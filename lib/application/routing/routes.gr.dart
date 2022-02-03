@@ -12,7 +12,6 @@
 
 import 'package:auto_route/auto_route.dart' as _i18;
 import 'package:baetobe/application/routing/auth_guard.dart' as _i30;
-import 'package:baetobe/components/webview.dart' as _i28;
 import 'package:baetobe/entities/user_profile.dart' as _i31;
 import 'package:baetobe/screens/boot/splash_screen.dart' as _i1;
 import 'package:baetobe/screens/home/discover_tab.dart' as _i21;
@@ -47,6 +46,7 @@ import 'package:baetobe/screens/update_update/update_work_information_screen.dar
 import 'package:baetobe/screens/update_update/upload_images_screen.dart' as _i9;
 import 'package:baetobe/screens/user_profile/report_user_screen.dart' as _i15;
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart' as _i14;
+import 'package:baetobe/screens/webview_screen.dart' as _i28;
 import 'package:flutter/material.dart' as _i29;
 
 class AppRouter extends _i18.RootStackRouter {

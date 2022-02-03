@@ -41,6 +41,7 @@ class Headings {
   static const String faqs = 'FAQs';
   static const String profile = 'Profile';
   static const String matches = 'Matches';
+  static const String loadingArticle = 'Loading Article..';
 }
 
 class InfoLabels {

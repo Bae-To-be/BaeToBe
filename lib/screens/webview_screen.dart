@@ -1,7 +1,8 @@
 import 'package:auto_route/annotations.dart';
-import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -16,26 +17,16 @@ class Webview extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final router = ref.read(routerProvider);
+    final pageLoading = useState(true);
     return Column(
       children: [
-        Row(
-          children: [
-            TextButton(
-              onPressed: () {
-                router.pop();
-              },
-              child: Icon(
-                FontAwesomeIcons.chevronLeft,
-                color: Theme.of(context).primaryColor,
-              ),
-            )
-          ],
-        ),
+        CustomHeaderTile(
+            text: pageLoading.value ? Headings.loadingArticle : ''),
         Expanded(
           child: WebView(
             initialUrl: decodeURI(url!),
             javascriptMode: JavascriptMode.unrestricted,
+            onPageFinished: (_) => pageLoading.value = false,
           ),
         ),
       ],
