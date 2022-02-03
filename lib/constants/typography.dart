@@ -37,6 +37,8 @@ class Headings {
   static const likes = 'Likes';
   static const received = 'Received';
   static const sent = 'Sent';
+  static const String editProfile = 'Edit Profile';
+  static const String faqs = 'FAQs';
 }
 
 class InfoLabels {

@@ -1,29 +1,23 @@
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
-import 'package:baetobe/entities/like.dart';
+import 'package:baetobe/entities/match.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final likesProvider = StateNotifierProvider.family<LikesNotifier,
-    AsyncValue<List<Like>>, likeDirection>((ref, direction) {
-  return LikesNotifier(ref, direction);
+final matchesProvider =
+    StateNotifierProvider<MatchesNotifier, AsyncValue<List<Match>>>((ref) {
+  return MatchesNotifier(ref);
 });
 
-const likeRouteMap = {
-  likeDirection.received: BackendRoutes.listLikesReceived,
-  likeDirection.sent: BackendRoutes.listLikesSent
-};
-
-class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
+class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
     with WidgetsBindingObserver {
   int pageNumber = 0;
-
   final Ref ref;
-  final likeDirection direction;
 
-  LikesNotifier(this.ref, this.direction) : super(const AsyncValue.loading()) {
-    fetchLikes(1, true).then((_) => WidgetsBinding.instance?.addObserver(this));
+  MatchesNotifier(this.ref) : super(const AsyncValue.loading()) {
+    fetchMatches(1, true)
+        .then((_) => WidgetsBinding.instance?.addObserver(this));
   }
 
   @override
@@ -40,11 +34,11 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
       return;
     }
     if (appState == AppLifecycleState.resumed) {
-      fetchLikes(1, false);
+      fetchMatches(1, false);
     }
   }
 
-  Future<bool> fetchLikes(int? pageOverride, bool updateLoading) async {
+  Future<bool> fetchMatches(int? pageOverride, bool updateLoading) async {
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
 
@@ -58,7 +52,7 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
       state = const AsyncValue.loading();
     }
     await error.safelyExecute(
-        command: client.get(likeRouteMap[direction]!,
+        command: client.get(BackendRoutes.listMatches,
             queryParameters: {'page': pageNumber}),
         onSuccess: (response) {
           if (response.data['data'].isNotEmpty) {
@@ -66,11 +60,11 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
           }
           if (pageNumber == 1) {
             state = AsyncValue.data(response.data['data']
-                .map<Like>((likeData) => Like.fromJson(likeData))
+                .map<Match>((matchData) => Match.fromJson(matchData))
                 .toList());
           } else {
-            for (var likeData in response.data['data']) {
-              addOrUpdateLike(Like.fromJson(likeData));
+            for (var matchData in response.data['data']) {
+              addOrUpdateLike(Match.fromJson(matchData));
             }
           }
           return Future.value(null);
@@ -81,18 +75,9 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
     return gotData;
   }
 
-  void addOrUpdateLike(Like newLike) {
+  void addOrUpdateLike(Match newMatch) {
     state = AsyncValue.data(List.from(state.value ?? [])
-      ..removeWhere((like) => like.id == newLike.id)
-      ..add(newLike));
-  }
-
-  void removeLike(int likeId) {
-    if (state is AsyncLoading) {
-      return;
-    }
-
-    state = AsyncValue.data(
-        List.from(state.value ?? [])..removeWhere((like) => like.id == likeId));
+      ..removeWhere((match) => match.id == newMatch.id)
+      ..add(newMatch));
   }
 }

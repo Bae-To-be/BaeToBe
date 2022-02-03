@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
-import 'package:baetobe/components/custom_divider.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/article_provider.dart';
 import 'package:baetobe/entities/article.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 //TODO: Fix navigation issue
@@ -27,18 +27,7 @@ class HelpPage extends HookConsumerWidget {
     return articleListing.maybeWhen(
       data: (List<Article> listing) => Column(
         children: [
-          GFListTile(
-              padding: const EdgeInsets.all(0),
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-              title: Text('FAQs', style: Theme.of(context).textTheme.headline5),
-              icon: IconButton(
-                icon: Icon(FontAwesomeIcons.solidTimesCircle,
-                    color: Theme.of(context).primaryColor, size: 20),
-                onPressed: () {
-                  router.pop();
-                },
-              )),
-          const CustomDivider(),
+          const CustomHeaderTile(text: Headings.faqs),
           Expanded(
             child: ListView.builder(
                 itemCount: listing.length,
