@@ -63,10 +63,10 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
               child: ListView(
             children: [
               const SizedBox(height: 32),
-              const Heading5(text: Headings.enterIndustry)
+              const Heading5(text: Headings.enterIndustry, withRow: false)
                   .padding(top: 32, bottom: 20, left: 15),
               const IndustryField().padding(horizontal: 10),
-              const Heading5(text: Headings.enterWorkTitle)
+              const Heading5(text: Headings.enterWorkTitle, withRow: false)
                   .padding(top: 32, left: 15),
               AutoCompleteField(
                 textController: workTitleController,
