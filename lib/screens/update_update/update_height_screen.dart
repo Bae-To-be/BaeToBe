@@ -60,6 +60,7 @@ class _HeightInput extends HookConsumerWidget {
           heightController.jumpToItem(12);
         }
       });
+      return null;
     }, []);
 
     return LayoutBuilder(
