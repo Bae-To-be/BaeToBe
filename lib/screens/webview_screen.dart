@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class Webview extends HookConsumerWidget {
             text: pageLoading.value ? Headings.loadingArticle : ''),
         Expanded(
           child: WebView(
+            backgroundColor: offWhite,
             initialUrl: decodeURI(url!),
             javascriptMode: JavascriptMode.unrestricted,
             onPageFinished: (_) => pageLoading.value = false,
