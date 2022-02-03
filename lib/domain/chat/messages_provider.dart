@@ -126,10 +126,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
       return;
     }
 
-    state = state.copyWith(newConnection: connectionState.connecting);
-    if (!state.connectionStateVisible) {
-      state = state.copyWith(newConnectionStateVisible: true);
-    }
+    state = state.copyWith(
+        newConnection: connectionState.connecting,
+        newConnectionStateVisible: true);
     state.cable?.disconnect();
 
     final stopwatch = Stopwatch()..start();
@@ -146,7 +145,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
         return;
       }
       state = state.copyWith(newConnection: connectionState.connected);
-      Timer(const Duration(milliseconds: 5000), () {
+      Timer(const Duration(milliseconds: 500), () {
         state = state.copyWith(newConnectionStateVisible: false);
       });
     }, onConnectionLost: () {
@@ -156,7 +155,12 @@ class MessagesNotifier extends StateNotifier<ChatState>
       if (!mounted) {
         return;
       }
-      state = state.copyWith(newConnection: connectionState.connectionLost);
+      if (kDebugMode) {
+        debugPrint('CONNECT TO SOCKET LOST');
+      }
+      state = state.copyWith(
+          newConnection: connectionState.connectionLost,
+          newConnectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
         state = state.copyWith(newRetryCount: state.retryCount + 1);
@@ -169,7 +173,12 @@ class MessagesNotifier extends StateNotifier<ChatState>
       if (!mounted) {
         return;
       }
-      state = state.copyWith(newConnection: connectionState.connectionFailed);
+      if (kDebugMode) {
+        debugPrint('CANNOT CONNECT TO SOCKET');
+      }
+      state = state.copyWith(
+          newConnection: connectionState.connectionFailed,
+          newConnectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
         state = state.copyWith(newRetryCount: state.retryCount + 1);
@@ -182,7 +191,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
         onSubscribed: () {
       debugPrint('subscribed');
     }, onDisconnected: () {
-      state = state.copyWith(newConnection: connectionState.disconnected);
+      state = state.copyWith(
+          newConnection: connectionState.disconnected,
+          newConnectionStateVisible: true);
     }, onMessage: (Map message) {
       if (kDebugMode) {
         debugPrint(message.toString());
@@ -300,11 +311,19 @@ class ChatState {
         messages: newMessages ?? messages,
         connectionStateVisible:
             newConnectionStateVisible ?? connectionStateVisible,
-        connection: connectionState.connecting);
+        connection: newConnection ?? connection);
   }
 
   ChatState withMessage(types.Message newMessage) {
     return copyWith(newMessages: messages.addOrReplace(newMessage));
+  }
+
+  @override
+  String toString() {
+    return {
+      'connection': connection,
+      'connectionVisible': connectionStateVisible,
+    }.toString();
   }
 }
 
