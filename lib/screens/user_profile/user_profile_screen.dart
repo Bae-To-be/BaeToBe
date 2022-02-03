@@ -7,7 +7,6 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -51,16 +50,8 @@ class UserProfileScreen extends HookConsumerWidget {
                       children: [
                         CustomTextButton(
                             onPressed: () {
-                              final existing = router.stackData
-                                  .firstWhereOrNull((route) => route.name
-                                      .contains('MessagesForMatchScreenRoute'));
-                              if (existing != null) {
-                                router.popUntil((route) => route.settings.name!
-                                    .contains('MessagesForMatchScreenRoute'));
-                              } else {
-                                router.push(MessagesForMatchScreenRoute(
-                                    match: profile.match!));
-                              }
+                              router.navigate(MessagesForMatchScreenRoute(
+                                  match: profile.match!));
                             },
                             text: LinkTexts.conversation,
                             type: textWidgetType.caption),
