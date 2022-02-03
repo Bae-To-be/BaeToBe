@@ -167,7 +167,6 @@ class NotificationService {
               .addOrUpdateLike(Like.fromJson(jsonDecode(message.data['like'])));
           break;
         case NotificationEvents.leftSwiped:
-          debugPrint(message.data.toString());
           ref
               .read(likesProvider(likeDirection.sent).notifier)
               .removeLike(int.parse(message.data['like_id']));
