@@ -197,23 +197,14 @@ class EditProfilePage extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  button: true,
-                  callback: () {
-                    AutoRouter.of(context).pushNamed(
-                        '${AppLinks.updateWorkDetails}?redirectBack=true');
-                    // Get.toNamed(AppLinks.updateWorkDetails, arguments: false);
-                  },
+                  button: false,
                 ),
                 EditProfileContentTile(
                   title: 'Education',
                   content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _allEducationList(context, ref)),
-                  button: true,
-                  callback: () {
-                    AutoRouter.of(context).pushNamed(
-                        '${AppLinks.updateEducationHistory}?redirectBack=true');
-                  },
+                  button: false,
                 ),
                 const EditProfileSectionTile(title: 'Lifestyle'),
                 EditProfileContentTile(
