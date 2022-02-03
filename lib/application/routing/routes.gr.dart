@@ -203,8 +203,10 @@ class AppRouter extends _i18.RootStackRouter {
           routeData: routeData, child: const _i22.LikesTab());
     },
     MatchesTabRoute.name: (routeData) {
+      final args = routeData.argsAs<MatchesTabRouteArgs>(
+          orElse: () => const MatchesTabRouteArgs());
       return _i18.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i23.MatchesTab());
+          routeData: routeData, child: _i23.MatchesTab(key: args.key));
     },
     ProfileTabRoute.name: (routeData) {
       return _i18.AdaptivePage<dynamic>(
@@ -689,10 +691,23 @@ class LikesTabRoute extends _i18.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i23.MatchesTab]
-class MatchesTabRoute extends _i18.PageRouteInfo<void> {
-  const MatchesTabRoute() : super(MatchesTabRoute.name, path: 'matches');
+class MatchesTabRoute extends _i18.PageRouteInfo<MatchesTabRouteArgs> {
+  MatchesTabRoute({_i29.Key? key})
+      : super(MatchesTabRoute.name,
+            path: 'matches', args: MatchesTabRouteArgs(key: key));
 
   static const String name = 'MatchesTabRoute';
+}
+
+class MatchesTabRouteArgs {
+  const MatchesTabRouteArgs({this.key});
+
+  final _i29.Key? key;
+
+  @override
+  String toString() {
+    return 'MatchesTabRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

@@ -39,6 +39,8 @@ class Headings {
   static const sent = 'Sent';
   static const String editProfile = 'Edit Profile';
   static const String faqs = 'FAQs';
+  static const String profile = 'Profile';
+  static const String matches = 'Matches';
 }
 
 class InfoLabels {
@@ -68,7 +70,8 @@ class InfoLabels {
   static const pleaseChangeField = 'Please update this information';
   static const correctionSubmitted = 'Correction Submitted';
   static const allGood = 'All good';
-  static const likesLoaded = 'likes loaded';
+  static const likesLoaded = 'Likes loaded';
+  static const matchesLoaded = 'Matches loaded';
 }
 
 class Placeholders {

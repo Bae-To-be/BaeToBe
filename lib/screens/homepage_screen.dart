@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:baetobe/components/custom_icons.dart';
-import 'package:baetobe/constants/app_constants.dart';
-import 'package:baetobe/components/navbar/navbar.dart';
-import 'package:flutter/material.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
+import 'package:baetobe/application/theme.dart';
+import 'package:baetobe/components/custom_icons.dart';
+import 'package:baetobe/components/navbar/navbar.dart';
+import 'package:baetobe/constants/app_constants.dart';
+import 'package:flutter/material.dart';
 
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({Key? key}) : super(key: key);
@@ -11,11 +12,12 @@ class HomepageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
-        DiscoverTabRoute(),
-        LikesTabRoute(),
+      backgroundColor: offWhite,
+      routes: [
+        const DiscoverTabRoute(),
+        const LikesTabRoute(),
         MatchesTabRoute(),
-        ProfileTabRoute(),
+        const ProfileTabRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return Theme(

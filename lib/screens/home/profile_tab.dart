@@ -1,6 +1,8 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -29,17 +31,10 @@ class ProfileTab extends HookConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'My Profile',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ],
-          ).padding(all: 16),
-          const CustomDivider(),
+          const CustomHeaderTile(
+            text: Headings.profile,
+            withCross: false,
+          ),
           Stack(
             children: <Widget>[
               CircleAvatar(

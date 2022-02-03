@@ -3,15 +3,14 @@ import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
+import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
-import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/entities/like.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -35,13 +34,7 @@ class LikesListing extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loading = ref.watch(loadingProvider);
     final likes = ref.watch(likesProvider(direction));
-    if (loading) {
-      return Center(
-          child:
-              CircularProgressIndicator(color: Theme.of(context).primaryColor));
-    }
     return likes.when(
       loading: () => Center(
           child:
@@ -73,7 +66,10 @@ class LikesListing extends HookConsumerWidget {
             ref
                 .read(likesProvider(direction).notifier)
                 .fetchLikes(1, false)
-                .then((_) => controller.refreshCompleted());
+                .then((_) {
+              controller.refreshCompleted();
+              controller.resetNoData();
+            });
           },
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) =>
@@ -100,11 +96,13 @@ class LikesListing extends HookConsumerWidget {
                   ref.read(routerProvider.notifier).pushNamed(
                       AppLinks.profileDetails(likesListing[i].userId));
                 },
-                icon: Icon(FontAwesomeIcons.chevronRight,
-                    color: Theme.of(context).primaryColor)),
+                icon: CustomTextWidget(
+                    type: textWidgetType.caption,
+                    withRow: false,
+                    text: likesListing[i].timeSinceCreation)),
             itemCount: likesListing.length,
           ),
-        ).padding(bottom: 10);
+        ).padding(bottom: 10, horizontal: 15);
       },
       error: (_error, _) =>
           _retryView(ErrorMessages.somethingWentWrongTryAgain, context, ref),
