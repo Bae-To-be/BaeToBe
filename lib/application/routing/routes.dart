@@ -22,6 +22,7 @@ import 'package:baetobe/screens/update_update/linkedin_url_screen.dart';
 import 'package:baetobe/screens/update_update/selfie_verification_screen.dart';
 import 'package:baetobe/screens/update_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/update_update/update_gender_screen.dart';
+import 'package:baetobe/screens/update_update/update_height_screen.dart';
 import 'package:baetobe/screens/update_update/update_hometown_screen.dart';
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
 import 'package:baetobe/screens/update_update/update_religion_screen.dart';
@@ -124,6 +125,10 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
     AutoRoute(
         path: AppLinks.editReligion,
         page: UpdateReligionScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.editHeight,
+        page: UpdateHeightScreen,
         guards: [AuthGuard]),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),
   ],

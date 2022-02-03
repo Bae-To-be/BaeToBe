@@ -29,7 +29,7 @@ class EditProfilePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.read(routerProvider);
-    final _user = ref.read(userProvider);
+    final _user = ref.watch(userProvider);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -187,7 +187,7 @@ class EditProfilePage extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editHeight, arguments: false);
+                    router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
                 const EditProfileSectionTile(title: 'Work and Education'),
