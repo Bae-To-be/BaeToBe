@@ -75,7 +75,7 @@ class LikesListing extends HookConsumerWidget {
             separatorBuilder: (BuildContext context, int index) =>
                 const CustomDivider(),
             itemBuilder: (c, i) => GFListTile(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 5),
                 avatar: GFAvatar(
                   shape: GFAvatarShape.circle,
                   backgroundColor: offWhite,
@@ -102,7 +102,7 @@ class LikesListing extends HookConsumerWidget {
                     text: likesListing[i].timeSinceCreation)),
             itemCount: likesListing.length,
           ),
-        ).padding(bottom: 10, horizontal: 15);
+        ).padding(bottom: 10, horizontal: 5);
       },
       error: (_error, _) =>
           _retryView(ErrorMessages.somethingWentWrongTryAgain, context, ref),

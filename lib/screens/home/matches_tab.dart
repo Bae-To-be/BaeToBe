@@ -40,12 +40,14 @@ class MatchesTab extends HookConsumerWidget {
           withCross: false,
         ),
         matches.when(
-          loading: () => Center(
-              child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor)),
+          loading: () => Expanded(
+            child: Center(
+                child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor)),
+          ),
           data: (matchesListing) {
             if (matchesListing.isEmpty) {
-              return _retryView(ErrorMessages.noLikesFound, context, ref);
+              return _retryView(ErrorMessages.noMatchesFound, context, ref);
             }
 
             return Expanded(
@@ -79,44 +81,52 @@ class MatchesTab extends HookConsumerWidget {
                 child: ListView.separated(
                   separatorBuilder: (BuildContext context, int index) =>
                       const CustomDivider(),
-                  itemBuilder: (c, i) => GFListTile(
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    icon: Row(children: [
-                      if (matchesListing[i].hasUnread())
-                        GFBadge(
-                            color: Theme.of(context).primaryColor,
-                            child:
-                                Text(matchesListing[i].unreadCount.toString()),
-                            shape: GFBadgeShape.pills)
-                      else
-                        Container(),
-                      CustomTextWidget(
-                          type: textWidgetType.caption,
-                          text: matchesListing[i].timeSinceUpdate)
-                    ]),
-                    avatar: GFAvatar(
-                      shape: GFAvatarShape.circle,
-                      backgroundColor: offWhite,
-                      backgroundImage: matchesListing[i].profilePicture != null
-                          ? CachedNetworkImageProvider(
-                              matchesListing[i].profilePicture!.url)
-                          : Image.asset('assets/profile_placeholder.png').image,
-                    ),
-                    color: offWhite,
-                    title: Text(matchesListing[i].userName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle1
-                            ?.copyWith(fontWeight: FontWeight.w500)),
-                    onTap: () {
-                      ref.read(routerProvider.notifier).push(
-                          MessagesForMatchScreenRoute(
-                              match: matchesListing[i]));
-                    },
-                  ),
+                  itemBuilder: (c, i) {
+                    final bgColor = (matchesListing[i].hasUnread()
+                        ? Theme.of(context).primaryColorLight
+                        : offWhite);
+
+                    return GFListTile(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      icon: Row(children: [
+                        if (matchesListing[i].hasUnread())
+                          GFBadge(
+                              color: Theme.of(context).primaryColor,
+                              child: Text(
+                                  matchesListing[i].unreadCount.toString()),
+                              shape: GFBadgeShape.pills)
+                        else
+                          Container(),
+                        CustomTextWidget(
+                            type: textWidgetType.caption,
+                            text: matchesListing[i].timeSinceUpdate)
+                      ]),
+                      avatar: GFAvatar(
+                        shape: GFAvatarShape.circle,
+                        backgroundColor: offWhite,
+                        backgroundImage:
+                            matchesListing[i].profilePicture != null
+                                ? CachedNetworkImageProvider(
+                                    matchesListing[i].profilePicture!.url)
+                                : Image.asset('assets/profile_placeholder.png')
+                                    .image,
+                      ),
+                      color: bgColor,
+                      title: Text(matchesListing[i].userName,
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              ?.copyWith(fontWeight: FontWeight.w500)),
+                      onTap: () {
+                        ref.read(routerProvider.notifier).push(
+                            MessagesForMatchScreenRoute(
+                                match: matchesListing[i]));
+                      },
+                    );
+                  },
                   itemCount: matchesListing.length,
                 ),
-              ).padding(bottom: 10, horizontal: 15),
+              ).padding(bottom: 10, horizontal: 5),
             );
           },
           error: (_error, _) => _retryView(

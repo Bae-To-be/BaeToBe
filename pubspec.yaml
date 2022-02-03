@@ -42,6 +42,9 @@ dependencies:
   pull_to_refresh: ^2.0.0
   alice: ^0.2.5
   flutter_chat_ui: ^1.5.5
+  action_cable: ^1.2.0
+  uuid: ^3.0.5
+  flutter_slidable: ^1.2.0
 dev_dependencies:
   integration_test:
     sdk: flutter

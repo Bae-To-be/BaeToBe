@@ -36,6 +36,7 @@ class ErrorMessages {
       'could not load verification info';
   static const String pleaseUpdatePreferences = 'Please update preferences';
   static const String noLikesFound = 'No likes found! Try again?';
+  static const String noMatchesFound = 'No Matches found! Try again?';
   static const String userNotFound = 'User not found';
 }
 

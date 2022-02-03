@@ -36,7 +36,7 @@ final isReportedProvider =
       true;
 });
 
-final isMatchClosedProvider =
+final isProfileMatchClosedProvider =
     StateProvider.autoDispose.family<bool, int>((ref, id) {
   return ref.watch(profileDetailsProvider(id)
           .select((result) => result.value?.match?.isClosed)) ==
