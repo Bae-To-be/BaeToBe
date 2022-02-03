@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
+import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -20,6 +22,7 @@ class UserProfileScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final profileRequest = ref.watch(profileDetailsProvider(id));
     final isReported = ref.watch(isReportedProvider(id));
+    final router = ref.read(routerProvider.notifier);
 
     return profileRequest.maybeWhen(
         orElse: () => Center(
@@ -29,8 +32,10 @@ class UserProfileScreen extends HookConsumerWidget {
           if (profile == null) {
             return const Center(
                 child: CustomTextWidget(
-                    type: textWidgetType.heading5,
-                    text: ErrorMessages.userNotFound));
+              type: textWidgetType.heading5,
+              text: ErrorMessages.userNotFound,
+              withRow: false,
+            ));
           }
 
           return Column(
@@ -39,20 +44,39 @@ class UserProfileScreen extends HookConsumerWidget {
               Expanded(
                   child: SingleChildScrollView(
                       child: Text(profile.toString()).padding(horizontal: 15))),
+              profile.match == null
+                  ? Container()
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomTextButton(
+                            onPressed: () {
+                              final existing = router.stackData
+                                  .firstWhereOrNull((route) => route.name
+                                      .contains('MessagesForMatchScreenRoute'));
+                              if (existing != null) {
+                                router.popUntil((route) => route.settings.name!
+                                    .contains('MessagesForMatchScreenRoute'));
+                              } else {
+                                router.push(MessagesForMatchScreenRoute(
+                                    match: profile.match!));
+                              }
+                            },
+                            text: LinkTexts.conversation,
+                            type: textWidgetType.caption),
+                      ],
+                    ),
               isReported
                   ? Container()
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextButton(
+                        CustomTextButton(
                             onPressed: () => ref
                                 .read(routerProvider.notifier)
                                 .push(ReportUserScreenRoute(profile: profile)),
-                            child: Text(LinkTexts.reportUser,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .caption!
-                                    .copyWith(fontSize: 15))),
+                            text: LinkTexts.reportUser,
+                            type: textWidgetType.caption),
                       ],
                     )
             ],

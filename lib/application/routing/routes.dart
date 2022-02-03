@@ -6,6 +6,7 @@ import 'package:baetobe/screens/home/discover_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_received_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_sent_tab.dart';
 import 'package:baetobe/screens/home/likes_tab.dart';
+import 'package:baetobe/screens/home/matches/messages_for_match_screen.dart';
 import 'package:baetobe/screens/home/matches_tab.dart';
 import 'package:baetobe/screens/home/profile_tab.dart';
 import 'package:baetobe/screens/homepage_screen.dart';
@@ -84,6 +85,10 @@ import 'package:baetobe/screens/webview_screen.dart';
     AutoRoute(
         path: AppLinks.profileDetailsRoute,
         page: UserProfileScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.messagesForMatchRoute,
+        page: MessagesForMatchScreen,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.reportUser, page: ReportUserScreen, guards: [AuthGuard]),

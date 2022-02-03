@@ -1,4 +1,5 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
@@ -6,7 +7,6 @@ import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
-import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/matches_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -109,8 +109,9 @@ class MatchesTab extends HookConsumerWidget {
                             .subtitle1
                             ?.copyWith(fontWeight: FontWeight.w500)),
                     onTap: () {
-                      ref.read(routerProvider.notifier).pushNamed(
-                          AppLinks.profileDetails(matchesListing[i].userId));
+                      ref.read(routerProvider.notifier).push(
+                          MessagesForMatchScreenRoute(
+                              match: matchesListing[i]));
                     },
                   ),
                   itemCount: matchesListing.length,

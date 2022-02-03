@@ -138,6 +138,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
   }
 
   Future<String> getAccessToken() async {
+    if (state.value == null) {
+      return '';
+    }
+
     if (state.value!.shouldRefresh() == true) {
       await _refreshToken();
     }

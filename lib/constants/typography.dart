@@ -96,6 +96,7 @@ class LinkTexts {
   static const String removeRow = 'Remove Row';
   static const String refreshStatus = 'Refresh Status';
   static const String reportUser = 'Report User';
+  static const String conversation = 'Conversation';
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithFb = 'Continue with Facebook';
   static const String submit = 'Submit';

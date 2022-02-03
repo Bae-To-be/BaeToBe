@@ -5,9 +5,11 @@ import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/likes_provider.dart';
+import 'package:baetobe/domain/matches_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/like.dart';
+import 'package:baetobe/entities/match.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -42,17 +44,19 @@ class NotificationService {
         onSelectNotification: (String? payload) {
       switch (payload) {
         case NotificationEvents.newMessage:
-          // Get.until((route) => Get.currentRoute == AppLinks.homePage);
-          // Get.offNamed(HomeRoutes.matches, id: homeRouterKey);
+          ref.read(routerProvider.notifier).replaceAll([
+            HomepageScreenRoute(children: [MatchesTabRoute()])
+          ]);
           break;
         case NotificationEvents.newMatch:
-          // Get.until((route) => Get.currentRoute == AppLinks.homePage);
-          // Get.offNamed(HomeRoutes.matches, id: homeRouterKey);
+          ref.read(routerProvider.notifier).replaceAll([
+            HomepageScreenRoute(children: [MatchesTabRoute()])
+          ]);
           break;
         case NotificationEvents.newLike:
-          ref
-              .read(routerProvider.notifier)
-              .push(const HomepageScreenRoute(children: [LikesTabRoute()]));
+          ref.read(routerProvider.notifier).replaceAll([
+            const HomepageScreenRoute(children: [LikesTabRoute()])
+          ]);
           break;
       }
     });
@@ -78,11 +82,11 @@ class NotificationService {
         // }
         switch (message.data['event']) {
           case NotificationEvents.newMessage:
-            // final matchId = int.parse(message.data['match_id']);
-            // if (Get.currentRoute != AppLinks.messages(matchId: matchId)) {
-            //   showNotification(flutterLocalNotificationsPlugin, notification,
-            //       channel, message.data['event']);
-            // }
+            if (ref.read(routerProvider.notifier).current.name !=
+                'MessagesForMatchScreenRoute') {
+              _showNotification(flutterLocalNotificationsPlugin, notification,
+                  channel, message.data['event']);
+            }
             break;
           case NotificationEvents.leftSwiped:
             break;
@@ -143,13 +147,13 @@ class NotificationService {
               .replaceAll([const VerificationRejectedScreenRoute()]);
           break;
         case NotificationEvents.newMatch:
-          // if (Get.isRegistered<MatchesController>()) {
-          //   Get.find<MatchesController>().addOrUpdateMatch(
-          //       Match.fromJson(jsonDecode(message.data['match'])));
-          // } else if (appOpen) {
-          //   await Get.offNamed(AppLinks.homePage);
-          //   await Get.offNamed(HomeRoutes.matches, id: homeRouterKey);
-          // }
+          if (appOpen) {
+            await ref.read(routerProvider.notifier).replaceAll([
+              HomepageScreenRoute(children: [MatchesTabRoute()])
+            ]);
+          }
+          ref.read(matchesProvider.notifier).addOrUpdateMatch(
+              Match.fromJson(jsonDecode(message.data['match'])));
           break;
         case NotificationEvents.newLike:
           if (appOpen) {
@@ -169,14 +173,14 @@ class NotificationService {
               .removeLike(int.parse(message.data['like_id']));
           break;
         case NotificationEvents.newMessage:
-          // if (Get.isRegistered<MatchesController>()) {
-          //   final matchId = int.parse(message.data['match_id']);
-          //   final updatedAt = int.parse(message.data['updated_at']);
-          //   Get.find<MatchesController>().updateMatchInfo(matchId, updatedAt);
-          // } else if (appOpen) {
-          //   await Get.offNamed(AppLinks.homePage);
-          //   await Get.offNamed(HomeRoutes.matches, id: homeRouterKey);
-          // }
+          if (appOpen) {
+            await ref.read(routerProvider.notifier).replaceAll([
+              HomepageScreenRoute(children: [MatchesTabRoute()])
+            ]);
+          }
+          ref.read(matchesProvider.notifier).updateMatchInfo(
+              int.parse(message.data['match_id']),
+              int.parse(message.data['updated_at']));
           break;
       }
     }

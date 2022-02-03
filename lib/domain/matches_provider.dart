@@ -2,6 +2,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/entities/match.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -64,7 +65,7 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
                 .toList());
           } else {
             for (var matchData in response.data['data']) {
-              addOrUpdateLike(Match.fromJson(matchData));
+              addOrUpdateMatch(Match.fromJson(matchData));
             }
           }
           return Future.value(null);
@@ -75,9 +76,23 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
     return gotData;
   }
 
-  void addOrUpdateLike(Match newMatch) {
+  void updateMatchInfo(int matchId, int updatedAt) {
+    if (state.value == null) {
+      return;
+    }
+
+    final existing =
+        state.value!.firstWhereOrNull((match) => match.id == matchId);
+    if (existing != null) {
+      addOrUpdateMatch(existing.copyWith(
+          newUnreadCount: existing.unreadCount + 1, newUpdatedAt: updatedAt));
+    }
+  }
+
+  void addOrUpdateMatch(Match newMatch) {
     state = AsyncValue.data(List.from(state.value ?? [])
       ..removeWhere((match) => match.id == newMatch.id)
-      ..add(newMatch));
+      ..add(newMatch)
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt)));
   }
 }
