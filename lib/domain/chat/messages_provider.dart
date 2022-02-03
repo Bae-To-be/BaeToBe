@@ -146,6 +146,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
       }
       state = state.copyWith(newConnection: connectionState.connected);
       Timer(const Duration(milliseconds: 500), () {
+        if (!mounted) {
+          return;
+        }
         state = state.copyWith(newConnectionStateVisible: false);
       });
     }, onConnectionLost: () {
@@ -191,6 +194,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
         onSubscribed: () {
       debugPrint('subscribed');
     }, onDisconnected: () {
+      if (!mounted) {
+        return;
+      }
       state = state.copyWith(
           newConnection: connectionState.disconnected,
           newConnectionStateVisible: true);
