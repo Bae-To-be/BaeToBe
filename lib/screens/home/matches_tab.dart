@@ -115,7 +115,7 @@ class MatchesTab extends HookConsumerWidget {
                   ),
                   itemCount: matchesListing.length,
                 ),
-              ).padding(bottom: 10),
+              ).padding(bottom: 10, horizontal: 15),
             );
           },
           error: (_error, _) => _retryView(
