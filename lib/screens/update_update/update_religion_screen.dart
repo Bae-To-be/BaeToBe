@@ -33,8 +33,6 @@ class UpdateReligionScreen extends HookConsumerWidget {
         void Function() onSubmit) {
       List<Widget> result = [];
 
-      bool defaultSelected = false;
-
       for (var religion in religionListing.religions) {
         bool isSelected = selected.contains(religion.id);
 
@@ -42,20 +40,6 @@ class UpdateReligionScreen extends HookConsumerWidget {
             title: religion.name,
             selected: isSelected,
             onTap: () => onTap(religion.id)));
-
-        if (isSelected) {
-          defaultSelected = true;
-        }
-      }
-
-      if (selected.isNotEmpty && !defaultSelected) {
-        Religion selection = religionListing.religions
-            .firstWhere((religion) => selected.contains(religion.id));
-
-        result.add(SelectTile(
-            title: selection.name,
-            selected: true,
-            onTap: () => onTap(selection.id)));
       }
       return result;
     }
