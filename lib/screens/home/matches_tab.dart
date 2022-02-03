@@ -88,19 +88,15 @@ class MatchesTab extends HookConsumerWidget {
 
                     return GFListTile(
                       margin: const EdgeInsets.symmetric(horizontal: 5),
-                      icon: Row(children: [
-                        if (matchesListing[i].hasUnread())
-                          GFBadge(
+                      icon: matchesListing[i].hasUnread()
+                          ? GFBadge(
                               color: Theme.of(context).primaryColor,
                               child: Text(
                                   matchesListing[i].unreadCount.toString()),
                               shape: GFBadgeShape.pills)
-                        else
-                          Container(),
-                        CustomTextWidget(
-                            type: textWidgetType.caption,
-                            text: matchesListing[i].timeSinceUpdate)
-                      ]),
+                          : CustomTextWidget(
+                              type: textWidgetType.caption,
+                              text: matchesListing[i].timeSinceUpdate),
                       avatar: GFAvatar(
                         shape: GFAvatarShape.circle,
                         backgroundColor: offWhite,
