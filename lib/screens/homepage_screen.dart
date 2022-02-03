@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
@@ -29,74 +31,85 @@ class HomepageScreen extends StatelessWidget {
               height: 60,
               indicatorColor: Theme.of(context).primaryColorLight,
             ),
-            child: CustomNavigationBar(
-              animationDuration: const Duration(milliseconds: 400),
-              selectedIndex: tabsRouter.activeIndex,
-              onDestinationSelected: tabsRouter.setActiveIndex,
-              backgroundColor: Colors.white,
-              destinations: [
-                CustomNavigationDestination(
-                    icon: Stack(
-                      clipBehavior: Clip.none,
-                      children: const [
-                        Icon(BTBCustomIcons.b,
-                            color:
-                                Color(CustomColors.bottomNavBarInactiveColor)),
-                        Positioned(
-                          bottom: 0,
-                          right: -3,
-                          child: Icon(
-                            BTBCustomIcons.btbheart,
-                            color: Colors.red,
-                            size: 5,
+            child: GestureDetector(
+              onHorizontalDragEnd: (dragEndDetails) {
+                if ((dragEndDetails.primaryVelocity ?? 0) < 0) {
+                  tabsRouter.setActiveIndex(
+                      [tabsRouter.activeIndex + 1, 3].reduce(min));
+                } else if ((dragEndDetails.primaryVelocity ?? 0) > 0) {
+                  tabsRouter.setActiveIndex(
+                      [tabsRouter.activeIndex - 1, 0].reduce(max));
+                }
+              },
+              child: CustomNavigationBar(
+                animationDuration: const Duration(milliseconds: 400),
+                selectedIndex: tabsRouter.activeIndex,
+                onDestinationSelected: tabsRouter.setActiveIndex,
+                backgroundColor: Colors.white,
+                destinations: [
+                  CustomNavigationDestination(
+                      icon: Stack(
+                        clipBehavior: Clip.none,
+                        children: const [
+                          Icon(BTBCustomIcons.b,
+                              color: Color(
+                                  CustomColors.bottomNavBarInactiveColor)),
+                          Positioned(
+                            bottom: 0,
+                            right: -3,
+                            child: Icon(
+                              BTBCustomIcons.btbheart,
+                              color: Colors.red,
+                              size: 5,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    selectedIcon: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          BTBCustomIcons.b,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        const Positioned(
-                          bottom: 0,
-                          right: -3,
-                          child: Icon(
-                            BTBCustomIcons.btbheart,
-                            color: Colors.red,
-                            size: 5,
+                        ],
+                      ),
+                      selectedIcon: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          Icon(
+                            BTBCustomIcons.b,
+                            color: Theme.of(context).primaryColor,
                           ),
-                        ),
-                      ],
-                    ),
-                    label: 'Discover'),
-                CustomNavigationDestination(
-                    icon: const Icon(BTBCustomIcons.likes,
-                        color: Color(CustomColors.bottomNavBarInactiveColor)),
-                    selectedIcon: Icon(
-                      BTBCustomIcons.likes,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    label: 'Likes'),
-                CustomNavigationDestination(
-                    icon: const Icon(BTBCustomIcons.chat,
-                        color: Color(CustomColors.bottomNavBarInactiveColor)),
-                    selectedIcon: Icon(
-                      BTBCustomIcons.chat,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    label: 'Matches'),
-                CustomNavigationDestination(
-                    icon: const Icon(BTBCustomIcons.profile,
-                        color: Color(CustomColors.bottomNavBarInactiveColor)),
-                    selectedIcon: Icon(
-                      BTBCustomIcons.profile,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    label: 'Profile'),
-              ],
+                          const Positioned(
+                            bottom: 0,
+                            right: -3,
+                            child: Icon(
+                              BTBCustomIcons.btbheart,
+                              color: Colors.red,
+                              size: 5,
+                            ),
+                          ),
+                        ],
+                      ),
+                      label: 'Discover'),
+                  CustomNavigationDestination(
+                      icon: const Icon(BTBCustomIcons.likes,
+                          color: Color(CustomColors.bottomNavBarInactiveColor)),
+                      selectedIcon: Icon(
+                        BTBCustomIcons.likes,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      label: 'Likes'),
+                  CustomNavigationDestination(
+                      icon: const Icon(BTBCustomIcons.chat,
+                          color: Color(CustomColors.bottomNavBarInactiveColor)),
+                      selectedIcon: Icon(
+                        BTBCustomIcons.chat,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      label: 'Matches'),
+                  CustomNavigationDestination(
+                      icon: const Icon(BTBCustomIcons.profile,
+                          color: Color(CustomColors.bottomNavBarInactiveColor)),
+                      selectedIcon: Icon(
+                        BTBCustomIcons.profile,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      label: 'Profile'),
+                ],
+              ),
             ),
           ),
         );
