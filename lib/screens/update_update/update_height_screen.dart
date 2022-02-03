@@ -7,6 +7,7 @@ import 'package:baetobe/domain/form_states/height_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 // import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -48,21 +49,18 @@ class _HeightInput extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedHeight = ref.watch(selectedHeightProvider);
-    // final height = ref.read(heightStateProvider);
+    final height = ref.read(heightStateProvider);
 
-    //TODO: FIX WHEEL NOT SCROLLING WHEN USING THIS CODE
-    // useEffect(() {
-    //   Future.microtask(() {
-    //     WidgetsBinding.instance?.addPostFrameCallback((_) {
-    //       if (height != null) {
-    //         heightController
-    //             .jumpToItem((height / 2.54).round() - (heightLowerBound * 12));
-    //       } else {
-    //         heightController.jumpToItem(12);
-    //       }
-    //     });
-    //   });
-    // });
+    useEffect(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        if (height != null) {
+          heightController
+              .jumpToItem((height / 2.54).round() - (heightLowerBound * 12));
+        } else {
+          heightController.jumpToItem(12);
+        }
+      });
+    }, []);
 
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
