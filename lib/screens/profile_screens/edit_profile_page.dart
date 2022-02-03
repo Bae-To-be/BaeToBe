@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
 import 'package:baetobe/components/images/image_grid.dart';
@@ -51,17 +52,7 @@ class EditProfilePage extends HookConsumerWidget {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            GFListTile(
-                padding: const EdgeInsets.all(0),
-                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                title: Text('Edit Profile',
-                    style: Theme.of(context).textTheme.headline5),
-                icon: IconButton(
-                  icon: Icon(FontAwesomeIcons.solidTimesCircle,
-                      color: Theme.of(context).primaryColor, size: 20),
-                  onPressed: () => router.pop(),
-                )),
-            const CustomDivider(),
+            const CustomHeaderTile(text: 'Edit Profile'),
             const SizedBox(height: 24),
             const ImageGrid(),
             Row(
