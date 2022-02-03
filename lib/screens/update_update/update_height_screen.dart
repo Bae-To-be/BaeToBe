@@ -1,12 +1,13 @@
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/domain/form_states/height_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+// import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -35,12 +36,10 @@ class UpdateHeightScreen extends HookConsumerWidget {
 }
 
 class _HeightInput extends HookConsumerWidget {
-  // final heightLowerBound =
-  //     FirebaseRemoteConfig.instance.getInt(RemoteConfigs.heightLowerBound);
-  // final heightUpperBound =
-  //     FirebaseRemoteConfig.instance.getInt(RemoteConfigs.heightUpperBound);
-  final heightLowerBound = 4;
-  final heightUpperBound = 7;
+  final heightLowerBound =
+      FirebaseRemoteConfig.instance.getInt(RemoteConfigs.heightLowerBound);
+  final heightUpperBound =
+      FirebaseRemoteConfig.instance.getInt(RemoteConfigs.heightUpperBound);
   final FixedExtentScrollController heightController =
       FixedExtentScrollController();
 
@@ -49,7 +48,7 @@ class _HeightInput extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedHeight = ref.watch(selectedHeightProvider);
-    final height = ref.read(heightStateProvider);
+    // final height = ref.read(heightStateProvider);
 
     //TODO: FIX WHEEL NOT SCROLLING WHEN USING THIS CODE
     // useEffect(() {
