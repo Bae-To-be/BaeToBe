@@ -15,7 +15,12 @@ class AuthGuard extends AutoRouteGuard {
       return resolver.next(true);
     }
     final auth = ref.read(authProvider).value;
-    if (auth == null || auth.accessToken == '') {
+    if (auth == null) {
+      // We are in the middle of refresh token
+      return resolver.next(true);
+    }
+
+    if (auth.accessToken == '') {
       router.replaceAll([const LoginScreenRoute()]);
       return resolver.next(false);
     }
