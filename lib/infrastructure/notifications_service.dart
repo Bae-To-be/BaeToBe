@@ -90,6 +90,8 @@ class NotificationService {
             break;
           case NotificationEvents.leftSwiped:
             break;
+          case NotificationEvents.matchClosed:
+            break;
           default:
             _showNotification(flutterLocalNotificationsPlugin, notification,
                 channel, message.data['event']);
@@ -171,13 +173,18 @@ class NotificationService {
               .read(likesProvider(likeDirection.sent).notifier)
               .removeLike(int.parse(message.data['like_id']));
           break;
+        case NotificationEvents.matchClosed:
+          ref.read(matchesProvider.notifier).markClosed(
+              int.parse(message.data['match_id']),
+              int.parse(message.data['updated_at']));
+          break;
         case NotificationEvents.newMessage:
           if (appOpen) {
             await ref.read(routerProvider.notifier).replaceAll([
               HomepageScreenRoute(children: [MatchesTabRoute()])
             ]);
           }
-          ref.read(matchesProvider.notifier).updateMatchInfo(
+          ref.read(matchesProvider.notifier).incrementUnreadCount(
               int.parse(message.data['match_id']),
               int.parse(message.data['updated_at']));
           break;

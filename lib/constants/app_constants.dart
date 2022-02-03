@@ -71,6 +71,7 @@ class NotificationEvents {
   static const String newMatch = 'new_match';
   static const String leftSwiped = 'left_swiped';
   static const String newLike = 'new_like';
+  static const String matchClosed = 'match_closed';
 }
 
 class UserMatchStatuses {

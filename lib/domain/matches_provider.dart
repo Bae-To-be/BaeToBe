@@ -76,7 +76,7 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
     return gotData;
   }
 
-  void updateMatchInfo(int matchId, int updatedAt) {
+  void incrementUnreadCount(int matchId, int updatedAt) {
     if (state.value == null) {
       return;
     }
@@ -86,6 +86,19 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
     if (existing != null) {
       addOrUpdateMatch(existing.copyWith(
           newUnreadCount: existing.unreadCount + 1, newUpdatedAt: updatedAt));
+    }
+  }
+
+  void markClosed(int matchId, int updatedAt) {
+    if (state.value == null) {
+      return;
+    }
+
+    final existing =
+        state.value!.firstWhereOrNull((match) => match.id == matchId);
+    if (existing != null) {
+      addOrUpdateMatch(
+          existing.copyWith(newIsClosed: true, newUpdatedAt: updatedAt));
     }
   }
 
