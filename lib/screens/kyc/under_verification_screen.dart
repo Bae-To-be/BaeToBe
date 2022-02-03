@@ -1,6 +1,8 @@
+import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,11 @@ class UnderVerificationScreen extends HookConsumerWidget {
               text: LinkTexts.refreshStatus,
               onPressed: ref.read(verificationInfoProvider.notifier).loadInfo)
           .padding(bottom: 10),
+      CustomTextButton(
+          text: LinkTexts.help,
+          onPressed: () => ref
+              .read(routerProvider.notifier)
+              .pushNamed(AppLinks.helpPage)).padding(bottom: 10)
     ]).padding(horizontal: 16);
   }
 }

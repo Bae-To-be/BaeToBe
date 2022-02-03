@@ -93,6 +93,7 @@ class LinkTexts {
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithFb = 'Continue with Facebook';
   static const String submit = 'Submit';
+  static const String help = 'Need Help?';
 }
 
 class ApprovalFieldLabels {

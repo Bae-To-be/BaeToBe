@@ -1,4 +1,5 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/kyc/field_approval_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -31,9 +32,9 @@ class VerificationRejectedScreen extends HookConsumerWidget {
           .replaceNamed(AppLinks.underVerification);
     }
 
-    if (verificationInfo.status == ApprovalStatuses.approved) {
-      ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
-    }
+    // if (verificationInfo.status == ApprovalStatuses.approved) {
+    //   ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
+    // }
 
     return Column(children: [
       const SizedBox(height: 32),
@@ -97,6 +98,11 @@ class VerificationRejectedScreen extends HookConsumerWidget {
           ],
         ),
       ),
+      CustomTextButton(
+          text: LinkTexts.help,
+          onPressed: () => ref
+              .read(routerProvider.notifier)
+              .pushNamed(AppLinks.helpPage)).padding(bottom: 10)
     ]);
   }
 }
