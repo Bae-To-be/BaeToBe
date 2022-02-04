@@ -7,6 +7,7 @@ import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/form_states/bio_state_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -293,27 +294,25 @@ class EditProfilePage extends HookConsumerWidget {
   }
 }
 
-//
 class _BioTextField extends HookConsumerWidget {
   const _BioTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _user = ref.read(userProvider);
-    final bioFieldController = TextEditingController();
+    final bioState = ref.watch(bioTextProvider);
 
     return Focus(
       onFocusChange: (hasFocus) async {
         if (!hasFocus) {
           await ref.read(userProvider.notifier).updateAttributes({
-            'bio': bioFieldController.text,
+            'bio': bioState,
           });
         }
       },
       child: BigFomField(
-          value: _user.bio ?? '',
+          value: bioState,
           onChanged: (text) {
-            bioFieldController.text = text;
+            ref.read(bioTextProvider.notifier).state = text;
           }),
     );
   }
