@@ -12,6 +12,8 @@ class Headings {
   static const String gender = 'Gender';
   static const String interestedIn = 'Interested In';
   static const String work = 'Work';
+  static const String enterCity = 'Enter City';
+  static const String enterCountry = 'Enter Country';
   static const String enterIndustry = "What's your work industry?";
   static const String educationBackground = 'Where did you study?';
   static const String enterWorkTitle = "What's your designation?";
@@ -24,7 +26,7 @@ class Headings {
   static const String selfieVerification = 'Selfie Verification';
   static const String identityVerification = 'Identity Verification';
   static const String enterHometown = 'Where do you live?';
-  static const String enterReligion = 'What\'s your religion?';
+  static const String religion = 'Religion';
   static const String childrenPreference = 'Children';
   static const String foodPreference = 'Food';
   static const String smokingPreference = 'Smoking';

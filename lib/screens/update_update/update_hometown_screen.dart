@@ -1,4 +1,5 @@
 import 'package:baetobe/components/buttons/floating_cta.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/auto_complete_field.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/constants/app_links.dart';
@@ -34,27 +35,20 @@ class UpdateHometownScreen extends HookConsumerWidget {
       }
     });
     return FormLayout(
+      header: const CustomHeaderTile(text: EditProfileFieldLabels.hometown),
       children: [
         Expanded(
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Hometown',
-                      style: Theme.of(context).textTheme.headline5,
-                    )
-                  ],
-                ).padding(top: 24, bottom: 32),
                 Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Enter City',
+                          Headings.enterCity,
                           style: Theme.of(context).textTheme.headline6,
                         )
                       ],
@@ -75,7 +69,7 @@ class UpdateHometownScreen extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Enter Country',
+                          Headings.enterCountry,
                           style: Theme.of(context).textTheme.headline6,
                         )
                       ],
@@ -111,7 +105,7 @@ class UpdateHometownScreen extends HookConsumerWidget {
               ],
             ),
           ),
-        ),
+        ).padding(top: 36),
       ],
       floatingSubmit: FloatingCta(
         onPressed: () {

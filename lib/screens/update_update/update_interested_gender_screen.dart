@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/gender/view_more_genders.dart';
@@ -76,44 +77,59 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
+        header: redirectBack == true
+            ? const CustomHeaderTile(text: Headings.interestedIn)
+            : null,
         children: <Widget>[
-          const SizedBox(height: 32),
-          const Heading5(text: Headings.enterInterestedGender)
-              .padding(top: 32, bottom: 36, left: 10),
-          genderListing.maybeWhen(
-              data: (GenderListing listing) => ListView(
-                    shrinkWrap: true,
-                    children: _tiles(context, listing, state, (int value) {
-                      final currentState = ref
-                          .read(interestedGenderStateProvider.notifier)
-                          .state;
-                      final allGenders = genderListing.value?.defaultGenders
-                          .firstWhereOrNull((gender) => gender.name == 'All');
-                      if (currentState.contains(value)) {
-                        ref.read(interestedGenderStateProvider.notifier).state =
-                            currentState.where((id) => id != value).toList();
-                        return;
-                      }
-                      if (allGenders != null) {
-                        if (currentState.contains(allGenders.id)) {
-                          return;
-                        }
-                        if (value == allGenders.id) {
+          redirectBack == true
+              ? Container()
+              : Column(
+                  children: [
+                    const SizedBox(height: 32),
+                    const Heading5(text: Headings.enterInterestedGender)
+                        .padding(top: 32, bottom: 36, left: 10),
+                  ],
+                ),
+          genderListing
+              .maybeWhen(
+                  data: (GenderListing listing) => ListView(
+                        shrinkWrap: true,
+                        children: _tiles(context, listing, state, (int value) {
+                          final currentState = ref
+                              .read(interestedGenderStateProvider.notifier)
+                              .state;
+                          final allGenders = genderListing.value?.defaultGenders
+                              .firstWhereOrNull(
+                                  (gender) => gender.name == 'All');
+                          if (currentState.contains(value)) {
+                            ref
+                                    .read(interestedGenderStateProvider.notifier)
+                                    .state =
+                                currentState
+                                    .where((id) => id != value)
+                                    .toList();
+                            return;
+                          }
+                          if (allGenders != null) {
+                            if (currentState.contains(allGenders.id)) {
+                              return;
+                            }
+                            if (value == allGenders.id) {
+                              ref
+                                  .read(interestedGenderStateProvider.notifier)
+                                  .state = [value];
+                              return;
+                            }
+                          }
                           ref
                               .read(interestedGenderStateProvider.notifier)
-                              .state = [value];
-                          return;
-                        }
-                      }
-                      ref.read(interestedGenderStateProvider.notifier).state = [
-                        ...currentState,
-                        value
-                      ];
-                    }, onSubmit),
-                  ),
-              orElse: () => Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor))),
+                              .state = [...currentState, value];
+                        }, onSubmit),
+                      ),
+                  orElse: () => Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor)))
+              .padding(top: 36),
         ],
         floatingSubmit: FloatingCta(
           enabled: state.isNotEmpty,

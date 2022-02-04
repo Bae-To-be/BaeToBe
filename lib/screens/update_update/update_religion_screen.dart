@@ -1,4 +1,5 @@
 import 'package:baetobe/components/buttons/floating_cta.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
@@ -41,16 +42,14 @@ class UpdateReligionScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
+        header: const CustomHeaderTile(text: Headings.religion),
         children: <Widget>[
-          const SizedBox(height: 32),
-          const Heading5(text: Headings.enterReligion, withRow: false)
-              .padding(top: 32, bottom: 36, horizontal: 10),
           religionListing.maybeWhen(
               data: (listing) => Column(
                     children: _tiles(context, listing, state, (int value) {
                       ref.read(religionStateProvider.notifier).state = value;
                     }, onSubmit),
-                  ),
+                  ).padding(top: 36),
               orElse: () => Center(
                   child: CircularProgressIndicator(
                       color: Theme.of(context).primaryColor))),

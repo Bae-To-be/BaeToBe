@@ -27,17 +27,19 @@ class UpdateHeightScreen extends HookConsumerWidget {
       }, routeTo: AppLinks.back);
     }
 
-    return FormLayout(children: [
-      const CustomHeaderTile(text: Headings.height),
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _HeightInput(),
-          ],
-        ),
-      ),
-    ], floatingSubmit: FloatingCta(onPressed: onSubmit));
+    return FormLayout(
+        header: const CustomHeaderTile(text: Headings.height),
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _HeightInput(),
+              ],
+            ),
+          ),
+        ],
+        floatingSubmit: FloatingCta(onPressed: onSubmit));
   }
 }
 
