@@ -8,7 +8,6 @@ import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-// import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -17,7 +16,7 @@ class UpdateHeightScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedHeight = ref.watch(selectedHeightProvider);
+    final selectedHeight = ref.watch(selectedIndexProvider);
     const heightLowerBound = 4;
 
     void onSubmit() {
@@ -48,17 +47,14 @@ class _HeightInput extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedHeight = ref.watch(selectedHeightProvider);
-    final height = ref.read(heightStateProvider);
+    final selectedIndex = ref.watch(selectedIndexProvider);
+    final user = ref.watch(userProvider);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        if (height != null) {
-          heightController
-              .jumpToItem((height / 2.54).round() - (heightLowerBound * 12));
-        } else {
-          heightController.jumpToItem(12);
-        }
+        heightController.jumpToItem(user.height != null
+            ? (user.height! / 2.54).round() - (heightLowerBound * 12)
+            : 12);
       });
       return null;
     }, []);
@@ -83,7 +79,7 @@ class _HeightInput extends HookConsumerWidget {
               useMagnifier: true,
               controller: heightController,
               onSelectedItemChanged: (index) {
-                ref.read(selectedHeightProvider.state).update((state) => index);
+                ref.read(selectedIndexProvider.state).update((state) => index);
               },
               childDelegate: ListWheelChildBuilderDelegate(
                 childCount:
@@ -99,10 +95,10 @@ class _HeightInput extends HookConsumerWidget {
                       'cms)',
                       style: TextStyle(
                           fontSize: 18,
-                          fontWeight: (selectedHeight == index)
+                          fontWeight: (selectedIndex == index)
                               ? FontWeight.w600
                               : FontWeight.w300,
-                          color: (selectedHeight == index)
+                          color: (selectedIndex == index)
                               ? Theme.of(context).primaryColor
                               : Colors.grey),
                     ).center(),
