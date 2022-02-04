@@ -49,13 +49,10 @@ class _HeightInput extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedIndex = ref.watch(selectedIndexProvider);
-    final user = ref.watch(userProvider);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
-        heightController.jumpToItem(user.height != null
-            ? (user.height! / 2.54).round() - (heightLowerBound * 12)
-            : 12);
+        heightController.jumpToItem(selectedIndex);
       });
       return null;
     }, []);
