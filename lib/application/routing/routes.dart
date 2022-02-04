@@ -28,7 +28,7 @@ import 'package:baetobe/screens/update_update/update_work_information_screen.dar
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
 import 'package:baetobe/screens/user_profile/report_user_screen.dart';
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
-import 'package:baetobe/screens/webview_screen.dart';
+import 'package:baetobe/screens/help_article_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -113,7 +113,7 @@ import 'package:baetobe/screens/webview_screen.dart';
         path: AppLinks.editProfile, page: EditProfile, guards: [AuthGuard]),
     AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
       AutoRoute(path: '', page: HelpPage, initial: true),
-      AutoRoute(path: AppLinks.webview, page: Webview),
+      AutoRoute(path: ':id', page: HelpArticleScreen),
     ], guards: [
       AuthGuard
     ]),

@@ -15,6 +15,7 @@ import 'package:baetobe/application/routing/auth_guard.dart' as _i31;
 import 'package:baetobe/entities/match.dart' as _i32;
 import 'package:baetobe/entities/user_profile.dart' as _i33;
 import 'package:baetobe/screens/boot/splash_screen.dart' as _i1;
+import 'package:baetobe/screens/help_article_screen.dart' as _i29;
 import 'package:baetobe/screens/home/discover_tab.dart' as _i22;
 import 'package:baetobe/screens/home/likes/likes_received_tab.dart' as _i26;
 import 'package:baetobe/screens/home/likes/likes_sent_tab.dart' as _i27;
@@ -49,7 +50,6 @@ import 'package:baetobe/screens/update_update/update_work_information_screen.dar
 import 'package:baetobe/screens/update_update/upload_images_screen.dart' as _i9;
 import 'package:baetobe/screens/user_profile/report_user_screen.dart' as _i16;
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart' as _i14;
-import 'package:baetobe/screens/webview_screen.dart' as _i29;
 import 'package:flutter/material.dart' as _i30;
 
 class AppRouter extends _i19.RootStackRouter {
@@ -235,13 +235,14 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData, child: _i28.HelpPage(key: args.key));
     },
-    WebviewRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<WebviewRouteArgs>(
-          orElse: () => WebviewRouteArgs(url: queryParams.optString('url')));
+    HelpArticleScreenRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<HelpArticleScreenRouteArgs>(
+          orElse: () =>
+              HelpArticleScreenRouteArgs(id: pathParams.getString('id')));
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData,
-          child: _i29.Webview(key: args.key, url: args.url));
+          child: _i29.HelpArticleScreen(key: args.key, id: args.id));
     }
   };
 
@@ -315,8 +316,8 @@ class AppRouter extends _i19.RootStackRouter {
         ], children: [
           _i19.RouteConfig(HelpPageRoute.name,
               path: '', parent: EmptyRouterPageRoute.name),
-          _i19.RouteConfig(WebviewRoute.name,
-              path: 'webview', parent: EmptyRouterPageRoute.name)
+          _i19.RouteConfig(HelpArticleScreenRoute.name,
+              path: ':id', parent: EmptyRouterPageRoute.name)
         ]),
         _i19.RouteConfig(UpdatePreferencesRoute.name,
             path: 'update_preferences', guards: [authGuard]),
@@ -791,26 +792,27 @@ class HelpPageRouteArgs {
 }
 
 /// generated route for
-/// [_i29.Webview]
-class WebviewRoute extends _i19.PageRouteInfo<WebviewRouteArgs> {
-  WebviewRoute({_i30.Key? key, String? url})
-      : super(WebviewRoute.name,
-            path: 'webview',
-            args: WebviewRouteArgs(key: key, url: url),
-            rawQueryParams: {'url': url});
+/// [_i29.HelpArticleScreen]
+class HelpArticleScreenRoute
+    extends _i19.PageRouteInfo<HelpArticleScreenRouteArgs> {
+  HelpArticleScreenRoute({_i30.Key? key, required String id})
+      : super(HelpArticleScreenRoute.name,
+            path: ':id',
+            args: HelpArticleScreenRouteArgs(key: key, id: id),
+            rawPathParams: {'id': id});
 
-  static const String name = 'WebviewRoute';
+  static const String name = 'HelpArticleScreenRoute';
 }
 
-class WebviewRouteArgs {
-  const WebviewRouteArgs({this.key, this.url});
+class HelpArticleScreenRouteArgs {
+  const HelpArticleScreenRouteArgs({this.key, required this.id});
 
   final _i30.Key? key;
 
-  final String? url;
+  final String id;
 
   @override
   String toString() {
-    return 'WebviewRouteArgs{key: $key, url: $url}';
+    return 'HelpArticleScreenRouteArgs{key: $key, id: $id}';
   }
 }

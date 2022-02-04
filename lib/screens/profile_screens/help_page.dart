@@ -33,7 +33,7 @@ class HelpPage extends HookConsumerWidget {
                   return TextButton(
                     onPressed: () {
                       AutoRouter.of(context).pushNamed(
-                          '${AppLinks.webview}?url=$apiHostURL/articles/${listing[index].id}');
+                          '${AppLinks.helpPage}/${listing[index].id}');
                     },
                     child: ListTile(
                         trailing: const Icon(FontAwesomeIcons.chevronRight),
