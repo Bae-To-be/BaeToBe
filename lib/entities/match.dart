@@ -39,6 +39,23 @@ class Match {
             : null);
   }
 
+  Match copyWith(
+      {int? newUpdatedAt,
+      int? newUnreadCount,
+      bool? newIsClosed,
+      int? newClosedBy}) {
+    return Match(
+        userName: userName,
+        id: id,
+        closedBy: newClosedBy ?? closedBy,
+        isClosed: newIsClosed ?? isClosed,
+        userId: userId,
+        timeSinceUpdate: timeSinceUpdate,
+        unreadCount: newUnreadCount ?? unreadCount,
+        updatedAt: newUpdatedAt ?? updatedAt,
+        profilePicture: profilePicture);
+  }
+
   bool hasUnread() {
     return unreadCount > 0;
   }

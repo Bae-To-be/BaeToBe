@@ -40,33 +40,31 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
       return;
     }
     if (appState == AppLifecycleState.resumed) {
-      fetchLikes(1, true);
+      fetchLikes(1, false);
     }
   }
 
-  Future<bool> fetchLikes(int? pageOverride, bool initialLoading) async {
+  Future<bool> fetchLikes(int? pageOverride, bool updateLoading) async {
     final client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
 
     bool gotData = false;
-    int toSend;
     if (pageOverride == null) {
       pageNumber += 1;
-      toSend = pageNumber;
     } else {
-      toSend = pageOverride;
+      pageNumber = pageOverride;
     }
-    if (initialLoading) {
+    if (updateLoading) {
       state = const AsyncValue.loading();
     }
     await error.safelyExecute(
-        command: client
-            .get(likeRouteMap[direction]!, queryParameters: {'page': toSend}),
+        command: client.get(likeRouteMap[direction]!,
+            queryParameters: {'page': pageNumber}),
         onSuccess: (response) {
           if (response.data['data'].isNotEmpty) {
             gotData = true;
           }
-          if (initialLoading) {
+          if (pageNumber == 1) {
             state = AsyncValue.data(response.data['data']
                 .map<Like>((likeData) => Like.fromJson(likeData))
                 .toList());

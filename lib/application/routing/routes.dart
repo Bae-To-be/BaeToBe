@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/auth_guard.dart';
-import 'package:baetobe/components/webview.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
 import 'package:baetobe/screens/home/discover_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_received_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_sent_tab.dart';
 import 'package:baetobe/screens/home/likes_tab.dart';
+import 'package:baetobe/screens/home/matches/messages_for_match_screen.dart';
 import 'package:baetobe/screens/home/matches_tab.dart';
 import 'package:baetobe/screens/home/profile_tab.dart';
 import 'package:baetobe/screens/homepage_screen.dart';
@@ -30,6 +30,7 @@ import 'package:baetobe/screens/update_update/update_work_information_screen.dar
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
 import 'package:baetobe/screens/user_profile/report_user_screen.dart';
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
+import 'package:baetobe/screens/help_article_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -88,6 +89,10 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         page: UserProfileScreen,
         guards: [AuthGuard]),
     AutoRoute(
+        path: AppLinks.messagesForMatchRoute,
+        page: MessagesForMatchScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
         path: AppLinks.reportUser, page: ReportUserScreen, guards: [AuthGuard]),
     AutoRoute(
       path: AppLinks.homePage,
@@ -110,7 +115,7 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         path: AppLinks.editProfile, page: EditProfilePage, guards: [AuthGuard]),
     AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
       AutoRoute(path: '', page: HelpPage, initial: true),
-      AutoRoute(path: AppLinks.webview, page: Webview),
+      AutoRoute(path: ':id', page: HelpArticleScreen),
     ], guards: [
       AuthGuard
     ]),

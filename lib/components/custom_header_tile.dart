@@ -9,7 +9,9 @@ import 'package:styled_widget/styled_widget.dart';
 class CustomHeaderTile extends HookConsumerWidget {
   final String text;
   final Color? color;
-  const CustomHeaderTile({Key? key, required this.text, this.color})
+  final bool withCross;
+  const CustomHeaderTile(
+      {Key? key, required this.text, this.color, this.withCross = true})
       : super(key: key);
 
   @override
@@ -18,6 +20,7 @@ class CustomHeaderTile extends HookConsumerWidget {
 
     return Column(
       children: [
+        if (withCross) Container() else const SizedBox(height: 2),
         GFListTile(
             padding: const EdgeInsets.all(0),
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
@@ -26,14 +29,18 @@ class CustomHeaderTile extends HookConsumerWidget {
                     .textTheme
                     .headline5!
                     .copyWith(color: color)),
-            icon: IconButton(
-              icon: Icon(FontAwesomeIcons.solidTimesCircle,
-                  color: color ?? Theme.of(context).primaryColor, size: 20),
-              onPressed: () {
-                router.pop();
-              },
-            )),
-        CustomDivider(color: color).padding(bottom: 15),
+            icon: withCross
+                ? IconButton(
+                    icon: Icon(FontAwesomeIcons.solidTimesCircle,
+                        color: color ?? Theme.of(context).primaryColor,
+                        size: 20),
+                    onPressed: () {
+                      router.pop();
+                    },
+                  )
+                : null),
+        if (withCross) Container() else const SizedBox(height: 2),
+        CustomDivider(color: color).padding(bottom: 10),
       ],
     );
   }

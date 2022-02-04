@@ -19,7 +19,8 @@ class SelfieContainer extends StatelessWidget {
     if (state.controller == null ||
         state.controller?.value.isInitialized != true) {
       return Column(children: [
-        const Heading5(text: InfoLabels.loadingCamera),
+        const CustomTextWidget(
+            type: textWidgetType.heading5, text: InfoLabels.loadingCamera),
         CircularProgressIndicator(
           color: Theme.of(context).primaryColor,
         ).padding(top: 20)

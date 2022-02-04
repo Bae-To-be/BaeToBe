@@ -32,10 +32,7 @@ class AppLinks {
     return '/profile_details/${id.toString()}';
   }
 
-  static String messages({int? matchId}) {
-    return '/matches/${matchId == null ? ":id" : matchId.toString()}/messages';
-  }
-
+  static const String messagesForMatchRoute = '/matches/messages';
   static String back = 'back';
 }
 

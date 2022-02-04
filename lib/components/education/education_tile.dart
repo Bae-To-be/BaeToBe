@@ -72,7 +72,8 @@ class EducationTile extends HookConsumerWidget {
     if (isEditing) {
       return Column(
         children: [
-          const Heading6(text: Headings.schoolName)
+          const CustomTextWidget(
+                  text: Headings.schoolName, type: textWidgetType.heading6)
               .padding(left: 15, bottom: 10),
           AutoCompleteField(
             textController: universityController,
@@ -84,7 +85,8 @@ class EducationTile extends HookConsumerWidget {
             },
             hintText: Placeholders.university,
           ).padding(horizontal: 15, bottom: 10),
-          const Heading6(text: Headings.courseName)
+          const CustomTextWidget(
+                  text: Headings.courseName, type: textWidgetType.heading6)
               .padding(left: 15, vertical: 10),
           AutoCompleteField(
             textController: courseController,
@@ -96,7 +98,15 @@ class EducationTile extends HookConsumerWidget {
             },
             hintText: Placeholders.university,
           ).padding(horizontal: 15, bottom: 10),
-          const Heading6(text: Headings.year).padding(left: 15, vertical: 10),
+          const CustomTextWidget(
+                  text: Headings.year, type: textWidgetType.heading6)
+              .padding(left: 15, top: 10),
+          const CustomTextWidget(
+            type: textWidgetType.caption,
+            text: InfoLabels.classYearHelper,
+            withRow: true,
+            withFlexible: true,
+          ).padding(bottom: 5, left: 15),
           GFDropdown(
             padding: const EdgeInsets.only(right: 15, left: 15, bottom: 5),
             dropdownButtonColor: const Color(0xFFF2F2F2),
@@ -107,10 +117,6 @@ class EducationTile extends HookConsumerWidget {
             onChanged: (newValue) {
               onEdit(year: newValue as String);
             },
-            hint: Text(
-              Headings.year,
-              style: Theme.of(context).textTheme.caption,
-            ),
             items: yearOptions()
                 .map((value) => DropdownMenuItem(
                       value: value,

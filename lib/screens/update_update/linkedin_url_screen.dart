@@ -40,7 +40,8 @@ class LinkedinUrlScreen extends HookConsumerWidget {
     return FormLayout(
       children: [
         const SizedBox(height: 32),
-        const Heading5(text: Headings.enterLinkedIn)
+        const CustomTextWidget(
+                type: textWidgetType.heading5, text: Headings.enterLinkedIn)
             .padding(top: 32, bottom: 20, left: 15),
         TextField(
                 controller: urlController,
