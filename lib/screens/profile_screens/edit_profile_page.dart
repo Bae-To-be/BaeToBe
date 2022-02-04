@@ -6,6 +6,7 @@ import 'package:baetobe/components/forms/big_text_field.dart';
 import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -50,13 +51,13 @@ class EditProfilePage extends HookConsumerWidget {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            const CustomHeaderTile(text: 'Edit Profile'),
+            const CustomHeaderTile(text: Headings.editProfile),
             const SizedBox(height: 24),
             const ImageGrid(),
             Row(
               children: [
                 const Text(
-                  'Your first picture is your profile picture.',
+                  InfoLabels.firstPhotoIsProfilePicture,
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -67,9 +68,9 @@ class EditProfilePage extends HookConsumerWidget {
             Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const EditProfileSectionTile(title: 'About Me'),
+                const EditProfileSectionTile(title: Headings.aboutMe),
                 EditProfileContentTile(
-                  title: 'Name',
+                  title: EditProfileFields.name,
                   content: Text(
                     _user.name,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -77,12 +78,12 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 const EditProfileContentTile(
-                  title: 'Bio',
+                  title: EditProfileFields.bio,
                   content: _BioTextField(),
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Age',
+                  title: EditProfileFields.age,
                   content: Text(
                     _user.age.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -90,7 +91,7 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Gender',
+                  title: EditProfileFields.gender,
                   content: Text(
                     _user.gender.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -102,7 +103,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Interested In',
+                  title: EditProfileFields.interestedIn,
                   content: Text(
                     _user.interestedGenders.join(', '),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -114,7 +115,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Hometown',
+                  title: EditProfileFields.hometown,
                   content: Text(
                     _user.hometown.toString() != ''
                         ? _user.hometown.toString()
@@ -128,7 +129,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Religion',
+                  title: EditProfileFields.religion,
                   content: Text(
                     _user.religion != null
                         ? _user.religion!.name
@@ -141,7 +142,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Languages',
+                  title: EditProfileFields.languages,
                   content: Text(
                     _user.languages.map((e) => e.name).join(', ') != ''
                         ? _user.languages.map((e) => e.name).join(', ')
@@ -154,7 +155,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Children',
+                  title: EditProfileFields.children,
                   content: Text(
                     _user.children != null
                         ? _user.children!.name
@@ -167,7 +168,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Height',
+                  title: EditProfileFields.height,
                   content: Text(
                     _user.height != null
                         ? cmToFeetAndInchesAndCmString(_user.height!)
@@ -179,9 +180,9 @@ class EditProfilePage extends HookConsumerWidget {
                     router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
-                const EditProfileSectionTile(title: 'Work and Education'),
+                const EditProfileSectionTile(title: Headings.workAndEducation),
                 EditProfileContentTile(
-                  title: 'Work',
+                  title: EditProfileFields.work,
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -200,15 +201,15 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Education',
+                  title: EditProfileFields.education,
                   content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _allEducationList(context, ref)),
                   button: false,
                 ),
-                const EditProfileSectionTile(title: 'Lifestyle'),
+                const EditProfileSectionTile(title: Headings.lifestyle),
                 EditProfileContentTile(
-                  title: 'Food',
+                  title: EditProfileFields.food,
                   content: Text(
                     _user.food != null
                         ? _user.food!.name
@@ -222,7 +223,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Smoking',
+                  title: EditProfileFields.smoking,
                   content: Text(
                     _user.smoking != null
                         ? _user.smoking!.name
@@ -236,7 +237,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Drinking',
+                  title: EditProfileFields.drinking,
                   content: Text(
                     _user.drinking != null
                         ? _user.drinking!.name

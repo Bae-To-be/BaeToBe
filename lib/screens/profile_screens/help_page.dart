@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/article_provider.dart';
 import 'package:baetobe/entities/article.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -18,7 +19,10 @@ class HelpPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      children: [const CustomHeaderTile(text: 'FAQs'), ArticleListings()],
+      children: [
+        const CustomHeaderTile(text: Headings.faqs),
+        ArticleListings()
+      ],
     );
   }
 }

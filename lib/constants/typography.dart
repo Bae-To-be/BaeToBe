@@ -37,6 +37,29 @@ class Headings {
   static const likes = 'Likes';
   static const received = 'Received';
   static const sent = 'Sent';
+  static const faqs = 'FAQs';
+  static const editProfile = 'Edit Profile';
+  static const aboutMe = 'About Me';
+  static const workAndEducation = 'Work and Education';
+  static const lifestyle = 'Lifestyle';
+}
+
+class EditProfileFields {
+  static const name = 'Name';
+  static const bio = 'Bio';
+  static const age = 'Age';
+  static const gender = 'Gender';
+  static const interestedIn = 'Interested In';
+  static const hometown = 'Hometown';
+  static const religion = 'Religion';
+  static const languages = 'Languages';
+  static const children = 'Children';
+  static const height = 'Height';
+  static const work = 'Work';
+  static const education = 'Education';
+  static const food = 'Food';
+  static const smoking = 'Smoking';
+  static const drinking = 'Drinking';
 }
 
 class InfoLabels {
@@ -66,6 +89,8 @@ class InfoLabels {
   static const correctionSubmitted = 'Correction Submitted';
   static const allGood = 'All good';
   static const likesLoaded = 'likes loaded';
+  static const firstPhotoIsProfilePicture =
+      'Your first picture is your profile picture.';
 }
 
 class Placeholders {
