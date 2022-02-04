@@ -16,13 +16,13 @@ class UpdateReligionScreen extends HookConsumerWidget {
 
   List<Widget> _tiles(
       BuildContext context,
-      ReligionListing religionListing,
+      List religionListing,
       List<int> selected,
       void Function(int value) onTap,
       void Function() onSubmit) {
     List<Widget> result = [];
 
-    for (var religion in religionListing.religions) {
+    for (var religion in religionListing) {
       bool isSelected = selected.contains(religion.id);
 
       result.add(SelectTile(
@@ -50,7 +50,7 @@ class UpdateReligionScreen extends HookConsumerWidget {
           const Heading5(text: Headings.enterReligion, withRow: false)
               .padding(top: 32, bottom: 36, horizontal: 10),
           religionListing.maybeWhen(
-              data: (ReligionListing listing) => Column(
+              data: (listing) => Column(
                     children: _tiles(context, listing, state, (int value) {
                       ref.read(religionStateProvider.notifier).state = [value];
                     }, onSubmit),

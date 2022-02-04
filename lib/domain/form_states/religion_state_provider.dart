@@ -9,7 +9,7 @@ final religionStateProvider = StateProvider.autoDispose<List<int>>((ref) {
   final religions = ref.watch(religionProvider);
   if (user.religion != null) {
     religions.whenData((listing) {
-      final match = listing.religions
+      final match = listing
           .firstWhereOrNull((religion) => religion.name == user.religion?.name);
       if (match != null) {
         result = [match.id];
