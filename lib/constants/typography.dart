@@ -46,7 +46,6 @@ class Headings {
   static const lifestyleLabel = 'Lifestyle';
   static const height = 'Height';
   static const String editProfile = 'Edit Profile';
-  static const String faqs = 'FAQs';
   static const String profile = 'Profile';
   static const String matches = 'Matches';
   static const String loadingArticle = 'Loading Article..';

@@ -86,7 +86,9 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
               : Column(
                   children: [
                     const SizedBox(height: 32),
-                    const Heading5(text: Headings.enterInterestedGender)
+                    const CustomTextWidget(
+                            type: textWidgetType.heading5,
+                            text: Headings.enterInterestedGender)
                         .padding(top: 32, bottom: 36, left: 10),
                   ],
                 ),

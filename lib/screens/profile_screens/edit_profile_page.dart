@@ -7,10 +7,7 @@ import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
-<<<<<<< edit_profile_screens_2
 import 'package:baetobe/domain/form_states/bio_state_provider.dart';
-=======
->>>>>>> main
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';

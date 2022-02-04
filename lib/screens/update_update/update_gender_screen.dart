@@ -90,19 +90,26 @@ class UpdateGenderScreen extends HookConsumerWidget {
               : Column(
                   children: [
                     const SizedBox(height: 32),
-                    const Heading5(text: Headings.enterGender, withRow: false)
-                        .padding(top: 32, horizontal: 10),
+                    const CustomTextWidget(
+                            type: textWidgetType.heading5,
+                            text: Headings.enterGender,
+                            withRow: false)
+                        .padding(top: 32, bottom: 36, horizontal: 10),
                   ],
                 ),
-          genderListing.maybeWhen(
-              data: (GenderListing listing) => Column(
-                    children: _tiles(context, listing, state, (int value) {
-                      ref.read(genderStateProvider.notifier).state = [value];
-                    }, onSubmit),
-                  ).padding(top: 36),
-              orElse: () => Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor))),
+          genderListing
+              .maybeWhen(
+                  data: (GenderListing listing) => Column(
+                        children: _tiles(context, listing, state, (int value) {
+                          ref.read(genderStateProvider.notifier).state = [
+                            value
+                          ];
+                        }, onSubmit),
+                      ),
+                  orElse: () => Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor)))
+              .padding(top: 36),
         ],
         floatingSubmit: FloatingCta(
           enabled: state.isNotEmpty,
