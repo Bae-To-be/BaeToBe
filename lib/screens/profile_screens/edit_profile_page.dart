@@ -51,7 +51,7 @@ class EditProfilePage extends HookConsumerWidget {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            const CustomHeaderTile(text: Headings.editProfile),
+            const CustomHeaderTile(text: Headings.editProfileLabel),
             const SizedBox(height: 24),
             const ImageGrid(),
             Row(
@@ -68,9 +68,9 @@ class EditProfilePage extends HookConsumerWidget {
             Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const EditProfileSectionTile(title: Headings.aboutMe),
+                const EditProfileSectionTile(title: Headings.aboutMeLabel),
                 EditProfileContentTile(
-                  title: EditProfileFields.name,
+                  title: EditProfileFieldLabels.name,
                   content: Text(
                     _user.name,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -78,12 +78,12 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 const EditProfileContentTile(
-                  title: EditProfileFields.bio,
+                  title: EditProfileFieldLabels.bio,
                   content: _BioTextField(),
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.age,
+                  title: EditProfileFieldLabels.age,
                   content: Text(
                     _user.age.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -91,7 +91,7 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.gender,
+                  title: EditProfileFieldLabels.gender,
                   content: Text(
                     _user.gender.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -103,7 +103,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.interestedIn,
+                  title: EditProfileFieldLabels.interestedIn,
                   content: Text(
                     _user.interestedGenders.join(', '),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -115,7 +115,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.hometown,
+                  title: EditProfileFieldLabels.hometown,
                   content: Text(
                     _user.hometown.toString() != ''
                         ? _user.hometown.toString()
@@ -129,7 +129,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.religion,
+                  title: EditProfileFieldLabels.religion,
                   content: Text(
                     _user.religion != null
                         ? _user.religion!.name
@@ -142,7 +142,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.languages,
+                  title: EditProfileFieldLabels.languages,
                   content: Text(
                     _user.languages.map((e) => e.name).join(', ') != ''
                         ? _user.languages.map((e) => e.name).join(', ')
@@ -155,7 +155,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.children,
+                  title: EditProfileFieldLabels.children,
                   content: Text(
                     _user.children != null
                         ? _user.children!.name
@@ -168,7 +168,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.height,
+                  title: EditProfileFieldLabels.height,
                   content: Text(
                     _user.height != null
                         ? cmToFeetAndInchesAndCmString(_user.height!)
@@ -180,9 +180,10 @@ class EditProfilePage extends HookConsumerWidget {
                     router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
-                const EditProfileSectionTile(title: Headings.workAndEducation),
+                const EditProfileSectionTile(
+                    title: Headings.workAndEducationLabel),
                 EditProfileContentTile(
-                  title: EditProfileFields.work,
+                  title: EditProfileFieldLabels.work,
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -201,15 +202,15 @@ class EditProfilePage extends HookConsumerWidget {
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.education,
+                  title: EditProfileFieldLabels.education,
                   content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _allEducationList(context, ref)),
                   button: false,
                 ),
-                const EditProfileSectionTile(title: Headings.lifestyle),
+                const EditProfileSectionTile(title: Headings.lifestyleLabel),
                 EditProfileContentTile(
-                  title: EditProfileFields.food,
+                  title: EditProfileFieldLabels.food,
                   content: Text(
                     _user.food != null
                         ? _user.food!.name
@@ -223,7 +224,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.smoking,
+                  title: EditProfileFieldLabels.smoking,
                   content: Text(
                     _user.smoking != null
                         ? _user.smoking!.name
@@ -237,7 +238,7 @@ class EditProfilePage extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: EditProfileFields.drinking,
+                  title: EditProfileFieldLabels.drinking,
                   content: Text(
                     _user.drinking != null
                         ? _user.drinking!.name

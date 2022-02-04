@@ -38,13 +38,13 @@ class Headings {
   static const received = 'Received';
   static const sent = 'Sent';
   static const faqs = 'FAQs';
-  static const editProfile = 'Edit Profile';
-  static const aboutMe = 'About Me';
-  static const workAndEducation = 'Work and Education';
-  static const lifestyle = 'Lifestyle';
+  static const editProfileLabel = 'Edit Profile';
+  static const aboutMeLabel = 'About Me';
+  static const workAndEducationLabel = 'Work and Education';
+  static const lifestyleLabel = 'Lifestyle';
 }
 
-class EditProfileFields {
+class EditProfileFieldLabels {
   static const name = 'Name';
   static const bio = 'Bio';
   static const age = 'Age';
