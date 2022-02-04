@@ -3,6 +3,7 @@ import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/height_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -27,7 +28,7 @@ class UpdateHeightScreen extends HookConsumerWidget {
     }
 
     return FormLayout(children: [
-      const CustomHeaderTile(text: 'Height'),
+      const CustomHeaderTile(text: Headings.height),
       Expanded(flex: 1, child: Container()),
       _HeightInput(),
       Expanded(flex: 2, child: Container()),

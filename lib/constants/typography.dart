@@ -42,6 +42,7 @@ class Headings {
   static const aboutMeLabel = 'About Me';
   static const workAndEducationLabel = 'Work and Education';
   static const lifestyleLabel = 'Lifestyle';
+  static const height = 'Height';
 }
 
 class EditProfileFieldLabels {
