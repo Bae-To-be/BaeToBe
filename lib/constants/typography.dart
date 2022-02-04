@@ -45,6 +45,11 @@ class Headings {
   static const workAndEducationLabel = 'Work and Education';
   static const lifestyleLabel = 'Lifestyle';
   static const height = 'Height';
+  static const String editProfile = 'Edit Profile';
+  static const String faqs = 'FAQs';
+  static const String profile = 'Profile';
+  static const String matches = 'Matches';
+  static const String loadingArticle = 'Loading Article..';
 }
 
 class EditProfileFieldLabels {
@@ -70,7 +75,8 @@ class InfoLabels {
   static const String selectIndustry = 'Select your industry';
   static const String selectYear = 'Select year';
   static const String schoolDetails = 'School Details';
-  static const String classYearHelper = 'mentioned the year you graduated in';
+  static const String classYearHelper =
+      'Mention the year you graduated in/will be graduating in';
   static const String linkedinPublic = 'Show my LinkedIn on my profile';
   static const String addMinimumPhotos =
       'Add at least %{image_count} photos to continue';
@@ -94,6 +100,10 @@ class InfoLabels {
   static const likesLoaded = 'likes loaded';
   static const firstPhotoIsProfilePicture =
       'Your first picture is your profile picture.';
+  static const String matchesLoaded = 'Matches loaded';
+  static const String warning = 'Warning';
+  static const String closeMatchInfo =
+      'No one will be able to send further messages to this conversation. This will not delete the messages!';
 }
 
 class Placeholders {
@@ -117,9 +127,12 @@ class LinkTexts {
   static const String removeRow = 'Remove Row';
   static const String refreshStatus = 'Refresh Status';
   static const String reportUser = 'Report User';
+  static const String conversation = 'Conversation';
   static const String continueWithGoogle = 'Continue with Google';
   static const String continueWithFb = 'Continue with Facebook';
   static const String submit = 'Submit';
+  static const String help = 'Need Help?';
+  static const String cancel = 'Cancel';
 }
 
 class ApprovalFieldLabels {

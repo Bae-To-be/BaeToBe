@@ -24,10 +24,13 @@ class SelfieVerificationScreen extends HookConsumerWidget {
     return FormLayout(
       children: [
         const SizedBox(height: 32),
-        const Heading5(text: Headings.selfieVerification)
+        const CustomTextWidget(
+                type: textWidgetType.heading5,
+                text: Headings.selfieVerification)
             .padding(top: 32, bottom: 10, left: 15),
-        const Caption(
+        const CustomTextWidget(
           text: InfoLabels.selfieVerification,
+          type: textWidgetType.caption,
           withRow: false,
         ).padding(horizontal: 15, bottom: 20),
         SelfieContainer(

@@ -38,23 +38,28 @@ class ArticleListings extends HookConsumerWidget {
     final articleListing = ref.watch(articleProvider);
 
     return articleListing.maybeWhen(
-      data: (List<Article> listing) => Expanded(
-        child: ListView.builder(
-            itemCount: listing.length,
-            itemBuilder: (BuildContext context, int index) {
-              return TextButton(
-                onPressed: () {
-                  AutoRouter.of(context).pushNamed(
-                      '${AppLinks.webview}?url=$apiHostURL/articles/${listing[index].id}');
-                },
-                child: ListTile(
-                    trailing: const Icon(FontAwesomeIcons.chevronRight),
-                    title: Wrap(children: [
-                      Text(listing[index].title,
-                          style: Theme.of(context).textTheme.subtitle1),
-                    ])),
-              );
-            }),
+      data: (List<Article> listing) => Column(
+        children: [
+          const CustomHeaderTile(text: Headings.faqs),
+          Expanded(
+            child: ListView.builder(
+                itemCount: listing.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).pushNamed(
+                          '${AppLinks.helpPage}/${listing[index].id}');
+                    },
+                    child: ListTile(
+                        trailing: const Icon(FontAwesomeIcons.chevronRight),
+                        title: Wrap(children: [
+                          Text(listing[index].title,
+                              style: Theme.of(context).textTheme.subtitle1),
+                        ])),
+                  );
+                }),
+          )
+        ],
       ),
       orElse: () => Center(
           child:

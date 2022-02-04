@@ -1,4 +1,5 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/kyc/field_approval_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -19,7 +20,8 @@ class VerificationRejectedScreen extends HookConsumerWidget {
 
     if (verificationInfo == null) {
       return const Center(
-          child: Heading5(
+          child: CustomTextWidget(
+              type: textWidgetType.heading5,
               withRow: false,
               text: ErrorMessages.couldNotLoadVerificationInfo));
     }
@@ -30,13 +32,16 @@ class VerificationRejectedScreen extends HookConsumerWidget {
           .replaceNamed(AppLinks.underVerification);
     }
 
-    if (verificationInfo.status == ApprovalStatuses.approved) {
-      ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
-    }
+    // if (verificationInfo.status == ApprovalStatuses.approved) {
+    //   ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
+    // }
 
     return Column(children: [
       const SizedBox(height: 32),
-      const Heading5(text: Headings.verificationRejected, withRow: false)
+      const CustomTextWidget(
+              type: textWidgetType.heading5,
+              text: Headings.verificationRejected,
+              withRow: false)
           .padding(top: 32, bottom: 10, horizontal: 30),
       Expanded(
         child: ListView(
@@ -85,13 +90,19 @@ class VerificationRejectedScreen extends HookConsumerWidget {
                 : GFCard(
                     color: Colors.red[100],
                     boxFit: BoxFit.cover,
-                    content: Caption(
+                    content: CustomTextWidget(
                         text: verificationInfo.rejectionReason!,
+                        type: textWidgetType.caption,
                         withRow: false),
                   ),
           ],
         ),
       ),
+      CustomTextButton(
+          text: LinkTexts.help,
+          onPressed: () => ref
+              .read(routerProvider.notifier)
+              .pushNamed(AppLinks.helpPage)).padding(bottom: 10)
     ]);
   }
 }

@@ -38,6 +38,7 @@ class ErrorMessages {
       'could not load verification info';
   static const String pleaseUpdatePreferences = 'Please update preferences';
   static const String noLikesFound = 'No likes found! Try again?';
+  static const String noMatchesFound = 'No Matches found! Try again?';
   static const String userNotFound = 'User not found';
 }
 
@@ -73,4 +74,12 @@ class NotificationEvents {
   static const String newMatch = 'new_match';
   static const String leftSwiped = 'left_swiped';
   static const String newLike = 'new_like';
+  static const String matchClosed = 'match_closed';
+}
+
+class UserMatchStatuses {
+  static const String rejected = 'rejected';
+  static const String pending = 'pending';
+  static const String matched = 'matched';
+  static const String none = 'none';
 }

@@ -38,7 +38,8 @@ class LikesTab extends HookConsumerWidget {
             appBar: AppBar(
                 backgroundColor: offWhite,
                 elevation: 0,
-                title: const Heading4(text: Headings.likes),
+                title: const CustomTextWidget(
+                    text: Headings.likes, type: textWidgetType.heading5),
                 bottom: PreferredSize(
                   preferredSize: Size(
                     MediaQuery.of(context).size.width,
@@ -97,7 +98,18 @@ class LikesTab extends HookConsumerWidget {
                             tabRouter.activeIndex == 0 ? -1.0 : 1.0, 0.0),
                         end: Offset.zero)
                     .animate(animation),
-                child: FadeTransition(opacity: animation, child: child)));
+                child: FadeTransition(
+                    opacity: animation,
+                    child: GestureDetector(
+                        onHorizontalDragEnd: (dragEndDetails) {
+                          if ((dragEndDetails.primaryVelocity ?? 0) < 0) {
+                            tabRouter.setActiveIndex(1);
+                          } else if ((dragEndDetails.primaryVelocity ?? 0) >
+                              0) {
+                            tabRouter.setActiveIndex(0);
+                          }
+                        },
+                        child: child))));
       },
     );
   }
