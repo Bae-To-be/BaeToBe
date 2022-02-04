@@ -22,8 +22,10 @@ import 'package:baetobe/screens/update_update/linkedin_url_screen.dart';
 import 'package:baetobe/screens/update_update/selfie_verification_screen.dart';
 import 'package:baetobe/screens/update_update/update_birthday_screen.dart';
 import 'package:baetobe/screens/update_update/update_gender_screen.dart';
-import 'package:baetobe/screens/update_update/update_hometown.dart';
+import 'package:baetobe/screens/update_update/update_height_screen.dart';
+import 'package:baetobe/screens/update_update/update_hometown_screen.dart';
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
+import 'package:baetobe/screens/update_update/update_religion_screen.dart';
 import 'package:baetobe/screens/update_update/update_work_information_screen.dart';
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
 import 'package:baetobe/screens/user_profile/report_user_screen.dart';
@@ -110,7 +112,7 @@ import 'package:baetobe/screens/help_article_screen.dart';
       ],
     ),
     AutoRoute(
-        path: AppLinks.editProfile, page: EditProfile, guards: [AuthGuard]),
+        path: AppLinks.editProfile, page: EditProfilePage, guards: [AuthGuard]),
     AutoRoute(path: AppLinks.helpPage, page: EmptyRouterPage, children: [
       AutoRoute(path: '', page: HelpPage, initial: true),
       AutoRoute(path: ':id', page: HelpArticleScreen),
@@ -122,7 +124,17 @@ import 'package:baetobe/screens/help_article_screen.dart';
         page: UpdatePreferences,
         guards: [AuthGuard]),
     AutoRoute(
-        path: AppLinks.editHometown, page: UpdateHometown, guards: [AuthGuard]),
+        path: AppLinks.editHometown,
+        page: UpdateHometownScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.editReligion,
+        page: UpdateReligionScreen,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.editHeight,
+        page: UpdateHeightScreen,
+        guards: [AuthGuard]),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),
   ],
 )

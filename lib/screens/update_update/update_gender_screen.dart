@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
+import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/components/gender/view_more_genders.dart';
@@ -80,22 +81,35 @@ class UpdateGenderScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
+        header: redirectBack == true
+            ? const CustomHeaderTile(text: Headings.gender)
+            : null,
         children: <Widget>[
-          const SizedBox(height: 32),
-          const CustomTextWidget(
-                  type: textWidgetType.heading5,
-                  text: Headings.enterGender,
-                  withRow: false)
-              .padding(top: 32, bottom: 36, horizontal: 10),
-          genderListing.maybeWhen(
-              data: (GenderListing listing) => Column(
-                    children: _tiles(context, listing, state, (int value) {
-                      ref.read(genderStateProvider.notifier).state = [value];
-                    }, onSubmit),
-                  ),
-              orElse: () => Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor))),
+          redirectBack == true
+              ? Container()
+              : Column(
+                  children: [
+                    const SizedBox(height: 32),
+                    const CustomTextWidget(
+                            type: textWidgetType.heading5,
+                            text: Headings.enterGender,
+                            withRow: false)
+                        .padding(top: 32, bottom: 36, horizontal: 10),
+                  ],
+                ),
+          genderListing
+              .maybeWhen(
+                  data: (GenderListing listing) => Column(
+                        children: _tiles(context, listing, state, (int value) {
+                          ref.read(genderStateProvider.notifier).state = [
+                            value
+                          ];
+                        }, onSubmit),
+                      ),
+                  orElse: () => Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor)))
+              .padding(top: 36),
         ],
         floatingSubmit: FloatingCta(
           enabled: state.isNotEmpty,

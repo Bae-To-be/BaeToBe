@@ -12,6 +12,8 @@ class Headings {
   static const String gender = 'Gender';
   static const String interestedIn = 'Interested In';
   static const String work = 'Work';
+  static const String enterCity = 'Enter City';
+  static const String enterCountry = 'Enter Country';
   static const String enterIndustry = "What's your work industry?";
   static const String educationBackground = 'Where did you study?';
   static const String enterWorkTitle = "What's your designation?";
@@ -24,7 +26,7 @@ class Headings {
   static const String selfieVerification = 'Selfie Verification';
   static const String identityVerification = 'Identity Verification';
   static const String enterHometown = 'Where do you live?';
-  static const String enterReligion = 'What\'s your religion?';
+  static const String religion = 'Religion';
   static const String childrenPreference = 'Children';
   static const String foodPreference = 'Food';
   static const String smokingPreference = 'Smoking';
@@ -37,11 +39,34 @@ class Headings {
   static const likes = 'Likes';
   static const received = 'Received';
   static const sent = 'Sent';
+  static const faqs = 'FAQs';
+  static const editProfileLabel = 'Edit Profile';
+  static const aboutMeLabel = 'About Me';
+  static const workAndEducationLabel = 'Work and Education';
+  static const lifestyleLabel = 'Lifestyle';
+  static const height = 'Height';
   static const String editProfile = 'Edit Profile';
-  static const String faqs = 'FAQs';
   static const String profile = 'Profile';
   static const String matches = 'Matches';
   static const String loadingArticle = 'Loading Article..';
+}
+
+class EditProfileFieldLabels {
+  static const name = 'Name';
+  static const bio = 'Bio';
+  static const age = 'Age';
+  static const gender = 'Gender';
+  static const interestedIn = 'Interested In';
+  static const hometown = 'Hometown';
+  static const religion = 'Religion';
+  static const languages = 'Languages';
+  static const children = 'Children';
+  static const height = 'Height';
+  static const work = 'Work';
+  static const education = 'Education';
+  static const food = 'Food';
+  static const smoking = 'Smoking';
+  static const drinking = 'Drinking';
 }
 
 class InfoLabels {
@@ -68,10 +93,12 @@ class InfoLabels {
   static const socialAccounts = 'Social accounts.';
   static const String underVerificationHelper =
       'Hi, we have collected your information and our team is currently verifying your profile. We will get back to you soon!';
-  static const String pleaseChangeField = 'Please update this information';
-  static const String correctionSubmitted = 'Correction Submitted';
-  static const String allGood = 'All good';
-  static const String likesLoaded = 'Likes loaded';
+  static const pleaseChangeField = 'Please update this information';
+  static const correctionSubmitted = 'Correction Submitted';
+  static const allGood = 'All good';
+  static const likesLoaded = 'likes loaded';
+  static const firstPhotoIsProfilePicture =
+      'Your first picture is your profile picture.';
   static const String matchesLoaded = 'Matches loaded';
   static const String warning = 'Warning';
   static const String closeMatchInfo =

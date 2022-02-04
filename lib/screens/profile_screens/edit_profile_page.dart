@@ -3,21 +3,21 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
-import 'package:baetobe/components/images/image_tile.dart';
+import 'package:baetobe/components/images/image_grid.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/form_states/bio_state_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class EditProfile extends HookConsumerWidget {
-  const EditProfile({Key? key}) : super(key: key);
+class EditProfilePage extends HookConsumerWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
 
   String cmToFeetAndInchesAndCmString(int heightInCm) {
     int heightInInches = (heightInCm / 2.54).round();
@@ -30,7 +30,7 @@ class EditProfile extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.read(routerProvider);
-    final _user = ref.read(userProvider);
+    final _user = ref.watch(userProvider);
 
     useEffect(() {
       WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -38,8 +38,8 @@ class EditProfile extends HookConsumerWidget {
       });
       return null;
     }, []);
-    // return const Center(child: Text('EDIT PROFILE'),);
     return GestureDetector(
+      //hides keyboard when tapped outside the keyboard
       onVerticalDragCancel: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -52,25 +52,13 @@ class EditProfile extends HookConsumerWidget {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            const CustomHeaderTile(text: Headings.editProfile),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
-                  maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
-              itemCount: FirebaseRemoteConfig.instance
-                  .getInt(RemoteConfigs.maxPhotoCount),
-              physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemBuilder: (BuildContext ctx, index) {
-                return ImageTile(position: index);
-              },
-            ),
+            const CustomHeaderTile(text: Headings.editProfileLabel),
+            const SizedBox(height: 24),
+            const ImageGrid(),
             Row(
               children: [
                 const Text(
-                  'Your first picture is your profile picture.',
+                  InfoLabels.firstPhotoIsProfilePicture,
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -81,9 +69,9 @@ class EditProfile extends HookConsumerWidget {
             Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const EditProfileSectionTile(title: 'About Me'),
+                const EditProfileSectionTile(title: Headings.aboutMeLabel),
                 EditProfileContentTile(
-                  title: 'Name',
+                  title: EditProfileFieldLabels.name,
                   content: Text(
                     _user.name,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -91,12 +79,12 @@ class EditProfile extends HookConsumerWidget {
                   button: false,
                 ),
                 const EditProfileContentTile(
-                  title: 'Bio',
+                  title: EditProfileFieldLabels.bio,
                   content: _BioTextField(),
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Age',
+                  title: EditProfileFieldLabels.age,
                   content: Text(
                     _user.age.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -104,7 +92,7 @@ class EditProfile extends HookConsumerWidget {
                   button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Gender',
+                  title: EditProfileFieldLabels.gender,
                   content: Text(
                     _user.gender.toString(),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -116,7 +104,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Interested In',
+                  title: EditProfileFieldLabels.interestedIn,
                   content: Text(
                     _user.interestedGenders.join(', '),
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
@@ -128,7 +116,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Hometown',
+                  title: EditProfileFieldLabels.hometown,
                   content: Text(
                     _user.hometown.toString() != ''
                         ? _user.hometown.toString()
@@ -142,7 +130,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Religion',
+                  title: EditProfileFieldLabels.religion,
                   content: Text(
                     _user.religion != null
                         ? _user.religion!.name
@@ -151,11 +139,11 @@ class EditProfile extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editReligion, arguments: false);
+                    router.navigateNamed(AppLinks.editReligion);
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Languages',
+                  title: EditProfileFieldLabels.languages,
                   content: Text(
                     _user.languages.map((e) => e.name).join(', ') != ''
                         ? _user.languages.map((e) => e.name).join(', ')
@@ -168,7 +156,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Children',
+                  title: EditProfileFieldLabels.children,
                   content: Text(
                     _user.children != null
                         ? _user.children!.name
@@ -181,7 +169,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Height',
+                  title: EditProfileFieldLabels.height,
                   content: Text(
                     _user.height != null
                         ? cmToFeetAndInchesAndCmString(_user.height!)
@@ -190,12 +178,13 @@ class EditProfile extends HookConsumerWidget {
                   ),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editHeight, arguments: false);
+                    router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
-                const EditProfileSectionTile(title: 'Work and Education'),
+                const EditProfileSectionTile(
+                    title: Headings.workAndEducationLabel),
                 EditProfileContentTile(
-                  title: 'Work',
+                  title: EditProfileFieldLabels.work,
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -211,27 +200,18 @@ class EditProfile extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  button: true,
-                  callback: () {
-                    AutoRouter.of(context).pushNamed(
-                        '${AppLinks.updateWorkDetails}?redirectBack=true');
-                    // Get.toNamed(AppLinks.updateWorkDetails, arguments: false);
-                  },
+                  button: false,
                 ),
                 EditProfileContentTile(
-                  title: 'Education',
+                  title: EditProfileFieldLabels.education,
                   content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: _allEducationList(context, ref)),
-                  button: true,
-                  callback: () {
-                    AutoRouter.of(context).pushNamed(
-                        '${AppLinks.updateEducationHistory}?redirectBack=true');
-                  },
+                  button: false,
                 ),
-                const EditProfileSectionTile(title: 'Lifestyle'),
+                const EditProfileSectionTile(title: Headings.lifestyleLabel),
                 EditProfileContentTile(
-                  title: 'Food',
+                  title: EditProfileFieldLabels.food,
                   content: Text(
                     _user.food != null
                         ? _user.food!.name
@@ -245,7 +225,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Smoking',
+                  title: EditProfileFieldLabels.smoking,
                   content: Text(
                     _user.smoking != null
                         ? _user.smoking!.name
@@ -259,7 +239,7 @@ class EditProfile extends HookConsumerWidget {
                   },
                 ),
                 EditProfileContentTile(
-                  title: 'Drinking',
+                  title: EditProfileFieldLabels.drinking,
                   content: Text(
                     _user.drinking != null
                         ? _user.drinking!.name
@@ -314,26 +294,25 @@ class EditProfile extends HookConsumerWidget {
   }
 }
 
-//
 class _BioTextField extends HookConsumerWidget {
   const _BioTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _user = ref.read(userProvider);
+    final bioState = ref.watch(bioTextProvider);
 
     return Focus(
       onFocusChange: (hasFocus) async {
         if (!hasFocus) {
           await ref.read(userProvider.notifier).updateAttributes({
-            'bio': _user.bio,
+            'bio': bioState,
           });
         }
       },
       child: BigFomField(
-          value: _user.bio ?? '',
+          value: bioState,
           onChanged: (text) {
-            _user.bio = text;
+            ref.read(bioTextProvider.notifier).state = text;
           }),
     );
   }

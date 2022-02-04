@@ -11,25 +11,25 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i19;
-import 'package:baetobe/application/routing/auth_guard.dart' as _i31;
-import 'package:baetobe/entities/match.dart' as _i32;
-import 'package:baetobe/entities/user_profile.dart' as _i33;
+import 'package:baetobe/application/routing/auth_guard.dart' as _i33;
+import 'package:baetobe/entities/match.dart' as _i34;
+import 'package:baetobe/entities/user_profile.dart' as _i35;
 import 'package:baetobe/screens/boot/splash_screen.dart' as _i1;
-import 'package:baetobe/screens/help_article_screen.dart' as _i29;
-import 'package:baetobe/screens/home/discover_tab.dart' as _i22;
-import 'package:baetobe/screens/home/likes/likes_received_tab.dart' as _i26;
-import 'package:baetobe/screens/home/likes/likes_sent_tab.dart' as _i27;
-import 'package:baetobe/screens/home/likes_tab.dart' as _i23;
+import 'package:baetobe/screens/help_article_screen.dart' as _i31;
+import 'package:baetobe/screens/home/discover_tab.dart' as _i24;
+import 'package:baetobe/screens/home/likes/likes_received_tab.dart' as _i28;
+import 'package:baetobe/screens/home/likes/likes_sent_tab.dart' as _i29;
+import 'package:baetobe/screens/home/likes_tab.dart' as _i25;
 import 'package:baetobe/screens/home/matches/messages_for_match_screen.dart'
     as _i15;
-import 'package:baetobe/screens/home/matches_tab.dart' as _i24;
-import 'package:baetobe/screens/home/profile_tab.dart' as _i25;
+import 'package:baetobe/screens/home/matches_tab.dart' as _i26;
+import 'package:baetobe/screens/home/profile_tab.dart' as _i27;
 import 'package:baetobe/screens/homepage_screen.dart' as _i17;
 import 'package:baetobe/screens/kyc/under_verification_screen.dart' as _i12;
 import 'package:baetobe/screens/kyc/verification_rejected_screen.dart' as _i13;
 import 'package:baetobe/screens/login_screen.dart' as _i2;
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart' as _i18;
-import 'package:baetobe/screens/profile_screens/help_page.dart' as _i28;
+import 'package:baetobe/screens/profile_screens/help_page.dart' as _i30;
 import 'package:baetobe/screens/profile_screens/update_preferences_page.dart'
     as _i20;
 import 'package:baetobe/screens/update_update/education_history_screen.dart'
@@ -42,23 +42,28 @@ import 'package:baetobe/screens/update_update/selfie_verification_screen.dart'
 import 'package:baetobe/screens/update_update/update_birthday_screen.dart'
     as _i3;
 import 'package:baetobe/screens/update_update/update_gender_screen.dart' as _i4;
-import 'package:baetobe/screens/update_update/update_hometown.dart' as _i21;
+import 'package:baetobe/screens/update_update/update_height_screen.dart'
+    as _i23;
+import 'package:baetobe/screens/update_update/update_hometown_screen.dart'
+    as _i21;
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart'
     as _i5;
+import 'package:baetobe/screens/update_update/update_religion_screen.dart'
+    as _i22;
 import 'package:baetobe/screens/update_update/update_work_information_screen.dart'
     as _i6;
 import 'package:baetobe/screens/update_update/upload_images_screen.dart' as _i9;
 import 'package:baetobe/screens/user_profile/report_user_screen.dart' as _i16;
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart' as _i14;
-import 'package:flutter/material.dart' as _i30;
+import 'package:flutter/material.dart' as _i32;
 
 class AppRouter extends _i19.RootStackRouter {
   AppRouter(
-      {_i30.GlobalKey<_i30.NavigatorState>? navigatorKey,
+      {_i32.GlobalKey<_i32.NavigatorState>? navigatorKey,
       required this.authGuard})
       : super(navigatorKey);
 
-  final _i31.AuthGuard authGuard;
+  final _i33.AuthGuard authGuard;
 
   @override
   final Map<String, _i19.PageFactory> pagesMap = {
@@ -187,9 +192,9 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i17.HomepageScreen());
     },
-    EditProfileRoute.name: (routeData) {
+    EditProfilePageRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i18.EditProfile());
+          routeData: routeData, child: const _i18.EditProfilePage());
     },
     EmptyRouterPageRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
@@ -199,41 +204,47 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i20.UpdatePreferences());
     },
-    UpdateHometownRoute.name: (routeData) {
+    UpdateHometownScreenRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i21.UpdateHometown());
+          routeData: routeData, child: const _i21.UpdateHometownScreen());
+    },
+    UpdateReligionScreenRoute.name: (routeData) {
+      return _i19.AdaptivePage<dynamic>(
+          routeData: routeData, child: const _i22.UpdateReligionScreen());
+    },
+    UpdateHeightScreenRoute.name: (routeData) {
+      return _i19.AdaptivePage<dynamic>(
+          routeData: routeData, child: const _i23.UpdateHeightScreen());
     },
     DiscoverTabRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i22.DiscoverTab());
+          routeData: routeData, child: const _i24.DiscoverTab());
     },
     LikesTabRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i23.LikesTab());
+          routeData: routeData, child: const _i25.LikesTab());
     },
     MatchesTabRoute.name: (routeData) {
       final args = routeData.argsAs<MatchesTabRouteArgs>(
           orElse: () => const MatchesTabRouteArgs());
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i24.MatchesTab(key: args.key));
+          routeData: routeData, child: _i26.MatchesTab(key: args.key));
     },
     ProfileTabRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i25.ProfileTab());
+          routeData: routeData, child: const _i27.ProfileTab());
     },
     LikesReceivedTabRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i26.LikesReceivedTab());
+          routeData: routeData, child: const _i28.LikesReceivedTab());
     },
     LikesSentTabRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i27.LikesSentTab());
+          routeData: routeData, child: const _i29.LikesSentTab());
     },
     HelpPageRoute.name: (routeData) {
-      final args = routeData.argsAs<HelpPageRouteArgs>(
-          orElse: () => const HelpPageRouteArgs());
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i28.HelpPage(key: args.key));
+          routeData: routeData, child: const _i30.HelpPage());
     },
     HelpArticleScreenRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -242,7 +253,7 @@ class AppRouter extends _i19.RootStackRouter {
               HelpArticleScreenRouteArgs(id: pathParams.getString('id')));
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData,
-          child: _i29.HelpArticleScreen(key: args.key, id: args.id));
+          child: _i31.HelpArticleScreen(key: args.key, id: args.id));
     }
   };
 
@@ -309,7 +320,7 @@ class AppRouter extends _i19.RootStackRouter {
               redirectTo: '',
               fullMatch: true)
         ]),
-        _i19.RouteConfig(EditProfileRoute.name,
+        _i19.RouteConfig(EditProfilePageRoute.name,
             path: 'edit_profile', guards: [authGuard]),
         _i19.RouteConfig(EmptyRouterPageRoute.name, path: 'help', guards: [
           authGuard
@@ -321,8 +332,12 @@ class AppRouter extends _i19.RootStackRouter {
         ]),
         _i19.RouteConfig(UpdatePreferencesRoute.name,
             path: 'update_preferences', guards: [authGuard]),
-        _i19.RouteConfig(UpdateHometownRoute.name,
+        _i19.RouteConfig(UpdateHometownScreenRoute.name,
             path: '/edit_hometown', guards: [authGuard]),
+        _i19.RouteConfig(UpdateReligionScreenRoute.name,
+            path: '/edit_religion', guards: [authGuard]),
+        _i19.RouteConfig(UpdateHeightScreenRoute.name,
+            path: '/edit_height', guards: [authGuard]),
         _i19.RouteConfig('*#redirect',
             path: '*', redirectTo: '/login', fullMatch: true)
       ];
@@ -348,7 +363,7 @@ class LoginScreenRoute extends _i19.PageRouteInfo<void> {
 /// [_i3.UpdateBirthdayScreen]
 class UpdateBirthdayScreenRoute
     extends _i19.PageRouteInfo<UpdateBirthdayScreenRouteArgs> {
-  UpdateBirthdayScreenRoute({_i30.Key? key, bool? redirectBack})
+  UpdateBirthdayScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(UpdateBirthdayScreenRoute.name,
             path: '/birthday',
             args: UpdateBirthdayScreenRouteArgs(
@@ -361,7 +376,7 @@ class UpdateBirthdayScreenRoute
 class UpdateBirthdayScreenRouteArgs {
   const UpdateBirthdayScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -375,7 +390,7 @@ class UpdateBirthdayScreenRouteArgs {
 /// [_i4.UpdateGenderScreen]
 class UpdateGenderScreenRoute
     extends _i19.PageRouteInfo<UpdateGenderScreenRouteArgs> {
-  UpdateGenderScreenRoute({_i30.Key? key, bool? redirectBack})
+  UpdateGenderScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(UpdateGenderScreenRoute.name,
             path: '/gender',
             args: UpdateGenderScreenRouteArgs(
@@ -388,7 +403,7 @@ class UpdateGenderScreenRoute
 class UpdateGenderScreenRouteArgs {
   const UpdateGenderScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -402,7 +417,7 @@ class UpdateGenderScreenRouteArgs {
 /// [_i5.UpdateInterestedGenderScreen]
 class UpdateInterestedGenderScreenRoute
     extends _i19.PageRouteInfo<UpdateInterestedGenderScreenRouteArgs> {
-  UpdateInterestedGenderScreenRoute({_i30.Key? key, bool? redirectBack})
+  UpdateInterestedGenderScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(UpdateInterestedGenderScreenRoute.name,
             path: '/interested_genders',
             args: UpdateInterestedGenderScreenRouteArgs(
@@ -415,7 +430,7 @@ class UpdateInterestedGenderScreenRoute
 class UpdateInterestedGenderScreenRouteArgs {
   const UpdateInterestedGenderScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -429,7 +444,7 @@ class UpdateInterestedGenderScreenRouteArgs {
 /// [_i6.UpdateWorkInformationScreen]
 class UpdateWorkInformationScreenRoute
     extends _i19.PageRouteInfo<UpdateWorkInformationScreenRouteArgs> {
-  UpdateWorkInformationScreenRoute({_i30.Key? key, bool? redirectBack})
+  UpdateWorkInformationScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(UpdateWorkInformationScreenRoute.name,
             path: '/work_details',
             args: UpdateWorkInformationScreenRouteArgs(
@@ -442,7 +457,7 @@ class UpdateWorkInformationScreenRoute
 class UpdateWorkInformationScreenRouteArgs {
   const UpdateWorkInformationScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -456,7 +471,7 @@ class UpdateWorkInformationScreenRouteArgs {
 /// [_i7.EducationHistoryScreen]
 class EducationHistoryScreenRoute
     extends _i19.PageRouteInfo<EducationHistoryScreenRouteArgs> {
-  EducationHistoryScreenRoute({_i30.Key? key, bool? redirectBack})
+  EducationHistoryScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(EducationHistoryScreenRoute.name,
             path: '/education_history',
             args: EducationHistoryScreenRouteArgs(
@@ -469,7 +484,7 @@ class EducationHistoryScreenRoute
 class EducationHistoryScreenRouteArgs {
   const EducationHistoryScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -483,7 +498,7 @@ class EducationHistoryScreenRouteArgs {
 /// [_i8.LinkedinUrlScreen]
 class LinkedinUrlScreenRoute
     extends _i19.PageRouteInfo<LinkedinUrlScreenRouteArgs> {
-  LinkedinUrlScreenRoute({_i30.Key? key, bool? redirectBack})
+  LinkedinUrlScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(LinkedinUrlScreenRoute.name,
             path: '/linkedin_url',
             args: LinkedinUrlScreenRouteArgs(
@@ -496,7 +511,7 @@ class LinkedinUrlScreenRoute
 class LinkedinUrlScreenRouteArgs {
   const LinkedinUrlScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -519,7 +534,7 @@ class UploadImagesScreenRoute extends _i19.PageRouteInfo<void> {
 /// [_i10.SelfieVerificationScreen]
 class SelfieVerificationScreenRoute
     extends _i19.PageRouteInfo<SelfieVerificationScreenRouteArgs> {
-  SelfieVerificationScreenRoute({_i30.Key? key, bool? redirectBack})
+  SelfieVerificationScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(SelfieVerificationScreenRoute.name,
             path: '/selfie_verification',
             args: SelfieVerificationScreenRouteArgs(
@@ -532,7 +547,7 @@ class SelfieVerificationScreenRoute
 class SelfieVerificationScreenRouteArgs {
   const SelfieVerificationScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -546,7 +561,7 @@ class SelfieVerificationScreenRouteArgs {
 /// [_i11.IdentityVerificationScreen]
 class IdentityVerificationScreenRoute
     extends _i19.PageRouteInfo<IdentityVerificationScreenRouteArgs> {
-  IdentityVerificationScreenRoute({_i30.Key? key, bool? redirectBack})
+  IdentityVerificationScreenRoute({_i32.Key? key, bool? redirectBack})
       : super(IdentityVerificationScreenRoute.name,
             path: '/identity_verification',
             args: IdentityVerificationScreenRouteArgs(
@@ -559,7 +574,7 @@ class IdentityVerificationScreenRoute
 class IdentityVerificationScreenRouteArgs {
   const IdentityVerificationScreenRouteArgs({this.key, this.redirectBack});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final bool? redirectBack;
 
@@ -591,7 +606,7 @@ class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
 /// [_i14.UserProfileScreen]
 class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
-  UserProfileScreenRoute({_i30.Key? key, required int id})
+  UserProfileScreenRoute({_i32.Key? key, required int id})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
             args: UserProfileScreenRouteArgs(key: key, id: id),
@@ -603,7 +618,7 @@ class UserProfileScreenRoute
 class UserProfileScreenRouteArgs {
   const UserProfileScreenRouteArgs({this.key, required this.id});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final int id;
 
@@ -617,7 +632,7 @@ class UserProfileScreenRouteArgs {
 /// [_i15.MessagesForMatchScreen]
 class MessagesForMatchScreenRoute
     extends _i19.PageRouteInfo<MessagesForMatchScreenRouteArgs> {
-  MessagesForMatchScreenRoute({_i30.Key? key, required _i32.Match match})
+  MessagesForMatchScreenRoute({_i32.Key? key, required _i34.Match match})
       : super(MessagesForMatchScreenRoute.name,
             path: '/matches/messages',
             args: MessagesForMatchScreenRouteArgs(key: key, match: match));
@@ -628,9 +643,9 @@ class MessagesForMatchScreenRoute
 class MessagesForMatchScreenRouteArgs {
   const MessagesForMatchScreenRouteArgs({this.key, required this.match});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
-  final _i32.Match match;
+  final _i34.Match match;
 
   @override
   String toString() {
@@ -642,7 +657,7 @@ class MessagesForMatchScreenRouteArgs {
 /// [_i16.ReportUserScreen]
 class ReportUserScreenRoute
     extends _i19.PageRouteInfo<ReportUserScreenRouteArgs> {
-  ReportUserScreenRoute({_i30.Key? key, required _i33.DetailedProfile profile})
+  ReportUserScreenRoute({_i32.Key? key, required _i35.DetailedProfile profile})
       : super(ReportUserScreenRoute.name,
             path: '/users/report',
             args: ReportUserScreenRouteArgs(key: key, profile: profile));
@@ -653,9 +668,9 @@ class ReportUserScreenRoute
 class ReportUserScreenRouteArgs {
   const ReportUserScreenRouteArgs({this.key, required this.profile});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
-  final _i33.DetailedProfile profile;
+  final _i35.DetailedProfile profile;
 
   @override
   String toString() {
@@ -674,11 +689,12 @@ class HomepageScreenRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.EditProfile]
-class EditProfileRoute extends _i19.PageRouteInfo<void> {
-  const EditProfileRoute() : super(EditProfileRoute.name, path: 'edit_profile');
+/// [_i18.EditProfilePage]
+class EditProfilePageRoute extends _i19.PageRouteInfo<void> {
+  const EditProfilePageRoute()
+      : super(EditProfilePageRoute.name, path: 'edit_profile');
 
-  static const String name = 'EditProfileRoute';
+  static const String name = 'EditProfilePageRoute';
 }
 
 /// generated route for
@@ -701,16 +717,34 @@ class UpdatePreferencesRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.UpdateHometown]
-class UpdateHometownRoute extends _i19.PageRouteInfo<void> {
-  const UpdateHometownRoute()
-      : super(UpdateHometownRoute.name, path: '/edit_hometown');
+/// [_i21.UpdateHometownScreen]
+class UpdateHometownScreenRoute extends _i19.PageRouteInfo<void> {
+  const UpdateHometownScreenRoute()
+      : super(UpdateHometownScreenRoute.name, path: '/edit_hometown');
 
-  static const String name = 'UpdateHometownRoute';
+  static const String name = 'UpdateHometownScreenRoute';
 }
 
 /// generated route for
-/// [_i22.DiscoverTab]
+/// [_i22.UpdateReligionScreen]
+class UpdateReligionScreenRoute extends _i19.PageRouteInfo<void> {
+  const UpdateReligionScreenRoute()
+      : super(UpdateReligionScreenRoute.name, path: '/edit_religion');
+
+  static const String name = 'UpdateReligionScreenRoute';
+}
+
+/// generated route for
+/// [_i23.UpdateHeightScreen]
+class UpdateHeightScreenRoute extends _i19.PageRouteInfo<void> {
+  const UpdateHeightScreenRoute()
+      : super(UpdateHeightScreenRoute.name, path: '/edit_height');
+
+  static const String name = 'UpdateHeightScreenRoute';
+}
+
+/// generated route for
+/// [_i24.DiscoverTab]
 class DiscoverTabRoute extends _i19.PageRouteInfo<void> {
   const DiscoverTabRoute() : super(DiscoverTabRoute.name, path: '');
 
@@ -718,7 +752,7 @@ class DiscoverTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.LikesTab]
+/// [_i25.LikesTab]
 class LikesTabRoute extends _i19.PageRouteInfo<void> {
   const LikesTabRoute({List<_i19.PageRouteInfo>? children})
       : super(LikesTabRoute.name, path: 'likes', initialChildren: children);
@@ -727,9 +761,9 @@ class LikesTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.MatchesTab]
+/// [_i26.MatchesTab]
 class MatchesTabRoute extends _i19.PageRouteInfo<MatchesTabRouteArgs> {
-  MatchesTabRoute({_i30.Key? key})
+  MatchesTabRoute({_i32.Key? key})
       : super(MatchesTabRoute.name,
             path: 'matches', args: MatchesTabRouteArgs(key: key));
 
@@ -739,7 +773,7 @@ class MatchesTabRoute extends _i19.PageRouteInfo<MatchesTabRouteArgs> {
 class MatchesTabRouteArgs {
   const MatchesTabRouteArgs({this.key});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   @override
   String toString() {
@@ -748,7 +782,7 @@ class MatchesTabRouteArgs {
 }
 
 /// generated route for
-/// [_i25.ProfileTab]
+/// [_i27.ProfileTab]
 class ProfileTabRoute extends _i19.PageRouteInfo<void> {
   const ProfileTabRoute() : super(ProfileTabRoute.name, path: 'profile');
 
@@ -756,7 +790,7 @@ class ProfileTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i26.LikesReceivedTab]
+/// [_i28.LikesReceivedTab]
 class LikesReceivedTabRoute extends _i19.PageRouteInfo<void> {
   const LikesReceivedTabRoute() : super(LikesReceivedTabRoute.name, path: '');
 
@@ -764,7 +798,7 @@ class LikesReceivedTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i27.LikesSentTab]
+/// [_i29.LikesSentTab]
 class LikesSentTabRoute extends _i19.PageRouteInfo<void> {
   const LikesSentTabRoute() : super(LikesSentTabRoute.name, path: 'sent');
 
@@ -772,30 +806,18 @@ class LikesSentTabRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i28.HelpPage]
-class HelpPageRoute extends _i19.PageRouteInfo<HelpPageRouteArgs> {
-  HelpPageRoute({_i30.Key? key})
-      : super(HelpPageRoute.name, path: '', args: HelpPageRouteArgs(key: key));
+/// [_i30.HelpPage]
+class HelpPageRoute extends _i19.PageRouteInfo<void> {
+  const HelpPageRoute() : super(HelpPageRoute.name, path: '');
 
   static const String name = 'HelpPageRoute';
 }
 
-class HelpPageRouteArgs {
-  const HelpPageRouteArgs({this.key});
-
-  final _i30.Key? key;
-
-  @override
-  String toString() {
-    return 'HelpPageRouteArgs{key: $key}';
-  }
-}
-
 /// generated route for
-/// [_i29.HelpArticleScreen]
+/// [_i31.HelpArticleScreen]
 class HelpArticleScreenRoute
     extends _i19.PageRouteInfo<HelpArticleScreenRouteArgs> {
-  HelpArticleScreenRoute({_i30.Key? key, required String id})
+  HelpArticleScreenRoute({_i32.Key? key, required String id})
       : super(HelpArticleScreenRoute.name,
             path: ':id',
             args: HelpArticleScreenRouteArgs(key: key, id: id),
@@ -807,7 +829,7 @@ class HelpArticleScreenRoute
 class HelpArticleScreenRouteArgs {
   const HelpArticleScreenRouteArgs({this.key, required this.id});
 
-  final _i30.Key? key;
+  final _i32.Key? key;
 
   final String id;
 

@@ -14,14 +14,29 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 //To Reproduce: Open an Article from the listing -> Press Back -> Open Any Article Again -> Press Back -> Takes you to profile page
 
 class HelpPage extends HookConsumerWidget {
+  const HelpPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      children: [
+        const CustomHeaderTile(text: Headings.faqs),
+        ArticleListings()
+      ],
+    );
+  }
+}
+
+class ArticleListings extends HookConsumerWidget {
   final apiHostURL =
       FirebaseRemoteConfig.instance.getString(RemoteConfigs.apiHostURL);
 
-  HelpPage({Key? key}) : super(key: key);
+  ArticleListings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final articleListing = ref.watch(articleProvider);
+
     return articleListing.maybeWhen(
       data: (List<Article> listing) => Column(
         children: [
