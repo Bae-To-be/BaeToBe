@@ -68,11 +68,14 @@ class InfoLabels {
   static const socialAccounts = 'Social accounts.';
   static const String underVerificationHelper =
       'Hi, we have collected your information and our team is currently verifying your profile. We will get back to you soon!';
-  static const pleaseChangeField = 'Please update this information';
-  static const correctionSubmitted = 'Correction Submitted';
-  static const allGood = 'All good';
-  static const likesLoaded = 'Likes loaded';
-  static const matchesLoaded = 'Matches loaded';
+  static const String pleaseChangeField = 'Please update this information';
+  static const String correctionSubmitted = 'Correction Submitted';
+  static const String allGood = 'All good';
+  static const String likesLoaded = 'Likes loaded';
+  static const String matchesLoaded = 'Matches loaded';
+  static const String warning = 'Warning';
+  static const String closeMatchInfo =
+      'No one will be able to send further messages to this conversation. This will not delete the messages!';
 }
 
 class Placeholders {
@@ -101,6 +104,7 @@ class LinkTexts {
   static const String continueWithFb = 'Continue with Facebook';
   static const String submit = 'Submit';
   static const String help = 'Need Help?';
+  static const String cancel = 'Cancel';
 }
 
 class ApprovalFieldLabels {

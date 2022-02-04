@@ -42,3 +42,16 @@ final isProfileMatchClosedProvider =
           .select((result) => result.value?.match?.isClosed)) ==
       true;
 });
+
+Future<void> closeMatch(int id, WidgetRef ref) async {
+  final client = ref.read(networkClientProvider);
+  final error = ref.read(errorProvider.notifier);
+
+  await error.safelyExecute(
+      command: client.post(
+          BackendRoutes.closeMatch.replaceAll('%{match_id}', id.toString())),
+      onSuccess: (response) {
+        ref.read(isProfileMatchClosedProvider(id).notifier).state = true;
+        return Future.value(null);
+      });
+}
