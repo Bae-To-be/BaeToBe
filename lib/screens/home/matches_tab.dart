@@ -6,10 +6,10 @@ import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/components/user_avatar.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/matches_provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -97,16 +97,8 @@ class MatchesTab extends HookConsumerWidget {
                           : CustomTextWidget(
                               type: textWidgetType.caption,
                               text: matchesListing[i].timeSinceUpdate),
-                      avatar: GFAvatar(
-                        shape: GFAvatarShape.circle,
-                        backgroundColor: offWhite,
-                        backgroundImage:
-                            matchesListing[i].profilePicture != null
-                                ? CachedNetworkImageProvider(
-                                    matchesListing[i].profilePicture!.url)
-                                : Image.asset('assets/profile_placeholder.png')
-                                    .image,
-                      ),
+                      avatar:
+                          UserAvatar(image: matchesListing[i].profilePicture),
                       color: bgColor,
                       title: Text(matchesListing[i].userName,
                           style: Theme.of(context)

@@ -4,12 +4,12 @@ import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/components/user_avatar.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/like.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -76,14 +76,7 @@ class LikesListing extends HookConsumerWidget {
                 const CustomDivider(),
             itemBuilder: (c, i) => GFListTile(
                 margin: const EdgeInsets.symmetric(horizontal: 5),
-                avatar: GFAvatar(
-                  shape: GFAvatarShape.circle,
-                  backgroundColor: offWhite,
-                  backgroundImage: likesListing[i].profilePicture != null
-                      ? CachedNetworkImageProvider(
-                          likesListing[i].profilePicture!.url)
-                      : Image.asset('assets/profile_placeholder.png').image,
-                ),
+                avatar: UserAvatar(image: likesListing[i].profilePicture),
                 color: offWhite,
                 subTitle: Text(likesListing[i].summary,
                     style: Theme.of(context).textTheme.caption),

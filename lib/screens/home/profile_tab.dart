@@ -1,11 +1,11 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
+import 'package:baetobe/components/user_avatar.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,14 +37,9 @@ class ProfileTab extends HookConsumerWidget {
           ),
           Stack(
             children: <Widget>[
-              CircleAvatar(
-                foregroundImage: profilePicture != null
-                    ? CachedNetworkImageProvider(profilePicture.url,
-                        cacheKey: profilePicture.id.toString())
-                    : Image.asset('assets/profile_placeholder.png').image,
-                backgroundColor: Theme.of(context).primaryColorLight,
-                radius: 75,
-              ),
+              UserAvatar(
+                  image: profilePicture,
+                  radius: MediaQuery.of(context).size.width / 2),
               Positioned(
                 bottom: 0,
                 right: 0,

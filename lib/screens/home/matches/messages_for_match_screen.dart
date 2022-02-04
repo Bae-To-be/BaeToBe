@@ -66,7 +66,8 @@ class MessagesForMatchScreen extends HookConsumerWidget {
               backgroundColor: Colors.white,
               size: GFSize.LARGE,
               backgroundImage: match.profilePicture != null
-                  ? CachedNetworkImageProvider(match.profilePicture!.url)
+                  ? CachedNetworkImageProvider(match.profilePicture!.url,
+                      cacheKey: match.profilePicture!.id.toString())
                   : Image.asset('assets/profile_placeholder.png').image,
             ),
             onTap: () {
