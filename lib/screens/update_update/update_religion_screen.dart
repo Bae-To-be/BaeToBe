@@ -14,33 +14,34 @@ import 'package:styled_widget/styled_widget.dart';
 class UpdateReligionScreen extends HookConsumerWidget {
   const UpdateReligionScreen({Key? key}) : super(key: key);
 
+  List<Widget> _tiles(
+      BuildContext context,
+      ReligionListing religionListing,
+      List<int> selected,
+      void Function(int value) onTap,
+      void Function() onSubmit) {
+    List<Widget> result = [];
+
+    for (var religion in religionListing.religions) {
+      bool isSelected = selected.contains(religion.id);
+
+      result.add(SelectTile(
+          title: religion.name,
+          selected: isSelected,
+          onTap: () => onTap(religion.id)));
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final religionListing = ref.watch(religionProvider);
     final state = ref.watch(religionStateProvider);
+
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
           {'religion_id': state.first},
           routeTo: AppLinks.back);
-    }
-
-    List<Widget> _tiles(
-        BuildContext context,
-        ReligionListing religionListing,
-        List<int> selected,
-        void Function(int value) onTap,
-        void Function() onSubmit) {
-      List<Widget> result = [];
-
-      for (var religion in religionListing.religions) {
-        bool isSelected = selected.contains(religion.id);
-
-        result.add(SelectTile(
-            title: religion.name,
-            selected: isSelected,
-            onTap: () => onTap(religion.id)));
-      }
-      return result;
     }
 
     return FormLayout(
