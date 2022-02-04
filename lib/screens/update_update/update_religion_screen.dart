@@ -14,16 +14,12 @@ import 'package:styled_widget/styled_widget.dart';
 class UpdateReligionScreen extends HookConsumerWidget {
   const UpdateReligionScreen({Key? key}) : super(key: key);
 
-  List<Widget> _tiles(
-      BuildContext context,
-      List religionListing,
-      List<int> selected,
-      void Function(int value) onTap,
-      void Function() onSubmit) {
+  List<Widget> _tiles(BuildContext context, List religionListing, int? selected,
+      void Function(int value) onTap, void Function() onSubmit) {
     List<Widget> result = [];
 
     for (var religion in religionListing) {
-      bool isSelected = selected.contains(religion.id);
+      bool isSelected = selected == religion.id;
 
       result.add(SelectTile(
           title: religion.name,
@@ -39,9 +35,9 @@ class UpdateReligionScreen extends HookConsumerWidget {
     final state = ref.watch(religionStateProvider);
 
     void onSubmit() {
-      ref.read(userProvider.notifier).updateAttributes(
-          {'religion_id': state.first},
-          routeTo: AppLinks.back);
+      ref
+          .read(userProvider.notifier)
+          .updateAttributes({'religion_id': state}, routeTo: AppLinks.back);
     }
 
     return FormLayout(
@@ -52,7 +48,7 @@ class UpdateReligionScreen extends HookConsumerWidget {
           religionListing.maybeWhen(
               data: (listing) => Column(
                     children: _tiles(context, listing, state, (int value) {
-                      ref.read(religionStateProvider.notifier).state = [value];
+                      ref.read(religionStateProvider.notifier).state = value;
                     }, onSubmit),
                   ),
               orElse: () => Center(
@@ -60,7 +56,7 @@ class UpdateReligionScreen extends HookConsumerWidget {
                       color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
-          enabled: state.isNotEmpty,
+          enabled: state != null,
           onPressed: onSubmit,
         ));
   }
