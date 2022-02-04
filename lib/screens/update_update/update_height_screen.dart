@@ -89,12 +89,13 @@ class _HeightInput extends HookConsumerWidget {
                 childCount:
                     ((heightUpperBound * 12) - (heightLowerBound * 12)) + 1,
                 builder: (BuildContext context, int index) {
+                  int indexInInches = ((heightLowerBound * 12) + index);
                   return SizedBox(
                     width: MediaQuery.of(context).size.width - 32,
                     child: Text(
-                      '${(((heightLowerBound * 12) + index) / 12).floor()}\' '
-                      '${((heightLowerBound * 12) + index) % 12}" '
-                      '(${(((heightLowerBound * 12) + index) * 2.54).round()} '
+                      '${(indexInInches / 12).floor()}\' '
+                      '${indexInInches % 12}" '
+                      '(${(indexInInches * 2.54).round()} '
                       'cms)',
                       style: TextStyle(
                           fontSize: 18,
