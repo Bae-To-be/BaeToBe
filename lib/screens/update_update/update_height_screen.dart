@@ -29,9 +29,14 @@ class UpdateHeightScreen extends HookConsumerWidget {
 
     return FormLayout(children: [
       const CustomHeaderTile(text: Headings.height),
-      Expanded(flex: 1, child: Container()),
-      _HeightInput(),
-      Expanded(flex: 2, child: Container()),
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _HeightInput(),
+          ],
+        ),
+      ),
     ], floatingSubmit: FloatingCta(onPressed: onSubmit));
   }
 }
