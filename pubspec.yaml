@@ -46,6 +46,7 @@ dependencies:
   uuid: ^3.0.5
   flutter_slidable: ^1.2.0
   debug_friend: ^0.4.0
+  freezed_annotation: ^1.1.0
 dev_dependencies:
   integration_test:
     sdk: flutter
@@ -58,6 +59,8 @@ dev_dependencies:
   http_mock_adapter: ^0.3.2
   mockito: ^5.0.17
   auto_route_generator: ^3.2.1
+  freezed: ^1.1.1
+  json_serializable: ^6.1.4
 flutter_icons:
   android: ture
   ios: true
