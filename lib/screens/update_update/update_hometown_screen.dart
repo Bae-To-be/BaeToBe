@@ -30,7 +30,7 @@ class UpdateHometownScreen extends HookConsumerWidget {
         ref.read(hometownStateProvider.notifier).state = ref
             .read(hometownStateProvider.notifier)
             .state
-            .copyWith(newCityName: cityNameController.text);
+            .copyWith(cityName: cityNameController.text);
       }
     });
     return FormLayout(
@@ -85,7 +85,7 @@ class UpdateHometownScreen extends HookConsumerWidget {
                           ref.read(hometownStateProvider.notifier).state = ref
                               .read(hometownStateProvider.notifier)
                               .state
-                              .copyWith(newCountryName: value as String);
+                              .copyWith(countryName: value as String);
                         },
                         hint: const Text(
                           Placeholders.countryHint,

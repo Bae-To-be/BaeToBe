@@ -1,4 +1,5 @@
 import 'package:baetobe/domain/images_provider.dart';
+import 'package:baetobe/entities/view_models/image_form_state.dart';
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,49 +29,20 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
 
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
-      state = state.copyWith(newUploading: true);
+      state = state.copyWith(loading: true);
       await imagesNotifier.addImage(position, image.path, image.name);
       if (mounted) {
-        state = state.copyWith(newUploading: false);
+        state = state.copyWith(loading: false);
       }
     }
   }
 
   Future<void> removeImage() async {
-    state = state.copyWith(newUploading: true);
+    state = state.copyWith(loading: true);
     final imagesNotifier = ref.read(imagesProvider.notifier);
     await imagesNotifier.removeImage(position);
     if (mounted) {
-      state = state.copyWith(newUploading: false);
+      state = state.copyWith(loading: false);
     }
-  }
-}
-
-class ImageFormState {
-  String? url;
-  int? id;
-  bool loading;
-
-  ImageFormState({this.url, this.id, this.loading = false});
-
-  ImageFormState copyWith({
-    String? newUrl,
-    int? newId,
-    bool? newUploading,
-  }) {
-    return ImageFormState(
-      url: newUrl ?? url,
-      id: newId ?? id,
-      loading: newUploading ?? loading,
-    );
-  }
-
-  @override
-  String toString() {
-    return {
-      'url': url,
-      'uploading': loading,
-      'id': id,
-    }.toString();
   }
 }
