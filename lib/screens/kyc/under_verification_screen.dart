@@ -2,6 +2,7 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
@@ -14,6 +15,20 @@ class UnderVerificationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final verificationInfo = ref.watch(verificationInfoProvider);
+
+    if (verificationInfo != null) {
+      if (verificationInfo.status == ApprovalStatuses.rejected) {
+        ref
+            .read(routerProvider.notifier)
+            .replaceNamed(AppLinks.verificationRejected);
+      }
+
+      if (verificationInfo.status == ApprovalStatuses.approved) {
+        ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
+      }
+    }
+
     return Column(children: [
       SizedBox(height: MediaQuery.of(context).size.width * 0.3),
       Text.rich(
