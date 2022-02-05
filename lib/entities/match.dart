@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/generated/user_image.dart';
 
 class Match {
   int id;

@@ -119,7 +119,7 @@ class EditProfilePage extends HookConsumerWidget {
                   title: EditProfileFieldLabels.hometown,
                   content: Text(
                     _user.hometown.toString() != ''
-                        ? _user.hometown.toString()
+                        ? _user.hometown.formatted()
                         : ErrorMessages.pleaseUpdatePreferences,
                     style: const TextStyle(color: Colors.grey, fontSize: 16),
                   ),

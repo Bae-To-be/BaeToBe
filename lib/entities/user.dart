@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:baetobe/entities/generated/language.dart';
 import 'package:baetobe/entities/generated/preference.dart';
 import 'package:baetobe/entities/generated/religion.dart';
+import 'package:baetobe/entities/generated/user_hometown.dart';
 
 class User {
   static const String pausedStatus = 'paused';
@@ -126,37 +127,6 @@ class User {
   }
 }
 
-class UserHometown {
-  String countryName;
-  String cityName;
-
-  UserHometown(this.cityName, this.countryName);
-
-  factory UserHometown.fromJson(Map<String, dynamic> json) {
-    String cityName = '';
-    if (json['city'] != null) {
-      cityName = json['city']['name'];
-    }
-
-    return UserHometown(cityName, json['country_name'] ?? '');
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'country_name': countryName,
-      'city_name': cityName,
-    };
-  }
-
-  @override
-  String toString() {
-    if (cityName != '' && countryName != '') {
-      return '$cityName, $countryName';
-    }
-    return '$cityName$countryName';
-  }
-}
-
 class UserEducation {
   String courseName;
   String universityName;
@@ -205,26 +175,6 @@ class UserEducation {
   }
 }
 
-class UserImage {
-  int position;
-  String url;
-  int id;
-
-  UserImage(this.id, this.position, this.url);
-
-  factory UserImage.fromJson(Map<String, dynamic> json) {
-    return UserImage(json['id'] as int, json['position'] as int, json['url']);
-  }
-
-  @override
-  String toString() {
-    return {
-      'id': id,
-      'position': position,
-    }.toString();
-  }
-}
-
 class UserVerificationFile {
   String fileType;
   String url;
@@ -240,56 +190,6 @@ class UserVerificationFile {
     return {
       'file_type': fileType,
       'url': url,
-    }.toString();
-  }
-}
-
-class UserVerificationInfo {
-  bool linkedinApproved;
-  bool workDetailsApproved;
-  bool educationApproved;
-  bool dobApproved;
-  bool selfieApproved;
-  bool identityApproved;
-  List<String> fieldsUpdated;
-  String? rejectionReason;
-  String status;
-
-  UserVerificationInfo(
-      {required this.linkedinApproved,
-      required this.workDetailsApproved,
-      required this.educationApproved,
-      required this.dobApproved,
-      required this.selfieApproved,
-      required this.identityApproved,
-      required this.fieldsUpdated,
-      required this.status,
-      this.rejectionReason});
-
-  factory UserVerificationInfo.fromJson(Map<String, dynamic> json) {
-    return UserVerificationInfo(
-        linkedinApproved: json['linkedin_approved'],
-        workDetailsApproved: json['work_details_approved'],
-        educationApproved: json['education_approved'],
-        dobApproved: json['dob_approved'],
-        selfieApproved: json['selfie_approved'],
-        identityApproved: json['identity_approved'],
-        status: json['status'],
-        fieldsUpdated: List<String>.from(json['fields_updated'] ?? []),
-        rejectionReason: json['rejection_reason']);
-  }
-
-  @override
-  String toString() {
-    return {
-      linkedinApproved: linkedinApproved,
-      workDetailsApproved: workDetailsApproved,
-      educationApproved: educationApproved,
-      dobApproved: dobApproved,
-      selfieApproved: selfieApproved,
-      identityApproved: identityApproved,
-      fieldsUpdated: fieldsUpdated,
-      rejectionReason: rejectionReason
     }.toString();
   }
 }

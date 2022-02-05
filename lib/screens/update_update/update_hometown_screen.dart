@@ -8,7 +8,6 @@ import 'package:baetobe/domain/background_fields/countries_provider.dart';
 import 'package:baetobe/domain/background_fields/suggestions.dart';
 import 'package:baetobe/domain/form_states/hometown_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:getwidget/components/dropdown/gf_dropdown.dart';
@@ -109,9 +108,12 @@ class UpdateHometownScreen extends HookConsumerWidget {
       ],
       floatingSubmit: FloatingCta(
         onPressed: () {
-          ref.read(userProvider.notifier).updateAttributes(
-              {'hometown': UserHometown(state.cityName!, state.countryName!)},
-              routeTo: AppLinks.back);
+          ref.read(userProvider.notifier).updateAttributes({
+            'hometown': {
+              'country_name': state.countryName,
+              'city_name': state.cityName
+            },
+          }, routeTo: AppLinks.back);
         },
       ),
     );
