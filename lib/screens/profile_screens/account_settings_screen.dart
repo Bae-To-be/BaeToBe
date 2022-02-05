@@ -6,6 +6,7 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/auth_provider.dart';
+import 'package:baetobe/domain/notification_preferences_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
@@ -58,11 +59,10 @@ class AccountSettingsScreen extends HookConsumerWidget {
         GFListTile(
           padding: const EdgeInsets.only(top: 10),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-          title: Text('Terms and Conditions',
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1!
-                  .copyWith(fontWeight: FontWeight.bold)),
+          title: const CustomTextWidget(
+              type: textWidgetType.subtitle1,
+              text: LinkTexts.termsAndConditions,
+              withRow: false),
           icon: Icon(
             FontAwesomeIcons.chevronRight,
             color: Theme.of(context).primaryColor,
@@ -73,11 +73,10 @@ class AccountSettingsScreen extends HookConsumerWidget {
         GFListTile(
           padding: const EdgeInsets.only(top: 15, bottom: 10),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-          title: Text('Privacy Policy',
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1!
-                  .copyWith(fontWeight: FontWeight.bold)),
+          title: const CustomTextWidget(
+              type: textWidgetType.subtitle1,
+              text: LinkTexts.privacyPolicy,
+              withRow: false),
           icon: Icon(
             FontAwesomeIcons.chevronRight,
             color: Theme.of(context).primaryColor,
@@ -89,6 +88,29 @@ class AccountSettingsScreen extends HookConsumerWidget {
                 type: textWidgetType.heading6, text: Headings.notifications)
             .padding(left: 20, bottom: 10),
         const CustomDivider().padding(horizontal: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const CustomTextWidget(
+                type: textWidgetType.subtitle1,
+                text: InfoLabels.whileAppOpen,
+                withRow: false),
+            Consumer(builder: (context, ref, child) {
+              final state = ref.watch(notificationPreferencesProvider);
+
+              return GFToggle(
+                enabledTrackColor: Theme.of(context).primaryColor,
+                onChanged: (val) {
+                  ref
+                      .read(notificationPreferencesProvider.notifier)
+                      .updateWhileAppOpen(val == true);
+                },
+                type: GFToggleType.ios,
+                value: state,
+              );
+            })
+          ],
+        ).padding(left: 20, right: 5, top: 10),
         Expanded(child: Container()),
         const CustomDivider().padding(horizontal: 20, top: 15, bottom: 5),
         Row(

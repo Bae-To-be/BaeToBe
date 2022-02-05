@@ -114,7 +114,7 @@ class LoginScreen extends HookConsumerWidget {
                     ),
                     const TextSpan(text: 'and '),
                     TextSpan(
-                      text: LinkTexts.privacyPolicy,
+                      text: '${LinkTexts.privacyPolicy}.',
                       style:
                           const TextStyle(decoration: TextDecoration.underline),
                       recognizer: TapGestureRecognizer()

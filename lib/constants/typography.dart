@@ -110,6 +110,7 @@ class InfoLabels {
   static const String pauseAccount = 'Pause Account';
   static const String permanentAction =
       'This is a permanent action and cannot be reverted';
+  static const String whileAppOpen = 'While App Open';
 }
 
 class Placeholders {
@@ -125,7 +126,7 @@ class Placeholders {
 
 class LinkTexts {
   static const String termsAndConditions = 'Terms and Conditions ';
-  static const String privacyPolicy = 'Privacy Policy.';
+  static const String privacyPolicy = 'Privacy Policy';
   static const String viewMore = 'View More';
   static const String cont = 'Continue';
   static const String addSchool = 'Add Another School';

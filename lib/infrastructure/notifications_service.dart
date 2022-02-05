@@ -6,6 +6,7 @@ import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/domain/matches_provider.dart';
+import 'package:baetobe/domain/notification_preferences_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
@@ -20,11 +21,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final notificationsProvider = Provider((ref) => NotificationService(ref));
 
 class NotificationService {
+  bool whileAppOpen = false;
   Ref ref;
-
   NotificationService(this.ref);
 
   Future<void> setupNotifications(Ref ref) async {
+    ref.listen(notificationPreferencesProvider, (_, bool value) {
+      whileAppOpen = value;
+    });
+
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       'high_importance_channel', // id
       'High Importance Notifications', // title
@@ -74,12 +79,10 @@ class NotificationService {
       RemoteNotification? notification = message.notification;
 
       _messageDataReactions(message, false);
-      // If `onMessage` is triggered with a notification, construct our own
-      // local notification to show to users using the created channel.
       if (notification != null) {
-        // if (!_notificationPreferences.whileAppOpen.value) {
-        //   return;
-        // }
+        if (!whileAppOpen) {
+          return;
+        }
         switch (message.data['event']) {
           case NotificationEvents.newMessage:
             if (ref.read(routerProvider.notifier).current.name !=

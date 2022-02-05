@@ -46,6 +46,7 @@ class StorageKeys {
   static const String auth = 'auth_info';
   static const String locationUpdatedAt = 'location_updated_at';
   static const String fcmTimestamp = 'fcm_updated_at';
+  static const String notifyWhileAppOpen = 'notify_while_app_open';
 }
 
 class VerificationTypes {
