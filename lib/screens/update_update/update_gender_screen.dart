@@ -86,7 +86,10 @@ class UpdateGenderScreen extends HookConsumerWidget {
             : null,
         children: <Widget>[
           redirectBack == true
-              ? Container()
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 36.0),
+                  child: Container(),
+                )
               : Column(
                   children: [
                     const SizedBox(height: 32),
@@ -97,19 +100,15 @@ class UpdateGenderScreen extends HookConsumerWidget {
                         .padding(top: 32, bottom: 36, horizontal: 10),
                   ],
                 ),
-          genderListing
-              .maybeWhen(
-                  data: (GenderListing listing) => Column(
-                        children: _tiles(context, listing, state, (int value) {
-                          ref.read(genderStateProvider.notifier).state = [
-                            value
-                          ];
-                        }, onSubmit),
-                      ),
-                  orElse: () => Center(
-                      child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor)))
-              .padding(top: 36),
+          genderListing.maybeWhen(
+              data: (GenderListing listing) => Column(
+                    children: _tiles(context, listing, state, (int value) {
+                      ref.read(genderStateProvider.notifier).state = [value];
+                    }, onSubmit),
+                  ),
+              orElse: () => Center(
+                  child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
           enabled: state.isNotEmpty,

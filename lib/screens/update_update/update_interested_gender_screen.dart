@@ -82,7 +82,10 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
             : null,
         children: <Widget>[
           redirectBack == true
-              ? Container()
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 36.0),
+                  child: Container(),
+                )
               : Column(
                   children: [
                     const SizedBox(height: 32),
@@ -92,46 +95,40 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                         .padding(top: 32, bottom: 36, left: 10),
                   ],
                 ),
-          genderListing
-              .maybeWhen(
-                  data: (GenderListing listing) => ListView(
-                        shrinkWrap: true,
-                        children: _tiles(context, listing, state, (int value) {
-                          final currentState = ref
-                              .read(interestedGenderStateProvider.notifier)
-                              .state;
-                          final allGenders = genderListing.value?.defaultGenders
-                              .firstWhereOrNull(
-                                  (gender) => gender.name == 'All');
-                          if (currentState.contains(value)) {
-                            ref
-                                    .read(interestedGenderStateProvider.notifier)
-                                    .state =
-                                currentState
-                                    .where((id) => id != value)
-                                    .toList();
-                            return;
-                          }
-                          if (allGenders != null) {
-                            if (currentState.contains(allGenders.id)) {
-                              return;
-                            }
-                            if (value == allGenders.id) {
-                              ref
-                                  .read(interestedGenderStateProvider.notifier)
-                                  .state = [value];
-                              return;
-                            }
-                          }
+          genderListing.maybeWhen(
+              data: (GenderListing listing) => ListView(
+                    shrinkWrap: true,
+                    children: _tiles(context, listing, state, (int value) {
+                      final currentState = ref
+                          .read(interestedGenderStateProvider.notifier)
+                          .state;
+                      final allGenders = genderListing.value?.defaultGenders
+                          .firstWhereOrNull((gender) => gender.name == 'All');
+                      if (currentState.contains(value)) {
+                        ref.read(interestedGenderStateProvider.notifier).state =
+                            currentState.where((id) => id != value).toList();
+                        return;
+                      }
+                      if (allGenders != null) {
+                        if (currentState.contains(allGenders.id)) {
+                          return;
+                        }
+                        if (value == allGenders.id) {
                           ref
                               .read(interestedGenderStateProvider.notifier)
-                              .state = [...currentState, value];
-                        }, onSubmit),
-                      ),
-                  orElse: () => Center(
-                      child: CircularProgressIndicator(
-                          color: Theme.of(context).primaryColor)))
-              .padding(top: 36),
+                              .state = [value];
+                          return;
+                        }
+                      }
+                      ref.read(interestedGenderStateProvider.notifier).state = [
+                        ...currentState,
+                        value
+                      ];
+                    }, onSubmit),
+                  ),
+              orElse: () => Center(
+                  child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
           enabled: state.isNotEmpty,
