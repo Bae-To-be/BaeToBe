@@ -30,7 +30,9 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     if (image != null) {
       state = state.copyWith(newUploading: true);
       await imagesNotifier.addImage(position, image.path, image.name);
-      state = state.copyWith(newUploading: false);
+      if (mounted) {
+        state = state.copyWith(newUploading: false);
+      }
     }
   }
 
@@ -38,7 +40,9 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     state = state.copyWith(newUploading: true);
     final imagesNotifier = ref.read(imagesProvider.notifier);
     await imagesNotifier.removeImage(position);
-    state = state.copyWith(newUploading: false);
+    if (mounted) {
+      state = state.copyWith(newUploading: false);
+    }
   }
 }
 
