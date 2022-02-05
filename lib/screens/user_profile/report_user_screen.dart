@@ -4,7 +4,7 @@ import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/report_user_state_provider.dart';
 import 'package:baetobe/domain/report_reasons_provider.dart';
-import 'package:baetobe/entities/user_profile.dart';
+import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';

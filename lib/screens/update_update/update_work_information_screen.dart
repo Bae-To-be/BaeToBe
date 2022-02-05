@@ -34,7 +34,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
         ref.read(workInformationStateProvider.notifier).state = ref
             .read(workInformationStateProvider.notifier)
             .state
-            .copyWith(newWorkTitleName: workTitleController.text);
+            .copyWith(workTitleName: workTitleController.text);
       }
     });
     companyController.addListener(() {
@@ -43,7 +43,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
         ref.read(workInformationStateProvider.notifier).state = ref
             .read(workInformationStateProvider.notifier)
             .state
-            .copyWith(newCompanyName: companyController.text);
+            .copyWith(companyName: companyController.text);
       }
     });
     useEffect(() {

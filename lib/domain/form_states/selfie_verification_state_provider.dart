@@ -4,6 +4,7 @@ import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_files_provider.dart';
+import 'package:baetobe/entities/view_models/selfie_state.dart';
 import 'package:camera/camera.dart';
 import 'package:collection/collection.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -49,9 +50,7 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
   }
 
   void clearPicture() {
-    final newState = state.copyWith();
-    newState.file = null;
-    debugPrint(newState.toString());
+    final newState = state.copyWith(file: null);
     state = newState;
   }
 
@@ -68,7 +67,7 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
     XFile? file;
     try {
       file = await state.controller!.takePicture();
-      state = state.copyWith(newFile: file);
+      state = state.copyWith(file: file);
     } catch (e, stacktrace) {
       await FirebaseCrashlytics.instance.recordError(e, stacktrace);
       error.updateError(ErrorMessages.couldNotTakePicture);
@@ -113,23 +112,6 @@ class SelfieFormStateNotifier extends StateNotifier<SelfieState>
     } on CameraException {
       error.updateError(ErrorMessages.pleaseGrantCameraPermission);
     }
-    state = state.copyWith(newController: controller);
-  }
-}
-
-class SelfieState {
-  XFile? file;
-  CameraController? controller;
-
-  SelfieState({this.controller, this.file});
-
-  SelfieState copyWith({CameraController? newController, XFile? newFile}) {
-    return SelfieState(
-        file: newFile ?? file, controller: newController ?? controller);
-  }
-
-  @override
-  String toString() {
-    return {'file': file}.toString();
+    state = state.copyWith(controller: controller);
   }
 }

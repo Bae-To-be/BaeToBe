@@ -1,6 +1,6 @@
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
-import 'package:baetobe/entities/match.dart';
+import 'package:baetobe/entities/data/match.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +85,7 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
         state.value!.firstWhereOrNull((match) => match.id == matchId);
     if (existing != null) {
       addOrUpdateMatch(existing.copyWith(
-          newUnreadCount: existing.unreadCount + 1, newUpdatedAt: updatedAt));
+          unreadCount: existing.unreadCount + 1, updatedAt: updatedAt));
     }
   }
 
@@ -97,8 +97,7 @@ class MatchesNotifier extends StateNotifier<AsyncValue<List<Match>>>
     final existing =
         state.value!.firstWhereOrNull((match) => match.id == matchId);
     if (existing != null) {
-      addOrUpdateMatch(
-          existing.copyWith(newIsClosed: true, newUpdatedAt: updatedAt));
+      addOrUpdateMatch(existing.copyWith(isClosed: true, updatedAt: updatedAt));
     }
   }
 

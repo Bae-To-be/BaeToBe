@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
-import 'package:baetobe/domain/form_states/selfie_verification_state_provider.dart';
+import 'package:baetobe/entities/view_models/selfie_state.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';

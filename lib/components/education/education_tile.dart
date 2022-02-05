@@ -2,7 +2,7 @@ import 'package:baetobe/components/forms/auto_complete_field.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/suggestions.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user_education.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -113,7 +113,7 @@ class EducationTile extends HookConsumerWidget {
             iconEnabledColor: Theme.of(context).primaryColor,
             iconDisabledColor: Theme.of(context).primaryColor,
             isExpanded: true,
-            value: education.year != '' ? education.year : null,
+            value: education.year.toString(),
             onChanged: (newValue) {
               onEdit(year: newValue as String);
             },

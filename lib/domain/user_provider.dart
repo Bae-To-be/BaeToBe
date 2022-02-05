@@ -5,7 +5,8 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user.dart';
+import 'package:baetobe/entities/data/user_hometown.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,7 +23,7 @@ class UserNotifier extends StateNotifier<User> {
             name: '',
             interestedGenders: [],
             education: [],
-            hometown: UserHometown('', ''),
+            hometown: UserHometown(countryName: '', cityName: ''),
             languages: []));
 
   User get user => state;

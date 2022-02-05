@@ -1,5 +1,5 @@
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user_education.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final educationFormStateProvider =
@@ -28,7 +28,7 @@ class EducationFormState extends StateNotifier<List<UserEducation>> {
   }
 
   void addEducation() {
-    state += [UserEducation('', '', '2010')];
+    state += [UserEducation(courseName: '', universityName: '', year: 2010)];
   }
 
   void removeEducation(int index) {
@@ -42,9 +42,9 @@ class EducationFormState extends StateNotifier<List<UserEducation>> {
     required int index,
   }) {
     final newEducation = state[index].copyWith(
-      newCourseName: courseName,
-      newUniversityName: universityName,
-      newYear: year,
+      courseName: courseName ?? state[index].courseName,
+      universityName: universityName ?? state[index].universityName,
+      year: year != null ? int.parse(year) : state[index].year,
     );
     state = List.from(state)
       ..removeAt(index)

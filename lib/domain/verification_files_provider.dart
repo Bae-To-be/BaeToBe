@@ -3,7 +3,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user_verification_file.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
@@ -100,7 +100,8 @@ class VerificationFilesNotifier
   }
 
   void _addOrReplaceFile(String verificationType, String url) {
-    final newVerificationFile = UserVerificationFile(verificationType, url);
+    final newVerificationFile =
+        UserVerificationFile(fileType: verificationType, url: url);
     final matchIndex =
         state.indexWhere((image) => image.fileType == verificationType);
     if (matchIndex == -1) {

@@ -10,7 +10,7 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/gender_provider.dart';
 import 'package:baetobe/domain/form_states/gender_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/gender.dart';
+import 'package:baetobe/entities/data/gender.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';

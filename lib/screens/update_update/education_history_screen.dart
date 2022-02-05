@@ -90,7 +90,8 @@ class EducationHistoryScreen extends HookConsumerWidget {
         enabled: state.allInformationValid(),
         onPressed: () {
           ref.read(userProvider.notifier).updateAttributes({
-            'education': state.map((education) => education.toJson()).toList()
+            'education':
+                state.map((education) => education.submitPayload()).toList()
           },
               routeTo: redirectBack == true
                   ? AppLinks.back

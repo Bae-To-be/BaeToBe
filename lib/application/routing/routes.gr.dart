@@ -12,8 +12,8 @@
 
 import 'package:auto_route/auto_route.dart' as _i19;
 import 'package:baetobe/application/routing/auth_guard.dart' as _i33;
-import 'package:baetobe/entities/match.dart' as _i34;
-import 'package:baetobe/entities/user_profile.dart' as _i35;
+import 'package:baetobe/entities/data/detailed_profile.dart' as _i35;
+import 'package:baetobe/entities/data/match.dart' as _i34;
 import 'package:baetobe/screens/boot/splash_screen.dart' as _i1;
 import 'package:baetobe/screens/help_article_screen.dart' as _i31;
 import 'package:baetobe/screens/home/discover_tab.dart' as _i24;

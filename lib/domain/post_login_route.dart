@@ -4,7 +4,7 @@ import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_files_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user.dart';
 
 Future<String> postLoginRoute(ref) async {
   final UserNotifier userNotifier = ref.read(userProvider.notifier);

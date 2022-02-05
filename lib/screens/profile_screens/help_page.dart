@@ -4,14 +4,11 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/article_provider.dart';
-import 'package:baetobe/entities/article.dart';
+import 'package:baetobe/entities/data/article.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-//TODO: Fix navigation issue
-//To Reproduce: Open an Article from the listing -> Press Back -> Open Any Article Again -> Press Back -> Takes you to profile page
 
 class HelpPage extends HookConsumerWidget {
   const HelpPage({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -90,7 +90,7 @@ class ImagesNotifier extends StateNotifier<List<UserImage>> {
   }
 
   void _addOrReplaceImage(int id, int position, String url) {
-    final newImage = UserImage(id, position, url);
+    final newImage = UserImage(id: id, position: position, url: url);
     final matchIndex = state.indexWhere((image) => image.position == position);
     if (matchIndex == -1) {
       state = [...state, newImage];

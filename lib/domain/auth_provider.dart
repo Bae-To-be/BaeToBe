@@ -8,7 +8,7 @@ import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/post_login_route.dart';
-import 'package:baetobe/entities/auth_information.dart';
+import 'package:baetobe/entities/data/auth_information.dart';
 import 'package:baetobe/infrastructure/location_service.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:baetobe/infrastructure/notifications_service.dart';
@@ -33,7 +33,11 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
 
     initialize().then((_) {
       if (state.value == null) {
-        state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+        state = AsyncValue.data(AuthInformation(
+            accessToken: '',
+            refreshToken: '',
+            expiresIn: 100,
+            fetchedAt: DateTime.now()));
         router.replaceNamed(AppLinks.login);
       }
     }).catchError((error, stacktrace) {
@@ -164,10 +168,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
             data: {'refresh_token': refreshToken}),
         onSuccess: (response) async {
           state = AsyncValue.data(AuthInformation(
-            response.data['data']['access_token'],
-            refreshToken,
-            response.data['data']['expires_in'] as int,
-            DateTime.now(),
+            accessToken: response.data['data']['access_token'],
+            refreshToken: refreshToken,
+            expiresIn: response.data['data']['expires_in'] as int,
+            fetchedAt: DateTime.now(),
           ));
           await storage.write(
               key: StorageKeys.auth, value: jsonEncode(state.value));
@@ -191,10 +195,10 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
         }),
         onSuccess: (response) async {
           state = AsyncValue.data(AuthInformation(
-            response.data['data']['access_token'],
-            response.data['data']['refresh_token'],
-            response.data['data']['expires_in'] as int,
-            DateTime.now(),
+            accessToken: response.data['data']['access_token'],
+            refreshToken: response.data['data']['refresh_token'],
+            expiresIn: response.data['data']['expires_in'] as int,
+            fetchedAt: DateTime.now(),
           ));
           await Future.wait([
             storage.write(
@@ -248,7 +252,11 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     if (await storage.containsKey(key: StorageKeys.auth)) {
       await storage.delete(key: StorageKeys.auth);
     }
-    state = AsyncValue.data(AuthInformation('', '', 100, DateTime.now()));
+    state = AsyncValue.data(AuthInformation(
+        accessToken: '',
+        refreshToken: '',
+        expiresIn: 100,
+        fetchedAt: DateTime.now()));
     await router.replaceAll([const LoginScreenRoute()]);
   }
 }

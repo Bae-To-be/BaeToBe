@@ -1,5 +1,5 @@
 import 'package:baetobe/components/likes/likes_listing.dart';
-import 'package:baetobe/entities/like.dart';
+import 'package:baetobe/entities/data/like.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

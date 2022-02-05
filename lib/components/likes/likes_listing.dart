@@ -9,7 +9,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
-import 'package:baetobe/entities/like.dart';
+import 'package:baetobe/entities/data/like.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

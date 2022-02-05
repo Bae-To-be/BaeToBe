@@ -1,7 +1,7 @@
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/data/user_verification_info.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

@@ -32,9 +32,9 @@ class VerificationRejectedScreen extends HookConsumerWidget {
           .replaceNamed(AppLinks.underVerification);
     }
 
-    // if (verificationInfo.status == ApprovalStatuses.approved) {
-    //   ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
-    // }
+    if (verificationInfo.status == ApprovalStatuses.approved) {
+      ref.read(routerProvider.notifier).replaceNamed(AppLinks.homePage);
+    }
 
     return Column(children: [
       const SizedBox(height: 32),
