@@ -13,6 +13,7 @@ enum textWidgetType {
   heading5,
   heading6,
   caption,
+  subtitle1
 }
 
 class CustomTextWidget extends StatelessWidget {
@@ -45,6 +46,11 @@ class CustomTextWidget extends StatelessWidget {
         return Theme.of(context).textTheme.headline6!;
       case textWidgetType.caption:
         return Theme.of(context).textTheme.caption!;
+      case textWidgetType.subtitle1:
+        return Theme.of(context)
+            .textTheme
+            .subtitle1!
+            .copyWith(fontWeight: FontWeight.w600);
       default:
         return Theme.of(context).textTheme.bodyText1!;
     }

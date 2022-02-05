@@ -24,6 +24,10 @@ class ErrorNotifier extends StateNotifier<String?> {
     } on DioError catch (e) {
       String? errorMessage;
 
+      if (e.type == DioErrorType.cancel) {
+        return;
+      }
+
       if (e.response?.data is Map) {
         errorMessage = e.response?.data['error'];
       }

@@ -6,19 +6,19 @@ const themeColorLight = Color(0xFFCCECEE);
 const offWhite = Color(0xFFF2F2F2);
 
 final theme = ThemeData(
-    sliderTheme: const SliderThemeData(
+    sliderTheme: SliderThemeData(
+        overlayShape: SliderComponentShape.noOverlay,
         activeTrackColor: themeColor,
         inactiveTrackColor: themeColorLight,
-        trackShape: RoundedRectSliderTrackShape(),
-        trackHeight: 4.0,
+        trackShape: const RoundedRectSliderTrackShape(),
+        trackHeight: 6.0,
         thumbColor: themeColor,
-        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-        tickMarkShape: RoundSliderTickMarkShape(),
-        rangeTickMarkShape: RoundRangeSliderTickMarkShape(),
+        tickMarkShape: const RoundSliderTickMarkShape(),
+        rangeTickMarkShape: const RoundRangeSliderTickMarkShape(),
         activeTickMarkColor: themeColor,
-        valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+        valueIndicatorShape: const PaddleSliderValueIndicatorShape(),
         valueIndicatorColor: themeColor,
-        valueIndicatorTextStyle: TextStyle(
+        valueIndicatorTextStyle: const TextStyle(
           color: Colors.white,
         )),
     primaryColor: themeColor,

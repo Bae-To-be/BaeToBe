@@ -8,6 +8,7 @@ import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/data/user.dart';
 import 'package:baetobe/entities/data/user_hometown.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -43,14 +44,15 @@ class UserNotifier extends StateNotifier<User> {
   }
 
   Future<void> updateAttributes(Map<String, dynamic> attributes,
-      {String? routeTo}) async {
+      {String? routeTo, CancelToken? cancelToken}) async {
     final loading = ref.read(loadingProvider.notifier);
     loading.state = true;
-    final client = ref.read(networkClientProvider);
+    final Dio client = ref.read(networkClientProvider);
     final error = ref.read(errorProvider.notifier);
     final router = ref.read(routerProvider);
     await error.safelyExecute(
-        command: client.patch(BackendRoutes.updateUser, data: attributes),
+        command: client.patch(BackendRoutes.updateUser,
+            data: attributes, cancelToken: cancelToken),
         onSuccess: (response) async {
           state = User.fromJson(response.data['data']);
           await _addAnalyticAttributes();

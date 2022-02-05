@@ -49,6 +49,7 @@ class Headings {
   static const String profile = 'Profile';
   static const String matches = 'Matches';
   static const String loadingArticle = 'Loading Article..';
+  static const String preferences = 'Preferences';
 }
 
 class EditProfileFieldLabels {
