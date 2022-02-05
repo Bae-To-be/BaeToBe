@@ -3,6 +3,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
+import 'package:baetobe/entities/view_models/report_user_state.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,11 +18,11 @@ class ReportUserNotifier extends StateNotifier<ReportUserState> {
   ReportUserNotifier(this.ref, this.userId) : super(ReportUserState());
 
   void updateComment(String value) {
-    state = state.copyWith(newComment: value);
+    state = state.copyWith(comment: value);
   }
 
   void updateSelected(int value) {
-    state = state.copyWith(newSelected: value);
+    state = state.copyWith(selected: value);
   }
 
   Future<void> submitSelection() async {
@@ -42,24 +43,5 @@ class ReportUserNotifier extends StateNotifier<ReportUserState> {
           return Future.value(null);
         },
         onError: (_) => loading.state = false);
-  }
-}
-
-class ReportUserState {
-  int? selected;
-  String? comment;
-
-  ReportUserState({this.selected, this.comment});
-
-  ReportUserState copyWith({int? newSelected, String? newComment}) {
-    return ReportUserState(
-      selected: newSelected ?? selected,
-      comment: newComment ?? comment,
-    );
-  }
-
-  @override
-  String toString() {
-    return {'selected': selected, 'comment': comment}.toString();
   }
 }
