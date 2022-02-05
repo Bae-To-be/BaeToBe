@@ -259,9 +259,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     if (googleSignIn?.currentUser != null) {
       await googleSignIn!.signOut();
     }
-    if (await storage.containsKey(key: StorageKeys.auth)) {
-      await storage.delete(key: StorageKeys.auth);
-    }
+    await storage.deleteAll();
     state = AsyncValue.data(AuthInformation(
         accessToken: '',
         refreshToken: '',
