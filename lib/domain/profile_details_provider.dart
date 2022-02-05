@@ -2,7 +2,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/domain/matches_provider.dart';
-import 'package:baetobe/entities/like.dart';
+import 'package:baetobe/entities/data/like.dart';
 import 'package:baetobe/entities/user_profile.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';
