@@ -126,7 +126,6 @@ class EditProfilePage extends HookConsumerWidget {
                   button: true,
                   callback: () {
                     router.navigateNamed(AppLinks.editHometown);
-                    // Get.toNamed(AppLinks.editHometown, arguments: false);
                   },
                 ),
                 EditProfileContentTile(

@@ -25,10 +25,7 @@ class HelpPage extends HookConsumerWidget {
 }
 
 class ArticleListings extends HookConsumerWidget {
-  final apiHostURL =
-      FirebaseRemoteConfig.instance.getString(RemoteConfigs.apiHostURL);
-
-  ArticleListings({Key? key}) : super(key: key);
+  const ArticleListings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
