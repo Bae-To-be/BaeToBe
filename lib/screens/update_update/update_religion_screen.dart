@@ -14,21 +14,6 @@ import 'package:styled_widget/styled_widget.dart';
 class UpdateReligionScreen extends HookConsumerWidget {
   const UpdateReligionScreen({Key? key}) : super(key: key);
 
-  List<Widget> _tiles(BuildContext context, List religionListing, int? selected,
-      void Function(int value) onTap, void Function() onSubmit) {
-    List<Widget> result = [];
-
-    for (var religion in religionListing) {
-      bool isSelected = selected == religion.id;
-
-      result.add(SelectTile(
-          title: religion.name,
-          selected: isSelected,
-          onTap: () => onTap(religion.id)));
-    }
-    return result;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final religionListing = ref.watch(religionProvider);
@@ -43,15 +28,25 @@ class UpdateReligionScreen extends HookConsumerWidget {
     return FormLayout(
         header: const CustomHeaderTile(text: Headings.religion),
         children: <Widget>[
-          religionListing.maybeWhen(
-              data: (listing) => Column(
-                    children: _tiles(context, listing, state, (int value) {
-                      ref.read(religionStateProvider.notifier).state = value;
-                    }, onSubmit),
-                  ).padding(top: 36),
-              orElse: () => Center(
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor))),
+          religionListing
+              .maybeWhen(
+                  data: (listing) => ListView.builder(
+                      itemCount: listing.length,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext context, int index) {
+                        bool isSelected = state == listing[index].id;
+
+                        return SelectTile(
+                            title: listing[index].name,
+                            selected: isSelected,
+                            onTap: () => ref
+                                .read(religionStateProvider.notifier)
+                                .state = listing[index].id);
+                      }),
+                  orElse: () => Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor)))
+              .padding(top: 36),
         ],
         floatingSubmit: FloatingCta(
           enabled: state != null,
