@@ -1,7 +1,7 @@
-import 'package:baetobe/entities/language.dart';
+import 'package:baetobe/entities/generated/language.dart';
+import 'package:baetobe/entities/generated/preference.dart';
+import 'package:baetobe/entities/generated/religion.dart';
 import 'package:baetobe/entities/match.dart';
-import 'package:baetobe/entities/preference.dart';
-import 'package:baetobe/entities/religion.dart';
 import 'package:baetobe/entities/user.dart';
 
 class DetailedProfile {
