@@ -96,7 +96,7 @@ class EducationTile extends HookConsumerWidget {
             suggestionsCallback: (pattern) {
               return suggestionsFor(SuggestionEntity.course, pattern, ref);
             },
-            hintText: Placeholders.university,
+            hintText: Placeholders.course,
           ).padding(horizontal: 15, bottom: 10),
           const CustomTextWidget(
                   text: Headings.year, type: textWidgetType.heading6)
