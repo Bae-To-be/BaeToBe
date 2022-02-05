@@ -7,7 +7,7 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
-import 'package:baetobe/entities/user_profile.dart';
+import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
