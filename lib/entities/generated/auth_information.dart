@@ -8,10 +8,10 @@ class AuthInformation with _$AuthInformation {
   const AuthInformation._();
 
   factory AuthInformation(
-          {@JsonKey(defaultValue: 'access_token') required String accessToken,
-          @JsonKey(defaultValue: 'refresh_token') required String refreshToken,
-          @JsonKey(defaultValue: 'expires_in') required int expiresIn,
-          @JsonKey(defaultValue: 'fetched_at') required DateTime fetchedAt}) =
+          {@JsonKey(name: 'access_token') required String accessToken,
+          @JsonKey(name: 'refresh_token') required String refreshToken,
+          @JsonKey(name: 'expires_in') required int expiresIn,
+          @JsonKey(name: 'fetched_at') required DateTime fetchedAt}) =
       _AuthInformation;
 
   factory AuthInformation.fromJson(Map<String, dynamic> json) =>

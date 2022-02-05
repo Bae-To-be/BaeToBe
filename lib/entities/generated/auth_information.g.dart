@@ -8,16 +8,16 @@ part of 'auth_information.dart';
 
 _$_AuthInformation _$$_AuthInformationFromJson(Map<String, dynamic> json) =>
     _$_AuthInformation(
-      accessToken: json['accessToken'] as String? ?? 'access_token',
-      refreshToken: json['refreshToken'] as String? ?? 'refresh_token',
-      expiresIn: json['expiresIn'] as int? ?? 'expires_in',
-      fetchedAt: DateTime.parse(json['fetchedAt'] as String) ?? 'fetched_at',
+      accessToken: json['access_token'] as String,
+      refreshToken: json['refresh_token'] as String,
+      expiresIn: json['expires_in'] as int,
+      fetchedAt: DateTime.parse(json['fetched_at'] as String),
     );
 
 Map<String, dynamic> _$$_AuthInformationToJson(_$_AuthInformation instance) =>
     <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
-      'expiresIn': instance.expiresIn,
-      'fetchedAt': instance.fetchedAt.toIso8601String(),
+      'access_token': instance.accessToken,
+      'refresh_token': instance.refreshToken,
+      'expires_in': instance.expiresIn,
+      'fetched_at': instance.fetchedAt.toIso8601String(),
     };

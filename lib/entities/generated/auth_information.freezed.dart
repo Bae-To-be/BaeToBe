@@ -23,10 +23,10 @@ class _$AuthInformationTearOff {
   const _$AuthInformationTearOff();
 
   _AuthInformation call(
-      {@JsonKey(defaultValue: 'access_token') required String accessToken,
-      @JsonKey(defaultValue: 'refresh_token') required String refreshToken,
-      @JsonKey(defaultValue: 'expires_in') required int expiresIn,
-      @JsonKey(defaultValue: 'fetched_at') required DateTime fetchedAt}) {
+      {@JsonKey(name: 'access_token') required String accessToken,
+      @JsonKey(name: 'refresh_token') required String refreshToken,
+      @JsonKey(name: 'expires_in') required int expiresIn,
+      @JsonKey(name: 'fetched_at') required DateTime fetchedAt}) {
     return _AuthInformation(
       accessToken: accessToken,
       refreshToken: refreshToken,
@@ -45,13 +45,13 @@ const $AuthInformation = _$AuthInformationTearOff();
 
 /// @nodoc
 mixin _$AuthInformation {
-  @JsonKey(defaultValue: 'access_token')
+  @JsonKey(name: 'access_token')
   String get accessToken => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: 'refresh_token')
+  @JsonKey(name: 'refresh_token')
   String get refreshToken => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: 'expires_in')
+  @JsonKey(name: 'expires_in')
   int get expiresIn => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: 'fetched_at')
+  @JsonKey(name: 'fetched_at')
   DateTime get fetchedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -66,10 +66,10 @@ abstract class $AuthInformationCopyWith<$Res> {
           AuthInformation value, $Res Function(AuthInformation) then) =
       _$AuthInformationCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(defaultValue: 'access_token') String accessToken,
-      @JsonKey(defaultValue: 'refresh_token') String refreshToken,
-      @JsonKey(defaultValue: 'expires_in') int expiresIn,
-      @JsonKey(defaultValue: 'fetched_at') DateTime fetchedAt});
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'expires_in') int expiresIn,
+      @JsonKey(name: 'fetched_at') DateTime fetchedAt});
 }
 
 /// @nodoc
@@ -117,10 +117,10 @@ abstract class _$AuthInformationCopyWith<$Res>
       __$AuthInformationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(defaultValue: 'access_token') String accessToken,
-      @JsonKey(defaultValue: 'refresh_token') String refreshToken,
-      @JsonKey(defaultValue: 'expires_in') int expiresIn,
-      @JsonKey(defaultValue: 'fetched_at') DateTime fetchedAt});
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'expires_in') int expiresIn,
+      @JsonKey(name: 'fetched_at') DateTime fetchedAt});
 }
 
 /// @nodoc
@@ -166,26 +166,26 @@ class __$AuthInformationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AuthInformation extends _AuthInformation {
   _$_AuthInformation(
-      {@JsonKey(defaultValue: 'access_token') required this.accessToken,
-      @JsonKey(defaultValue: 'refresh_token') required this.refreshToken,
-      @JsonKey(defaultValue: 'expires_in') required this.expiresIn,
-      @JsonKey(defaultValue: 'fetched_at') required this.fetchedAt})
+      {@JsonKey(name: 'access_token') required this.accessToken,
+      @JsonKey(name: 'refresh_token') required this.refreshToken,
+      @JsonKey(name: 'expires_in') required this.expiresIn,
+      @JsonKey(name: 'fetched_at') required this.fetchedAt})
       : super._();
 
   factory _$_AuthInformation.fromJson(Map<String, dynamic> json) =>
       _$$_AuthInformationFromJson(json);
 
   @override
-  @JsonKey(defaultValue: 'access_token')
+  @JsonKey(name: 'access_token')
   final String accessToken;
   @override
-  @JsonKey(defaultValue: 'refresh_token')
+  @JsonKey(name: 'refresh_token')
   final String refreshToken;
   @override
-  @JsonKey(defaultValue: 'expires_in')
+  @JsonKey(name: 'expires_in')
   final int expiresIn;
   @override
-  @JsonKey(defaultValue: 'fetched_at')
+  @JsonKey(name: 'fetched_at')
   final DateTime fetchedAt;
 
   @override
@@ -227,10 +227,10 @@ class _$_AuthInformation extends _AuthInformation {
 
 abstract class _AuthInformation extends AuthInformation {
   factory _AuthInformation(
-          {@JsonKey(defaultValue: 'access_token') required String accessToken,
-          @JsonKey(defaultValue: 'refresh_token') required String refreshToken,
-          @JsonKey(defaultValue: 'expires_in') required int expiresIn,
-          @JsonKey(defaultValue: 'fetched_at') required DateTime fetchedAt}) =
+          {@JsonKey(name: 'access_token') required String accessToken,
+          @JsonKey(name: 'refresh_token') required String refreshToken,
+          @JsonKey(name: 'expires_in') required int expiresIn,
+          @JsonKey(name: 'fetched_at') required DateTime fetchedAt}) =
       _$_AuthInformation;
   _AuthInformation._() : super._();
 
@@ -238,16 +238,16 @@ abstract class _AuthInformation extends AuthInformation {
       _$_AuthInformation.fromJson;
 
   @override
-  @JsonKey(defaultValue: 'access_token')
+  @JsonKey(name: 'access_token')
   String get accessToken;
   @override
-  @JsonKey(defaultValue: 'refresh_token')
+  @JsonKey(name: 'refresh_token')
   String get refreshToken;
   @override
-  @JsonKey(defaultValue: 'expires_in')
+  @JsonKey(name: 'expires_in')
   int get expiresIn;
   @override
-  @JsonKey(defaultValue: 'fetched_at')
+  @JsonKey(name: 'fetched_at')
   DateTime get fetchedAt;
   @override
   @JsonKey(ignore: true)

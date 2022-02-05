@@ -4,7 +4,7 @@ import 'package:baetobe/application/page_wrapper.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/domain/auth_provider.dart';
-import 'package:baetobe/entities/auth_information.dart';
+import 'package:baetobe/entities/generated/auth_information.dart';
 import 'package:baetobe/infrastructure/router_logger.dart';
 import 'package:baetobe/screens/boot/something_went_wrong_screen.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
