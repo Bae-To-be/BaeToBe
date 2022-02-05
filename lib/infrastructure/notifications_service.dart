@@ -9,7 +9,7 @@ import 'package:baetobe/domain/matches_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
-import 'package:baetobe/entities/match.dart';
+import 'package:baetobe/entities/data/match.dart';
 import 'package:baetobe/infrastructure/secure_storage_provider.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

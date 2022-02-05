@@ -5,7 +5,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/auth_provider.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/match.dart';
+import 'package:baetobe/entities/data/match.dart';
 import 'package:baetobe/entities/user.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';

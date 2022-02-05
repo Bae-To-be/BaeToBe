@@ -1,10 +1,10 @@
 import 'package:baetobe/entities/data/language.dart';
+import 'package:baetobe/entities/data/match.dart';
 import 'package:baetobe/entities/data/preference.dart';
 import 'package:baetobe/entities/data/religion.dart';
 import 'package:baetobe/entities/data/user_education.dart';
 import 'package:baetobe/entities/data/user_hometown.dart';
 import 'package:baetobe/entities/data/user_image.dart';
-import 'package:baetobe/entities/match.dart';
 
 class DetailedProfile {
   int id;

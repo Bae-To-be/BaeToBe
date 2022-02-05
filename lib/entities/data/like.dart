@@ -1,3 +1,4 @@
+import 'package:baetobe/entities/data/readers.dart';
 import 'package:baetobe/entities/data/user_image.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,10 +10,9 @@ enum likeDirection { sent, received }
 @freezed
 class Like with _$Like {
   static dynamic _readUser(Map map, String key) => map['user'][key];
-  static int _readId(Map map, String key) => map['id'];
 
   factory Like(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           required int id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           required String userName,

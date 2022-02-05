@@ -23,7 +23,7 @@ class _$LikeTearOff {
   const _$LikeTearOff();
 
   _Like call(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           required int id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           required String userName,
@@ -55,7 +55,7 @@ const $Like = _$LikeTearOff();
 
 /// @nodoc
 mixin _$Like {
-  @JsonKey(name: '_id', readValue: Like._readId)
+  @JsonKey(name: '_id', readValue: Readers.readId)
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name', readValue: Like._readUser)
   String get userName => throw _privateConstructorUsedError;
@@ -78,7 +78,7 @@ abstract class $LikeCopyWith<$Res> {
   factory $LikeCopyWith(Like value, $Res Function(Like) then) =
       _$LikeCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           int id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           String userName,
@@ -157,7 +157,7 @@ abstract class _$LikeCopyWith<$Res> implements $LikeCopyWith<$Res> {
       __$LikeCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           int id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           String userName,
@@ -225,7 +225,7 @@ class __$LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Like implements _Like {
   _$_Like(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           required this.id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           required this.userName,
@@ -241,7 +241,7 @@ class _$_Like implements _Like {
   factory _$_Like.fromJson(Map<String, dynamic> json) => _$$_LikeFromJson(json);
 
   @override
-  @JsonKey(name: '_id', readValue: Like._readId)
+  @JsonKey(name: '_id', readValue: Readers.readId)
   final int id;
   @override
   @JsonKey(name: 'name', readValue: Like._readUser)
@@ -302,7 +302,7 @@ class _$_Like implements _Like {
 
 abstract class _Like implements Like {
   factory _Like(
-      {@JsonKey(name: '_id', readValue: Like._readId)
+      {@JsonKey(name: '_id', readValue: Readers.readId)
           required int id,
       @JsonKey(name: 'name', readValue: Like._readUser)
           required String userName,
@@ -318,7 +318,7 @@ abstract class _Like implements Like {
   factory _Like.fromJson(Map<String, dynamic> json) = _$_Like.fromJson;
 
   @override
-  @JsonKey(name: '_id', readValue: Like._readId)
+  @JsonKey(name: '_id', readValue: Readers.readId)
   int get id;
   @override
   @JsonKey(name: 'name', readValue: Like._readUser)

@@ -7,7 +7,7 @@ part of 'like.dart';
 // **************************************************************************
 
 _$_Like _$$_LikeFromJson(Map<String, dynamic> json) => _$_Like(
-      id: Like._readId(json, '_id') as int,
+      id: Readers.readId(json, '_id') as int,
       userName: Like._readUser(json, 'name') as String,
       userId: Like._readUser(json, 'id') as int,
       summary: Like._readUser(json, 'summary') as String,
