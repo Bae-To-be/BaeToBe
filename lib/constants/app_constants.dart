@@ -83,3 +83,8 @@ class UserMatchStatuses {
   static const String matched = 'matched';
   static const String none = 'none';
 }
+
+class UserStatus {
+  static const String paused = 'paused';
+  static const String active = 'active';
+}

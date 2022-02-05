@@ -50,6 +50,9 @@ class Headings {
   static const String matches = 'Matches';
   static const String loadingArticle = 'Loading Article..';
   static const String preferences = 'Preferences';
+  static const String settings = 'Settings';
+  static const String legal = 'Legal';
+  static const String notifications = 'Notifications';
 }
 
 class EditProfileFieldLabels {
@@ -104,6 +107,9 @@ class InfoLabels {
   static const String warning = 'Warning';
   static const String closeMatchInfo =
       'No one will be able to send further messages to this conversation. This will not delete the messages!';
+  static const String pauseAccount = 'Pause Account';
+  static const String permanentAction =
+      'This is a permanent action and cannot be reverted';
 }
 
 class Placeholders {
@@ -133,6 +139,8 @@ class LinkTexts {
   static const String submit = 'Submit';
   static const String help = 'Need Help?';
   static const String cancel = 'Cancel';
+  static const String logout = 'logout';
+  static const String deleteAccount = 'Delete Account';
 }
 
 class ApprovalFieldLabels {

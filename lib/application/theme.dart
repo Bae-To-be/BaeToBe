@@ -11,7 +11,7 @@ final theme = ThemeData(
         activeTrackColor: themeColor,
         inactiveTrackColor: themeColorLight,
         trackShape: const RoundedRectSliderTrackShape(),
-        trackHeight: 6.0,
+        trackHeight: 5.0,
         thumbColor: themeColor,
         tickMarkShape: const RoundSliderTickMarkShape(),
         rangeTickMarkShape: const RoundRangeSliderTickMarkShape(),

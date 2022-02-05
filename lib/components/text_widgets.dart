@@ -21,11 +21,13 @@ class CustomTextWidget extends StatelessWidget {
   final String text;
   final bool withRow;
   final bool withFlexible;
+  final Color? color;
 
   const CustomTextWidget(
       {Key? key,
       required this.type,
       required this.text,
+      this.color,
       this.withRow = true,
       this.withFlexible = false})
       : super(key: key);
@@ -33,26 +35,26 @@ class CustomTextWidget extends StatelessWidget {
   TextStyle textStyleForWidget(BuildContext context) {
     switch (type) {
       case textWidgetType.heading1:
-        return Theme.of(context).textTheme.headline1!;
+        return Theme.of(context).textTheme.headline1!.copyWith(color: color);
       case textWidgetType.heading2:
-        return Theme.of(context).textTheme.headline2!;
+        return Theme.of(context).textTheme.headline2!.copyWith(color: color);
       case textWidgetType.heading3:
-        return Theme.of(context).textTheme.headline3!;
+        return Theme.of(context).textTheme.headline3!.copyWith(color: color);
       case textWidgetType.heading4:
-        return Theme.of(context).textTheme.headline4!;
+        return Theme.of(context).textTheme.headline4!.copyWith(color: color);
       case textWidgetType.heading5:
-        return Theme.of(context).textTheme.headline5!;
+        return Theme.of(context).textTheme.headline5!.copyWith(color: color);
       case textWidgetType.heading6:
-        return Theme.of(context).textTheme.headline6!;
+        return Theme.of(context).textTheme.headline6!.copyWith(color: color);
       case textWidgetType.caption:
-        return Theme.of(context).textTheme.caption!;
+        return Theme.of(context).textTheme.caption!.copyWith(color: color);
       case textWidgetType.subtitle1:
         return Theme.of(context)
             .textTheme
             .subtitle1!
-            .copyWith(fontWeight: FontWeight.w600);
+            .copyWith(fontWeight: FontWeight.w600, color: color);
       default:
-        return Theme.of(context).textTheme.bodyText1!;
+        return Theme.of(context).textTheme.bodyText1!.copyWith(color: color);
     }
   }
 

@@ -6,12 +6,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class CustomTextButton extends HookConsumerWidget {
   final String text;
   final textWidgetType type;
+  final Color? color;
   final void Function() onPressed;
 
   const CustomTextButton(
       {Key? key,
       required this.text,
       required this.onPressed,
+      this.color,
       this.type = textWidgetType.heading6})
       : super(key: key);
 
@@ -25,7 +27,8 @@ class CustomTextButton extends HookConsumerWidget {
 
     return TextButton(
       onPressed: onPressed,
-      child: CustomTextWidget(text: text, type: type, withRow: false),
+      child: CustomTextWidget(
+          text: text, type: type, withRow: false, color: color),
     );
   }
 }

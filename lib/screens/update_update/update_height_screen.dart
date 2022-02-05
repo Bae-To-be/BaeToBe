@@ -84,7 +84,9 @@ class _HeightInput extends HookConsumerWidget {
               useMagnifier: true,
               controller: heightController,
               onSelectedItemChanged: (index) {
-                ref.read(selectedIndexProvider.state).update((state) => index);
+                ref
+                    .read(selectedIndexProvider.notifier)
+                    .update((state) => index);
               },
               childDelegate: ListWheelChildBuilderDelegate(
                 childCount:

@@ -77,7 +77,9 @@ class ProfileTab extends HookConsumerWidget {
                 child: Column(
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        router.pushNamed(AppLinks.accountSettings);
+                      },
                       child: Row(
                         children: [
                           Icon(

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/auth_guard.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/screens/boot/splash_screen.dart';
+import 'package:baetobe/screens/help_article_screen.dart';
 import 'package:baetobe/screens/home/discover_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_received_tab.dart';
 import 'package:baetobe/screens/home/likes/likes_sent_tab.dart';
@@ -13,6 +14,7 @@ import 'package:baetobe/screens/homepage_screen.dart';
 import 'package:baetobe/screens/kyc/under_verification_screen.dart';
 import 'package:baetobe/screens/kyc/verification_rejected_screen.dart';
 import 'package:baetobe/screens/login_screen.dart';
+import 'package:baetobe/screens/profile_screens/account_settings_screen.dart';
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
 import 'package:baetobe/screens/profile_screens/help_page.dart';
 import 'package:baetobe/screens/profile_screens/update_preferences_page.dart';
@@ -30,7 +32,6 @@ import 'package:baetobe/screens/update_update/update_work_information_screen.dar
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
 import 'package:baetobe/screens/user_profile/report_user_screen.dart';
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
-import 'package:baetobe/screens/help_article_screen.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route,Screen',
@@ -122,6 +123,10 @@ import 'package:baetobe/screens/help_article_screen.dart';
     AutoRoute(
         path: AppLinks.updatePreferences,
         page: UpdatePreferences,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.accountSettings,
+        page: AccountSettingsScreen,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.editHometown,

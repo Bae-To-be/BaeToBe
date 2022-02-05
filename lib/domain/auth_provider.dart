@@ -120,6 +120,16 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthInformation>> {
     }
   }
 
+  Future<void> deleteAccount() async {
+    final client = ref.read(networkClientProvider);
+    final error = ref.read(errorProvider.notifier);
+    await error.safelyExecute(
+        command: client.delete(BackendRoutes.deleteAccount),
+        onSuccess: (_) async {
+          await _logoutCallbacks();
+        });
+  }
+
   Future<void> logout() async {
     final client = ref.read(authNetworkClientProvider);
     final error = ref.read(errorProvider.notifier);
