@@ -6,6 +6,7 @@ import 'package:baetobe/domain/chat/messages_provider.dart';
 import 'package:baetobe/domain/matches_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/data/match.dart';
+import 'package:baetobe/entities/view_models/chat_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;

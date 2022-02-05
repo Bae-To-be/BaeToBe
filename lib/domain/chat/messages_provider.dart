@@ -7,8 +7,8 @@ import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/data/match.dart';
 import 'package:baetobe/entities/data/user.dart';
+import 'package:baetobe/entities/view_models/chat_state.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
-import 'package:collection/collection.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
@@ -23,14 +23,6 @@ final messagesProvider = StateNotifierProvider.autoDispose
   return MessagesNotifier(ref, match, user);
 });
 
-enum connectionState {
-  connecting,
-  connected,
-  connectionLost,
-  connectionFailed,
-  disconnected
-}
-
 const uuid = Uuid();
 
 class MessagesNotifier extends StateNotifier<ChatState>
@@ -40,8 +32,8 @@ class MessagesNotifier extends StateNotifier<ChatState>
   final User user;
 
   MessagesNotifier(this.ref, this.match, this.user) : super(ChatState()) {
-    state = state.copyWith(
-        newMatchClosed: match.isClosed, newClosedBy: match.closedBy);
+    state =
+        state.copyWith(matchClosed: match.isClosed, closedBy: match.closedBy);
     _setupCable();
     updateMessages().then((_) => WidgetsBinding.instance?.addObserver(this));
   }
@@ -58,8 +50,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
   void didChangeAppLifecycleState(AppLifecycleState appState) {
     super.didChangeAppLifecycleState(appState);
     if (appState == AppLifecycleState.resumed) {
-      state = state.copyWith(
-          newRetryCount: 0, newPageNumber: 1, newMessagesLeft: true);
+      state = state.copyWith(retryCount: 0, pageNumber: 1, messagesLeft: true);
       updateMessages();
       _setupCable();
     }
@@ -77,9 +68,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
           if (!mounted) {
             return Future.value(null);
           }
-          state = state.copyWith(newPageNumber: state.pageNumber + 1);
+          state = state.copyWith(pageNumber: state.pageNumber + 1);
           if (response.data['data'].isEmpty) {
-            state = state.copyWith(newMessagesLeft: false);
+            state = state.copyWith(messagesLeft: false);
           }
           for (var message in response.data['data']) {
             _addOrReplace(message);
@@ -90,7 +81,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
             newState = newState.withMessage(_jsonToMessage(messageData));
           }
           if (state.initialLoading) {
-            state = newState.copyWith(newInitialLoading: false);
+            state = newState.copyWith(initialLoading: false);
           }
           return Future.value(null);
         });
@@ -127,8 +118,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
     }
 
     state = state.copyWith(
-        newConnection: connectionState.connecting,
-        newConnectionStateVisible: true);
+        connection: connectionState.connecting, connectionStateVisible: true);
     state.cable?.disconnect();
 
     final stopwatch = Stopwatch()..start();
@@ -144,12 +134,12 @@ class MessagesNotifier extends StateNotifier<ChatState>
       if (!mounted) {
         return;
       }
-      state = state.copyWith(newConnection: connectionState.connected);
+      state = state.copyWith(connection: connectionState.connected);
       Timer(const Duration(milliseconds: 500), () {
         if (!mounted) {
           return;
         }
-        state = state.copyWith(newConnectionStateVisible: false);
+        state = state.copyWith(connectionStateVisible: false);
       });
     }, onConnectionLost: () {
       FirebaseAnalytics.instance.logEvent(
@@ -162,11 +152,11 @@ class MessagesNotifier extends StateNotifier<ChatState>
         debugPrint('CONNECT TO SOCKET LOST');
       }
       state = state.copyWith(
-          newConnection: connectionState.connectionLost,
-          newConnectionStateVisible: true);
+          connection: connectionState.connectionLost,
+          connectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
-        state = state.copyWith(newRetryCount: state.retryCount + 1);
+        state = state.copyWith(retryCount: state.retryCount + 1);
         _setupCable();
       }
     }, onCannotConnect: () {
@@ -180,15 +170,15 @@ class MessagesNotifier extends StateNotifier<ChatState>
         debugPrint('CANNOT CONNECT TO SOCKET');
       }
       state = state.copyWith(
-          newConnection: connectionState.connectionFailed,
-          newConnectionStateVisible: true);
+          connection: connectionState.connectionFailed,
+          connectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
-        state = state.copyWith(newRetryCount: state.retryCount + 1);
+        state = state.copyWith(retryCount: state.retryCount + 1);
         _setupCable();
       }
     });
-    state = state.copyWith(newCable: _cable);
+    state = state.copyWith(cable: _cable);
 
     state.cable?.subscribe('Chat', channelParams: _channelParams(),
         onSubscribed: () {
@@ -198,8 +188,8 @@ class MessagesNotifier extends StateNotifier<ChatState>
         return;
       }
       state = state.copyWith(
-          newConnection: connectionState.disconnected,
-          newConnectionStateVisible: true);
+          connection: connectionState.disconnected,
+          connectionStateVisible: true);
     }, onMessage: (Map message) {
       if (kDebugMode) {
         debugPrint(message.toString());
@@ -211,8 +201,8 @@ class MessagesNotifier extends StateNotifier<ChatState>
         _addOrReplace(message['data']);
       }
       if (message['event'] == 'match_closed') {
-        state = state.copyWith(
-            newMatchClosed: true, newClosedBy: message['closed_by']);
+        state =
+            state.copyWith(matchClosed: true, closedBy: message['closed_by']);
         state.cable?.disconnect();
       }
     });
@@ -266,78 +256,5 @@ class MessagesNotifier extends StateNotifier<ChatState>
 
   Map<String, dynamic> _channelParams() {
     return {'match_id': match.id};
-  }
-}
-
-const List<types.Message> initialMessages = [];
-
-class ChatState {
-  int pageNumber;
-  bool initialLoading;
-  bool messagesLeft;
-  ActionCable? cable;
-  int retryCount;
-  int? closedBy;
-  bool matchClosed;
-  connectionState connection;
-  bool connectionStateVisible;
-  List<types.Message> messages;
-
-  ChatState(
-      {this.pageNumber = 1,
-      this.messagesLeft = true,
-      this.messages = initialMessages,
-      this.initialLoading = true,
-      this.cable,
-      this.retryCount = 0,
-      this.closedBy,
-      this.matchClosed = false,
-      this.connectionStateVisible = false,
-      this.connection = connectionState.connecting});
-
-  ChatState copyWith(
-      {int? newPageNumber,
-      bool? newMessagesLeft,
-      ActionCable? newCable,
-      int? newRetryCount,
-      int? newClosedBy,
-      bool? newMatchClosed,
-      bool? newInitialLoading,
-      List<types.Message>? newMessages,
-      connectionState? newConnection,
-      bool? newConnectionStateVisible}) {
-    return ChatState(
-        pageNumber: newPageNumber ?? pageNumber,
-        messagesLeft: newMessagesLeft ?? messagesLeft,
-        cable: newCable ?? cable,
-        retryCount: newRetryCount ?? retryCount,
-        closedBy: newClosedBy ?? closedBy,
-        initialLoading: newInitialLoading ?? initialLoading,
-        matchClosed: newMatchClosed ?? matchClosed,
-        messages: newMessages ?? messages,
-        connectionStateVisible:
-            newConnectionStateVisible ?? connectionStateVisible,
-        connection: newConnection ?? connection);
-  }
-
-  ChatState withMessage(types.Message newMessage) {
-    return copyWith(newMessages: messages.addOrReplace(newMessage));
-  }
-
-  @override
-  String toString() {
-    return {
-      'connection': connection,
-      'connectionVisible': connectionStateVisible,
-    }.toString();
-  }
-}
-
-extension ReplaceMessage on List<types.Message> {
-  List<types.Message> addOrReplace(types.Message newMessage) {
-    return List.from(this)
-      ..remove(firstWhereOrNull((message) => message.id == newMessage.id))
-      ..add(newMessage)
-      ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
   }
 }
