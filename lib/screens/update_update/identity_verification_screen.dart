@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/identity/identity_document_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
-import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/identity_verification_state_provider.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class IdentityVerificationScreen extends HookConsumerWidget {
             }
             ref
                 .read(routerProvider.notifier)
-                .pushNamed(AppLinks.underVerification);
+                .replaceAll([const VerificationRejectedScreenRoute()]);
           },
         ));
   }
