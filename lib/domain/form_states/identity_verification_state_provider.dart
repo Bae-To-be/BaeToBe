@@ -4,7 +4,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_files_provider.dart';
-import 'package:baetobe/entities/user.dart';
+import 'package:baetobe/entities/generated/user_verification_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

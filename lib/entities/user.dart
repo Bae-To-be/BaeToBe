@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:baetobe/entities/generated/language.dart';
 import 'package:baetobe/entities/generated/preference.dart';
 import 'package:baetobe/entities/generated/religion.dart';
+import 'package:baetobe/entities/generated/user_education.dart';
 import 'package:baetobe/entities/generated/user_hometown.dart';
 
 class User {
@@ -124,72 +123,5 @@ class User {
 
   bool workInformationPresent() {
     return (workTitle != null && industry != null && company != null);
-  }
-}
-
-class UserEducation {
-  String courseName;
-  String universityName;
-  String year;
-
-  UserEducation(this.courseName, this.universityName, this.year);
-
-  factory UserEducation.fromJson(Map<String, dynamic> json) {
-    return UserEducation(
-        json['course'], json['university'], json['year'].toString());
-  }
-
-  UserEducation copyWith(
-      {String? newCourseName, String? newUniversityName, String? newYear}) {
-    return UserEducation(newCourseName ?? courseName,
-        newUniversityName ?? universityName, newYear ?? year);
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'course_name': courseName,
-      'university_name': universityName,
-      'year': year
-    };
-  }
-
-  @override
-  bool operator ==(other) {
-    return other is UserEducation &&
-        (other.courseName == courseName) &&
-        (other.universityName == universityName) &&
-        (other.year == year);
-  }
-
-  @override
-  int get hashCode =>
-      hashValues(courseName.hashCode, universityName.hashCode, year.hashCode);
-
-  @override
-  String toString() {
-    return toJson().toString();
-  }
-
-  bool allFieldsPresent() {
-    return courseName != '' && universityName != '' && year != '';
-  }
-}
-
-class UserVerificationFile {
-  String fileType;
-  String url;
-
-  UserVerificationFile(this.fileType, this.url);
-
-  factory UserVerificationFile.fromJson(Map<String, dynamic> json) {
-    return UserVerificationFile(json['file_type'], json['url']);
-  }
-
-  @override
-  String toString() {
-    return {
-      'file_type': fileType,
-      'url': url,
-    }.toString();
   }
 }
