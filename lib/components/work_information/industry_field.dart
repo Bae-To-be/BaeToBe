@@ -27,7 +27,7 @@ class IndustryField extends HookConsumerWidget {
           ref.read(workInformationStateProvider.notifier).state = ref
               .read(workInformationStateProvider.notifier)
               .state
-              .copyWith(newIndustryId: value as int);
+              .copyWith(industryId: value as int);
         },
         hint: const Text(
           InfoLabels.selectIndustry,
