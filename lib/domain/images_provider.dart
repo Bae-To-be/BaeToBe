@@ -2,7 +2,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
-import 'package:baetobe/entities/generated/user_image.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';

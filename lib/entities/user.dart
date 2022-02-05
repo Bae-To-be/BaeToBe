@@ -1,8 +1,8 @@
-import 'package:baetobe/entities/generated/language.dart';
-import 'package:baetobe/entities/generated/preference.dart';
-import 'package:baetobe/entities/generated/religion.dart';
-import 'package:baetobe/entities/generated/user_education.dart';
-import 'package:baetobe/entities/generated/user_hometown.dart';
+import 'package:baetobe/entities/data/language.dart';
+import 'package:baetobe/entities/data/preference.dart';
+import 'package:baetobe/entities/data/religion.dart';
+import 'package:baetobe/entities/data/user_education.dart';
+import 'package:baetobe/entities/data/user_hometown.dart';
 
 class User {
   static const String pausedStatus = 'paused';

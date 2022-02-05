@@ -1,4 +1,4 @@
-import 'package:baetobe/entities/generated/user_image.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 
 enum likeDirection { sent, received }
 

@@ -4,7 +4,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/article_provider.dart';
-import 'package:baetobe/entities/generated/article.dart';
+import 'package:baetobe/entities/data/article.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

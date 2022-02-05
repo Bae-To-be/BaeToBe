@@ -343,7 +343,7 @@ class AppRouter extends _i19.RootStackRouter {
       ];
 }
 
-/// generated route for
+/// data route for
 /// [_i1.SplashScreen]
 class SplashScreenRoute extends _i19.PageRouteInfo<void> {
   const SplashScreenRoute() : super(SplashScreenRoute.name, path: '/splash');
@@ -351,7 +351,7 @@ class SplashScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'SplashScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i2.LoginScreen]
 class LoginScreenRoute extends _i19.PageRouteInfo<void> {
   const LoginScreenRoute() : super(LoginScreenRoute.name, path: '/login');
@@ -359,7 +359,7 @@ class LoginScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'LoginScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i3.UpdateBirthdayScreen]
 class UpdateBirthdayScreenRoute
     extends _i19.PageRouteInfo<UpdateBirthdayScreenRouteArgs> {
@@ -386,7 +386,7 @@ class UpdateBirthdayScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i4.UpdateGenderScreen]
 class UpdateGenderScreenRoute
     extends _i19.PageRouteInfo<UpdateGenderScreenRouteArgs> {
@@ -413,7 +413,7 @@ class UpdateGenderScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i5.UpdateInterestedGenderScreen]
 class UpdateInterestedGenderScreenRoute
     extends _i19.PageRouteInfo<UpdateInterestedGenderScreenRouteArgs> {
@@ -440,7 +440,7 @@ class UpdateInterestedGenderScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i6.UpdateWorkInformationScreen]
 class UpdateWorkInformationScreenRoute
     extends _i19.PageRouteInfo<UpdateWorkInformationScreenRouteArgs> {
@@ -467,7 +467,7 @@ class UpdateWorkInformationScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i7.EducationHistoryScreen]
 class EducationHistoryScreenRoute
     extends _i19.PageRouteInfo<EducationHistoryScreenRouteArgs> {
@@ -494,7 +494,7 @@ class EducationHistoryScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i8.LinkedinUrlScreen]
 class LinkedinUrlScreenRoute
     extends _i19.PageRouteInfo<LinkedinUrlScreenRouteArgs> {
@@ -521,7 +521,7 @@ class LinkedinUrlScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i9.UploadImagesScreen]
 class UploadImagesScreenRoute extends _i19.PageRouteInfo<void> {
   const UploadImagesScreenRoute()
@@ -530,7 +530,7 @@ class UploadImagesScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UploadImagesScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i10.SelfieVerificationScreen]
 class SelfieVerificationScreenRoute
     extends _i19.PageRouteInfo<SelfieVerificationScreenRouteArgs> {
@@ -557,7 +557,7 @@ class SelfieVerificationScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i11.IdentityVerificationScreen]
 class IdentityVerificationScreenRoute
     extends _i19.PageRouteInfo<IdentityVerificationScreenRouteArgs> {
@@ -584,7 +584,7 @@ class IdentityVerificationScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i12.UnderVerificationScreen]
 class UnderVerificationScreenRoute extends _i19.PageRouteInfo<void> {
   const UnderVerificationScreenRoute()
@@ -593,7 +593,7 @@ class UnderVerificationScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UnderVerificationScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i13.VerificationRejectedScreen]
 class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
   const VerificationRejectedScreenRoute()
@@ -602,7 +602,7 @@ class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'VerificationRejectedScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i14.UserProfileScreen]
 class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
@@ -628,7 +628,7 @@ class UserProfileScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i15.MessagesForMatchScreen]
 class MessagesForMatchScreenRoute
     extends _i19.PageRouteInfo<MessagesForMatchScreenRouteArgs> {
@@ -653,7 +653,7 @@ class MessagesForMatchScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i16.ReportUserScreen]
 class ReportUserScreenRoute
     extends _i19.PageRouteInfo<ReportUserScreenRouteArgs> {
@@ -678,7 +678,7 @@ class ReportUserScreenRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i17.HomepageScreen]
 class HomepageScreenRoute extends _i19.PageRouteInfo<void> {
   const HomepageScreenRoute({List<_i19.PageRouteInfo>? children})
@@ -688,7 +688,7 @@ class HomepageScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'HomepageScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i18.EditProfilePage]
 class EditProfilePageRoute extends _i19.PageRouteInfo<void> {
   const EditProfilePageRoute()
@@ -697,7 +697,7 @@ class EditProfilePageRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'EditProfilePageRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i19.EmptyRouterPage]
 class EmptyRouterPageRoute extends _i19.PageRouteInfo<void> {
   const EmptyRouterPageRoute({List<_i19.PageRouteInfo>? children})
@@ -707,7 +707,7 @@ class EmptyRouterPageRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'EmptyRouterPageRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i20.UpdatePreferences]
 class UpdatePreferencesRoute extends _i19.PageRouteInfo<void> {
   const UpdatePreferencesRoute()
@@ -716,7 +716,7 @@ class UpdatePreferencesRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UpdatePreferencesRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i21.UpdateHometownScreen]
 class UpdateHometownScreenRoute extends _i19.PageRouteInfo<void> {
   const UpdateHometownScreenRoute()
@@ -725,7 +725,7 @@ class UpdateHometownScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UpdateHometownScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i22.UpdateReligionScreen]
 class UpdateReligionScreenRoute extends _i19.PageRouteInfo<void> {
   const UpdateReligionScreenRoute()
@@ -734,7 +734,7 @@ class UpdateReligionScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UpdateReligionScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i23.UpdateHeightScreen]
 class UpdateHeightScreenRoute extends _i19.PageRouteInfo<void> {
   const UpdateHeightScreenRoute()
@@ -743,7 +743,7 @@ class UpdateHeightScreenRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'UpdateHeightScreenRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i24.DiscoverTab]
 class DiscoverTabRoute extends _i19.PageRouteInfo<void> {
   const DiscoverTabRoute() : super(DiscoverTabRoute.name, path: '');
@@ -751,7 +751,7 @@ class DiscoverTabRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'DiscoverTabRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i25.LikesTab]
 class LikesTabRoute extends _i19.PageRouteInfo<void> {
   const LikesTabRoute({List<_i19.PageRouteInfo>? children})
@@ -760,7 +760,7 @@ class LikesTabRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'LikesTabRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i26.MatchesTab]
 class MatchesTabRoute extends _i19.PageRouteInfo<MatchesTabRouteArgs> {
   MatchesTabRoute({_i32.Key? key})
@@ -781,7 +781,7 @@ class MatchesTabRouteArgs {
   }
 }
 
-/// generated route for
+/// data route for
 /// [_i27.ProfileTab]
 class ProfileTabRoute extends _i19.PageRouteInfo<void> {
   const ProfileTabRoute() : super(ProfileTabRoute.name, path: 'profile');
@@ -789,7 +789,7 @@ class ProfileTabRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'ProfileTabRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i28.LikesReceivedTab]
 class LikesReceivedTabRoute extends _i19.PageRouteInfo<void> {
   const LikesReceivedTabRoute() : super(LikesReceivedTabRoute.name, path: '');
@@ -797,7 +797,7 @@ class LikesReceivedTabRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'LikesReceivedTabRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i29.LikesSentTab]
 class LikesSentTabRoute extends _i19.PageRouteInfo<void> {
   const LikesSentTabRoute() : super(LikesSentTabRoute.name, path: 'sent');
@@ -805,7 +805,7 @@ class LikesSentTabRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'LikesSentTabRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i30.HelpPage]
 class HelpPageRoute extends _i19.PageRouteInfo<void> {
   const HelpPageRoute() : super(HelpPageRoute.name, path: '');
@@ -813,7 +813,7 @@ class HelpPageRoute extends _i19.PageRouteInfo<void> {
   static const String name = 'HelpPageRoute';
 }
 
-/// generated route for
+/// data route for
 /// [_i31.HelpArticleScreen]
 class HelpArticleScreenRoute
     extends _i19.PageRouteInfo<HelpArticleScreenRouteArgs> {

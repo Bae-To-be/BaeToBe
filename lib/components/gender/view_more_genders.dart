@@ -5,7 +5,7 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/gender_provider.dart';
 import 'package:baetobe/domain/search_query_provider.dart';
-import 'package:baetobe/entities/generated/gender.dart';
+import 'package:baetobe/entities/data/gender.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

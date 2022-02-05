@@ -1,5 +1,5 @@
 import 'package:baetobe/domain/user_provider.dart';
-import 'package:baetobe/entities/generated/user_education.dart';
+import 'package:baetobe/entities/data/user_education.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final educationFormStateProvider =

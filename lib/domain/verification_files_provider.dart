@@ -3,7 +3,7 @@ import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
-import 'package:baetobe/entities/generated/user_verification_file.dart';
+import 'package:baetobe/entities/data/user_verification_file.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';

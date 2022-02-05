@@ -60,7 +60,7 @@ jobs:
           notify_when: 'failure'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
-      # Upload generated apk to the artifacts.
+      # Upload data apk to the artifacts.
 #      - uses: actions/upload-artifact@v1
 #        with:
 #          name: release-apk

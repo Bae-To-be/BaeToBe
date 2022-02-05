@@ -8,7 +8,7 @@ import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/post_login_route.dart';
-import 'package:baetobe/entities/generated/auth_information.dart';
+import 'package:baetobe/entities/data/auth_information.dart';
 import 'package:baetobe/infrastructure/location_service.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:baetobe/infrastructure/notifications_service.dart';
