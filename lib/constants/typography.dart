@@ -110,7 +110,7 @@ class InfoLabels {
   static const String pauseAccount = 'Pause Account';
   static const String permanentAction =
       'This is a permanent action and cannot be reverted';
-  static const String whileAppOpen = 'While App Open';
+  static const String whileAppOpen = 'While app open';
 }
 
 class Placeholders {
