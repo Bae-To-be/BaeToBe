@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
-import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/background_fields/article_provider.dart';
 import 'package:baetobe/entities/data/article.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,8 +14,8 @@ class HelpPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
-      children: [
-        const CustomHeaderTile(text: Headings.faqs),
+      children: const [
+        CustomHeaderTile(text: Headings.faqs),
         ArticleListings()
       ],
     );
