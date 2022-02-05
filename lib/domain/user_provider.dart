@@ -61,6 +61,7 @@ class UserNotifier extends StateNotifier<User> {
           }
           if (routeTo != null) {
             if (routeTo == AppLinks.back) {
+              router.popUntil((route) => route.settings.name != null);
               await router.pop();
               return;
             }

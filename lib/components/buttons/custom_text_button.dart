@@ -25,7 +25,7 @@ class CustomTextButton extends HookConsumerWidget {
 
     return TextButton(
       onPressed: onPressed,
-      child: CustomTextWidget(text: text, type: type),
+      child: CustomTextWidget(text: text, type: type, withRow: false),
     );
   }
 }
