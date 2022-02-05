@@ -82,8 +82,9 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
                   workTitleController.text = selection;
                 },
                 suggestionsCallback: (String pattern) {
-                  return suggestionsFor(
-                      SuggestionEntity.workTitle, pattern, ref);
+                  return ref
+                      .read(suggestorProvider(SuggestionEntity.workTitle))
+                      .suggestionsFor(pattern);
                 },
               ).padding(horizontal: 15, vertical: 10),
               const CustomTextWidget(
@@ -97,7 +98,9 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
                   companyController.text = selection;
                 },
                 suggestionsCallback: (String pattern) {
-                  return suggestionsFor(SuggestionEntity.company, pattern, ref);
+                  return ref
+                      .read(suggestorProvider(SuggestionEntity.company))
+                      .suggestionsFor(pattern);
                 },
               ).padding(horizontal: 15, vertical: 10),
             ],

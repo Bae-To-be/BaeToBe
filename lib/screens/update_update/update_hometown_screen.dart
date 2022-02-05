@@ -36,75 +36,70 @@ class UpdateHometownScreen extends HookConsumerWidget {
     return FormLayout(
       header: const CustomHeaderTile(text: EditProfileFieldLabels.hometown),
       children: [
-        Expanded(
-          child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
-            child: Column(
+        Column(
+          children: [
+            Column(
               children: [
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          Headings.enterCity,
-                          style: Theme.of(context).textTheme.headline6,
-                        )
-                      ],
-                    ),
-                    AutoCompleteField(
-                      textController: cityNameController,
-                      hintText:
-                          state.cityName == '' ? Placeholders.cityHint : '',
-                      onSuggestionSelected: (String selection) {
-                        cityNameController.text = selection;
-                      },
-                      suggestionsCallback: (String pattern) {
-                        return suggestionsFor(
-                            SuggestionEntity.city, pattern, ref);
-                      },
-                    ).padding(vertical: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          Headings.enterCountry,
-                          style: Theme.of(context).textTheme.headline6,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width - 32,
-                      child: GFDropdown(
-                        dropdownButtonColor: const Color(0xFFF2F2F2),
-                        iconEnabledColor: Theme.of(context).primaryColor,
-                        iconDisabledColor: Theme.of(context).primaryColor,
-                        isExpanded: true,
-                        value: state.countryName,
-                        onChanged: (value) {
-                          ref.read(hometownStateProvider.notifier).state = ref
-                              .read(hometownStateProvider.notifier)
-                              .state
-                              .copyWith(countryName: value as String);
-                        },
-                        hint: const Text(
-                          Placeholders.countryHint,
-                        ),
-                        items: countries.value
-                            ?.map((value) => DropdownMenuItem(
-                                  child: Text(value),
-                                  value: value,
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                    // const _CountryField(),
+                    Text(
+                      Headings.enterCity,
+                      style: Theme.of(context).textTheme.headline6,
+                    )
                   ],
-                ).padding(horizontal: 8)
+                ),
+                AutoCompleteField(
+                  textController: cityNameController,
+                  hintText: state.cityName == '' ? Placeholders.cityHint : '',
+                  onSuggestionSelected: (String selection) {
+                    cityNameController.text = selection;
+                  },
+                  suggestionsCallback: (String pattern) {
+                    return ref
+                        .read(suggestorProvider(SuggestionEntity.city))
+                        .suggestionsFor(pattern);
+                  },
+                ).padding(vertical: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      Headings.enterCountry,
+                      style: Theme.of(context).textTheme.headline6,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 32,
+                  child: GFDropdown(
+                    dropdownButtonColor: const Color(0xFFF2F2F2),
+                    iconEnabledColor: Theme.of(context).primaryColor,
+                    iconDisabledColor: Theme.of(context).primaryColor,
+                    isExpanded: true,
+                    value: state.countryName,
+                    onChanged: (value) {
+                      ref.read(hometownStateProvider.notifier).state = ref
+                          .read(hometownStateProvider.notifier)
+                          .state
+                          .copyWith(countryName: value as String);
+                    },
+                    hint: const Text(
+                      Placeholders.countryHint,
+                    ),
+                    items: countries.value
+                        ?.map((value) => DropdownMenuItem(
+                              child: Text(value),
+                              value: value,
+                            ))
+                        .toList(),
+                  ),
+                ),
+                // const _CountryField(),
               ],
-            ),
-          ),
-        ).padding(top: 36),
+            ).padding(horizontal: 8)
+          ],
+        ).padding(top: 10),
       ],
       floatingSubmit: FloatingCta(
         onPressed: () {

@@ -81,7 +81,9 @@ class EducationTile extends HookConsumerWidget {
               universityController.text = value;
             },
             suggestionsCallback: (pattern) {
-              return suggestionsFor(SuggestionEntity.university, pattern, ref);
+              return ref
+                  .read(suggestorProvider(SuggestionEntity.university))
+                  .suggestionsFor(pattern);
             },
             hintText: Placeholders.university,
           ).padding(horizontal: 15, bottom: 10),
@@ -94,7 +96,9 @@ class EducationTile extends HookConsumerWidget {
               courseController.text = value;
             },
             suggestionsCallback: (pattern) {
-              return suggestionsFor(SuggestionEntity.course, pattern, ref);
+              return ref
+                  .read(suggestorProvider(SuggestionEntity.course))
+                  .suggestionsFor(pattern);
             },
             hintText: Placeholders.course,
           ).padding(horizontal: 15, bottom: 10),
