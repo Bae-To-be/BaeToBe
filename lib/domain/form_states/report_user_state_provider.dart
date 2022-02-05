@@ -1,4 +1,3 @@
-import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/constants/backend_routes.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
@@ -39,7 +38,6 @@ class ReportUserNotifier extends StateNotifier<ReportUserState> {
         onSuccess: (response) {
           loading.state = false;
           ref.read(isReportedProvider(userId).notifier).state = true;
-          ref.read(routerProvider.notifier).pop();
           return Future.value(null);
         },
         onError: (_) => loading.state = false);

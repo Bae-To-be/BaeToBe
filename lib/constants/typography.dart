@@ -111,6 +111,8 @@ class InfoLabels {
   static const String permanentAction =
       'This is a permanent action and cannot be reverted';
   static const String whileAppOpen = 'While app open';
+  static const String reportUserSuccess =
+      'We have noted your concern. We thank you for taking the time to report this, our team will review this report as soon as possible.';
 }
 
 class Placeholders {
@@ -142,6 +144,7 @@ class LinkTexts {
   static const String cancel = 'Cancel';
   static const String logout = 'logout';
   static const String deleteAccount = 'Delete Account';
+  static const String takeMeBack = 'Take me back';
 }
 
 class ApprovalFieldLabels {
