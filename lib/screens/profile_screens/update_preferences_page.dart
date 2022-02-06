@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class UpdatePreferences extends HookConsumerWidget {
-  const UpdatePreferences({Key? key}) : super(key: key);
+class UpdateMatchingPreferences extends HookConsumerWidget {
+  const UpdateMatchingPreferences({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

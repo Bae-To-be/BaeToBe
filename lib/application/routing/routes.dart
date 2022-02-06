@@ -122,8 +122,8 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
       AuthGuard
     ]),
     AutoRoute(
-        path: AppLinks.updatePreferences,
-        page: UpdatePreferences,
+        path: AppLinks.updateMatchingPreferences,
+        page: UpdateMatchingPreferences,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.editLanguage,

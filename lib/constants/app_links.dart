@@ -24,7 +24,8 @@ class AppLinks {
   static const String editSmokingPreference = '/edit_smoking_preference';
   static const String editDrinkingPreference = '/edit_drinking_preference';
   static const String editHeight = '/edit_height';
-  static const String updatePreferences = 'update_preferences';
+  static const String updateMatchingPreferences =
+      'update__matching_preferences';
   static const String accountSettings = '/account_settings';
   static const String reportUser = '/users/report';
   static const String profileDetailsRoute = '/profile_details/:id';

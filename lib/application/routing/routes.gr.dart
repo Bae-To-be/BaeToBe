@@ -204,9 +204,9 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.AdaptivePage<dynamic>(
           routeData: routeData, child: const _i19.EmptyRouterPage());
     },
-    UpdatePreferencesRoute.name: (routeData) {
+    UpdateMatchingPreferencesRoute.name: (routeData) {
       return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i20.UpdatePreferences());
+          routeData: routeData, child: const _i20.UpdateMatchingPreferences());
     },
     UpdateLanguagesSpokenScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
@@ -348,8 +348,8 @@ class AppRouter extends _i19.RootStackRouter {
           _i19.RouteConfig(HelpArticleScreenRoute.name,
               path: ':id', parent: EmptyRouterPageRoute.name)
         ]),
-        _i19.RouteConfig(UpdatePreferencesRoute.name,
-            path: 'update_preferences', guards: [authGuard]),
+        _i19.RouteConfig(UpdateMatchingPreferencesRoute.name,
+            path: 'update__matching_preferences', guards: [authGuard]),
         _i19.RouteConfig(UpdateLanguagesSpokenScreenRoute.name,
             path: '/edit_language', guards: [authGuard]),
         _i19.RouteConfig(AccountSettingsScreenRoute.name,
@@ -730,12 +730,13 @@ class EmptyRouterPageRoute extends _i19.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.UpdatePreferences]
-class UpdatePreferencesRoute extends _i19.PageRouteInfo<void> {
-  const UpdatePreferencesRoute()
-      : super(UpdatePreferencesRoute.name, path: 'update_preferences');
+/// [_i20.UpdateMatchingPreferences]
+class UpdateMatchingPreferencesRoute extends _i19.PageRouteInfo<void> {
+  const UpdateMatchingPreferencesRoute()
+      : super(UpdateMatchingPreferencesRoute.name,
+            path: 'update__matching_preferences');
 
-  static const String name = 'UpdatePreferencesRoute';
+  static const String name = 'UpdateMatchingPreferencesRoute';
 }
 
 /// generated route for

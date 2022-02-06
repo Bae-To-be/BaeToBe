@@ -104,7 +104,7 @@ class ProfileTab extends HookConsumerWidget {
                     const CustomDivider().padding(horizontal: 16),
                     TextButton(
                       onPressed: () {
-                        router.pushNamed(AppLinks.updatePreferences);
+                        router.pushNamed(AppLinks.updateMatchingPreferences);
                       },
                       child: Row(
                         children: [
