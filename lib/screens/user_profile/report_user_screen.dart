@@ -1,4 +1,3 @@
-import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
@@ -44,18 +43,6 @@ class ReportUserScreen extends HookConsumerWidget {
                   withRow: false,
                   type: textWidgetType.subtitle2,
                   text: InfoLabels.reportUserSuccess),
-              buttonBar: GFButtonBar(
-                padding: const EdgeInsets.only(bottom: 10),
-                children: <Widget>[
-                  GFButton(
-                    color: Theme.of(context).primaryColor,
-                    onPressed: () {
-                      ref.read(routerProvider.notifier).pop();
-                    },
-                    text: LinkTexts.takeMeBack,
-                  ),
-                ],
-              ),
             ),
           ),
         ],
