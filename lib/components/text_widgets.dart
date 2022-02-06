@@ -15,6 +15,9 @@ enum textWidgetType {
   caption,
   subtitle1,
   subtitle2,
+  editProfileContentTileTitle,
+  editProfileContentTileContent,
+  editProfileSectionTile
 }
 
 class CustomTextWidget extends StatelessWidget {
@@ -56,6 +59,13 @@ class CustomTextWidget extends StatelessWidget {
             .copyWith(fontWeight: FontWeight.w600, color: color);
       case textWidgetType.subtitle2:
         return Theme.of(context).textTheme.subtitle2!.copyWith(color: color);
+      case textWidgetType.editProfileContentTileTitle:
+        return const TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
+      case textWidgetType.editProfileContentTileContent:
+        return const TextStyle(color: Colors.grey, fontSize: 16);
+      case textWidgetType.editProfileSectionTile:
+        return const TextStyle(
+            fontWeight: FontWeight.w700, fontSize: 22, color: Colors.grey);
       default:
         return Theme.of(context).textTheme.bodyText1!.copyWith(color: color);
     }

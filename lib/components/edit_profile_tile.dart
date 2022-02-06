@@ -1,3 +1,4 @@
+import 'package:baetobe/components/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -14,9 +15,10 @@ class EditProfileSectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(title,
-            style: const TextStyle(
-                fontWeight: FontWeight.w700, fontSize: 22, color: Colors.grey)),
+        CustomTextWidget(
+          text: title,
+          type: textWidgetType.editProfileSectionTile,
+        ),
       ],
     ).padding(top: 16, bottom: 12);
   }
@@ -82,10 +84,8 @@ class _EditProfileContentTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              title,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-            ),
+            CustomTextWidget(
+                type: textWidgetType.editProfileContentTileTitle, text: title),
             Expanded(child: Container()),
             editable == true
                 ? Icon(

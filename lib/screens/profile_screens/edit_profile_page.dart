@@ -4,6 +4,7 @@ import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
 import 'package:baetobe/components/images/image_grid.dart';
+import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
@@ -38,6 +39,7 @@ class EditProfilePage extends HookConsumerWidget {
       });
       return null;
     }, []);
+
     return GestureDetector(
       //hides keyboard when tapped outside the keyboard
       onVerticalDragCancel: () {
@@ -72,10 +74,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const EditProfileSectionTile(title: Headings.aboutMeLabel),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.name,
-                  content: Text(
-                    _user.name,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.name),
                   button: false,
                 ),
                 const EditProfileContentTile(
@@ -85,18 +84,12 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.age,
-                  content: Text(
-                    _user.age.toString(),
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.age.toString()),
                   button: false,
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.gender,
-                  content: Text(
-                    _user.gender.toString(),
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.gender.toString()),
                   button: true,
                   callback: () {
                     AutoRouter.of(context).pushNamed(
@@ -105,10 +98,8 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.interestedIn,
-                  content: Text(
-                    _user.interestedGenders.join(', '),
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content:
+                      _ContentTextWidget(_user.interestedGenders.join(', ')),
                   button: true,
                   callback: () {
                     AutoRouter.of(context).pushNamed(
@@ -117,12 +108,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.hometown,
-                  content: Text(
-                    _user.hometown.toString() != ''
-                        ? _user.hometown.formatted()
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.hometown.formatted() != ''
+                      ? _user.hometown.formatted()
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     router.navigateNamed(AppLinks.editHometown);
@@ -130,12 +118,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.religion,
-                  content: Text(
-                    _user.religion != null
-                        ? _user.religion!.name
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.religion != null
+                      ? _user.religion!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     router.navigateNamed(AppLinks.editReligion);
@@ -143,12 +128,10 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.languages,
-                  content: Text(
-                    _user.languages.map((e) => e.name).join(', ') != ''
-                        ? _user.languages.map((e) => e.name).join(', ')
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(
+                      _user.languages.map((e) => e.name).join(', ') != ''
+                          ? _user.languages.map((e) => e.name).join(', ')
+                          : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     // Get.toNamed(AppLinks.editLanguage, arguments: false);
@@ -156,12 +139,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.children,
-                  content: Text(
-                    _user.children != null
-                        ? _user.children!.name
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.children != null
+                      ? _user.children!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     // Get.toNamed(AppLinks.editChildren, arguments: false);
@@ -169,12 +149,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.height,
-                  content: Text(
-                    _user.height != null
-                        ? cmToFeetAndInchesAndCmString(_user.height!)
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.height != null
+                      ? cmToFeetAndInchesAndCmString(_user.height!)
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     router.navigateNamed(AppLinks.editHeight);
@@ -187,16 +164,9 @@ class EditProfilePage extends HookConsumerWidget {
                   content: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        _user.workTitle!,
-                        style:
-                            const TextStyle(color: Colors.grey, fontSize: 16),
-                      ).padding(bottom: 4),
-                      Text(
-                        '${_user.company!} | ${_user.industry!}',
-                        style:
-                            const TextStyle(color: Colors.grey, fontSize: 16),
-                      ),
+                      _ContentTextWidget(_user.workTitle!).padding(bottom: 4),
+                      _ContentTextWidget(
+                          '${_user.company!} | ${_user.industry!}'),
                     ],
                   ),
                   button: false,
@@ -211,12 +181,9 @@ class EditProfilePage extends HookConsumerWidget {
                 const EditProfileSectionTile(title: Headings.lifestyleLabel),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.food,
-                  content: Text(
-                    _user.food != null
-                        ? _user.food!.name
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.food != null
+                      ? _user.food!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     // Get.toNamed(AppLinks.editFoodPreference,
@@ -225,12 +192,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.smoking,
-                  content: Text(
-                    _user.smoking != null
-                        ? _user.smoking!.name
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.smoking != null
+                      ? _user.smoking!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     // Get.toNamed(AppLinks.editSmokingPreference,
@@ -239,12 +203,9 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.drinking,
-                  content: Text(
-                    _user.drinking != null
-                        ? _user.drinking!.name
-                        : ErrorMessages.pleaseUpdatePreferences,
-                    style: const TextStyle(color: Colors.grey, fontSize: 16),
-                  ),
+                  content: _ContentTextWidget(_user.drinking != null
+                      ? _user.drinking!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
                     // Get.toNamed(AppLinks.editDrinkingPreference,
@@ -271,18 +232,15 @@ class EditProfilePage extends HookConsumerWidget {
               children: [
                 Icon(FontAwesomeIcons.solidCircle,
                     color: Theme.of(context).primaryColor, size: 10),
-                Text(
-                  '  ${_user.education[i].universityName} | ${_user.education[i].year}',
-                  style: const TextStyle(color: Colors.grey, fontSize: 16),
-                ).padding(bottom: 4),
+                _ContentTextWidget(
+                        '  ${_user.education[i].universityName} | ${_user.education[i].year}')
+                    .padding(bottom: 4),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '    ${_user.education[i].courseName}',
-                  style: const TextStyle(color: Colors.grey, fontSize: 16),
-                ).padding(bottom: 4),
+                _ContentTextWidget('    ${_user.education[i].courseName}')
+                    .padding(bottom: 4),
               ],
             ),
           ],
@@ -313,6 +271,20 @@ class _BioTextField extends HookConsumerWidget {
           onChanged: (text) {
             ref.read(bioTextProvider.notifier).state = text;
           }),
+    );
+  }
+}
+
+class _ContentTextWidget extends StatelessWidget {
+  final String text;
+
+  const _ContentTextWidget(this.text, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomTextWidget(
+      text: text,
+      type: textWidgetType.editProfileContentTileContent,
     );
   }
 }
