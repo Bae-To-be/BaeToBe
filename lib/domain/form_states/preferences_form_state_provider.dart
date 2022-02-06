@@ -1,24 +1,26 @@
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/data/user.dart';
-import 'package:baetobe/entities/view_models/preferences_form_state.dart';
+import 'package:baetobe/entities/view_models/matching_preferences_form_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final preferencesFormStateProvider = StateNotifierProvider.autoDispose<
-    PreferencesNotifier, PreferencesFormState>((ref) {
+final matchingPreferencesFormStateProvider = StateNotifierProvider.autoDispose<
+    MatchingPreferencesNotifier, MatchingPreferencesFormState>((ref) {
   final user = ref.watch(userProvider);
 
-  return PreferencesNotifier(ref, user);
+  return MatchingPreferencesNotifier(ref, user);
 });
 
-class PreferencesNotifier extends StateNotifier<PreferencesFormState> {
+class MatchingPreferencesNotifier
+    extends StateNotifier<MatchingPreferencesFormState> {
   final Ref ref;
   final User user;
   CancelToken? radiusToken;
   CancelToken? ageToken;
 
-  PreferencesNotifier(this.ref, this.user) : super(PreferencesFormState()) {
+  MatchingPreferencesNotifier(this.ref, this.user)
+      : super(MatchingPreferencesFormState()) {
     if (user.searchRadius != null) {
       state = state.copyWith(searchRadius: user.searchRadius!);
     }

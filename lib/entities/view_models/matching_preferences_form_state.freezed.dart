@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'preferences_form_state.dart';
+part of 'matching_preferences_form_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,14 +15,14 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$PreferencesFormStateTearOff {
-  const _$PreferencesFormStateTearOff();
+class _$MatchingPreferencesFormStateTearOff {
+  const _$MatchingPreferencesFormStateTearOff();
 
-  _PreferencesFormState call(
+  _MatchingPreferencesFormState call(
       {int searchRadius = 0,
       int interestedInAgeUpper = 0,
       int interestedInAgeLower = 0}) {
-    return _PreferencesFormState(
+    return _MatchingPreferencesFormState(
       searchRadius: searchRadius,
       interestedInAgeUpper: interestedInAgeUpper,
       interestedInAgeLower: interestedInAgeLower,
@@ -31,36 +31,37 @@ class _$PreferencesFormStateTearOff {
 }
 
 /// @nodoc
-const $PreferencesFormState = _$PreferencesFormStateTearOff();
+const $MatchingPreferencesFormState = _$MatchingPreferencesFormStateTearOff();
 
 /// @nodoc
-mixin _$PreferencesFormState {
+mixin _$MatchingPreferencesFormState {
   int get searchRadius => throw _privateConstructorUsedError;
   int get interestedInAgeUpper => throw _privateConstructorUsedError;
   int get interestedInAgeLower => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PreferencesFormStateCopyWith<PreferencesFormState> get copyWith =>
-      throw _privateConstructorUsedError;
+  $MatchingPreferencesFormStateCopyWith<MatchingPreferencesFormState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PreferencesFormStateCopyWith<$Res> {
-  factory $PreferencesFormStateCopyWith(PreferencesFormState value,
-          $Res Function(PreferencesFormState) then) =
-      _$PreferencesFormStateCopyWithImpl<$Res>;
+abstract class $MatchingPreferencesFormStateCopyWith<$Res> {
+  factory $MatchingPreferencesFormStateCopyWith(
+          MatchingPreferencesFormState value,
+          $Res Function(MatchingPreferencesFormState) then) =
+      _$MatchingPreferencesFormStateCopyWithImpl<$Res>;
   $Res call(
       {int searchRadius, int interestedInAgeUpper, int interestedInAgeLower});
 }
 
 /// @nodoc
-class _$PreferencesFormStateCopyWithImpl<$Res>
-    implements $PreferencesFormStateCopyWith<$Res> {
-  _$PreferencesFormStateCopyWithImpl(this._value, this._then);
+class _$MatchingPreferencesFormStateCopyWithImpl<$Res>
+    implements $MatchingPreferencesFormStateCopyWith<$Res> {
+  _$MatchingPreferencesFormStateCopyWithImpl(this._value, this._then);
 
-  final PreferencesFormState _value;
+  final MatchingPreferencesFormState _value;
   // ignore: unused_field
-  final $Res Function(PreferencesFormState) _then;
+  final $Res Function(MatchingPreferencesFormState) _then;
 
   @override
   $Res call({
@@ -86,26 +87,29 @@ class _$PreferencesFormStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PreferencesFormStateCopyWith<$Res>
-    implements $PreferencesFormStateCopyWith<$Res> {
-  factory _$PreferencesFormStateCopyWith(_PreferencesFormState value,
-          $Res Function(_PreferencesFormState) then) =
-      __$PreferencesFormStateCopyWithImpl<$Res>;
+abstract class _$MatchingPreferencesFormStateCopyWith<$Res>
+    implements $MatchingPreferencesFormStateCopyWith<$Res> {
+  factory _$MatchingPreferencesFormStateCopyWith(
+          _MatchingPreferencesFormState value,
+          $Res Function(_MatchingPreferencesFormState) then) =
+      __$MatchingPreferencesFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {int searchRadius, int interestedInAgeUpper, int interestedInAgeLower});
 }
 
 /// @nodoc
-class __$PreferencesFormStateCopyWithImpl<$Res>
-    extends _$PreferencesFormStateCopyWithImpl<$Res>
-    implements _$PreferencesFormStateCopyWith<$Res> {
-  __$PreferencesFormStateCopyWithImpl(
-      _PreferencesFormState _value, $Res Function(_PreferencesFormState) _then)
-      : super(_value, (v) => _then(v as _PreferencesFormState));
+class __$MatchingPreferencesFormStateCopyWithImpl<$Res>
+    extends _$MatchingPreferencesFormStateCopyWithImpl<$Res>
+    implements _$MatchingPreferencesFormStateCopyWith<$Res> {
+  __$MatchingPreferencesFormStateCopyWithImpl(
+      _MatchingPreferencesFormState _value,
+      $Res Function(_MatchingPreferencesFormState) _then)
+      : super(_value, (v) => _then(v as _MatchingPreferencesFormState));
 
   @override
-  _PreferencesFormState get _value => super._value as _PreferencesFormState;
+  _MatchingPreferencesFormState get _value =>
+      super._value as _MatchingPreferencesFormState;
 
   @override
   $Res call({
@@ -113,7 +117,7 @@ class __$PreferencesFormStateCopyWithImpl<$Res>
     Object? interestedInAgeUpper = freezed,
     Object? interestedInAgeLower = freezed,
   }) {
-    return _then(_PreferencesFormState(
+    return _then(_MatchingPreferencesFormState(
       searchRadius: searchRadius == freezed
           ? _value.searchRadius
           : searchRadius // ignore: cast_nullable_to_non_nullable
@@ -132,8 +136,8 @@ class __$PreferencesFormStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PreferencesFormState extends _PreferencesFormState {
-  _$_PreferencesFormState(
+class _$_MatchingPreferencesFormState extends _MatchingPreferencesFormState {
+  _$_MatchingPreferencesFormState(
       {this.searchRadius = 0,
       this.interestedInAgeUpper = 0,
       this.interestedInAgeLower = 0})
@@ -151,14 +155,14 @@ class _$_PreferencesFormState extends _PreferencesFormState {
 
   @override
   String toString() {
-    return 'PreferencesFormState(searchRadius: $searchRadius, interestedInAgeUpper: $interestedInAgeUpper, interestedInAgeLower: $interestedInAgeLower)';
+    return 'MatchingPreferencesFormState(searchRadius: $searchRadius, interestedInAgeUpper: $interestedInAgeUpper, interestedInAgeLower: $interestedInAgeLower)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PreferencesFormState &&
+            other is _MatchingPreferencesFormState &&
             const DeepCollectionEquality()
                 .equals(other.searchRadius, searchRadius) &&
             const DeepCollectionEquality()
@@ -176,17 +180,18 @@ class _$_PreferencesFormState extends _PreferencesFormState {
 
   @JsonKey(ignore: true)
   @override
-  _$PreferencesFormStateCopyWith<_PreferencesFormState> get copyWith =>
-      __$PreferencesFormStateCopyWithImpl<_PreferencesFormState>(
-          this, _$identity);
+  _$MatchingPreferencesFormStateCopyWith<_MatchingPreferencesFormState>
+      get copyWith => __$MatchingPreferencesFormStateCopyWithImpl<
+          _MatchingPreferencesFormState>(this, _$identity);
 }
 
-abstract class _PreferencesFormState extends PreferencesFormState {
-  factory _PreferencesFormState(
+abstract class _MatchingPreferencesFormState
+    extends MatchingPreferencesFormState {
+  factory _MatchingPreferencesFormState(
       {int searchRadius,
       int interestedInAgeUpper,
-      int interestedInAgeLower}) = _$_PreferencesFormState;
-  _PreferencesFormState._() : super._();
+      int interestedInAgeLower}) = _$_MatchingPreferencesFormState;
+  _MatchingPreferencesFormState._() : super._();
 
   @override
   int get searchRadius;
@@ -196,6 +201,6 @@ abstract class _PreferencesFormState extends PreferencesFormState {
   int get interestedInAgeLower;
   @override
   @JsonKey(ignore: true)
-  _$PreferencesFormStateCopyWith<_PreferencesFormState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$MatchingPreferencesFormStateCopyWith<_MatchingPreferencesFormState>
+      get copyWith => throw _privateConstructorUsedError;
 }

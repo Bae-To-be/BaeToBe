@@ -11,7 +11,7 @@ class UpdatePreferences extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(preferencesFormStateProvider);
+    final state = ref.watch(matchingPreferencesFormStateProvider);
 
     return Column(
       children: [
@@ -28,7 +28,7 @@ class UpdatePreferences extends HookConsumerWidget {
           max: 50,
           divisions: 100,
           onChanged: ref
-              .read(preferencesFormStateProvider.notifier)
+              .read(matchingPreferencesFormStateProvider.notifier)
               .updateSearchRadius,
         ).padding(horizontal: 15, vertical: 15),
         CustomTextWidget(
@@ -42,7 +42,7 @@ class UpdatePreferences extends HookConsumerWidget {
                 values: RangeValues(state.interestedInAgeLower.toDouble(),
                     state.interestedInAgeUpper.toDouble()),
                 onChanged: ref
-                    .read(preferencesFormStateProvider.notifier)
+                    .read(matchingPreferencesFormStateProvider.notifier)
                     .updateAgeRange)
             .padding(horizontal: 30, vertical: 15)
       ],
