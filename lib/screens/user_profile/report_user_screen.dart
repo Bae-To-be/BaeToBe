@@ -42,6 +42,7 @@ class ReportUserScreen extends HookConsumerWidget {
                   type: textWidgetType.subtitle2,
                   text: InfoLabels.reportUserSuccess),
               buttonBar: GFButtonBar(
+                padding: const EdgeInsets.only(bottom: 10),
                 children: <Widget>[
                   GFButton(
                     color: Theme.of(context).primaryColor,
