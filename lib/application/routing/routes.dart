@@ -27,6 +27,7 @@ import 'package:baetobe/screens/update_update/update_gender_screen.dart';
 import 'package:baetobe/screens/update_update/update_height_screen.dart';
 import 'package:baetobe/screens/update_update/update_hometown_screen.dart';
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
+import 'package:baetobe/screens/update_update/update_languages_spoken_screen.dart';
 import 'package:baetobe/screens/update_update/update_religion_screen.dart';
 import 'package:baetobe/screens/update_update/update_work_information_screen.dart';
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
@@ -123,6 +124,10 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
     AutoRoute(
         path: AppLinks.updatePreferences,
         page: UpdatePreferences,
+        guards: [AuthGuard]),
+    AutoRoute(
+        path: AppLinks.editLanguage,
+        page: UpdateLanguagesSpokenScreen,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.accountSettings,

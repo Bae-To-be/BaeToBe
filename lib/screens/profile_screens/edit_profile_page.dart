@@ -134,7 +134,7 @@ class EditProfilePage extends HookConsumerWidget {
                           : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editLanguage, arguments: false);
+                    router.navigateNamed(AppLinks.editLanguage);
                   },
                 ),
                 EditProfileContentTile(

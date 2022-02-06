@@ -111,6 +111,14 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                       }
                       if (allGenders != null) {
                         if (currentState.contains(allGenders.id)) {
+                          ref
+                              .read(interestedGenderStateProvider.notifier)
+                              .state = [
+                            ...currentState
+                                .where((id) => id != allGenders.id)
+                                .toList(),
+                            value
+                          ];
                           return;
                         }
                         if (value == allGenders.id) {
