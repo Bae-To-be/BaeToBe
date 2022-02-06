@@ -19,10 +19,7 @@ class AppLinks {
   static const String editHometown = '/edit_hometown';
   static const String editReligion = '/edit_religion';
   static const String editLanguage = '/edit_language';
-  static const String editChildren = '/edit_children';
-  static const String editFoodPreference = '/edit_food_preference';
-  static const String editSmokingPreference = '/edit_smoking_preference';
-  static const String editDrinkingPreference = '/edit_drinking_preference';
+  static const String updatePreferences = '/update_preferences/:preferenceFor';
   static const String editHeight = '/edit_height';
   static const String updateMatchingPreferences =
       'update__matching_preferences';

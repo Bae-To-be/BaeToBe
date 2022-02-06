@@ -17,7 +17,7 @@ import 'package:baetobe/screens/login_screen.dart';
 import 'package:baetobe/screens/profile_screens/account_settings_screen.dart';
 import 'package:baetobe/screens/profile_screens/edit_profile_page.dart';
 import 'package:baetobe/screens/profile_screens/help_page.dart';
-import 'package:baetobe/screens/profile_screens/update_preferences_page.dart';
+import 'package:baetobe/screens/profile_screens/update_matching_preferences_page.dart';
 import 'package:baetobe/screens/update_update/education_history_screen.dart';
 import 'package:baetobe/screens/update_update/identity_verification_screen.dart';
 import 'package:baetobe/screens/update_update/linkedin_url_screen.dart';
@@ -28,6 +28,7 @@ import 'package:baetobe/screens/update_update/update_height_screen.dart';
 import 'package:baetobe/screens/update_update/update_hometown_screen.dart';
 import 'package:baetobe/screens/update_update/update_interested_gender_screen.dart';
 import 'package:baetobe/screens/update_update/update_languages_spoken_screen.dart';
+import 'package:baetobe/screens/update_update/update_preferences_screen.dart';
 import 'package:baetobe/screens/update_update/update_religion_screen.dart';
 import 'package:baetobe/screens/update_update/update_work_information_screen.dart';
 import 'package:baetobe/screens/update_update/upload_images_screen.dart';
@@ -121,6 +122,10 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
     ], guards: [
       AuthGuard
     ]),
+    AutoRoute(
+        path: AppLinks.updatePreferences,
+        page: UpdatePreferencesScreen,
+        guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.updateMatchingPreferences,
         page: UpdateMatchingPreferences,

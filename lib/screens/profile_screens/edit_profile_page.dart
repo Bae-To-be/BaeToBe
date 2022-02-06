@@ -17,6 +17,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+import '../../application/routing/routes.gr.dart';
+
 class EditProfilePage extends HookConsumerWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
@@ -144,7 +146,8 @@ class EditProfilePage extends HookConsumerWidget {
                       : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editChildren, arguments: false);
+                    router.navigate(UpdatePreferencesScreenRoute(
+                        preferenceFor: PreferenceKey.children));
                   },
                 ),
                 EditProfileContentTile(
@@ -186,8 +189,8 @@ class EditProfilePage extends HookConsumerWidget {
                       : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editFoodPreference,
-                    //     arguments: false);
+                    router.navigate(UpdatePreferencesScreenRoute(
+                        preferenceFor: PreferenceKey.food));
                   },
                 ),
                 EditProfileContentTile(
@@ -197,8 +200,8 @@ class EditProfilePage extends HookConsumerWidget {
                       : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editSmokingPreference,
-                    //     arguments: false);
+                    router.navigate(UpdatePreferencesScreenRoute(
+                        preferenceFor: PreferenceKey.smoking));
                   },
                 ),
                 EditProfileContentTile(
@@ -208,8 +211,8 @@ class EditProfilePage extends HookConsumerWidget {
                       : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {
-                    // Get.toNamed(AppLinks.editDrinkingPreference,
-                    //     arguments: false);
+                    router.navigate(UpdatePreferencesScreenRoute(
+                        preferenceFor: PreferenceKey.drinking));
                   },
                 ),
               ],

@@ -89,3 +89,10 @@ class UserStatus {
   static const String paused = 'paused';
   static const String active = 'active';
 }
+
+class PreferenceKey {
+  static const String children = 'children';
+  static const String food = 'food';
+  static const String smoking = 'smoking';
+  static const String drinking = 'drinking';
+}
