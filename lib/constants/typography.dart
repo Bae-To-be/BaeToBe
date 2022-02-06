@@ -53,6 +53,7 @@ class Headings {
   static const String settings = 'Settings';
   static const String legal = 'Legal';
   static const String notifications = 'Notifications';
+  static const String language = 'Languages';
 }
 
 class EditProfileFieldLabels {
