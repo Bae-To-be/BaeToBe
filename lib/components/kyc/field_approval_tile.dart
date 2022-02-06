@@ -24,28 +24,28 @@ class FieldApprovalTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isFieldUpdated = fieldsUpdated.contains(fieldName);
 
-    return GFCheckboxListTile(
-      titleText: titleText,
-      size: 25,
-      padding: const EdgeInsets.all(5),
-      type: GFCheckboxType.circle,
-      subTitleText: (value || isFieldUpdated)
-          ? (value ? InfoLabels.allGood : InfoLabels.correctionSubmitted)
-          : InfoLabels.pleaseChangeField,
-      inactiveBgColor: const Color(0xFFF2F2F2),
-      inactiveBorderColor: const Color(0xFFF2F2F2),
-      activeBgColor: const Color(0xFFF2F2F2),
-      activeBorderColor: const Color(0xFFF2F2F2),
-      inactiveIcon: Icon(FontAwesomeIcons.chevronRight,
-          color: isFieldUpdated
-              ? const Color(0xFFF2F2F2)
-              : Theme.of(context).errorColor),
-      onChanged: (_) {
-        if (!value && !isFieldUpdated) {
-          AutoRouter.of(context).pushNamed('$link?redirectBack=true');
-        }
-      },
-      value: value,
+    bool? toggle = value || isFieldUpdated;
+    return IgnorePointer(
+      ignoring: toggle,
+      child: TextButton(
+        onPressed: () {
+          if (!value && !isFieldUpdated) {
+            AutoRouter.of(context).pushNamed('$link?redirectBack=true');
+          }
+        },
+        child: GFListTile(
+          margin: const EdgeInsets.symmetric(vertical: 0),
+          titleText: titleText,
+          padding: const EdgeInsets.all(5),
+          subTitleText: (toggle)
+              ? (value ? InfoLabels.allGood : InfoLabels.correctionSubmitted)
+              : InfoLabels.pleaseChangeField,
+          icon: toggle
+              ? Container()
+              : Icon(FontAwesomeIcons.chevronRight,
+                  color: Theme.of(context).errorColor),
+        ),
+      ),
     );
   }
 }
