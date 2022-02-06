@@ -1,6 +1,8 @@
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/entities/view_models/image_form_state.dart';
 import 'package:collection/collection.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,7 +29,10 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
   Future<void> pickImage() async {
     final imagesNotifier = ref.read(imagesProvider.notifier);
 
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality:
+            FirebaseRemoteConfig.instance.getInt(RemoteConfigs.imageQuality));
     if (image != null) {
       state = state.copyWith(loading: true);
       await imagesNotifier.addImage(position, image.path, image.name);

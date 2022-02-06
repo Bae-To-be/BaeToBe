@@ -20,6 +20,7 @@ class RemoteConfigs {
   static const String apiHostURL = 'API_HOST';
   static const String heightLowerBound = 'HEIGHT_LOWER_BOUND';
   static const String heightUpperBound = 'HEIGHT_UPPER_BOUND';
+  static const String imageQuality = 'IMAGE_QUALITY';
 }
 
 class ErrorMessages {
