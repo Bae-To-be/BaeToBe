@@ -27,6 +27,7 @@ class DetailedProfile with _$DetailedProfile {
       Preference? food,
       Preference? drinking,
       Preference? children,
+      Preference? exercise,
       @JsonKey(name: 'height_in_cms') required int? heightInCms,
       @JsonKey(name: 'status') required String matchStatus,
       required Match? match,

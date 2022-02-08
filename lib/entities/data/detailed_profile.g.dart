@@ -32,6 +32,9 @@ _$_DetailedProfile _$$_DetailedProfileFromJson(Map<String, dynamic> json) =>
       children: json['children'] == null
           ? null
           : Preference.fromJson(json['children'] as Map<String, dynamic>),
+      exercise: json['exercise'] == null
+          ? null
+          : Preference.fromJson(json['exercise'] as Map<String, dynamic>),
       heightInCms: json['height_in_cms'] as int?,
       matchStatus: json['status'] as String,
       match: json['match'] == null
@@ -66,6 +69,7 @@ Map<String, dynamic> _$$_DetailedProfileToJson(_$_DetailedProfile instance) =>
       'food': instance.food?.toJson(),
       'drinking': instance.drinking?.toJson(),
       'children': instance.children?.toJson(),
+      'exercise': instance.exercise?.toJson(),
       'height_in_cms': instance.heightInCms,
       'status': instance.matchStatus,
       'match': instance.match?.toJson(),

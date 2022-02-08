@@ -37,6 +37,7 @@ class _$DetailedProfileTearOff {
       Preference? food,
       Preference? drinking,
       Preference? children,
+      Preference? exercise,
       @JsonKey(name: 'height_in_cms') required int? heightInCms,
       @JsonKey(name: 'status') required String matchStatus,
       required Match? match,
@@ -60,6 +61,7 @@ class _$DetailedProfileTearOff {
       food: food,
       drinking: drinking,
       children: children,
+      exercise: exercise,
       heightInCms: heightInCms,
       matchStatus: matchStatus,
       match: match,
@@ -96,6 +98,7 @@ mixin _$DetailedProfile {
   Preference? get food => throw _privateConstructorUsedError;
   Preference? get drinking => throw _privateConstructorUsedError;
   Preference? get children => throw _privateConstructorUsedError;
+  Preference? get exercise => throw _privateConstructorUsedError;
   @JsonKey(name: 'height_in_cms')
   int? get heightInCms => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
@@ -135,6 +138,7 @@ abstract class $DetailedProfileCopyWith<$Res> {
       Preference? food,
       Preference? drinking,
       Preference? children,
+      Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? heightInCms,
       @JsonKey(name: 'status') String matchStatus,
       Match? match,
@@ -150,6 +154,7 @@ abstract class $DetailedProfileCopyWith<$Res> {
   $PreferenceCopyWith<$Res>? get food;
   $PreferenceCopyWith<$Res>? get drinking;
   $PreferenceCopyWith<$Res>? get children;
+  $PreferenceCopyWith<$Res>? get exercise;
   $MatchCopyWith<$Res>? get match;
 }
 
@@ -178,6 +183,7 @@ class _$DetailedProfileCopyWithImpl<$Res>
     Object? food = freezed,
     Object? drinking = freezed,
     Object? children = freezed,
+    Object? exercise = freezed,
     Object? heightInCms = freezed,
     Object? matchStatus = freezed,
     Object? match = freezed,
@@ -243,6 +249,10 @@ class _$DetailedProfileCopyWithImpl<$Res>
       children: children == freezed
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
+              as Preference?,
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
               as Preference?,
       heightInCms: heightInCms == freezed
           ? _value.heightInCms
@@ -342,6 +352,17 @@ class _$DetailedProfileCopyWithImpl<$Res>
   }
 
   @override
+  $PreferenceCopyWith<$Res>? get exercise {
+    if (_value.exercise == null) {
+      return null;
+    }
+
+    return $PreferenceCopyWith<$Res>(_value.exercise!, (value) {
+      return _then(_value.copyWith(exercise: value));
+    });
+  }
+
+  @override
   $MatchCopyWith<$Res>? get match {
     if (_value.match == null) {
       return null;
@@ -375,6 +396,7 @@ abstract class _$DetailedProfileCopyWith<$Res>
       Preference? food,
       Preference? drinking,
       Preference? children,
+      Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? heightInCms,
       @JsonKey(name: 'status') String matchStatus,
       Match? match,
@@ -396,6 +418,8 @@ abstract class _$DetailedProfileCopyWith<$Res>
   $PreferenceCopyWith<$Res>? get drinking;
   @override
   $PreferenceCopyWith<$Res>? get children;
+  @override
+  $PreferenceCopyWith<$Res>? get exercise;
   @override
   $MatchCopyWith<$Res>? get match;
 }
@@ -427,6 +451,7 @@ class __$DetailedProfileCopyWithImpl<$Res>
     Object? food = freezed,
     Object? drinking = freezed,
     Object? children = freezed,
+    Object? exercise = freezed,
     Object? heightInCms = freezed,
     Object? matchStatus = freezed,
     Object? match = freezed,
@@ -493,6 +518,10 @@ class __$DetailedProfileCopyWithImpl<$Res>
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
               as Preference?,
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
+              as Preference?,
       heightInCms: heightInCms == freezed
           ? _value.heightInCms
           : heightInCms // ignore: cast_nullable_to_non_nullable
@@ -547,6 +576,7 @@ class _$_DetailedProfile implements _DetailedProfile {
       this.food,
       this.drinking,
       this.children,
+      this.exercise,
       @JsonKey(name: 'height_in_cms') required this.heightInCms,
       @JsonKey(name: 'status') required this.matchStatus,
       required this.match,
@@ -589,6 +619,8 @@ class _$_DetailedProfile implements _DetailedProfile {
   @override
   final Preference? children;
   @override
+  final Preference? exercise;
+  @override
   @JsonKey(name: 'height_in_cms')
   final int? heightInCms;
   @override
@@ -611,7 +643,7 @@ class _$_DetailedProfile implements _DetailedProfile {
 
   @override
   String toString() {
-    return 'DetailedProfile(id: $id, name: $name, gender: $gender, age: $age, company: $company, industry: $industry, linkedinUrl: $linkedinUrl, bio: $bio, hometown: $hometown, religion: $religion, smoking: $smoking, food: $food, drinking: $drinking, children: $children, heightInCms: $heightInCms, matchStatus: $matchStatus, match: $match, isReported: $isReported, languages: $languages, education: $education, workTitle: $workTitle, images: $images)';
+    return 'DetailedProfile(id: $id, name: $name, gender: $gender, age: $age, company: $company, industry: $industry, linkedinUrl: $linkedinUrl, bio: $bio, hometown: $hometown, religion: $religion, smoking: $smoking, food: $food, drinking: $drinking, children: $children, exercise: $exercise, heightInCms: $heightInCms, matchStatus: $matchStatus, match: $match, isReported: $isReported, languages: $languages, education: $education, workTitle: $workTitle, images: $images)';
   }
 
   @override
@@ -634,6 +666,7 @@ class _$_DetailedProfile implements _DetailedProfile {
             const DeepCollectionEquality().equals(other.food, food) &&
             const DeepCollectionEquality().equals(other.drinking, drinking) &&
             const DeepCollectionEquality().equals(other.children, children) &&
+            const DeepCollectionEquality().equals(other.exercise, exercise) &&
             const DeepCollectionEquality()
                 .equals(other.heightInCms, heightInCms) &&
             const DeepCollectionEquality()
@@ -664,6 +697,7 @@ class _$_DetailedProfile implements _DetailedProfile {
         const DeepCollectionEquality().hash(food),
         const DeepCollectionEquality().hash(drinking),
         const DeepCollectionEquality().hash(children),
+        const DeepCollectionEquality().hash(exercise),
         const DeepCollectionEquality().hash(heightInCms),
         const DeepCollectionEquality().hash(matchStatus),
         const DeepCollectionEquality().hash(match),
@@ -701,6 +735,7 @@ abstract class _DetailedProfile implements DetailedProfile {
       Preference? food,
       Preference? drinking,
       Preference? children,
+      Preference? exercise,
       @JsonKey(name: 'height_in_cms') required int? heightInCms,
       @JsonKey(name: 'status') required String matchStatus,
       required Match? match,
@@ -742,6 +777,8 @@ abstract class _DetailedProfile implements DetailedProfile {
   Preference? get drinking;
   @override
   Preference? get children;
+  @override
+  Preference? get exercise;
   @override
   @JsonKey(name: 'height_in_cms')
   int? get heightInCms;
