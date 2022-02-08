@@ -14,27 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 import '../../constants/app_constants.dart';
-
-const preferenceBackendRoute = {
-  PreferenceKey.smoking: BackendRoutes.listSmokingPreferences,
-  PreferenceKey.children: BackendRoutes.listChildrenPreferences,
-  PreferenceKey.food: BackendRoutes.listFoodPreferences,
-  PreferenceKey.drinking: BackendRoutes.listDrinkingPreferences
-};
-
-const headingFor = {
-  PreferenceKey.smoking: Headings.smokingPreference,
-  PreferenceKey.children: Headings.childrenPreference,
-  PreferenceKey.food: Headings.foodPreference,
-  PreferenceKey.drinking: Headings.drinkingPreference
-};
-
-const jsonFor = {
-  PreferenceKey.smoking: 'smoking_preference_id',
-  PreferenceKey.children: 'children_preference_id',
-  PreferenceKey.food: 'food_preference_id',
-  PreferenceKey.drinking: 'drinking_preference_id'
-};
+import '../../entities/data/user.dart';
 
 class UpdatePreferencesScreen extends HookConsumerWidget {
   final String preferenceFor;
@@ -45,18 +25,20 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preferenceListing =
-        ref.watch(preferencesProvider(preferenceBackendRoute[preferenceFor]!));
-    final state = ref.watch(preferencesStateProvider(preferenceFor));
+    final user = ref.watch(userProvider);
+    final preferenceListing = ref
+        .watch(preferencesProvider(Preferences(preferenceFor).backendRoute()));
+    final state = ref.watch(preferencesStateProvider(
+        Preferences(preferenceFor).userSelectedValue(user)));
 
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
-          {jsonFor[preferenceFor]!: state},
+          {Preferences(preferenceFor).jsonName(): state},
           routeTo: AppLinks.back);
     }
 
     return FormLayout(
-        header: CustomHeaderTile(text: headingFor[preferenceFor]!),
+        header: CustomHeaderTile(text: Preferences(preferenceFor).heading()),
         children: <Widget>[
           preferenceListing
               .maybeWhen(
@@ -70,7 +52,9 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
                             title: listing[index].name,
                             selected: isSelected,
                             onTap: () => ref
-                                .read(preferencesStateProvider(preferenceFor)
+                                .read(preferencesStateProvider(
+                                        Preferences(preferenceFor)
+                                            .userSelectedValue(user))
                                     .notifier)
                                 .state = listing[index].id);
                       }),
@@ -85,3 +69,130 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
         ));
   }
 }
+
+abstract class Preferences {
+  String backendRoute();
+  String heading();
+  String jsonName();
+  int? userSelectedValue(User user);
+
+  factory Preferences(String preferenceFor) {
+    switch (preferenceFor) {
+      case PreferenceKey.smoking:
+        return _SmokingPreferences();
+      case PreferenceKey.food:
+        return _FoodPreference();
+      case PreferenceKey.children:
+        return _ChildrenPreference();
+      case PreferenceKey.drinking:
+        return _DrinkingPreference();
+      default:
+        throw "Can't find $preferenceFor.";
+    }
+  }
+}
+
+class _SmokingPreferences implements Preferences {
+  @override
+  String backendRoute() {
+    return BackendRoutes.listSmokingPreferences;
+  }
+
+  @override
+  String heading() {
+    return Headings.smokingPreference;
+  }
+
+  @override
+  String jsonName() {
+    return 'smoking_preference_id';
+  }
+
+  @override
+  int? userSelectedValue(User user) {
+    return user.smoking?.id;
+  }
+}
+
+class _DrinkingPreference implements Preferences {
+  @override
+  String backendRoute() {
+    return BackendRoutes.listDrinkingPreferences;
+  }
+
+  @override
+  String heading() {
+    return Headings.drinkingPreference;
+  }
+
+  @override
+  String jsonName() {
+    return 'drinking_preference_id';
+  }
+
+  @override
+  int? userSelectedValue(User user) {
+    return user.drinking?.id;
+  }
+}
+
+class _ChildrenPreference implements Preferences {
+  @override
+  String backendRoute() {
+    return BackendRoutes.listChildrenPreferences;
+  }
+
+  @override
+  String heading() {
+    return Headings.childrenPreference;
+  }
+
+  @override
+  String jsonName() {
+    return 'children_preference_id';
+  }
+
+  @override
+  int? userSelectedValue(User user) {
+    return user.children?.id;
+  }
+}
+
+class _FoodPreference implements Preferences {
+  @override
+  String backendRoute() {
+    return BackendRoutes.listFoodPreferences;
+  }
+
+  @override
+  String heading() {
+    return Headings.foodPreference;
+  }
+
+  @override
+  String jsonName() {
+    return 'food_preference_id';
+  }
+
+  @override
+  int? userSelectedValue(User user) {
+    return user.food?.id;
+  }
+}
+
+// class _ExercisePreference extends Preferences {
+//   @override
+//   String backendRoute() {
+//     return BackendRoutes.listSmokingPreferences;
+//   }
+//
+//   @override
+//   String heading() {
+//     return Headings.smokingPreference;
+//   }
+//
+//   @override
+//   String jsonName() {
+//     return 'smoking_preference_id';
+//   }
+// }
