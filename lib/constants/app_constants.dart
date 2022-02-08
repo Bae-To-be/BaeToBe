@@ -96,4 +96,5 @@ class PreferenceKey {
   static const String food = 'food';
   static const String smoking = 'smoking';
   static const String drinking = 'drinking';
+  static const String exercise = 'exercise';
 }

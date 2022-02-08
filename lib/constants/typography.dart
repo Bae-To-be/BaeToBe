@@ -31,6 +31,7 @@ class Headings {
   static const String foodPreference = 'Food';
   static const String smokingPreference = 'Smoking';
   static const String drinkingPreference = 'Drinking';
+  static const String exercisePreference = 'Exercise';
   static const String updateHeight = 'Height';
   static const String accountUnderVerification =
       'Your account is under verification';
@@ -72,6 +73,7 @@ class EditProfileFieldLabels {
   static const food = 'Food';
   static const smoking = 'Smoking';
   static const drinking = 'Drinking';
+  static const exercise = 'Exercise';
 }
 
 class InfoLabels {

@@ -54,6 +54,8 @@ class _$UserTearOff {
           Preference? drinking,
       @JsonKey(name: 'children_preference')
           Preference? children,
+      @JsonKey(name: 'exercise_preference')
+          Preference? exercise,
       @JsonKey(name: 'height_in_cms')
           int? height,
       String? status,
@@ -84,6 +86,7 @@ class _$UserTearOff {
       food: food,
       drinking: drinking,
       children: children,
+      exercise: exercise,
       height: height,
       status: status,
       languages: languages,
@@ -134,6 +137,8 @@ mixin _$User {
   Preference? get drinking => throw _privateConstructorUsedError;
   @JsonKey(name: 'children_preference')
   Preference? get children => throw _privateConstructorUsedError;
+  @JsonKey(name: 'exercise_preference')
+  Preference? get exercise => throw _privateConstructorUsedError;
   @JsonKey(name: 'height_in_cms')
   int? get height => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
@@ -174,6 +179,7 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'food_preference') Preference? food,
       @JsonKey(name: 'drinking_preference') Preference? drinking,
       @JsonKey(name: 'children_preference') Preference? children,
+      @JsonKey(name: 'exercise_preference') Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? height,
       String? status,
       List<Language> languages,
@@ -186,6 +192,7 @@ abstract class $UserCopyWith<$Res> {
   $PreferenceCopyWith<$Res>? get food;
   $PreferenceCopyWith<$Res>? get drinking;
   $PreferenceCopyWith<$Res>? get children;
+  $PreferenceCopyWith<$Res>? get exercise;
   $UserHometownCopyWith<$Res> get hometown;
 }
 
@@ -220,6 +227,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? food = freezed,
     Object? drinking = freezed,
     Object? children = freezed,
+    Object? exercise = freezed,
     Object? height = freezed,
     Object? status = freezed,
     Object? languages = freezed,
@@ -312,6 +320,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
               as Preference?,
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
+              as Preference?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -395,6 +407,17 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   }
 
   @override
+  $PreferenceCopyWith<$Res>? get exercise {
+    if (_value.exercise == null) {
+      return null;
+    }
+
+    return $PreferenceCopyWith<$Res>(_value.exercise!, (value) {
+      return _then(_value.copyWith(exercise: value));
+    });
+  }
+
+  @override
   $UserHometownCopyWith<$Res> get hometown {
     return $UserHometownCopyWith<$Res>(_value.hometown, (value) {
       return _then(_value.copyWith(hometown: value));
@@ -429,6 +452,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'food_preference') Preference? food,
       @JsonKey(name: 'drinking_preference') Preference? drinking,
       @JsonKey(name: 'children_preference') Preference? children,
+      @JsonKey(name: 'exercise_preference') Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? height,
       String? status,
       List<Language> languages,
@@ -446,6 +470,8 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $PreferenceCopyWith<$Res>? get drinking;
   @override
   $PreferenceCopyWith<$Res>? get children;
+  @override
+  $PreferenceCopyWith<$Res>? get exercise;
   @override
   $UserHometownCopyWith<$Res> get hometown;
 }
@@ -482,6 +508,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? food = freezed,
     Object? drinking = freezed,
     Object? children = freezed,
+    Object? exercise = freezed,
     Object? height = freezed,
     Object? status = freezed,
     Object? languages = freezed,
@@ -574,6 +601,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
               as Preference?,
+      exercise: exercise == freezed
+          ? _value.exercise
+          : exercise // ignore: cast_nullable_to_non_nullable
+              as Preference?,
       height: height == freezed
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
@@ -627,6 +658,7 @@ class _$_User extends _User {
       @JsonKey(name: 'food_preference') this.food,
       @JsonKey(name: 'drinking_preference') this.drinking,
       @JsonKey(name: 'children_preference') this.children,
+      @JsonKey(name: 'exercise_preference') this.exercise,
       @JsonKey(name: 'height_in_cms') this.height,
       this.status,
       required this.languages,
@@ -690,6 +722,9 @@ class _$_User extends _User {
   @JsonKey(name: 'children_preference')
   final Preference? children;
   @override
+  @JsonKey(name: 'exercise_preference')
+  final Preference? exercise;
+  @override
   @JsonKey(name: 'height_in_cms')
   final int? height;
   @override
@@ -706,7 +741,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, course: $course, industry: $industry, company: $company, university: $university, workTitle: $workTitle, birthday: $birthday, gender: $gender, linkedInURL: $linkedInURL, age: $age, linkedInPublic: $linkedInPublic, bio: $bio, searchRadius: $searchRadius, interestedAgeLower: $interestedAgeLower, interestedAgeUpper: $interestedAgeUpper, religion: $religion, smoking: $smoking, food: $food, drinking: $drinking, children: $children, height: $height, status: $status, languages: $languages, interestedGenders: $interestedGenders, education: $education, hometown: $hometown)';
+    return 'User(id: $id, name: $name, course: $course, industry: $industry, company: $company, university: $university, workTitle: $workTitle, birthday: $birthday, gender: $gender, linkedInURL: $linkedInURL, age: $age, linkedInPublic: $linkedInPublic, bio: $bio, searchRadius: $searchRadius, interestedAgeLower: $interestedAgeLower, interestedAgeUpper: $interestedAgeUpper, religion: $religion, smoking: $smoking, food: $food, drinking: $drinking, children: $children, exercise: $exercise, height: $height, status: $status, languages: $languages, interestedGenders: $interestedGenders, education: $education, hometown: $hometown)';
   }
 
   @override
@@ -741,6 +776,7 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.food, food) &&
             const DeepCollectionEquality().equals(other.drinking, drinking) &&
             const DeepCollectionEquality().equals(other.children, children) &&
+            const DeepCollectionEquality().equals(other.exercise, exercise) &&
             const DeepCollectionEquality().equals(other.height, height) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality().equals(other.languages, languages) &&
@@ -774,6 +810,7 @@ class _$_User extends _User {
         const DeepCollectionEquality().hash(food),
         const DeepCollectionEquality().hash(drinking),
         const DeepCollectionEquality().hash(children),
+        const DeepCollectionEquality().hash(exercise),
         const DeepCollectionEquality().hash(height),
         const DeepCollectionEquality().hash(status),
         const DeepCollectionEquality().hash(languages),
@@ -826,6 +863,8 @@ abstract class _User extends User {
           Preference? drinking,
       @JsonKey(name: 'children_preference')
           Preference? children,
+      @JsonKey(name: 'exercise_preference')
+          Preference? exercise,
       @JsonKey(name: 'height_in_cms')
           int? height,
       String? status,
@@ -890,6 +929,9 @@ abstract class _User extends User {
   @override
   @JsonKey(name: 'children_preference')
   Preference? get children;
+  @override
+  @JsonKey(name: 'exercise_preference')
+  Preference? get exercise;
   @override
   @JsonKey(name: 'height_in_cms')
   int? get height;

@@ -86,6 +86,8 @@ abstract class Preferences {
         return _ChildrenPreference();
       case PreferenceKey.drinking:
         return _DrinkingPreference();
+      case PreferenceKey.exercise:
+        return _ExercisePreferences();
       default:
         throw "Can't find $preferenceFor.";
     }
@@ -180,19 +182,24 @@ class _FoodPreference implements Preferences {
   }
 }
 
-// class _ExercisePreference extends Preferences {
-//   @override
-//   String backendRoute() {
-//     return BackendRoutes.listSmokingPreferences;
-//   }
-//
-//   @override
-//   String heading() {
-//     return Headings.smokingPreference;
-//   }
-//
-//   @override
-//   String jsonName() {
-//     return 'smoking_preference_id';
-//   }
-// }
+class _ExercisePreferences implements Preferences {
+  @override
+  String backendRoute() {
+    return BackendRoutes.listExercisePreferences;
+  }
+
+  @override
+  String heading() {
+    return Headings.exercisePreference;
+  }
+
+  @override
+  String jsonName() {
+    return 'exercise_preference_id';
+  }
+
+  @override
+  int? userSelectedValue(User user) {
+    return user.exercise?.id;
+  }
+}

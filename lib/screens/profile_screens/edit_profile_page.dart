@@ -215,6 +215,17 @@ class EditProfilePage extends HookConsumerWidget {
                         preferenceFor: PreferenceKey.drinking));
                   },
                 ),
+                EditProfileContentTile(
+                  title: EditProfileFieldLabels.exercise,
+                  content: _ContentTextWidget(_user.exercise != null
+                      ? _user.exercise!.name
+                      : ErrorMessages.pleaseUpdatePreferences),
+                  button: true,
+                  callback: () {
+                    router.navigate(UpdatePreferencesScreenRoute(
+                        preferenceFor: PreferenceKey.exercise));
+                  },
+                ),
               ],
             ).padding(horizontal: 16, top: 16),
           ],

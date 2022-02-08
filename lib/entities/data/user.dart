@@ -34,6 +34,7 @@ class User with _$User {
     @JsonKey(name: 'food_preference') Preference? food,
     @JsonKey(name: 'drinking_preference') Preference? drinking,
     @JsonKey(name: 'children_preference') Preference? children,
+    @JsonKey(name: 'exercise_preference') Preference? exercise,
     @JsonKey(name: 'height_in_cms') int? height,
     String? status,
     required List<Language> languages,

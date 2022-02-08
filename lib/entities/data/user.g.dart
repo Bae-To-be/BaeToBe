@@ -42,6 +42,10 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
           ? null
           : Preference.fromJson(
               json['children_preference'] as Map<String, dynamic>),
+      exercise: json['exercise_preference'] == null
+          ? null
+          : Preference.fromJson(
+              json['exercise_preference'] as Map<String, dynamic>),
       height: json['height_in_cms'] as int?,
       status: json['status'] as String?,
       languages: (json['languages'] as List<dynamic>)
@@ -78,6 +82,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'food_preference': instance.food?.toJson(),
       'drinking_preference': instance.drinking?.toJson(),
       'children_preference': instance.children?.toJson(),
+      'exercise_preference': instance.exercise?.toJson(),
       'height_in_cms': instance.height,
       'status': instance.status,
       'languages': instance.languages.map((e) => e.toJson()).toList(),

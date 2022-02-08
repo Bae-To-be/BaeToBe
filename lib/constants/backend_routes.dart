@@ -27,6 +27,7 @@ class BackendRoutes {
   static const String listFoodPreferences = '/api/v1/food_preferences';
   static const String listSmokingPreferences = '/api/v1/smoking_preferences';
   static const String listDrinkingPreferences = '/api/v1/drinking_preferences';
+  static const String listExercisePreferences = '/api/v1/exercise_preferences';
   static const String deleteAccount = '/api/v1/me';
   static const String potentialMatches = '/api/v1/potential_matches';
   static const String swipe = '/api/v1/swipes';
