@@ -15,29 +15,30 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+//ignore: must_be_immutable
 class UpdatePreferencesScreen extends HookConsumerWidget {
   final String preferenceFor;
+  Preferences? preferencesHandler;
 
-  const UpdatePreferencesScreen(
-      {Key? key, @pathParam required this.preferenceFor})
-      : super(key: key);
+  UpdatePreferencesScreen({Key? key, @pathParam required this.preferenceFor})
+      : super(key: key) {
+    preferencesHandler = Preferences(preferenceFor);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
-    final preferencesHandler = Preferences(preferenceFor, user);
     final preferenceListing =
-        ref.watch(preferencesProvider(preferencesHandler));
-    final state = ref.watch(preferencesStateProvider(preferencesHandler));
+        ref.watch(preferencesProvider(preferencesHandler!));
+    final state = ref.watch(preferencesStateProvider(preferencesHandler!));
 
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
-          {preferencesHandler.jsonName(): state},
+          {preferencesHandler!.jsonName(): state},
           routeTo: AppLinks.back);
     }
 
     return FormLayout(
-        header: CustomHeaderTile(text: preferencesHandler.heading()),
+        header: CustomHeaderTile(text: preferencesHandler!.heading()),
         children: <Widget>[
           preferenceListing
               .maybeWhen(
@@ -51,9 +52,9 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
                             title: listing[index].name,
                             selected: isSelected,
                             onTap: () => ref
-                                .read(
-                                    preferencesStateProvider(preferencesHandler)
-                                        .notifier)
+                                .read(preferencesStateProvider(
+                                        preferencesHandler!)
+                                    .notifier)
                                 .state = listing[index].id);
                       }),
                   orElse: () => Center(
@@ -73,20 +74,20 @@ abstract class Preferences {
   String backendRoute();
   String heading();
   String jsonName();
-  int? userSelectedValue();
+  int? userSelectedValue(User user);
 
-  factory Preferences(String preferenceFor, User user) {
+  factory Preferences(String preferenceFor) {
     switch (preferenceFor) {
       case PreferenceKey.smoking:
-        return _SmokingPreferences(user);
+        return _SmokingPreferences();
       case PreferenceKey.food:
-        return _FoodPreference(user);
+        return _FoodPreference();
       case PreferenceKey.children:
-        return _ChildrenPreference(user);
+        return _ChildrenPreference();
       case PreferenceKey.drinking:
-        return _DrinkingPreference(user);
+        return _DrinkingPreference();
       case PreferenceKey.exercise:
-        return _ExercisePreferences(user);
+        return _ExercisePreferences();
       default:
         throw "Can't find $preferenceFor.";
     }
@@ -94,9 +95,6 @@ abstract class Preferences {
 }
 
 class _SmokingPreferences implements Preferences {
-  final User user;
-  _SmokingPreferences(this.user);
-
   @override
   String backendRoute() {
     return BackendRoutes.listSmokingPreferences;
@@ -113,25 +111,12 @@ class _SmokingPreferences implements Preferences {
   }
 
   @override
-  int? userSelectedValue() {
+  int? userSelectedValue(user) {
     return user.smoking?.id;
   }
-
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      other is _SmokingPreferences &&
-          runtimeType == other.runtimeType &&
-          user == other.user;
-
-  @override
-  int get hashCode => user.hashCode;
 }
 
 class _DrinkingPreference implements Preferences {
-  final User user;
-  _DrinkingPreference(this.user);
-
   @override
   String backendRoute() {
     return BackendRoutes.listDrinkingPreferences;
@@ -148,25 +133,12 @@ class _DrinkingPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue() {
+  int? userSelectedValue(user) {
     return user.drinking?.id;
   }
-
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      other is _DrinkingPreference &&
-          runtimeType == other.runtimeType &&
-          user == other.user;
-
-  @override
-  int get hashCode => user.hashCode;
 }
 
 class _ChildrenPreference implements Preferences {
-  final User user;
-  _ChildrenPreference(this.user);
-
   @override
   String backendRoute() {
     return BackendRoutes.listChildrenPreferences;
@@ -183,25 +155,12 @@ class _ChildrenPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue() {
+  int? userSelectedValue(user) {
     return user.children?.id;
   }
-
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      other is _ChildrenPreference &&
-          runtimeType == other.runtimeType &&
-          user == other.user;
-
-  @override
-  int get hashCode => user.hashCode;
 }
 
 class _FoodPreference implements Preferences {
-  final User user;
-  _FoodPreference(this.user);
-
   @override
   String backendRoute() {
     return BackendRoutes.listFoodPreferences;
@@ -218,25 +177,12 @@ class _FoodPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue() {
+  int? userSelectedValue(user) {
     return user.food?.id;
   }
-
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      other is _FoodPreference &&
-          runtimeType == other.runtimeType &&
-          user == other.user;
-
-  @override
-  int get hashCode => user.hashCode;
 }
 
 class _ExercisePreferences implements Preferences {
-  final User user;
-  _ExercisePreferences(this.user);
-
   @override
   String backendRoute() {
     return BackendRoutes.listExercisePreferences;
@@ -253,17 +199,7 @@ class _ExercisePreferences implements Preferences {
   }
 
   @override
-  int? userSelectedValue() {
+  int? userSelectedValue(user) {
     return user.exercise?.id;
   }
-
-  @override
-  bool operator ==(other) =>
-      identical(this, other) ||
-      other is _ExercisePreferences &&
-          runtimeType == other.runtimeType &&
-          user == other.user;
-
-  @override
-  int get hashCode => user.hashCode;
 }
