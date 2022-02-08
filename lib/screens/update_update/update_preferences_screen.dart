@@ -25,11 +25,10 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
-    final preferencesHandler = Preferences(preferenceFor);
+    final preferencesHandler = Preferences(preferenceFor, user);
     final preferenceListing =
         ref.watch(preferencesProvider(preferencesHandler.backendRoute()));
-    final state = ref.watch(
-        preferencesStateProvider(preferencesHandler.userSelectedValue(user)));
+    final state = ref.watch(preferencesStateProvider(preferencesHandler));
 
     void onSubmit() {
       ref.read(userProvider.notifier).updateAttributes(
@@ -52,10 +51,9 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
                             title: listing[index].name,
                             selected: isSelected,
                             onTap: () => ref
-                                .read(preferencesStateProvider(
-                                        preferencesHandler
-                                            .userSelectedValue(user))
-                                    .notifier)
+                                .read(
+                                    preferencesStateProvider(preferencesHandler)
+                                        .notifier)
                                 .state = listing[index].id);
                       }),
                   orElse: () => Center(
@@ -75,20 +73,20 @@ abstract class Preferences {
   String backendRoute();
   String heading();
   String jsonName();
-  int? userSelectedValue(User user);
+  int? userSelectedValue();
 
-  factory Preferences(String preferenceFor) {
+  factory Preferences(String preferenceFor, User user) {
     switch (preferenceFor) {
       case PreferenceKey.smoking:
-        return _SmokingPreferences();
+        return _SmokingPreferences(user);
       case PreferenceKey.food:
-        return _FoodPreference();
+        return _FoodPreference(user);
       case PreferenceKey.children:
-        return _ChildrenPreference();
+        return _ChildrenPreference(user);
       case PreferenceKey.drinking:
-        return _DrinkingPreference();
+        return _DrinkingPreference(user);
       case PreferenceKey.exercise:
-        return _ExercisePreferences();
+        return _ExercisePreferences(user);
       default:
         throw "Can't find $preferenceFor.";
     }
@@ -96,6 +94,9 @@ abstract class Preferences {
 }
 
 class _SmokingPreferences implements Preferences {
+  final User user;
+  _SmokingPreferences(this.user);
+
   @override
   String backendRoute() {
     return BackendRoutes.listSmokingPreferences;
@@ -112,12 +113,25 @@ class _SmokingPreferences implements Preferences {
   }
 
   @override
-  int? userSelectedValue(User user) {
+  int? userSelectedValue() {
     return user.smoking?.id;
   }
+
+  @override
+  bool operator ==(other) =>
+      identical(this, other) ||
+      other is _SmokingPreferences &&
+          runtimeType == other.runtimeType &&
+          user == other.user;
+
+  @override
+  int get hashCode => user.hashCode;
 }
 
 class _DrinkingPreference implements Preferences {
+  final User user;
+  _DrinkingPreference(this.user);
+
   @override
   String backendRoute() {
     return BackendRoutes.listDrinkingPreferences;
@@ -134,12 +148,25 @@ class _DrinkingPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue(User user) {
+  int? userSelectedValue() {
     return user.drinking?.id;
   }
+
+  @override
+  bool operator ==(other) =>
+      identical(this, other) ||
+      other is _DrinkingPreference &&
+          runtimeType == other.runtimeType &&
+          user == other.user;
+
+  @override
+  int get hashCode => user.hashCode;
 }
 
 class _ChildrenPreference implements Preferences {
+  final User user;
+  _ChildrenPreference(this.user);
+
   @override
   String backendRoute() {
     return BackendRoutes.listChildrenPreferences;
@@ -156,12 +183,25 @@ class _ChildrenPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue(User user) {
+  int? userSelectedValue() {
     return user.children?.id;
   }
+
+  @override
+  bool operator ==(other) =>
+      identical(this, other) ||
+      other is _ChildrenPreference &&
+          runtimeType == other.runtimeType &&
+          user == other.user;
+
+  @override
+  int get hashCode => user.hashCode;
 }
 
 class _FoodPreference implements Preferences {
+  final User user;
+  _FoodPreference(this.user);
+
   @override
   String backendRoute() {
     return BackendRoutes.listFoodPreferences;
@@ -178,12 +218,25 @@ class _FoodPreference implements Preferences {
   }
 
   @override
-  int? userSelectedValue(User user) {
+  int? userSelectedValue() {
     return user.food?.id;
   }
+
+  @override
+  bool operator ==(other) =>
+      identical(this, other) ||
+      other is _FoodPreference &&
+          runtimeType == other.runtimeType &&
+          user == other.user;
+
+  @override
+  int get hashCode => user.hashCode;
 }
 
 class _ExercisePreferences implements Preferences {
+  final User user;
+  _ExercisePreferences(this.user);
+
   @override
   String backendRoute() {
     return BackendRoutes.listExercisePreferences;
@@ -200,7 +253,17 @@ class _ExercisePreferences implements Preferences {
   }
 
   @override
-  int? userSelectedValue(User user) {
+  int? userSelectedValue() {
     return user.exercise?.id;
   }
+
+  @override
+  bool operator ==(other) =>
+      identical(this, other) ||
+      other is _ExercisePreferences &&
+          runtimeType == other.runtimeType &&
+          user == other.user;
+
+  @override
+  int get hashCode => user.hashCode;
 }
