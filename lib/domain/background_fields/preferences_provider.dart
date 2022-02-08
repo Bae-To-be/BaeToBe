@@ -1,6 +1,6 @@
 import 'package:baetobe/domain/error_provider.dart';
+import 'package:baetobe/entities/preferences.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
-import 'package:baetobe/screens/update_update/update_preferences_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entities/data/preference.dart';
