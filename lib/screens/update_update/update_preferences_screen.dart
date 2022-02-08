@@ -27,7 +27,7 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
     final user = ref.watch(userProvider);
     final preferencesHandler = Preferences(preferenceFor, user);
     final preferenceListing =
-        ref.watch(preferencesProvider(preferencesHandler.backendRoute()));
+        ref.watch(preferencesProvider(preferencesHandler));
     final state = ref.watch(preferencesStateProvider(preferencesHandler));
 
     void onSubmit() {
