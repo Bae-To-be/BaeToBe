@@ -1,7 +1,6 @@
+import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/view_models/hometown_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../user_provider.dart';
 
 final hometownStateProvider = StateProvider.autoDispose<HometownState>((ref) {
   var result = HometownState();

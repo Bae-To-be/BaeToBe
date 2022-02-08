@@ -1,8 +1,7 @@
 import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/domain/user_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../user_provider.dart';
 
 final selectedIndexProvider = StateProvider.autoDispose<int>((ref) {
   int index = 12;

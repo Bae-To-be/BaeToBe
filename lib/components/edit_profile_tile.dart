@@ -1,9 +1,8 @@
+import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-import 'custom_divider.dart';
 
 class EditProfileSectionTile extends StatelessWidget {
   final String title;

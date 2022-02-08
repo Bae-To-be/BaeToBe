@@ -1,9 +1,8 @@
 import 'package:baetobe/domain/error_provider.dart';
+import 'package:baetobe/entities/data/preference.dart';
 import 'package:baetobe/entities/preferences.dart';
 import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../entities/data/preference.dart';
 
 final preferencesProvider = FutureProvider.family
     .autoDispose<List, Preferences>((ref, preferencesHandler) async {

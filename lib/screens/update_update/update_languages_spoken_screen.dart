@@ -5,13 +5,12 @@ import 'package:baetobe/components/forms/layout.dart';
 import 'package:baetobe/components/forms/select_tile.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/background_fields/language_provider.dart';
+import 'package:baetobe/domain/form_states/language_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-import '../../domain/background_fields/language_provider.dart';
-import '../../domain/form_states/language_state_provider.dart';
 
 class UpdateLanguagesSpokenScreen extends HookConsumerWidget {
   final bool? redirectBack;

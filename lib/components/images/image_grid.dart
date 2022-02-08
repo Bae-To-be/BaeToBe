@@ -1,8 +1,7 @@
+import 'package:baetobe/components/images/image_tile.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
-
-import 'image_tile.dart';
 
 class ImageGrid extends StatelessWidget {
   const ImageGrid({Key? key}) : super(key: key);
