@@ -1,4 +1,0 @@
-enum Redirect {
-  none,
-  back,
-}
