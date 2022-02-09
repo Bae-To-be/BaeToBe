@@ -9,10 +9,9 @@ final languageStateProvider = StateProvider.autoDispose<List<int>>((ref) {
   if (user.languages.isNotEmpty) {
     languages.whenData((listing) {
       final matches =
-          listing.where((language) => user.languages.contains(language.name));
+          listing.where((language) => user.languages.contains(language));
       result = matches.map((language) => language.id).cast<int>().toList();
     });
   }
-
   return result;
 });
