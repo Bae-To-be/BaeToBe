@@ -7,7 +7,6 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/linkedin_info_state_provider.dart';
-import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
