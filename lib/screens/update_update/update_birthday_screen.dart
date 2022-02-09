@@ -8,6 +8,7 @@ import 'package:baetobe/domain/form_states/birthday_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/utils/datetime.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -53,6 +54,9 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
           ).padding(vertical: 8).alignment(Alignment.center),
         ],
         floatingSubmit: FloatingCta(
+          icon: redirectBack == true
+              ? FontAwesomeIcons.solidSave
+              : FontAwesomeIcons.chevronRight,
           enabled: state != null,
           onPressed: () {
             ref.read(userProvider.notifier).updateAttributes(

@@ -20,7 +20,7 @@ class FloatingCta extends HookConsumerWidget {
       this.heroTag = 'submit',
       this.enabled = true,
       this.loadingOverride,
-      this.icon,
+      required this.icon,
       this.color,
       this.onPressed = doNothing,
       this.alignment = Alignment.bottomRight})

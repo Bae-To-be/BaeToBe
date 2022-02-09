@@ -88,6 +88,9 @@ class EducationHistoryScreen extends HookConsumerWidget {
       ],
       floatingSubmit: FloatingCta(
         enabled: state.allInformationValid(),
+        icon: redirectBack == true
+            ? FontAwesomeIcons.solidSave
+            : FontAwesomeIcons.chevronRight,
         onPressed: () {
           ref.read(userProvider.notifier).updateAttributes({
             'education':

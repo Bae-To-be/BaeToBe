@@ -9,6 +9,7 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/identity_verification_state_provider.dart';
 import 'package:baetobe/domain/verification_info_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -47,6 +48,9 @@ class IdentityVerificationScreen extends HookConsumerWidget {
         ],
         floatingSubmit: FloatingCta(
           enabled: state.uploaded,
+          icon: redirectBack == true
+              ? FontAwesomeIcons.solidSave
+              : FontAwesomeIcons.chevronRight,
           onPressed: () {
             if (redirectBack == true) {
               ref.read(routerProvider.notifier).pop();

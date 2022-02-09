@@ -9,6 +9,7 @@ import 'package:baetobe/domain/form_states/preferences_state_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -64,6 +65,7 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
               .padding(top: 36),
         ],
         floatingSubmit: FloatingCta(
+          icon: FontAwesomeIcons.solidSave,
           enabled: state != null,
           onPressed: onSubmit,
         ));

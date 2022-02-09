@@ -13,6 +13,7 @@ import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/data/gender.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -142,6 +143,9 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                       color: Theme.of(context).primaryColor))),
         ],
         floatingSubmit: FloatingCta(
+          icon: redirectBack == true
+              ? FontAwesomeIcons.solidSave
+              : FontAwesomeIcons.chevronRight,
           enabled: state.isNotEmpty,
           onPressed: onSubmit,
         ));
