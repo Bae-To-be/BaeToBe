@@ -5,7 +5,10 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/components/verification/selfie_container.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/selfie_verification_state_provider.dart';
+import 'package:baetobe/domain/images_provider.dart';
+import 'package:baetobe/domain/verification_files_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -20,6 +23,15 @@ class SelfieVerificationScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(selfieStateProvider);
+
+    useEffect(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        if (redirectBack != true) {
+          ref.read(verificationFilesProvider.notifier).loadFiles();
+        }
+      });
+      return null;
+    }, []);
 
     return FormLayout(
       children: [
