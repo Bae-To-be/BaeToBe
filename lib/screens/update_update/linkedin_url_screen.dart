@@ -37,9 +37,6 @@ class LinkedinUrlScreen extends HookConsumerWidget {
       if (urlState != null && urlController.text != urlState) {
         urlController.text = urlState;
       }
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
-        ref.read(imagesProvider.notifier).loadImages();
-      });
       return null;
     }, [urlState]);
     return FormLayout(

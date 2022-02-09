@@ -23,15 +23,6 @@ class SelfieVerificationScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(selfieStateProvider);
 
-    useEffect(() {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
-        if (redirectBack != true) {
-          ref.read(verificationFilesProvider.notifier).loadFiles();
-        }
-      });
-      return null;
-    }, []);
-
     return FormLayout(
       children: [
         const SizedBox(height: 32),

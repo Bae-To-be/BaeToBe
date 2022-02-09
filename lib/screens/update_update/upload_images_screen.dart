@@ -9,6 +9,7 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
@@ -21,6 +22,13 @@ class UploadImagesScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final images = ref.watch(imagesProvider);
+
+    useEffect(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        ref.read(imagesProvider.notifier).loadImages();
+      });
+      return null;
+    }, []);
 
     return FormLayout(
         children: [
