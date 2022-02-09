@@ -78,7 +78,10 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
 
     return FormLayout(
         header: redirectBack == true
-            ? const CustomHeaderTile(text: Headings.interestedIn)
+            ? const CustomHeaderTile(
+                text: Headings.interestedIn,
+                headerWith: HeaderWith.chevron,
+              )
             : null,
         children: <Widget>[
           redirectBack == true

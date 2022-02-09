@@ -17,6 +17,7 @@ class UpdateMatchingPreferences extends HookConsumerWidget {
       children: [
         const CustomHeaderTile(
           text: Headings.preferences,
+          headerWith: HeaderWith.cross,
         ),
         CustomTextWidget(
           text: 'Distance (${state.currentRadius()} Kms)',

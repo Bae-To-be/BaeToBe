@@ -15,7 +15,10 @@ class HelpPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: const [
-        CustomHeaderTile(text: Headings.faqs),
+        CustomHeaderTile(
+          text: Headings.faqs,
+          headerWith: HeaderWith.cross,
+        ),
         ArticleListings()
       ],
     );

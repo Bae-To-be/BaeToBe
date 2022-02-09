@@ -31,7 +31,10 @@ class UpdateLanguagesSpokenScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
-        header: const CustomHeaderTile(text: Headings.language),
+        header: const CustomHeaderTile(
+          text: Headings.language,
+          headerWith: HeaderWith.chevron,
+        ),
         children: <Widget>[
           languageListing
               .maybeWhen(

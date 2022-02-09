@@ -35,7 +35,10 @@ class UpdatePreferencesScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
-        header: CustomHeaderTile(text: preferencesHandler!.heading()),
+        header: CustomHeaderTile(
+          text: preferencesHandler!.heading(),
+          headerWith: HeaderWith.chevron,
+        ),
         children: <Widget>[
           preferenceListing
               .maybeWhen(

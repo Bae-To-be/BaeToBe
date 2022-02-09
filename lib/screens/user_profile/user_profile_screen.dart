@@ -116,7 +116,10 @@ class UserProfileScreen extends HookConsumerWidget {
 
           return Column(
             children: [
-              CustomHeaderTile(text: profile.name),
+              CustomHeaderTile(
+                text: profile.name,
+                headerWith: HeaderWith.cross,
+              ),
               Expanded(
                   child: SingleChildScrollView(
                       child: Text(profile.toString()).padding(horizontal: 15))),

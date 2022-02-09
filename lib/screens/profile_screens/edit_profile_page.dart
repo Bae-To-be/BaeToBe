@@ -56,7 +56,10 @@ class EditProfilePage extends HookConsumerWidget {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            const CustomHeaderTile(text: Headings.editProfileLabel),
+            const CustomHeaderTile(
+              text: Headings.editProfileLabel,
+              headerWith: HeaderWith.cross,
+            ),
             const SizedBox(height: 24),
             const ImageGrid(),
             Row(

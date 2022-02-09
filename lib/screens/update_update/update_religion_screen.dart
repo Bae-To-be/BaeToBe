@@ -26,7 +26,10 @@ class UpdateReligionScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
-        header: const CustomHeaderTile(text: Headings.religion),
+        header: const CustomHeaderTile(
+          text: Headings.religion,
+          headerWith: HeaderWith.chevron,
+        ),
         children: <Widget>[
           religionListing
               .maybeWhen(

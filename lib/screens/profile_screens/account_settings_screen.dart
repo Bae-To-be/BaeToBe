@@ -28,7 +28,10 @@ class AccountSettingsScreen extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const CustomHeaderTile(text: Headings.settings),
+        const CustomHeaderTile(
+          text: Headings.settings,
+          headerWith: HeaderWith.cross,
+        ),
         const CustomTextWidget(
                 type: textWidgetType.heading6, text: Headings.profile)
             .padding(left: 20, bottom: 10),

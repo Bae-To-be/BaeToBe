@@ -34,7 +34,10 @@ class UpdateHometownScreen extends HookConsumerWidget {
       }
     });
     return FormLayout(
-      header: const CustomHeaderTile(text: EditProfileFieldLabels.hometown),
+      header: const CustomHeaderTile(
+        text: EditProfileFieldLabels.hometown,
+        headerWith: HeaderWith.chevron,
+      ),
       children: [
         Column(
           children: [

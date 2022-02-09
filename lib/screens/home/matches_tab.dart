@@ -37,7 +37,7 @@ class MatchesTab extends HookConsumerWidget {
       children: [
         const CustomHeaderTile(
           text: Headings.matches,
-          withCross: false,
+          headerWith: HeaderWith.noButton,
         ),
         matches.when(
           loading: () => Expanded(

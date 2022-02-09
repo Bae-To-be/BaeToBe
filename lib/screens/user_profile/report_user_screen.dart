@@ -27,7 +27,10 @@ class ReportUserScreen extends HookConsumerWidget {
     if (isReported) {
       return Column(
         children: [
-          const CustomHeaderTile(text: LinkTexts.reportUser),
+          const CustomHeaderTile(
+            text: LinkTexts.reportUser,
+            headerWith: HeaderWith.chevron,
+          ),
           SizedBox(height: MediaQuery.of(context).size.width / 10),
           SizedBox(
             height: MediaQuery.of(context).size.height / 2,
@@ -60,7 +63,11 @@ class ReportUserScreen extends HookConsumerWidget {
     }
 
     return ListView(children: [
-      CustomHeaderTile(color: Colors.red[300], text: 'Report ${profile.name}'),
+      CustomHeaderTile(
+        color: Colors.red[300],
+        text: 'Report ${profile.name}',
+        headerWith: HeaderWith.chevron,
+      ),
       reasonsRequest.maybeWhen(
           orElse: () => Center(
               child: CircularProgressIndicator(color: Colors.red[300])

@@ -28,7 +28,10 @@ class UpdateHeightScreen extends HookConsumerWidget {
     }
 
     return FormLayout(
-        header: const CustomHeaderTile(text: Headings.height),
+        header: const CustomHeaderTile(
+          text: Headings.height,
+          headerWith: HeaderWith.chevron,
+        ),
         children: [
           Expanded(
             child: Column(

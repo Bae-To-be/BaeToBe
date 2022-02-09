@@ -22,7 +22,9 @@ class HelpArticleScreen extends HookConsumerWidget {
     return Column(
       children: [
         CustomHeaderTile(
-            text: pageLoading.value ? Headings.loadingArticle : ''),
+          text: pageLoading.value ? Headings.loadingArticle : '',
+          headerWith: HeaderWith.cross,
+        ),
         Expanded(
           child: WebView(
             backgroundColor: offWhite,

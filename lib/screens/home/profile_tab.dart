@@ -33,7 +33,7 @@ class ProfileTab extends HookConsumerWidget {
         children: <Widget>[
           const CustomHeaderTile(
             text: Headings.profile,
-            withCross: false,
+            headerWith: HeaderWith.noButton,
           ),
           Stack(
             children: <Widget>[
