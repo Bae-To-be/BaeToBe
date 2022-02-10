@@ -37,10 +37,12 @@ class ImageTile extends HookConsumerWidget {
                 cacheKey: state.id?.toString(),
                 placeholderFadeInDuration: const Duration(milliseconds: 500),
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    GFShimmer(
-                        child: Container(
-                  color: Colors.white,
-                )),
+                    Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                      value: downloadProgress.progress),
+                ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -75,7 +77,7 @@ class ImageTile extends HookConsumerWidget {
                           },
                           child: const CustomTextWidget(
                               text: ButtonTitles.camera,
-                              type: textWidgetType.heading5,
+                              type: textWidgetType.heading6,
                               withRow: false))
                       .padding(vertical: 8),
                   const CustomDivider(),
@@ -88,7 +90,7 @@ class ImageTile extends HookConsumerWidget {
                       },
                       child: const CustomTextWidget(
                         text: ButtonTitles.gallery,
-                        type: textWidgetType.heading5,
+                        type: textWidgetType.heading6,
                         withRow: false,
                       )).padding(vertical: 8),
                 ],
