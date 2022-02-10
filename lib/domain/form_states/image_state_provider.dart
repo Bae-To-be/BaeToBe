@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/entities/view_models/image_form_state.dart';
@@ -5,6 +7,7 @@ import 'package:collection/collection.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
 
 final imageStateProvider = StateNotifierProvider.autoDispose
     .family<ImageStateNotifier, ImageFormState, int>(
@@ -31,10 +34,15 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
 
     final XFile? image = await _picker.pickImage(
         source: imageSource,
+        preferredCameraDevice: CameraDevice.front,
         imageQuality:
             FirebaseRemoteConfig.instance.getInt(RemoteConfigs.imageQuality));
     if (image != null) {
       state = state.copyWith(loading: true);
+      final img.Image? capturedImage =
+          img.decodeImage(await File(image.path).readAsBytes());
+      final img.Image orientedImage = img.bakeOrientation(capturedImage!);
+      await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
       await imagesNotifier.addImage(position, image.path, image.name);
       if (mounted) {
         state = state.copyWith(loading: false);
