@@ -17,7 +17,7 @@ class ImageGrid extends StatelessWidget {
       itemCount:
           FirebaseRemoteConfig.instance.getInt(RemoteConfigs.maxPhotoCount),
       physics: const ClampingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 1),
       itemBuilder: (BuildContext ctx, index) {
         return ImageTile(position: index);
       },
