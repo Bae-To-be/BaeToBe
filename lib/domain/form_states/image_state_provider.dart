@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:baetobe/constants/app_constants.dart';
+import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/entities/view_models/image_form_state.dart';
 import 'package:collection/collection.dart';
@@ -51,6 +52,12 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
   }
 
   Future<void> removeImage() async {
+    if (ref.watch(imagesProvider).length <= 2) {
+      ref
+          .watch(errorProvider.notifier)
+          .updateError(ErrorMessages.cannotDeleteLastNImages);
+      return;
+    }
     state = state.copyWith(loading: true);
     final imagesNotifier = ref.read(imagesProvider.notifier);
     await imagesNotifier.removeImage(position);

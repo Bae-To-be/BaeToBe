@@ -3,6 +3,7 @@ import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/image_state_provider.dart';
+import 'package:baetobe/domain/images_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,10 @@ class ImageTile extends HookConsumerWidget {
           ),
           InkWell(
                   child: Icon(FontAwesomeIcons.timesCircle,
-                      color: Theme.of(context).errorColor, size: 26),
+                      color: (ref.watch(imagesProvider).length > 2)
+                          ? Theme.of(context).errorColor
+                          : Colors.grey,
+                      size: 26),
                   onTap: ref
                       .read(imageStateProvider(position).notifier)
                       .removeImage)

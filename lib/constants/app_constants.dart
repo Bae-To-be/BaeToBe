@@ -1,3 +1,5 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+
 class PlatformConstants {
   static const String android = 'android';
   static const String ios = 'ios';
@@ -41,6 +43,8 @@ class ErrorMessages {
   static const String noLikesFound = 'No likes found! Try again?';
   static const String noMatchesFound = 'No Matches found! Try again?';
   static const String userNotFound = 'User not found';
+  static String cannotDeleteLastNImages =
+      'Cannot delete last ${FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount)} images';
 }
 
 class StorageKeys {
