@@ -28,8 +28,6 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
 
   Future<void> pickImage(ImageSource imageSource) async {
     final imagesNotifier = ref.read(imagesProvider.notifier);
-    final setPosition = ref.watch(imagesProvider.select((images) =>
-        images.firstWhereOrNull((image) => if(image.url == null){return po})));
 
     final XFile? image = await _picker.pickImage(
         source: imageSource,
