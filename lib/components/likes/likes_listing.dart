@@ -40,42 +40,42 @@ class LikesListing extends HookConsumerWidget {
           return _retryView(ErrorMessages.noLikesFound, context, ref);
         }
 
-        return SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: true,
-          header: const RefreshHeader(text: InfoLabels.likesLoaded),
-          footer: const RefreshFooter(),
-          onLoading: () {
-            ref
-                .read(likesProvider(direction).notifier)
-                .fetchLikes(null, false)
-                .then((gotData) {
-              if (gotData) {
-                controller.loadComplete();
-              } else {
-                controller.loadNoData();
-              }
-            });
-          },
-          controller: controller,
-          onRefresh: () {
-            ref
-                .read(likesProvider(direction).notifier)
-                .fetchLikes(1, false)
-                .then((_) {
-              controller.refreshCompleted();
-              controller.resetNoData();
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
+            header: const RefreshHeader(text: InfoLabels.likesLoaded),
+            footer: const RefreshFooter(),
+            onLoading: () {
+              ref
+                  .read(likesProvider(direction).notifier)
+                  .fetchLikes(null, false)
+                  .then((gotData) {
+                if (gotData) {
+                  controller.loadComplete();
+                } else {
+                  controller.loadNoData();
+                }
+              });
+            },
+            controller: controller,
+            onRefresh: () {
+              ref
+                  .read(likesProvider(direction).notifier)
+                  .fetchLikes(1, false)
+                  .then((_) {
+                controller.refreshCompleted();
+                controller.resetNoData();
+              });
+            },
             child: GridView.builder(
               physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 12,
                   crossAxisCount: 2,
-                  childAspectRatio: 0.7),
+                  childAspectRatio: 0.864),
               itemCount: likesListing.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () => ref.read(routerProvider.notifier).pushNamed(
@@ -99,26 +99,29 @@ class LikesListing extends HookConsumerWidget {
                             height: constraints.maxHeight * 0.3,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  '${likesListing[index].userName.split(' ').first}, 24',
+                                  '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
                                   style: Theme.of(context)
                                       .textTheme
                                       .subtitle1!
-                                      .copyWith(fontWeight: FontWeight.w600),
+                                      .copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          height: 1.05),
                                   softWrap: false,
                                   overflow: TextOverflow.ellipsis,
-                                ).padding(horizontal: 4),
+                                ).padding(top: 4, horizontal: 8),
                                 Text(
                                   likesListing[index].summary,
                                   style: Theme.of(context)
                                       .textTheme
                                       .subtitle1!
-                                      .copyWith(fontWeight: FontWeight.w300),
+                                      .copyWith(
+                                          fontWeight: FontWeight.w300,
+                                          height: 1.05),
                                   softWrap: false,
-                                  overflow: TextOverflow.ellipsis,
-                                ).padding(horizontal: 4),
+                                  overflow: TextOverflow.fade,
+                                ).padding(bottom: 4, horizontal: 8),
                               ],
                             ),
                           ),
@@ -169,11 +172,14 @@ class _CardImage extends StatelessWidget {
                         imageUrl: likesListing[index].profilePicture!.url,
                         cacheKey:
                             likesListing[index].profilePicture!.id.toString(),
+                        placeholderFadeInDuration:
+                            const Duration(milliseconds: 500),
                         progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    color: Theme.of(context).primaryColor,
-                                    value: downloadProgress.progress),
+                            (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                              value: downloadProgress.progress),
+                        ),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       )
