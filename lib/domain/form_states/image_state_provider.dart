@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/error_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
@@ -8,7 +6,6 @@ import 'package:collection/collection.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
 
 final imageStateProvider = StateNotifierProvider.autoDispose
     .family<ImageStateNotifier, ImageFormState, int>(
