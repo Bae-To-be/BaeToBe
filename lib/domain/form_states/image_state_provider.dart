@@ -40,10 +40,6 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
             FirebaseRemoteConfig.instance.getInt(RemoteConfigs.imageQuality));
     if (image != null) {
       state = state.copyWith(loading: true);
-      final img.Image? capturedImage =
-          img.decodeImage(await File(image.path).readAsBytes());
-      final img.Image orientedImage = img.bakeOrientation(capturedImage!);
-      await File(image.path).writeAsBytes(img.encodeJpg(orientedImage));
       await imagesNotifier.addImage(position, image.path, image.name);
       if (mounted) {
         state = state.copyWith(loading: false);
