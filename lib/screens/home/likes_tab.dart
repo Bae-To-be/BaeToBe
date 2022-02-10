@@ -88,52 +88,6 @@ class LikesTab extends HookConsumerWidget {
                       ),
                     ],
                   ),
-                  // child: Container(
-                  //   decoration: BoxDecoration(
-                  //     border: Border(
-                  //       top: BorderSide(
-                  //         color: Theme.of(context).primaryColorLight,
-                  //       ),
-                  //     ),
-                  //   ),
-                  //   child: Row(
-                  //     children: [
-                  //       GestureDetector(
-                  //         onTap: () => tabRouter.setActiveIndex(0),
-                  //         child: AbsorbPointer(
-                  //           child: SizedBox(
-                  //             height: tabBarHeight,
-                  //             width: MediaQuery.of(context).size.width / 2,
-                  //             child: Center(
-                  //                 child: GenericTextWidget(
-                  //               textStyle: tabTextStyleFor(
-                  //                   tabRouter.activeIndex == 0, context),
-                  //               text: Headings.received,
-                  //               withRow: false,
-                  //             )),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //       GestureDetector(
-                  //         onTap: () => tabRouter.setActiveIndex(1),
-                  //         child: AbsorbPointer(
-                  //           child: SizedBox(
-                  //             height: tabBarHeight,
-                  //             width: MediaQuery.of(context).size.width / 2,
-                  //             child: Center(
-                  //               child: GenericTextWidget(
-                  //                 textStyle: tabTextStyleFor(
-                  //                     tabRouter.activeIndex == 1, context),
-                  //                 text: Headings.sent,
-                  //                 withRow: false,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 )),
             body: SlideTransition(
                 position: Tween<Offset>(
