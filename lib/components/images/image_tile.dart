@@ -1,6 +1,7 @@
 import 'package:baetobe/components/bottomsheet_utils.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/image_state_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -64,7 +65,7 @@ class ImageTile extends HookConsumerWidget {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const BottomSheetHeader(text: 'Pick your photos'),
+                  const BottomSheetHeader(text: Headings.pickImageBottomSheet),
                   TextButton(
                           onPressed: () {
                             ref
@@ -73,7 +74,7 @@ class ImageTile extends HookConsumerWidget {
                             Navigator.pop(context);
                           },
                           child: const CustomTextWidget(
-                              text: 'Camera',
+                              text: ButtonTitles.camera,
                               type: textWidgetType.heading5,
                               withRow: false))
                       .padding(vertical: 8),
@@ -86,7 +87,7 @@ class ImageTile extends HookConsumerWidget {
                         Navigator.pop(context);
                       },
                       child: const CustomTextWidget(
-                        text: 'Gallery',
+                        text: ButtonTitles.gallery,
                         type: textWidgetType.heading5,
                         withRow: false,
                       )).padding(vertical: 8),

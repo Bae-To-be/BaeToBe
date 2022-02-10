@@ -55,6 +55,12 @@ class Headings {
   static const String legal = 'Legal';
   static const String notifications = 'Notifications';
   static const String language = 'Languages';
+  static const String pickImageBottomSheet = 'Pick your photos';
+}
+
+class ButtonTitles {
+  static const String camera = 'Camera';
+  static const String gallery = 'Gallery';
 }
 
 class EditProfileFieldLabels {
