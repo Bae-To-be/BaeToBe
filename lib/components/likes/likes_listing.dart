@@ -10,6 +10,7 @@ import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -71,34 +72,159 @@ class LikesListing extends HookConsumerWidget {
               controller.resetNoData();
             });
           },
-          child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) =>
-                const CustomDivider(),
-            itemBuilder: (c, i) => GFListTile(
-                margin: const EdgeInsets.symmetric(horizontal: 5),
-                avatar: UserAvatar(image: likesListing[i].profilePicture),
-                color: offWhite,
-                subTitle: Text(likesListing[i].summary,
-                    style: Theme.of(context).textTheme.caption),
-                title: Text(likesListing[i].userName,
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle1
-                        ?.copyWith(fontWeight: FontWeight.w500)),
-                onTap: () {
-                  ref.read(routerProvider.notifier).pushNamed(
-                      AppLinks.profileDetails(likesListing[i].userId));
-                },
-                icon: CustomTextWidget(
-                    type: textWidgetType.caption,
-                    withRow: false,
-                    text: likesListing[i].timeSinceCreation)),
-            itemCount: likesListing.length,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.7),
+              itemCount: likesListing.length,
+              itemBuilder: (context, index) => GestureDetector(
+                onTap: () => ref.read(routerProvider.notifier).pushNamed(
+                    AppLinks.profileDetails(likesListing[index].userId)),
+                child: Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _CardImage(
+                              constraints: constraints,
+                              likesListing: likesListing,
+                              index: index),
+                          SizedBox(
+                            height: constraints.maxHeight * 0.3,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  '${likesListing[index].userName.split(' ').first}, 24',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                ).padding(horizontal: 4),
+                                Text(
+                                  likesListing[index].summary,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(fontWeight: FontWeight.w300),
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                ).padding(horizontal: 4),
+                              ],
+                            ),
+                          ),
+                          // CustomTextWidget(
+                          //   type: textWidgetType.subtitle1,
+                          //   text:
+                          //       '${likesListing[index].userName.split(' ').first}, 24',
+                          //   withRow: false,
+                          // ).padding(vertical: 4),
+                          // const CustomTextWidget(
+                          //   type: textWidgetType.subtitle1,
+                          //   text: 'WorkTitle, Industry',
+                          //   withRow: false,
+                          // ).padding(vertical: 4),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
           ),
-        ).padding(bottom: 10, horizontal: 5);
+          // child: ListView.separated(
+          //   separatorBuilder: (BuildContext context, int index) =>
+          //       const CustomDivider(),
+          //   itemBuilder: (c, i) => GFListTile(
+          //       margin: const EdgeInsets.symmetric(horizontal: 5),
+          //       avatar: UserAvatar(image: likesListing[i].profilePicture),
+          //       color: offWhite,
+          //       subTitle: Text(likesListing[i].summary,
+          //           style: Theme.of(context).textTheme.caption),
+          //       title: Text(likesListing[i].userName,
+          //           style: Theme.of(context)
+          //               .textTheme
+          //               .subtitle1
+          //               ?.copyWith(fontWeight: FontWeight.w500)),
+          //       onTap: () {
+          //         ref.read(routerProvider.notifier).pushNamed(
+          //             AppLinks.profileDetails(likesListing[i].userId));
+          //       },
+          //       icon: CustomTextWidget(
+          //           type: textWidgetType.caption,
+          //           withRow: false,
+          //           text: likesListing[i].timeSinceCreation)),
+          //   itemCount: likesListing.length,
+          // ),
+        );
       },
       error: (_error, _) =>
           _retryView(ErrorMessages.somethingWentWrongTryAgain, context, ref),
+    );
+  }
+}
+
+class _CardImage extends StatelessWidget {
+  final BoxConstraints constraints;
+  final List<Like> likesListing;
+  final int index;
+
+  const _CardImage(
+      {Key? key,
+      required this.constraints,
+      required this.likesListing,
+      required this.index})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: constraints.maxHeight * 0.7,
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              child: AspectRatio(
+                aspectRatio:
+                    constraints.maxWidth / (constraints.maxHeight * 0.7),
+                child: (likesListing[index].profilePicture != null)
+                    ? CachedNetworkImage(
+                        fit: BoxFit.fitWidth,
+                        imageUrl: likesListing[index].profilePicture!.url,
+                        cacheKey:
+                            likesListing[index].profilePicture!.id.toString(),
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    color: Theme.of(context).primaryColor,
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      )
+                    : Image.asset('assets/profile_placeholder.png',
+                        height: constraints.maxHeight * 0.73,
+                        width: constraints.maxWidth),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
