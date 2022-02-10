@@ -44,7 +44,7 @@ class ErrorMessages {
   static const String noMatchesFound = 'No Matches found! Try again?';
   static const String userNotFound = 'User not found';
   static String cannotDeleteLastNImages =
-      'Cannot delete last ${FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount)} images';
+      'Cannot delete the last ${FirebaseRemoteConfig.instance.getInt(RemoteConfigs.minPhotoCount)} images';
 }
 
 class StorageKeys {
