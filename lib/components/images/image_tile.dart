@@ -32,18 +32,23 @@ class ImageTile extends HookConsumerWidget {
           Center(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: state.url!,
-                cacheKey: state.id?.toString(),
-                placeholderFadeInDuration: const Duration(milliseconds: 500),
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircularProgressIndicator(
-                      color: Theme.of(context).primaryColor,
-                      value: downloadProgress.progress),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: CachedNetworkImage(
+                  imageUrl: state.url!,
+                  cacheKey: state.id?.toString(),
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                  placeholderFadeInDuration: const Duration(milliseconds: 500),
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                        value: downloadProgress.progress),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
