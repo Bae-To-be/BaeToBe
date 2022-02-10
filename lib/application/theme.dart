@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 const themeColor = Color(0xFF00838C);
 const themeColorLight = Color(0xFFCCECEE);
 const offWhite = Color(0xFFF2F2F2);
+const offWhiteDark = Color(0xFFE5E5E5);
 
 final theme = ThemeData(
     sliderTheme: SliderThemeData(
