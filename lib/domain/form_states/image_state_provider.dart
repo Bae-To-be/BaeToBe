@@ -26,11 +26,11 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     }
   }
 
-  Future<void> pickImage() async {
+  Future<void> pickImage(ImageSource imageSource) async {
     final imagesNotifier = ref.read(imagesProvider.notifier);
 
     final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
+        source: imageSource,
         imageQuality:
             FirebaseRemoteConfig.instance.getInt(RemoteConfigs.imageQuality));
     if (image != null) {

@@ -1,9 +1,14 @@
+import 'package:baetobe/components/bottomsheet_utils.dart';
+import 'package:baetobe/components/custom_divider.dart';
+import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/domain/form_states/image_state_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/components/shimmer/gf_shimmer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class ImageTile extends HookConsumerWidget {
@@ -29,10 +34,12 @@ class ImageTile extends HookConsumerWidget {
               child: CachedNetworkImage(
                 imageUrl: state.url!,
                 cacheKey: state.id?.toString(),
+                placeholderFadeInDuration: const Duration(milliseconds: 500),
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                        value: downloadProgress.progress),
+                    GFShimmer(
+                        child: Container(
+                  color: Colors.white,
+                )),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
@@ -49,7 +56,44 @@ class ImageTile extends HookConsumerWidget {
     }
 
     return InkWell(
-      onTap: ref.read(imageStateProvider(position).notifier).pickImage,
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            shape: bottomSheetShape(),
+            builder: (BuildContext context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const BottomSheetHeader(text: 'Pick your photos'),
+                  TextButton(
+                          onPressed: () {
+                            ref
+                                .read(imageStateProvider(position).notifier)
+                                .pickImage(ImageSource.camera);
+                            Navigator.pop(context);
+                          },
+                          child: const CustomTextWidget(
+                              text: 'Camera',
+                              type: textWidgetType.heading5,
+                              withRow: false))
+                      .padding(vertical: 8),
+                  const CustomDivider(),
+                  TextButton(
+                      onPressed: () {
+                        ref
+                            .read(imageStateProvider(position).notifier)
+                            .pickImage(ImageSource.gallery);
+                        Navigator.pop(context);
+                      },
+                      child: const CustomTextWidget(
+                        text: 'Gallery',
+                        type: textWidgetType.heading5,
+                        withRow: false,
+                      )).padding(vertical: 8),
+                ],
+              );
+            });
+      },
       child: DottedBorder(
           color: Theme.of(context).primaryColor,
           strokeWidth: 1,
