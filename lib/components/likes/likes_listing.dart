@@ -76,7 +76,7 @@ class LikesListing extends HookConsumerWidget {
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
                   crossAxisCount: 2,
-                  childAspectRatio: 0.864),
+                  mainAxisExtent: 224),
               itemCount: likesListing.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () => ref.read(routerProvider.notifier).pushNamed(
@@ -86,49 +86,32 @@ class LikesListing extends HookConsumerWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          _CardImage(
-                              constraints: constraints,
-                              likesListing: likesListing,
-                              index: index),
-                          SizedBox(
-                            height: constraints.maxHeight * 0.3,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          height: 1.05),
-                                  softWrap: false,
-                                  overflow: TextOverflow.ellipsis,
-                                ).padding(top: 4, horizontal: 8),
-                                Text(
-                                  likesListing[index].summary,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(
-                                          fontWeight: FontWeight.w300,
-                                          height: 1.05),
-                                  softWrap: false,
-                                  overflow: TextOverflow.fade,
-                                ).padding(bottom: 4, horizontal: 8),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _CardImage(likesListing: likesListing, index: index),
+                      Text(
+                        '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            height: 1.05),
+                        textAlign: TextAlign.center,
+                      ).padding(top: 12, horizontal: 8),
+                      Flexible(
+                        child: Text(
+                          likesListing[index].summary,
+                          style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300,
+                              height: 1.2),
+                          textAlign: TextAlign.center,
+                          // softWrap: false,
+                          overflow: TextOverflow.fade,
+                        ).padding(top: 12, horizontal: 8),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -143,66 +126,56 @@ class LikesListing extends HookConsumerWidget {
 }
 
 class _CardImage extends StatelessWidget {
-  final BoxConstraints constraints;
   final List<Like> likesListing;
   final int index;
 
-  const _CardImage(
-      {Key? key,
-      required this.constraints,
-      required this.likesListing,
-      required this.index})
+  const _CardImage({Key? key, required this.likesListing, required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: constraints.maxHeight * 0.7,
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-              child: AspectRatio(
-                aspectRatio:
-                    constraints.maxWidth / (constraints.maxHeight * 0.7),
-                child: (likesListing[index].profilePicture != null)
-                    ? CachedNetworkImage(
-                        fit: BoxFit.fitWidth,
-                        imageUrl: likesListing[index].profilePicture!.url,
-                        cacheKey:
-                            likesListing[index].profilePicture!.id.toString(),
-                        placeholderFadeInDuration:
-                            const Duration(milliseconds: 500),
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) => Center(
-                          child: CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                              value: downloadProgress.progress),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      )
-                    : Image.asset('assets/profile_placeholder.png',
-                        height: constraints.maxHeight * 0.73,
-                        width: constraints.maxWidth),
-              ),
+    return Stack(
+      children: <Widget>[
+        Center(
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+            child: AspectRatio(
+              aspectRatio: 1.358,
+              child: (likesListing[index].profilePicture != null)
+                  ? CachedNetworkImage(
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                      imageUrl: likesListing[index].profilePicture!.url,
+                      cacheKey:
+                          likesListing[index].profilePicture!.id.toString(),
+                      placeholderFadeInDuration:
+                          const Duration(milliseconds: 500),
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
+                        child: CircularProgressIndicator(
+                            color: Theme.of(context).primaryColor,
+                            value: downloadProgress.progress),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    )
+                  : Image.asset('assets/profile_placeholder.png'),
             ),
           ),
-          Positioned(
-              top: 8,
-              right: 8,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: themeColor, borderRadius: BorderRadius.circular(4)),
-                child: Text(
-                  likesListing[index].timeSinceCreation,
-                  style: const TextStyle(color: Colors.white, fontSize: 10),
-                ).padding(horizontal: 4, bottom: 4, top: 2),
-              )),
-        ],
-      ),
+        ),
+        Positioned(
+            top: 8,
+            right: 8,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: themeColor, borderRadius: BorderRadius.circular(4)),
+              child: Text(
+                likesListing[index].timeSinceCreation,
+                style: const TextStyle(color: Colors.white, fontSize: 10),
+              ).padding(horizontal: 4, bottom: 4, top: 2),
+            )),
+      ],
     );
   }
 }
