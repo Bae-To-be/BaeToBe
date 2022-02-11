@@ -198,8 +198,8 @@ class _CardImage extends StatelessWidget {
                     color: themeColor, borderRadius: BorderRadius.circular(4)),
                 child: Text(
                   likesListing[index].timeSinceCreation,
-                  style: const TextStyle(color: Colors.white),
-                ),
+                  style: const TextStyle(color: Colors.white, fontSize: 10),
+                ).padding(horizontal: 4, bottom: 4, top: 2),
               )),
         ],
       ),
