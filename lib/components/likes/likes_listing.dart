@@ -196,7 +196,10 @@ class _CardImage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: themeColor, borderRadius: BorderRadius.circular(4)),
-                child: Text(likesListing[index].timeSinceCreation),
+                child: Text(
+                  likesListing[index].timeSinceCreation,
+                  style: const TextStyle(color: Colors.white),
+                ),
               )),
         ],
       ),
