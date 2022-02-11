@@ -1,4 +1,5 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -72,8 +73,8 @@ class LikesListing extends HookConsumerWidget {
             child: GridView.builder(
               physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
                   crossAxisCount: 2,
                   childAspectRatio: 0.864),
               itemCount: likesListing.length,
@@ -189,6 +190,14 @@ class _CardImage extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: themeColor, borderRadius: BorderRadius.circular(4)),
+                child: Text(likesListing[index].timeSinceCreation),
+              )),
         ],
       ),
     );
