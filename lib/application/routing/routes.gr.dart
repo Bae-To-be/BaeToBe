@@ -74,216 +74,338 @@ class AppRouter extends _i19.RootStackRouter {
   @override
   final Map<String, _i19.PageFactory> pagesMap = {
     SplashScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i1.SplashScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i1.SplashScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.noTransition,
+          opaque: true,
+          barrierDismissible: false);
     },
     LoginScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i2.LoginScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i2.LoginScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateBirthdayScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<UpdateBirthdayScreenRouteArgs>(
           orElse: () => UpdateBirthdayScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i3.UpdateBirthdayScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateGenderScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<UpdateGenderScreenRouteArgs>(
           orElse: () => UpdateGenderScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i4.UpdateGenderScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateInterestedGenderScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<UpdateInterestedGenderScreenRouteArgs>(
           orElse: () => UpdateInterestedGenderScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i5.UpdateInterestedGenderScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateWorkInformationScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<UpdateWorkInformationScreenRouteArgs>(
           orElse: () => UpdateWorkInformationScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i6.UpdateWorkInformationScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     EducationHistoryScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<EducationHistoryScreenRouteArgs>(
           orElse: () => EducationHistoryScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i7.EducationHistoryScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     LinkedinUrlScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<LinkedinUrlScreenRouteArgs>(
           orElse: () => LinkedinUrlScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i8.LinkedinUrlScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UploadImagesScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i9.UploadImagesScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i9.UploadImagesScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     SelfieVerificationScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<SelfieVerificationScreenRouteArgs>(
           orElse: () => SelfieVerificationScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i10.SelfieVerificationScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     IdentityVerificationScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<IdentityVerificationScreenRouteArgs>(
           orElse: () => IdentityVerificationScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i11.IdentityVerificationScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UnderVerificationScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i12.UnderVerificationScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i12.UnderVerificationScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     VerificationRejectedScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i13.VerificationRejectedScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i13.VerificationRejectedScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UserProfileScreenRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<UserProfileScreenRouteArgs>(
           orElse: () =>
               UserProfileScreenRouteArgs(id: pathParams.getInt('id')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i14.UserProfileScreen(key: args.key, id: args.id));
+          child: _i14.UserProfileScreen(key: args.key, id: args.id),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     MessagesForMatchScreenRoute.name: (routeData) {
       final args = routeData.argsAs<MessagesForMatchScreenRouteArgs>();
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i15.MessagesForMatchScreen(key: args.key, match: args.match));
+          child: _i15.MessagesForMatchScreen(key: args.key, match: args.match),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     ReportUserScreenRoute.name: (routeData) {
       final args = routeData.argsAs<ReportUserScreenRouteArgs>();
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i16.ReportUserScreen(key: args.key, profile: args.profile));
+          child: _i16.ReportUserScreen(key: args.key, profile: args.profile),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     HomepageScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i17.HomepageScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i17.HomepageScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
+          opaque: true,
+          barrierDismissible: false);
     },
     EditProfilePageRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i18.EditProfilePage());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i18.EditProfilePage(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     EmptyRouterPageRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i19.EmptyRouterPage());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i19.EmptyRouterPage(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdatePreferencesScreenRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<UpdatePreferencesScreenRouteArgs>(
           orElse: () => UpdatePreferencesScreenRouteArgs(
               preferenceFor: pathParams.getString('preferenceFor')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i20.UpdatePreferencesScreen(
-              key: args.key, preferenceFor: args.preferenceFor));
+              key: args.key, preferenceFor: args.preferenceFor),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateMatchingPreferencesRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i21.UpdateMatchingPreferences());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i21.UpdateMatchingPreferences(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateLanguagesSpokenScreenRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<UpdateLanguagesSpokenScreenRouteArgs>(
           orElse: () => UpdateLanguagesSpokenScreenRouteArgs(
               redirectBack: queryParams.optBool('redirectBack')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i22.UpdateLanguagesSpokenScreen(
-              key: args.key, redirectBack: args.redirectBack));
+              key: args.key, redirectBack: args.redirectBack),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     AccountSettingsScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i23.AccountSettingsScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i23.AccountSettingsScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateHometownScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i24.UpdateHometownScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i24.UpdateHometownScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateReligionScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i25.UpdateReligionScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i25.UpdateReligionScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     UpdateHeightScreenRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i26.UpdateHeightScreen());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i26.UpdateHeightScreen(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     DiscoverTabRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i27.DiscoverTab());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i27.DiscoverTab(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     LikesTabRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i28.LikesTab());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i28.LikesTab(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     MatchesTabRoute.name: (routeData) {
       final args = routeData.argsAs<MatchesTabRouteArgs>(
           orElse: () => const MatchesTabRouteArgs());
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i29.MatchesTab(key: args.key));
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: _i29.MatchesTab(key: args.key),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     ProfileTabRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i30.ProfileTab());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i30.ProfileTab(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     LikesReceivedTabRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i31.LikesReceivedTab());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i31.LikesReceivedTab(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     LikesSentTabRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i32.LikesSentTab());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i32.LikesSentTab(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     HelpPageRoute.name: (routeData) {
-      return _i19.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i33.HelpPage());
+      return _i19.CustomPage<dynamic>(
+          routeData: routeData,
+          child: const _i33.HelpPage(),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     },
     HelpArticleScreenRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<HelpArticleScreenRouteArgs>(
           orElse: () =>
               HelpArticleScreenRouteArgs(id: pathParams.getString('id')));
-      return _i19.AdaptivePage<dynamic>(
+      return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i34.HelpArticleScreen(key: args.key, id: args.id));
+          child: _i34.HelpArticleScreen(key: args.key, id: args.id),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          opaque: true,
+          barrierDismissible: false);
     }
   };
 

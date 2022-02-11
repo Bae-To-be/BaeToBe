@@ -35,14 +35,20 @@ import 'package:baetobe/screens/update_update/upload_images_screen.dart';
 import 'package:baetobe/screens/user_profile/report_user_screen.dart';
 import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
 
-@AdaptiveAutoRouter(
+@CustomAutoRouter(
+  preferRelativeImports: false,
+  transitionsBuilder: TransitionsBuilders.slideLeft,
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
-    AutoRoute(initial: true, path: AppLinks.splash, page: SplashScreen),
-    AutoRoute(
-      path: AppLinks.login,
-      page: LoginScreen,
-    ),
+    CustomRoute(
+        initial: true,
+        path: AppLinks.splash,
+        page: SplashScreen,
+        transitionsBuilder: TransitionsBuilders.noTransition),
+    CustomRoute(
+        path: AppLinks.login,
+        page: LoginScreen,
+        transitionsBuilder: TransitionsBuilders.fadeIn),
     AutoRoute(
         path: AppLinks.updateBirthday,
         page: UpdateBirthdayScreen,
@@ -97,7 +103,8 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.reportUser, page: ReportUserScreen, guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
       path: AppLinks.homePage,
       page: HomepageScreen,
       guards: [AuthGuard],
@@ -110,7 +117,6 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         ]),
         AutoRoute(path: HomepageTabs.matches, page: MatchesTab),
         AutoRoute(path: HomepageTabs.profile, page: ProfileTab),
-        // redirect all other paths
         RedirectRoute(path: '*', redirectTo: HomepageTabs.discover),
       ],
     ),
