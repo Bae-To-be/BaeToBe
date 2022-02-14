@@ -37,9 +37,12 @@ class ProfileTab extends HookConsumerWidget {
           ),
           Stack(
             children: <Widget>[
-              UserAvatar(
-                  image: profilePicture,
-                  radius: MediaQuery.of(context).size.width / 2),
+              GestureDetector(
+                onTap: () => router.pushNamed(AppLinks.editProfile),
+                child: UserAvatar(
+                    image: profilePicture,
+                    radius: MediaQuery.of(context).size.width / 2),
+              ),
               Positioned(
                 bottom: 0,
                 right: 0,
