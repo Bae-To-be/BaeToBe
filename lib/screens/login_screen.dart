@@ -1,5 +1,4 @@
 import 'package:baetobe/components/buttons/rounded_cta.dart';
-import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/auth_provider.dart';
 import 'package:baetobe/domain/loading_provider.dart';
@@ -70,10 +69,12 @@ class LoginScreen extends HookConsumerWidget {
               style: TextStyle(fontSize: 32, color: Color(0xFF00838C)),
               children: [
                 TextSpan(text: Headings.sellingPoint),
-                WidgetSpan(
-                  child: Icon(BTBCustomIcons.btbheart,
-                      size: 12, color: Color(0xFFEC505C)),
-                ),
+                TextSpan(
+                    text: ' \u{e800}',
+                    style: TextStyle(
+                        fontFamily: 'BTBCustomIcons',
+                        fontSize: 10,
+                        color: Color(0xFFEC505C))),
               ],
             ),
           ),
