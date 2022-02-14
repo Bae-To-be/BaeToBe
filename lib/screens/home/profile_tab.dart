@@ -43,19 +43,21 @@ class ProfileTab extends HookConsumerWidget {
                     image: profilePicture,
                     radius: MediaQuery.of(context).size.width / 2),
               ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    router.pushNamed(AppLinks.editProfile);
-                  },
-                  child: const Icon(Icons.edit_sharp, color: Colors.white),
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(4),
-                    primary: Theme.of(context).primaryColor,
-                    onPrimary: Theme.of(context).primaryColorLight,
+              AbsorbPointer(
+                child: Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      router.pushNamed(AppLinks.editProfile);
+                    },
+                    child: const Icon(Icons.edit_sharp, color: Colors.white),
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(4),
+                      primary: Theme.of(context).primaryColor,
+                      onPrimary: Theme.of(context).primaryColorLight,
+                    ),
                   ),
                 ),
               )
