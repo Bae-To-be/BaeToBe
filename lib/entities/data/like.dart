@@ -20,6 +20,8 @@ class Like with _$Like {
           required int userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           required String summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          required int age,
       @JsonKey(name: 'time_since_creation')
           required String timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)

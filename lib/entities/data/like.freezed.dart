@@ -31,6 +31,8 @@ class _$LikeTearOff {
           required int userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           required String summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          required int age,
       @JsonKey(name: 'time_since_creation')
           required String timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -40,6 +42,7 @@ class _$LikeTearOff {
       userName: userName,
       userId: userId,
       summary: summary,
+      age: age,
       timeSinceCreation: timeSinceCreation,
       profilePicture: profilePicture,
     );
@@ -63,6 +66,8 @@ mixin _$Like {
   int get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'summary', readValue: Like._readUser)
   String get summary => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age', readValue: Like._readUser)
+  int get age => throw _privateConstructorUsedError;
   @JsonKey(name: 'time_since_creation')
   String get timeSinceCreation => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -86,6 +91,8 @@ abstract class $LikeCopyWith<$Res> {
           int userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           String summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          int age,
       @JsonKey(name: 'time_since_creation')
           String timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -108,6 +115,7 @@ class _$LikeCopyWithImpl<$Res> implements $LikeCopyWith<$Res> {
     Object? userName = freezed,
     Object? userId = freezed,
     Object? summary = freezed,
+    Object? age = freezed,
     Object? timeSinceCreation = freezed,
     Object? profilePicture = freezed,
   }) {
@@ -128,6 +136,10 @@ class _$LikeCopyWithImpl<$Res> implements $LikeCopyWith<$Res> {
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int,
       timeSinceCreation: timeSinceCreation == freezed
           ? _value.timeSinceCreation
           : timeSinceCreation // ignore: cast_nullable_to_non_nullable
@@ -165,6 +177,8 @@ abstract class _$LikeCopyWith<$Res> implements $LikeCopyWith<$Res> {
           int userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           String summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          int age,
       @JsonKey(name: 'time_since_creation')
           String timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -189,6 +203,7 @@ class __$LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? userId = freezed,
     Object? summary = freezed,
+    Object? age = freezed,
     Object? timeSinceCreation = freezed,
     Object? profilePicture = freezed,
   }) {
@@ -209,6 +224,10 @@ class __$LikeCopyWithImpl<$Res> extends _$LikeCopyWithImpl<$Res>
           ? _value.summary
           : summary // ignore: cast_nullable_to_non_nullable
               as String,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as int,
       timeSinceCreation: timeSinceCreation == freezed
           ? _value.timeSinceCreation
           : timeSinceCreation // ignore: cast_nullable_to_non_nullable
@@ -233,6 +252,8 @@ class _$_Like implements _Like {
           required this.userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           required this.summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          required this.age,
       @JsonKey(name: 'time_since_creation')
           required this.timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -253,6 +274,9 @@ class _$_Like implements _Like {
   @JsonKey(name: 'summary', readValue: Like._readUser)
   final String summary;
   @override
+  @JsonKey(name: 'age', readValue: Like._readUser)
+  final int age;
+  @override
   @JsonKey(name: 'time_since_creation')
   final String timeSinceCreation;
   @override
@@ -261,7 +285,7 @@ class _$_Like implements _Like {
 
   @override
   String toString() {
-    return 'Like(id: $id, userName: $userName, userId: $userId, summary: $summary, timeSinceCreation: $timeSinceCreation, profilePicture: $profilePicture)';
+    return 'Like(id: $id, userName: $userName, userId: $userId, summary: $summary, age: $age, timeSinceCreation: $timeSinceCreation, profilePicture: $profilePicture)';
   }
 
   @override
@@ -273,6 +297,7 @@ class _$_Like implements _Like {
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.summary, summary) &&
+            const DeepCollectionEquality().equals(other.age, age) &&
             const DeepCollectionEquality()
                 .equals(other.timeSinceCreation, timeSinceCreation) &&
             const DeepCollectionEquality()
@@ -286,6 +311,7 @@ class _$_Like implements _Like {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(summary),
+      const DeepCollectionEquality().hash(age),
       const DeepCollectionEquality().hash(timeSinceCreation),
       const DeepCollectionEquality().hash(profilePicture));
 
@@ -310,6 +336,8 @@ abstract class _Like implements Like {
           required int userId,
       @JsonKey(name: 'summary', readValue: Like._readUser)
           required String summary,
+      @JsonKey(name: 'age', readValue: Like._readUser)
+          required int age,
       @JsonKey(name: 'time_since_creation')
           required String timeSinceCreation,
       @JsonKey(name: 'profile_picture', readValue: Like._readUser)
@@ -329,6 +357,9 @@ abstract class _Like implements Like {
   @override
   @JsonKey(name: 'summary', readValue: Like._readUser)
   String get summary;
+  @override
+  @JsonKey(name: 'age', readValue: Like._readUser)
+  int get age;
   @override
   @JsonKey(name: 'time_since_creation')
   String get timeSinceCreation;
