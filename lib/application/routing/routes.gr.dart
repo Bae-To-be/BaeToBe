@@ -224,8 +224,13 @@ class AppRouter extends _i19.RootStackRouter {
               UserProfileScreenRouteArgs(id: pathParams.getInt('id')));
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i14.UserProfileScreen(key: args.key, id: args.id),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          child: _i14.UserProfileScreen(
+              key: args.key,
+              id: args.id,
+              age: args.age,
+              name: args.name,
+              firstPhotoUrl: args.firstPhotoUrl),
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -764,25 +769,42 @@ class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
 /// [_i14.UserProfileScreen]
 class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
-  UserProfileScreenRoute({_i35.Key? key, required int id})
+  UserProfileScreenRoute(
+      {_i35.Key? key,
+      required int id,
+      int? age,
+      String? name,
+      String? firstPhotoUrl})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
-            args: UserProfileScreenRouteArgs(key: key, id: id),
+            args: UserProfileScreenRouteArgs(
+                key: key,
+                id: id,
+                age: age,
+                name: name,
+                firstPhotoUrl: firstPhotoUrl),
             rawPathParams: {'id': id});
 
   static const String name = 'UserProfileScreenRoute';
 }
 
 class UserProfileScreenRouteArgs {
-  const UserProfileScreenRouteArgs({this.key, required this.id});
+  const UserProfileScreenRouteArgs(
+      {this.key, required this.id, this.age, this.name, this.firstPhotoUrl});
 
   final _i35.Key? key;
 
   final int id;
 
+  final int? age;
+
+  final String? name;
+
+  final String? firstPhotoUrl;
+
   @override
   String toString() {
-    return 'UserProfileScreenRouteArgs{key: $key, id: $id}';
+    return 'UserProfileScreenRouteArgs{key: $key, id: $id, age: $age, name: $name, firstPhotoUrl: $firstPhotoUrl}';
   }
 }
 

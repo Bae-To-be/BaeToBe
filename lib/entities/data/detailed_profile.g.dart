@@ -20,21 +20,26 @@ _$_DetailedProfile _$$_DetailedProfileFromJson(Map<String, dynamic> json) =>
       religion: json['religion'] == null
           ? null
           : Religion.fromJson(json['religion'] as Map<String, dynamic>),
-      smoking: json['smoking'] == null
+      smoking: json['smoking_preference'] == null
           ? null
-          : Preference.fromJson(json['smoking'] as Map<String, dynamic>),
-      food: json['food'] == null
+          : Preference.fromJson(
+              json['smoking_preference'] as Map<String, dynamic>),
+      food: json['food_preference'] == null
           ? null
-          : Preference.fromJson(json['food'] as Map<String, dynamic>),
-      drinking: json['drinking'] == null
+          : Preference.fromJson(
+              json['food_preference'] as Map<String, dynamic>),
+      drinking: json['drinking_preference'] == null
           ? null
-          : Preference.fromJson(json['drinking'] as Map<String, dynamic>),
-      children: json['children'] == null
+          : Preference.fromJson(
+              json['drinking_preference'] as Map<String, dynamic>),
+      children: json['children_preference'] == null
           ? null
-          : Preference.fromJson(json['children'] as Map<String, dynamic>),
-      exercise: json['exercise'] == null
+          : Preference.fromJson(
+              json['children_preference'] as Map<String, dynamic>),
+      exercise: json['exercise_preference'] == null
           ? null
-          : Preference.fromJson(json['exercise'] as Map<String, dynamic>),
+          : Preference.fromJson(
+              json['exercise_preference'] as Map<String, dynamic>),
       heightInCms: json['height_in_cms'] as int?,
       matchStatus: json['status'] as String,
       match: json['match'] == null
@@ -65,11 +70,11 @@ Map<String, dynamic> _$$_DetailedProfileToJson(_$_DetailedProfile instance) =>
       'bio': instance.bio,
       'hometown': instance.hometown.toJson(),
       'religion': instance.religion?.toJson(),
-      'smoking': instance.smoking?.toJson(),
-      'food': instance.food?.toJson(),
-      'drinking': instance.drinking?.toJson(),
-      'children': instance.children?.toJson(),
-      'exercise': instance.exercise?.toJson(),
+      'smoking_preference': instance.smoking?.toJson(),
+      'food_preference': instance.food?.toJson(),
+      'drinking_preference': instance.drinking?.toJson(),
+      'children_preference': instance.children?.toJson(),
+      'exercise_preference': instance.exercise?.toJson(),
       'height_in_cms': instance.heightInCms,
       'status': instance.matchStatus,
       'match': instance.match?.toJson(),

@@ -1,9 +1,9 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/constants/app_constants.dart';
-import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
@@ -79,8 +79,19 @@ class LikesListing extends HookConsumerWidget {
                   mainAxisExtent: 224),
               itemCount: likesListing.length,
               itemBuilder: (context, index) => GestureDetector(
-                onTap: () => ref.read(routerProvider.notifier).pushNamed(
-                    AppLinks.profileDetails(likesListing[index].userId)),
+                onTap: () {
+                  ref.read(routerProvider.notifier).push(
+                        UserProfileScreenRoute(
+                          id: likesListing[index].userId,
+                          age: likesListing[index].age,
+                          name: likesListing[index].userName,
+                          firstPhotoUrl:
+                              (likesListing[index].profilePicture != null)
+                                  ? likesListing[index].profilePicture?.url
+                                  : 'assets/profile_placeholder.png',
+                        ),
+                      );
+                },
                 child: Card(
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -90,14 +101,17 @@ class LikesListing extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       _CardImage(likesListing: likesListing, index: index),
-                      Text(
-                        '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            height: 1.05),
-                        textAlign: TextAlign.center,
-                      ).padding(top: 12, horizontal: 8),
+                      Hero(
+                        tag: likesListing[index].userName,
+                        child: Text(
+                          '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
+                          style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              height: 1.05),
+                          textAlign: TextAlign.center,
+                        ).padding(top: 12, horizontal: 8),
+                      ),
                       Flexible(
                         child: Text(
                           likesListing[index].summary,
@@ -140,27 +154,34 @@ class _CardImage extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            child: AspectRatio(
-              aspectRatio: 1.358,
-              child: (likesListing[index].profilePicture != null)
-                  ? CachedNetworkImage(
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topCenter,
-                      imageUrl: likesListing[index].profilePicture!.url,
-                      cacheKey:
-                          likesListing[index].profilePicture!.id.toString(),
-                      placeholderFadeInDuration:
-                          const Duration(milliseconds: 500),
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => Center(
-                        child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                            value: downloadProgress.progress),
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    )
-                  : Image.asset('assets/profile_placeholder.png'),
+            child: Hero(
+              tag: likesListing[index].userId,
+              child: AspectRatio(
+                aspectRatio: 1.358,
+                child: Container(
+                  child: (likesListing[index].profilePicture != null)
+                      ? CachedNetworkImage(
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                          imageUrl: likesListing[index].profilePicture!.url,
+                          cacheKey: likesListing[index]
+                              .profilePicture!
+                              .url
+                              .toString(),
+                          placeholderFadeInDuration:
+                              const Duration(milliseconds: 500),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                                value: downloadProgress.progress),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        )
+                      : Image.asset('assets/profile_placeholder.png'),
+                ),
+              ),
             ),
           ),
         ),
