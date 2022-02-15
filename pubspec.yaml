@@ -42,7 +42,8 @@ dependencies:
   pull_to_refresh: ^2.0.0
   alice: ^0.2.5
   flutter_chat_ui: ^1.5.5
-  action_cable: ^1.2.0
+  action_cable:
+    path: actioncable_dart
   uuid: ^3.0.5
   flutter_slidable: ^1.2.0
   debug_friend: ^0.4.0

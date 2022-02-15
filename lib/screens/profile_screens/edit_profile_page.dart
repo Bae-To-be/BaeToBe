@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
@@ -16,8 +17,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
-
-import 'package:baetobe/application/routing/routes.gr.dart';
 
 class EditProfilePage extends HookConsumerWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -36,9 +35,7 @@ class EditProfilePage extends HookConsumerWidget {
     final _user = ref.watch(userProvider);
 
     useEffect(() {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
-        ref.read(imagesProvider.notifier).loadImages();
-      });
+      ref.read(imagesProvider.notifier).loadImages();
       return null;
     }, []);
 

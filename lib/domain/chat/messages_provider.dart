@@ -34,8 +34,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
   MessagesNotifier(this.ref, this.match, this.user) : super(ChatState()) {
     state =
         state.copyWith(matchClosed: match.isClosed, closedBy: match.closedBy);
-    _setupCable();
-    updateMessages().then((_) => WidgetsBinding.instance?.addObserver(this));
+    updateMessages()
+        .then((_) => WidgetsBinding.instance?.addObserver(this))
+        .then((_) => _setupCable());
   }
 
   @override
@@ -134,6 +135,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
       if (!mounted) {
         return;
       }
+      subscribeToChat();
       state = state.copyWith(connection: connectionState.connected);
       Timer(const Duration(milliseconds: 500), () {
         if (!mounted) {
@@ -179,7 +181,9 @@ class MessagesNotifier extends StateNotifier<ChatState>
       }
     });
     state = state.copyWith(cable: _cable);
+  }
 
+  void subscribeToChat() {
     state.cable?.subscribe('Chat', channelParams: _channelParams(),
         onSubscribed: () {
       debugPrint('subscribed');

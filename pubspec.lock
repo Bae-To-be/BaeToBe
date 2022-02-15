@@ -11,9 +11,9 @@ packages:
   action_cable:
     dependency: "direct main"
     description:
-      name: action_cable
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: actioncable_dart
+      relative: true
+    source: path
     version: "1.2.0"
   alice:
     dependency: "direct main"
