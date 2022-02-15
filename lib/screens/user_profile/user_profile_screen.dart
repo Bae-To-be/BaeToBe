@@ -11,9 +11,9 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
+import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:baetobe/entities/data/user_education.dart';
-import 'package:baetobe/entities/data/user_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,16 +21,10 @@ import 'package:styled_widget/styled_widget.dart';
 
 class UserProfileScreen extends HookConsumerWidget {
   final int id;
-  final int? age;
-  final String? name;
-  final UserImage? firstPhoto;
+  final BasicProfile? basicProfile;
 
   const UserProfileScreen(
-      {Key? key,
-      @PathParam('id') required this.id,
-      this.age,
-      this.name,
-      this.firstPhoto})
+      {Key? key, @PathParam('id') required this.id, this.basicProfile})
       : super(key: key);
 
   List<Widget> workAndEducationList(
@@ -159,7 +153,7 @@ class UserProfileScreen extends HookConsumerWidget {
         child: Column(
           children: [
             const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
-            (firstPhoto != null)
+            (basicProfile != null)
                 ? CustomCardWidget(
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -174,19 +168,20 @@ class UserProfileScreen extends HookConsumerWidget {
                               child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Container(
-                                  child: (firstPhoto!.url !=
+                                  child: (basicProfile!.profilePicture.url !=
                                           'assets/profile_placeholder.png')
                                       ? CustomCachedNetworkImage(
-                                          imageURL: firstPhoto!.url)
+                                          imageURL:
+                                              basicProfile!.profilePicture.url)
                                       : Image.asset(
                                           'assets/profile_placeholder.png'),
                                 ),
                               ),
                             )),
                         Hero(
-                            tag: name!,
+                            tag: '${basicProfile!.name}$id',
                             child: Text(
-                              '$name, $age',
+                              '${basicProfile!.name}, ${basicProfile!.age}',
                               style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
@@ -235,7 +230,7 @@ class UserProfileScreen extends HookConsumerWidget {
                       ),
                     ),
                     ...profile.images.map((e) {
-                      if (e.id == firstPhoto!.id) {
+                      if (e.id == basicProfile!.profilePicture.id) {
                         return Container();
                       }
                       return CustomCardWidget(

@@ -6,6 +6,7 @@ import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
+import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/like.dart';
 import 'package:baetobe/entities/data/user_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -72,66 +73,70 @@ class LikesListing extends HookConsumerWidget {
               });
             },
             child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  crossAxisCount: 2,
-                  mainAxisExtent: 224),
-              itemCount: likesListing.length,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  ref.read(routerProvider.notifier).push(
-                        UserProfileScreenRoute(
-                          id: likesListing[index].userId,
-                          age: likesListing[index].age,
-                          name: likesListing[index].userName,
-                          firstPhoto: likesListing[index].profilePicture ??
-                              UserImage(
-                                  url: 'assets/profile_placeholder.png',
-                                  id: -1,
-                                  position: -1),
-                        ),
-                      );
-                },
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _CardImage(likesListing: likesListing, index: index),
-                      Hero(
-                        tag: likesListing[index].userName,
-                        child: Text(
-                          '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
-                          style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              height: 1.05),
-                          textAlign: TextAlign.center,
-                        ).padding(top: 12, horizontal: 8),
+                physics: const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    crossAxisCount: 2,
+                    mainAxisExtent: 224),
+                itemCount: likesListing.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      ref.read(routerProvider.notifier).push(
+                            UserProfileScreenRoute(
+                                id: likesListing[index].userId,
+                                basicProfile: BasicProfile(
+                                    name: likesListing[index].userName,
+                                    age: likesListing[index].age,
+                                    profilePicture: likesListing[index]
+                                            .profilePicture ??
+                                        UserImage(
+                                            url:
+                                                'assets/profile_placeholder.png',
+                                            id: -1,
+                                            position: -1))),
+                          );
+                    },
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                      Flexible(
-                        child: Text(
-                          likesListing[index].summary,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w300,
-                              height: 1.2),
-                          textAlign: TextAlign.center,
-                          // softWrap: false,
-                          overflow: TextOverflow.fade,
-                        ).padding(top: 12, horizontal: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _CardImage(likesListing: likesListing, index: index),
+                          Hero(
+                            tag:
+                                '${likesListing[index].userName}${likesListing[index].userId}',
+                            child: Text(
+                              '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.05),
+                              textAlign: TextAlign.center,
+                            ).padding(top: 12, horizontal: 8),
+                          ),
+                          Flexible(
+                            child: Text(
+                              likesListing[index].summary,
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300,
+                                  height: 1.2),
+                              textAlign: TextAlign.center,
+                              // softWrap: false,
+                              overflow: TextOverflow.fade,
+                            ).padding(top: 12, horizontal: 8),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                    ),
+                  );
+                }),
           ),
         );
       },
