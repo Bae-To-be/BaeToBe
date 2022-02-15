@@ -93,10 +93,9 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         path: AppLinks.verificationRejected,
         page: VerificationRejectedScreen,
         guards: [AuthGuard]),
-    CustomRoute(
+    AutoRoute(
         path: AppLinks.profileDetailsRoute,
         page: UserProfileScreen,
-        transitionsBuilder: TransitionsBuilders.fadeIn,
         guards: [AuthGuard]),
     AutoRoute(
         path: AppLinks.messagesForMatchRoute,

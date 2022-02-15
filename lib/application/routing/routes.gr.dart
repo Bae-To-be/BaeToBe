@@ -229,8 +229,9 @@ class AppRouter extends _i19.RootStackRouter {
               id: args.id,
               age: args.age,
               name: args.name,
-              firstPhotoUrl: args.firstPhotoUrl),
-          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
+              firstPhotoUrl: args.firstPhotoUrl,
+              basicProfile: args.basicProfile),
+          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
           opaque: true,
           barrierDismissible: false);
     },
@@ -774,7 +775,8 @@ class UserProfileScreenRoute
       required int id,
       int? age,
       String? name,
-      String? firstPhotoUrl})
+      String? firstPhotoUrl,
+      dynamic basicProfile})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
             args: UserProfileScreenRouteArgs(
@@ -782,7 +784,8 @@ class UserProfileScreenRoute
                 id: id,
                 age: age,
                 name: name,
-                firstPhotoUrl: firstPhotoUrl),
+                firstPhotoUrl: firstPhotoUrl,
+                basicProfile: basicProfile),
             rawPathParams: {'id': id});
 
   static const String name = 'UserProfileScreenRoute';
@@ -790,7 +793,12 @@ class UserProfileScreenRoute
 
 class UserProfileScreenRouteArgs {
   const UserProfileScreenRouteArgs(
-      {this.key, required this.id, this.age, this.name, this.firstPhotoUrl});
+      {this.key,
+      required this.id,
+      this.age,
+      this.name,
+      this.firstPhotoUrl,
+      this.basicProfile});
 
   final _i35.Key? key;
 
@@ -802,9 +810,11 @@ class UserProfileScreenRouteArgs {
 
   final String? firstPhotoUrl;
 
+  final dynamic basicProfile;
+
   @override
   String toString() {
-    return 'UserProfileScreenRouteArgs{key: $key, id: $id, age: $age, name: $name, firstPhotoUrl: $firstPhotoUrl}';
+    return 'UserProfileScreenRouteArgs{key: $key, id: $id, age: $age, name: $name, firstPhotoUrl: $firstPhotoUrl, basicProfile: $basicProfile}';
   }
 }
 
