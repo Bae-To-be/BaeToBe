@@ -102,3 +102,8 @@ class PreferenceKey {
   static const String drinking = 'drinking';
   static const String exercise = 'exercise';
 }
+
+class PerformanceTraces {
+  static const String chatConnection = 'CHAT_CONNECTION';
+  static const String attributeStatus = 'status';
+}

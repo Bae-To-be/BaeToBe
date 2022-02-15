@@ -5,6 +5,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/auth_provider.dart';
 import 'package:baetobe/infrastructure/alice_provider.dart';
 import 'package:baetobe/infrastructure/connectivity_provider.dart';
+import 'package:baetobe/infrastructure/network_performance_interceptor.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -30,6 +31,7 @@ void _configureDioClient(Dio instance, FirebaseRemoteConfig config,
   if (FirebaseRemoteConfig.instance.getBool(RemoteConfigs.debugNavEnabled)) {
     instance.interceptors.add(alice.getDioInterceptor());
   }
+  instance.interceptors.add(DioFirebasePerformanceInterceptor());
   instance.interceptors.add(InterceptorsWrapper(
       onError: (DioError error, ErrorInterceptorHandler handler) async {
     if (error.type == DioErrorType.other && error.error is SocketException) {
