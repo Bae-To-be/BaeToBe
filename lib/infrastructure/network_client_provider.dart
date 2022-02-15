@@ -57,8 +57,15 @@ final networkClientProvider = Provider<Dio>((ref) {
       ref.read(connectivityProvider.notifier), alice);
   dio.interceptors.add(QueuedInterceptorsWrapper(onRequest:
       (RequestOptions options, RequestInterceptorHandler handler) async {
-    options.headers['Authorization'] = 'Bearer ' + await auth.getAccessToken();
-    handler.next(options);
+    final accessToken = await auth.getAccessToken();
+    if (accessToken != '') {
+      options.headers['Authorization'] =
+          'Bearer ' + await auth.getAccessToken();
+      return handler.next(options);
+    }
+    // User is already logged out for this so don't need to make the request
+    return handler
+        .reject(DioError(requestOptions: options, type: DioErrorType.cancel));
   }, onError: (DioError error, ErrorInterceptorHandler handler) async {
     if (error.response?.statusCode == 401) {
       try {
