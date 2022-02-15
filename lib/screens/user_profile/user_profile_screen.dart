@@ -24,14 +24,6 @@ class UserProfileScreen extends HookConsumerWidget {
   final String? name;
   final String? firstPhotoUrl;
 
-  String cmToFeetAndInchesAndCmString(int heightInCm) {
-    int heightInInches = (heightInCm / 2.54).round();
-    int feet = (heightInInches / 12).floor();
-    int inches = (heightInInches - (12 * feet)).floor();
-
-    return '$feet\' $inches" ($heightInCm cm)';
-  }
-
   const UserProfileScreen(
       {Key? key,
       @PathParam('id') required this.id,
@@ -222,91 +214,7 @@ class UserProfileScreen extends HookConsumerWidget {
                       content: Text(profile.bio!)
                           .padding(horizontal: 16, top: 16, bottom: 24),
                     ),
-                    CustomCardWidget(
-                      content: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Wrap(
-                          children: [
-                            CustomChipWidget(
-                              profile.gender,
-                              avatar: const Icon(
-                                FontAwesomeIcons.solidUser,
-                                size: 16,
-                              ),
-                            ),
-                            if (profile.hometown.cityName != '' ||
-                                profile.hometown.countryName != '')
-                              CustomChipWidget(
-                                (profile.hometown.cityName != '' &&
-                                        profile.hometown.countryName != '')
-                                    ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
-                                    : '${profile.hometown.cityName}${profile.hometown.countryName}',
-                                avatar: const Icon(
-                                  FontAwesomeIcons.home,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.heightInCms != null)
-                              CustomChipWidget(
-                                cmToFeetAndInchesAndCmString(
-                                    profile.heightInCms!),
-                                avatar: const Icon(
-                                  FontAwesomeIcons.rulerHorizontal,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.food != null)
-                              CustomChipWidget(
-                                profile.food!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.utensils,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.drinking != null)
-                              CustomChipWidget(
-                                profile.drinking!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.beer,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.smoking != null)
-                              CustomChipWidget(
-                                profile.smoking!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.smoking,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.children != null)
-                              CustomChipWidget(
-                                profile.children!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.child,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.exercise != null)
-                              CustomChipWidget(
-                                profile.exercise!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.dumbbell,
-                                  size: 16,
-                                ),
-                              ),
-                            if (profile.religion != null)
-                              CustomChipWidget(
-                                profile.religion!.name,
-                                avatar: const Icon(
-                                  FontAwesomeIcons.prayingHands,
-                                  size: 16,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    BasicInfoChipsCard(profile: profile),
                     CustomCardWidget(
                       content: Column(
                         children: <Widget>[
@@ -335,6 +243,108 @@ class UserProfileScreen extends HookConsumerWidget {
                     ...actions(context, isMatchClosed, isReported, ref, profile)
                   ]);
                 })
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BasicInfoChipsCard extends StatelessWidget {
+  final DetailedProfile profile;
+
+  const BasicInfoChipsCard({Key? key, required this.profile}) : super(key: key);
+
+  String cmToFeetAndInchesAndCmString(int heightInCm) {
+    int heightInInches = (heightInCm / 2.54).round();
+    int feet = (heightInInches / 12).floor();
+    int inches = (heightInInches - (12 * feet)).floor();
+
+    return '$feet\' $inches" ($heightInCm cm)';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomCardWidget(
+      content: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        child: Wrap(
+          children: [
+            CustomChipWidget(
+              profile.gender,
+              avatar: const Icon(
+                FontAwesomeIcons.solidUser,
+                size: 16,
+              ),
+            ),
+            if (profile.hometown.cityName != '' ||
+                profile.hometown.countryName != '')
+              CustomChipWidget(
+                (profile.hometown.cityName != '' &&
+                        profile.hometown.countryName != '')
+                    ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
+                    : '${profile.hometown.cityName}${profile.hometown.countryName}',
+                avatar: const Icon(
+                  FontAwesomeIcons.home,
+                  size: 16,
+                ),
+              ),
+            if (profile.heightInCms != null)
+              CustomChipWidget(
+                cmToFeetAndInchesAndCmString(profile.heightInCms!),
+                avatar: const Icon(
+                  FontAwesomeIcons.rulerHorizontal,
+                  size: 16,
+                ),
+              ),
+            if (profile.food != null)
+              CustomChipWidget(
+                profile.food!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.utensils,
+                  size: 16,
+                ),
+              ),
+            if (profile.drinking != null)
+              CustomChipWidget(
+                profile.drinking!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.beer,
+                  size: 16,
+                ),
+              ),
+            if (profile.smoking != null)
+              CustomChipWidget(
+                profile.smoking!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.smoking,
+                  size: 16,
+                ),
+              ),
+            if (profile.children != null)
+              CustomChipWidget(
+                profile.children!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.child,
+                  size: 16,
+                ),
+              ),
+            if (profile.exercise != null)
+              CustomChipWidget(
+                profile.exercise!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.dumbbell,
+                  size: 16,
+                ),
+              ),
+            if (profile.religion != null)
+              CustomChipWidget(
+                profile.religion!.name,
+                avatar: const Icon(
+                  FontAwesomeIcons.prayingHands,
+                  size: 16,
+                ),
+              ),
           ],
         ),
       ),
