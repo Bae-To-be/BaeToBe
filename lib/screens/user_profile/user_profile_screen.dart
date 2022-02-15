@@ -3,6 +3,9 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
+import 'package:baetobe/components/custom_cached_network_image.dart';
+import 'package:baetobe/components/custom_card.dart';
+import 'package:baetobe/components/custom_chip.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -10,7 +13,6 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:baetobe/entities/data/user_education.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -38,7 +40,7 @@ class UserProfileScreen extends HookConsumerWidget {
       this.firstPhotoUrl})
       : super(key: key);
 
-  List<Widget> list(
+  List<Widget> workAndEducationList(
     context,
     String workTitle,
     String industry,
@@ -165,13 +167,9 @@ class UserProfileScreen extends HookConsumerWidget {
           children: [
             const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
             (firstPhotoUrl != null)
-                ? Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Column(
+                ? CustomCardWidget(
+                    padding: EdgeInsets.zero,
+                    content: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Hero(
@@ -185,25 +183,8 @@ class UserProfileScreen extends HookConsumerWidget {
                                 child: Container(
                                   child: (firstPhotoUrl !=
                                           'assets/profile_placeholder.png')
-                                      ? CachedNetworkImage(
-                                          fit: BoxFit.fitWidth,
-                                          alignment: Alignment.topCenter,
-                                          imageUrl: firstPhotoUrl!,
-                                          cacheKey: firstPhotoUrl,
-                                          placeholderFadeInDuration:
-                                              const Duration(milliseconds: 500),
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Center(
-                                            child: CircularProgressIndicator(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                                value:
-                                                    downloadProgress.progress),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
-                                        )
+                                      ? CustomCachedNetworkImage(
+                                          imageURL: firstPhotoUrl!)
                                       : Image.asset(
                                           'assets/profile_placeholder.png'),
                                 ),
@@ -236,207 +217,125 @@ class UserProfileScreen extends HookConsumerWidget {
                   }
 
                   return Column(children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Text(profile.bio!)
-                            .padding(horizontal: 16, top: 16, bottom: 24),
-                      ),
+                    CustomCardWidget(
+                      content: Text(profile.bio!)
+                          .padding(horizontal: 16, top: 16, bottom: 24),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Wrap(
-                            children: [
+                    CustomCardWidget(
+                      content: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Wrap(
+                          children: [
+                            CustomChipWidget(
+                              profile.gender,
+                              avatar: const Icon(
+                                FontAwesomeIcons.solidUser,
+                                size: 16,
+                              ),
+                            ),
+                            if (profile.hometown.cityName != '' ||
+                                profile.hometown.countryName != '')
                               CustomChipWidget(
-                                profile.gender,
+                                (profile.hometown.cityName != '' ||
+                                        profile.hometown.countryName != '')
+                                    ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
+                                    : '${profile.hometown.cityName}${profile.hometown.countryName}',
                                 avatar: const Icon(
-                                  FontAwesomeIcons.solidUser,
+                                  FontAwesomeIcons.home,
                                   size: 16,
                                 ),
                               ),
-                              if (profile.hometown.cityName != '' ||
-                                  profile.hometown.countryName != '')
-                                CustomChipWidget(
-                                  (profile.hometown.cityName != '' ||
-                                          profile.hometown.countryName != '')
-                                      ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
-                                      : '${profile.hometown.cityName}${profile.hometown.countryName}',
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.ruler,
-                                    size: 16,
-                                  ),
+                            if (profile.heightInCms != null)
+                              CustomChipWidget(
+                                cmToFeetAndInchesAndCmString(
+                                    profile.heightInCms!),
+                                avatar: const Icon(
+                                  FontAwesomeIcons.rulerHorizontal,
+                                  size: 16,
                                 ),
-                              if (profile.heightInCms != null)
-                                CustomChipWidget(
-                                  cmToFeetAndInchesAndCmString(
-                                      profile.heightInCms!),
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.ruler,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.food != null)
+                              CustomChipWidget(
+                                profile.food!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.utensils,
+                                  size: 16,
                                 ),
-                              if (profile.food != null)
-                                CustomChipWidget(
-                                  profile.food!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.solidUser,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.drinking != null)
+                              CustomChipWidget(
+                                profile.drinking!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.beer,
+                                  size: 16,
                                 ),
-                              if (profile.drinking != null)
-                                CustomChipWidget(
-                                  profile.drinking!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.solidUser,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.smoking != null)
+                              CustomChipWidget(
+                                profile.smoking!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.smoking,
+                                  size: 16,
                                 ),
-                              if (profile.smoking != null)
-                                CustomChipWidget(
-                                  profile.smoking!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.solidUser,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.children != null)
+                              CustomChipWidget(
+                                profile.children!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.child,
+                                  size: 16,
                                 ),
-                              if (profile.children != null)
-                                CustomChipWidget(
-                                  profile.children!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.solidUser,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.exercise != null)
+                              CustomChipWidget(
+                                profile.exercise!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.dumbbell,
+                                  size: 16,
                                 ),
-                              if (profile.exercise != null)
-                                CustomChipWidget(
-                                  profile.exercise!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.solidUser,
-                                    size: 16,
-                                  ),
+                              ),
+                            if (profile.religion != null)
+                              CustomChipWidget(
+                                profile.religion!.name,
+                                avatar: const Icon(
+                                  FontAwesomeIcons.prayingHands,
+                                  size: 16,
                                 ),
-                              if (profile.religion != null)
-                                CustomChipWidget(
-                                  profile.religion!.name,
-                                  avatar: const Icon(
-                                    FontAwesomeIcons.prayingHands,
-                                    size: 16,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            ListView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              children: ListTile.divideTiles(tiles: [
-                                ...list(context, profile.workTitle,
-                                    profile.industry, profile.education)
-                              ], context: context)
-                                  .toList(),
-                            )
+                              ),
                           ],
                         ),
                       ),
                     ),
+                    CustomCardWidget(
+                      content: Column(
+                        children: <Widget>[
+                          ListView(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            children: ListTile.divideTiles(tiles: [
+                              ...workAndEducationList(
+                                  context,
+                                  profile.workTitle,
+                                  profile.industry,
+                                  profile.education)
+                            ], context: context)
+                                .toList(),
+                          )
+                        ],
+                      ),
+                    ),
                     ...profile.images.skip(1).map((e) {
-                      return Card(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        clipBehavior: Clip.antiAlias,
-                        child: CachedNetworkImage(
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
-                          imageUrl: e.url,
-                          cacheKey: e.id.toString(),
-                          placeholderFadeInDuration:
-                              const Duration(milliseconds: 500),
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                color: Theme.of(context).primaryColor,
-                                value: downloadProgress.progress),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                      );
+                      return CustomCardWidget(
+                          content: CustomCachedNetworkImage(
+                        imageURL: e.url,
+                        cacheKey: e.id.toString(),
+                      ));
                     }),
                     ...actions(context, isMatchClosed, isReported, ref, profile)
-                    // ListView.builder(
-                    //   itemBuilder: (context, index) {
-                    //     if (index != 0) {
-                    //       return CachedNetworkImage(
-                    //         fit: BoxFit.fitWidth,
-                    //         alignment: Alignment.topCenter,
-                    //         imageUrl: profile.images[index].url,
-                    //         cacheKey: profile.images[index].url,
-                    //         placeholderFadeInDuration:
-                    //             const Duration(milliseconds: 500),
-                    //         progressIndicatorBuilder:
-                    //             (context, url, downloadProgress) => Center(
-                    //           child: CircularProgressIndicator(
-                    //               color: Theme.of(context).primaryColor,
-                    //               value: downloadProgress.progress),
-                    //         ),
-                    //         errorWidget: (context, url, error) =>
-                    //             const Icon(Icons.error),
-                    //       );
-                    //     }
-                    //   },
-                    //   shrinkWrap: true,
-                    // )
-                    // Text(profile.toString()).padding(horizontal: 15),
-                    // ...actions(context, isMatchClosed, isReported, ref, profile)
                   ]);
                 })
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CustomChipWidget extends StatelessWidget {
-  final String label;
-  final Widget avatar;
-
-  const CustomChipWidget(this.label, {Key? key, required this.avatar})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4),
-      child: Chip(
-        label: Text(label,
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
-        avatar: avatar,
-        backgroundColor: chipColor,
       ),
     );
   }

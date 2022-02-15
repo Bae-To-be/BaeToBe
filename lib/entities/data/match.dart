@@ -22,6 +22,8 @@ class Match with _$Match {
           required bool isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           required int userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          required int age,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @Default(0)

@@ -33,6 +33,8 @@ class _$MatchTearOff {
           required bool isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           required int userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          required int age,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
@@ -47,6 +49,7 @@ class _$MatchTearOff {
       closedBy: closedBy,
       isClosed: isClosed,
       userId: userId,
+      age: age,
       timeSinceUpdate: timeSinceUpdate,
       unreadCount: unreadCount,
       updatedAt: updatedAt,
@@ -74,6 +77,8 @@ mixin _$Match {
   bool get isClosed => throw _privateConstructorUsedError;
   @JsonKey(name: 'id', readValue: Match._readUser)
   int get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age', readValue: Match._readUser)
+  int get age => throw _privateConstructorUsedError;
   @JsonKey(name: 'time_since_update')
   String get timeSinceUpdate => throw _privateConstructorUsedError;
   @JsonKey(name: 'unread_count')
@@ -103,6 +108,8 @@ abstract class $MatchCopyWith<$Res> {
           bool isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           int userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          int age,
       @JsonKey(name: 'time_since_update')
           String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
@@ -130,6 +137,7 @@ class _$MatchCopyWithImpl<$Res> implements $MatchCopyWith<$Res> {
     Object? closedBy = freezed,
     Object? isClosed = freezed,
     Object? userId = freezed,
+    Object? age = freezed,
     Object? timeSinceUpdate = freezed,
     Object? unreadCount = freezed,
     Object? updatedAt = freezed,
@@ -155,6 +163,10 @@ class _$MatchCopyWithImpl<$Res> implements $MatchCopyWith<$Res> {
       userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int,
       timeSinceUpdate: timeSinceUpdate == freezed
           ? _value.timeSinceUpdate
@@ -203,6 +215,8 @@ abstract class _$MatchCopyWith<$Res> implements $MatchCopyWith<$Res> {
           bool isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           int userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          int age,
       @JsonKey(name: 'time_since_update')
           String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
@@ -232,6 +246,7 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
     Object? closedBy = freezed,
     Object? isClosed = freezed,
     Object? userId = freezed,
+    Object? age = freezed,
     Object? timeSinceUpdate = freezed,
     Object? unreadCount = freezed,
     Object? updatedAt = freezed,
@@ -257,6 +272,10 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
       userId: userId == freezed
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as int,
+      age: age == freezed
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int,
       timeSinceUpdate: timeSinceUpdate == freezed
           ? _value.timeSinceUpdate
@@ -292,6 +311,8 @@ class _$_Match extends _Match {
           required this.isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           required this.userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          required this.age,
       @JsonKey(name: 'time_since_update')
           required this.timeSinceUpdate,
       @JsonKey(name: 'unread_count')
@@ -321,6 +342,9 @@ class _$_Match extends _Match {
   @JsonKey(name: 'id', readValue: Match._readUser)
   final int userId;
   @override
+  @JsonKey(name: 'age', readValue: Match._readUser)
+  final int age;
+  @override
   @JsonKey(name: 'time_since_update')
   final String timeSinceUpdate;
   @override
@@ -335,7 +359,7 @@ class _$_Match extends _Match {
 
   @override
   String toString() {
-    return 'Match(id: $id, userName: $userName, closedBy: $closedBy, isClosed: $isClosed, userId: $userId, timeSinceUpdate: $timeSinceUpdate, unreadCount: $unreadCount, updatedAt: $updatedAt, profilePicture: $profilePicture)';
+    return 'Match(id: $id, userName: $userName, closedBy: $closedBy, isClosed: $isClosed, userId: $userId, age: $age, timeSinceUpdate: $timeSinceUpdate, unreadCount: $unreadCount, updatedAt: $updatedAt, profilePicture: $profilePicture)';
   }
 
   @override
@@ -348,6 +372,7 @@ class _$_Match extends _Match {
             const DeepCollectionEquality().equals(other.closedBy, closedBy) &&
             const DeepCollectionEquality().equals(other.isClosed, isClosed) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.age, age) &&
             const DeepCollectionEquality()
                 .equals(other.timeSinceUpdate, timeSinceUpdate) &&
             const DeepCollectionEquality()
@@ -365,6 +390,7 @@ class _$_Match extends _Match {
       const DeepCollectionEquality().hash(closedBy),
       const DeepCollectionEquality().hash(isClosed),
       const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(age),
       const DeepCollectionEquality().hash(timeSinceUpdate),
       const DeepCollectionEquality().hash(unreadCount),
       const DeepCollectionEquality().hash(updatedAt),
@@ -393,6 +419,8 @@ abstract class _Match extends Match {
           required bool isClosed,
       @JsonKey(name: 'id', readValue: Match._readUser)
           required int userId,
+      @JsonKey(name: 'age', readValue: Match._readUser)
+          required int age,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
@@ -420,6 +448,9 @@ abstract class _Match extends Match {
   @override
   @JsonKey(name: 'id', readValue: Match._readUser)
   int get userId;
+  @override
+  @JsonKey(name: 'age', readValue: Match._readUser)
+  int get age;
   @override
   @JsonKey(name: 'time_since_update')
   String get timeSinceUpdate;
