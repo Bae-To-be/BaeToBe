@@ -205,7 +205,8 @@ class UserProfileScreen extends HookConsumerWidget {
             profileRequest.maybeWhen(
                 orElse: () => Center(
                     child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor)),
+                            color: Theme.of(context).primaryColor)
+                        .padding(top: 32)),
                 data: (profile) {
                   if (profile == null) {
                     return const Center(
