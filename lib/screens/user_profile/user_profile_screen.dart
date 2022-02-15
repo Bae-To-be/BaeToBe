@@ -59,7 +59,7 @@ class UserProfileScreen extends HookConsumerWidget {
           color: themeColor,
         ),
         horizontalTitleGap: 0,
-        title: Text('${e.courseName} from ${e.universityName} in ${e.year}',
+        title: Text(e.formatted(),
             style: const TextStyle(
               fontSize: 14,
             )),
