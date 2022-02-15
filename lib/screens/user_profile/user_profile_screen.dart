@@ -237,7 +237,7 @@ class UserProfileScreen extends HookConsumerWidget {
                             if (profile.hometown.cityName != '' ||
                                 profile.hometown.countryName != '')
                               CustomChipWidget(
-                                (profile.hometown.cityName != '' ||
+                                (profile.hometown.cityName != '' &&
                                         profile.hometown.countryName != '')
                                     ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
                                     : '${profile.hometown.cityName}${profile.hometown.countryName}',
