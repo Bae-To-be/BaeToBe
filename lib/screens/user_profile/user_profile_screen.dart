@@ -205,10 +205,11 @@ class UserProfileScreen extends HookConsumerWidget {
                   }
 
                   return Column(children: [
-                    CustomCardWidget(
-                      content: Text(profile.bio!)
-                          .padding(horizontal: 16, top: 16, bottom: 24),
-                    ),
+                    if (profile.bio != null)
+                      CustomCardWidget(
+                        content: Text(profile.bio!)
+                            .padding(horizontal: 16, top: 16, bottom: 24),
+                      ),
                     BasicInfoChipsCard(profile: profile),
                     CustomCardWidget(
                       content: Column(

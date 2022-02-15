@@ -1,6 +1,5 @@
 import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/readers.dart';
-import 'package:baetobe/entities/data/user_image.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'match.freezed.dart';
