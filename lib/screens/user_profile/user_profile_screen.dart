@@ -259,12 +259,7 @@ class UserProfileScreen extends HookConsumerWidget {
                           child: Wrap(
                             children: [
                               CustomChipWidget(
-                                label: Text(
-                                  profile.gender,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13),
-                                ),
+                                profile.gender,
                                 avatar: const Icon(
                                   FontAwesomeIcons.solidUser,
                                   size: 16,
@@ -273,15 +268,10 @@ class UserProfileScreen extends HookConsumerWidget {
                               if (profile.hometown.cityName != '' ||
                                   profile.hometown.countryName != '')
                                 CustomChipWidget(
-                                  label: Text(
-                                    (profile.hometown.cityName != '' ||
-                                            profile.hometown.countryName != '')
-                                        ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
-                                        : '${profile.hometown.cityName}${profile.hometown.countryName}',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  (profile.hometown.cityName != '' ||
+                                          profile.hometown.countryName != '')
+                                      ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
+                                      : '${profile.hometown.cityName}${profile.hometown.countryName}',
                                   avatar: const Icon(
                                     FontAwesomeIcons.ruler,
                                     size: 16,
@@ -289,13 +279,8 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.heightInCms != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    cmToFeetAndInchesAndCmString(
-                                        profile.heightInCms!),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  cmToFeetAndInchesAndCmString(
+                                      profile.heightInCms!),
                                   avatar: const Icon(
                                     FontAwesomeIcons.ruler,
                                     size: 16,
@@ -303,12 +288,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.food != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.food!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.food!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.solidUser,
                                     size: 16,
@@ -316,12 +296,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.drinking != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.drinking!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.drinking!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.solidUser,
                                     size: 16,
@@ -329,12 +304,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.smoking != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.smoking!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.smoking!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.solidUser,
                                     size: 16,
@@ -342,12 +312,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.children != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.children!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.children!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.solidUser,
                                     size: 16,
@@ -355,12 +320,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.exercise != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.exercise!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.exercise!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.solidUser,
                                     size: 16,
@@ -368,12 +328,7 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               if (profile.religion != null)
                                 CustomChipWidget(
-                                  label: Text(
-                                    profile.religion!.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13),
-                                  ),
+                                  profile.religion!.name,
                                   avatar: const Icon(
                                     FontAwesomeIcons.prayingHands,
                                     size: 16,
@@ -467,9 +422,10 @@ class UserProfileScreen extends HookConsumerWidget {
 }
 
 class CustomChipWidget extends StatelessWidget {
-  final Widget label;
+  final String label;
   final Widget avatar;
-  const CustomChipWidget({Key? key, required this.label, required this.avatar})
+
+  const CustomChipWidget(this.label, {Key? key, required this.avatar})
       : super(key: key);
 
   @override
@@ -477,7 +433,8 @@ class CustomChipWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4),
       child: Chip(
-        label: label,
+        label: Text(label,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13)),
         avatar: avatar,
         backgroundColor: chipColor,
       ),
