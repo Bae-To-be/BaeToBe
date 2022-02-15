@@ -81,11 +81,14 @@ class MessagesForMatchScreen extends HookConsumerWidget {
                   firstPhotoUrl: match.profilePicture!.url,
                   age: match.age));
             },
-            title: Text(match.userName,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.w500))),
+            title: Hero(
+              tag: match.userName,
+              child: Text(match.userName,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.w500)),
+            )),
         state.connectionStateVisible
             ? Container(
                 color: Colors.white,
