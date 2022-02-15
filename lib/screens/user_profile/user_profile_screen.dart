@@ -283,10 +283,7 @@ class BasicInfoChipsCard extends StatelessWidget {
             if (profile.hometown.cityName != '' ||
                 profile.hometown.countryName != '')
               CustomChipWidget(
-                (profile.hometown.cityName != '' &&
-                        profile.hometown.countryName != '')
-                    ? '${profile.hometown.cityName}, ${profile.hometown.countryName}'
-                    : '${profile.hometown.cityName}${profile.hometown.countryName}',
+                profile.hometown.formatted(),
                 avatar: const Icon(
                   FontAwesomeIcons.home,
                   size: 16,
