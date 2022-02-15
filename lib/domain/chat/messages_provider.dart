@@ -221,16 +221,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
   }
 
   types.Message _jsonToMessage(Map<String, dynamic> json) {
-    types.Status? status;
-    if (json['author']['id'] == user.id) {
-      final notUser =
-          json['unread_by'].keys.firstWhere((id) => id != user.id.toString());
-      if (json['unread_by'][notUser] as bool) {
-        status = types.Status.sent;
-      } else {
-        status = types.Status.seen;
-      }
-    } else {
+    if (json['author']['id'] != user.id) {
       if (json['unread_by'][user.id.toString()] as bool) {
         state.cable?.performAction('Chat',
             action: 'mark_as_read',
@@ -243,7 +234,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
       author: types.User(
           id: json['author']['id'].toString(),
           firstName: json['author']['name']),
-      status: status,
+      status: types.Status.sent,
       createdAt: int.parse(json['created_at']),
       id: json['client_id'],
       remoteId: json['id'],
