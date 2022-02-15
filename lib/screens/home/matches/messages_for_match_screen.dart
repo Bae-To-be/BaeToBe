@@ -63,7 +63,7 @@ class MessagesForMatchScreen extends HookConsumerWidget {
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.all(0),
             avatar: Hero(
-              tag: match.userId,
+              tag: match.basicProfile.userId,
               child: GFAvatar(
                 shape: GFAvatarShape.circle,
                 backgroundColor: Colors.white,
@@ -77,7 +77,7 @@ class MessagesForMatchScreen extends HookConsumerWidget {
             onTap: () {
               router.push(
                 UserProfileScreenRoute(
-                  id: match.userId,
+                  id: match.basicProfile.userId,
                   basicProfile: match.basicProfile,
                 ),
               );

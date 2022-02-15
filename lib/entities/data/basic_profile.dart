@@ -9,6 +9,7 @@ class BasicProfile with _$BasicProfile {
   factory BasicProfile(
           {@JsonKey(name: 'name') required String userName,
           required int age,
+          @JsonKey(name: 'id') required int userId,
           @JsonKey(name: 'profile_picture') UserImage? profilePicture}) =
       _BasicProfile;
 

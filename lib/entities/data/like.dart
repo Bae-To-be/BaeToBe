@@ -14,7 +14,6 @@ class Like with _$Like {
   factory Like({
     @JsonKey(name: '_id', readValue: Readers.readId) required int id,
     @JsonKey(name: 'user') required BasicProfile basicProfile,
-    @JsonKey(name: 'id', readValue: Like._readUser) required int userId,
     @JsonKey(name: 'summary', readValue: Like._readUser)
         required String summary,
     @JsonKey(name: 'time_since_creation') required String timeSinceCreation,

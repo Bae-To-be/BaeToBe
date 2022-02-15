@@ -83,7 +83,7 @@ class LikesListing extends HookConsumerWidget {
                     onTap: () {
                       ref.read(routerProvider.notifier).push(
                             UserProfileScreenRoute(
-                                id: likesListing[index].userId,
+                                id: likesListing[index].basicProfile.userId,
                                 basicProfile: likesListing[index].basicProfile),
                           );
                     },
@@ -98,7 +98,7 @@ class LikesListing extends HookConsumerWidget {
                           _CardImage(likesListing: likesListing, index: index),
                           Hero(
                             tag:
-                                '${likesListing[index].basicProfile.userName}${likesListing[index].userId}',
+                                '${likesListing[index].basicProfile.userName}${likesListing[index].basicProfile.userId}',
                             child: Text(
                               '${likesListing[index].basicProfile.userName.split(' ').first}, ${likesListing[index].basicProfile.age}',
                               style: const TextStyle(
@@ -151,7 +151,7 @@ class _CardImage extends StatelessWidget {
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
             child: Hero(
-              tag: likesListing[index].userId,
+              tag: likesListing[index].basicProfile.userId,
               child: AspectRatio(
                 aspectRatio: 1.358,
                 child: Container(

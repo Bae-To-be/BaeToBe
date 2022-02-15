@@ -9,8 +9,6 @@ part 'match.g.dart';
 class Match with _$Match {
   const Match._();
 
-  static dynamic _readUser(Map map, String key) => map['matched_user'][key];
-
   factory Match(
       {@JsonKey(name: '_id', readValue: Readers.readId)
           required int id,
@@ -20,8 +18,6 @@ class Match with _$Match {
           int? closedBy,
       @JsonKey(name: 'is_closed')
           required bool isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          required int userId,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @Default(0)
