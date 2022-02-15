@@ -6,6 +6,7 @@ import 'package:baetobe/domain/chat/messages_provider.dart';
 import 'package:baetobe/domain/matches_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:baetobe/entities/data/match.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 import 'package:baetobe/entities/view_models/chat_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -77,9 +78,11 @@ class MessagesForMatchScreen extends HookConsumerWidget {
               router.push(UserProfileScreenRoute(
                   id: match.userId,
                   name: match.userName,
-                  firstPhotoUrl: match.profilePicture != null
-                      ? match.profilePicture!.url
-                      : 'assets/profile_placeholder.png',
+                  firstPhoto: match.profilePicture ??
+                      UserImage(
+                          url: 'assets/profile_placeholder.png',
+                          id: -1,
+                          position: -1),
                   age: match.age));
             },
             title: Hero(

@@ -7,6 +7,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -85,10 +86,11 @@ class LikesListing extends HookConsumerWidget {
                           id: likesListing[index].userId,
                           age: likesListing[index].age,
                           name: likesListing[index].userName,
-                          firstPhotoUrl:
-                              (likesListing[index].profilePicture != null)
-                                  ? likesListing[index].profilePicture?.url
-                                  : 'assets/profile_placeholder.png',
+                          firstPhoto: likesListing[index].profilePicture ??
+                              UserImage(
+                                  url: 'assets/profile_placeholder.png',
+                                  id: -1,
+                                  position: -1),
                         ),
                       );
                 },

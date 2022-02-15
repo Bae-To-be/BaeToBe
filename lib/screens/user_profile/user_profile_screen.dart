@@ -13,6 +13,7 @@ import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:baetobe/entities/data/user_education.dart';
+import 'package:baetobe/entities/data/user_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,14 +23,14 @@ class UserProfileScreen extends HookConsumerWidget {
   final int id;
   final int? age;
   final String? name;
-  final String? firstPhotoUrl;
+  final UserImage? firstPhoto;
 
   const UserProfileScreen(
       {Key? key,
       @PathParam('id') required this.id,
       this.age,
       this.name,
-      this.firstPhotoUrl})
+      this.firstPhoto})
       : super(key: key);
 
   List<Widget> workAndEducationList(
@@ -158,7 +159,7 @@ class UserProfileScreen extends HookConsumerWidget {
         child: Column(
           children: [
             const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
-            (firstPhotoUrl != null)
+            (firstPhoto != null)
                 ? CustomCardWidget(
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -173,10 +174,10 @@ class UserProfileScreen extends HookConsumerWidget {
                               child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Container(
-                                  child: (firstPhotoUrl !=
+                                  child: (firstPhoto!.url !=
                                           'assets/profile_placeholder.png')
                                       ? CustomCachedNetworkImage(
-                                          imageURL: firstPhotoUrl!)
+                                          imageURL: firstPhoto!.url)
                                       : Image.asset(
                                           'assets/profile_placeholder.png'),
                                 ),
@@ -234,7 +235,7 @@ class UserProfileScreen extends HookConsumerWidget {
                       ),
                     ),
                     ...profile.images.map((e) {
-                      if (e.position == 0) {
+                      if (e.id == firstPhoto!.id) {
                         return Container();
                       }
                       return CustomCardWidget(
