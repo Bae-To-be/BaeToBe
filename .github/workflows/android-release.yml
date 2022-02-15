@@ -20,7 +20,7 @@ jobs:
           channel: 'dev' # 'beta', 'alpha', default to: 'stable'
           # flutter-version: '1.12.x' # you can also specify exact version of flutter
       # Get flutter dependencies.
-      - run: flutter pub get
+      - run: flutter pub get && cd actioncable_dart && flutter pub get && cd ../
       # Check for any formatting issues in the code.
       - run: flutter format --set-exit-if-changed .
       # Statically analyze the Dart code for any errors.
