@@ -78,7 +78,9 @@ class MessagesForMatchScreen extends HookConsumerWidget {
               router.push(UserProfileScreenRoute(
                   id: match.userId,
                   name: match.userName,
-                  firstPhotoUrl: match.profilePicture!.url,
+                  firstPhotoUrl: match.profilePicture != null
+                      ? match.profilePicture!.url
+                      : 'assets/profile_placeholder.png',
                   age: match.age));
             },
             title: Hero(
