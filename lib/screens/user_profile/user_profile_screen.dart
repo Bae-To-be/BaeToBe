@@ -153,7 +153,7 @@ class UserProfileScreen extends HookConsumerWidget {
         child: Column(
           children: [
             const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
-            (basicProfile != null)
+            basicProfile != null
                 ? CustomCardWidget(
                     padding: EdgeInsets.zero,
                     content: Column(
@@ -168,20 +168,19 @@ class UserProfileScreen extends HookConsumerWidget {
                               child: AspectRatio(
                                 aspectRatio: 1,
                                 child: Container(
-                                  child: (basicProfile!.profilePicture.url !=
-                                          'assets/profile_placeholder.png')
+                                  child: (basicProfile!.profilePicture != null)
                                       ? CustomCachedNetworkImage(
                                           imageURL:
-                                              basicProfile!.profilePicture.url)
+                                              basicProfile!.profilePicture!.url)
                                       : Image.asset(
                                           'assets/profile_placeholder.png'),
                                 ),
                               ),
                             )),
                         Hero(
-                            tag: '${basicProfile!.name}$id',
+                            tag: '${basicProfile!.userName}$id',
                             child: Text(
-                              '${basicProfile!.name}, ${basicProfile!.age}',
+                              '${basicProfile!.userName}, ${basicProfile!.age}',
                               style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
@@ -230,7 +229,7 @@ class UserProfileScreen extends HookConsumerWidget {
                       ),
                     ),
                     ...profile.images.map((e) {
-                      if (e.id == basicProfile!.profilePicture.id) {
+                      if (e.id == basicProfile!.profilePicture!.id) {
                         return Container();
                       }
                       return CustomCardWidget(

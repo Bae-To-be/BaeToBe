@@ -97,10 +97,10 @@ class MatchesTab extends HookConsumerWidget {
                           : CustomTextWidget(
                               type: textWidgetType.caption,
                               text: matchesListing[i].timeSinceUpdate),
-                      avatar:
-                          UserAvatar(image: matchesListing[i].profilePicture),
+                      avatar: UserAvatar(
+                          image: matchesListing[i].basicProfile.profilePicture),
                       color: bgColor,
-                      title: Text(matchesListing[i].userName,
+                      title: Text(matchesListing[i].basicProfile.userName,
                           style: Theme.of(context)
                               .textTheme
                               .subtitle1

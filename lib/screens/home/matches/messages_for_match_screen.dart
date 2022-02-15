@@ -67,31 +67,26 @@ class MessagesForMatchScreen extends HookConsumerWidget {
             avatar: Hero(
               tag: match.userId,
               child: GFAvatar(
-                shape: GFAvatarShape.square,
+                shape: GFAvatarShape.circle,
                 backgroundColor: Colors.white,
                 size: GFSize.LARGE,
-                backgroundImage: match.profilePicture != null
-                    ? CachedNetworkImageProvider(match.profilePicture!.url)
+                backgroundImage: match.basicProfile.profilePicture != null
+                    ? CachedNetworkImageProvider(
+                        match.basicProfile.profilePicture!.url)
                     : Image.asset('assets/profile_placeholder.png').image,
               ),
             ),
             onTap: () {
-              router.push(UserProfileScreenRoute(
-                id: match.userId,
-                basicProfile: BasicProfile(
-                  name: match.userName,
-                  age: match.age,
-                  profilePicture: match.profilePicture ??
-                      UserImage(
-                          url: 'assets/profile_placeholder.png',
-                          id: -1,
-                          position: -1),
+              router.push(
+                UserProfileScreenRoute(
+                  id: match.userId,
+                  basicProfile: match.basicProfile,
                 ),
-              ));
+              );
             },
             title: Hero(
-              tag: match.userName,
-              child: Text(match.userName,
+              tag: match.basicProfile.userName,
+              child: Text(match.basicProfile.userName,
                   style: Theme.of(context)
                       .textTheme
                       .headline6

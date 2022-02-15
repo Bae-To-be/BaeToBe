@@ -8,15 +8,16 @@ part of 'basic_profile.dart';
 
 _$_BasicProfile _$$_BasicProfileFromJson(Map<String, dynamic> json) =>
     _$_BasicProfile(
-      name: json['name'] as String,
+      userName: json['name'] as String,
       age: json['age'] as int,
-      profilePicture:
-          UserImage.fromJson(json['profilePicture'] as Map<String, dynamic>),
+      profilePicture: json['profile_picture'] == null
+          ? null
+          : UserImage.fromJson(json['profile_picture'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_BasicProfileToJson(_$_BasicProfile instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'name': instance.userName,
       'age': instance.age,
-      'profilePicture': instance.profilePicture.toJson(),
+      'profile_picture': instance.profilePicture?.toJson(),
     };

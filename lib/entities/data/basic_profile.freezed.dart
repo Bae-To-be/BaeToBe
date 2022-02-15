@@ -23,11 +23,11 @@ class _$BasicProfileTearOff {
   const _$BasicProfileTearOff();
 
   _BasicProfile call(
-      {required String name,
+      {@JsonKey(name: 'name') required String userName,
       required int age,
-      required UserImage profilePicture}) {
+      @JsonKey(name: 'profile_picture') UserImage? profilePicture}) {
     return _BasicProfile(
-      name: name,
+      userName: userName,
       age: age,
       profilePicture: profilePicture,
     );
@@ -43,9 +43,11 @@ const $BasicProfile = _$BasicProfileTearOff();
 
 /// @nodoc
 mixin _$BasicProfile {
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String get userName => throw _privateConstructorUsedError;
   int get age => throw _privateConstructorUsedError;
-  UserImage get profilePicture => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_picture')
+  UserImage? get profilePicture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,9 +60,12 @@ abstract class $BasicProfileCopyWith<$Res> {
   factory $BasicProfileCopyWith(
           BasicProfile value, $Res Function(BasicProfile) then) =
       _$BasicProfileCopyWithImpl<$Res>;
-  $Res call({String name, int age, UserImage profilePicture});
+  $Res call(
+      {@JsonKey(name: 'name') String userName,
+      int age,
+      @JsonKey(name: 'profile_picture') UserImage? profilePicture});
 
-  $UserImageCopyWith<$Res> get profilePicture;
+  $UserImageCopyWith<$Res>? get profilePicture;
 }
 
 /// @nodoc
@@ -73,14 +78,14 @@ class _$BasicProfileCopyWithImpl<$Res> implements $BasicProfileCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? userName = freezed,
     Object? age = freezed,
     Object? profilePicture = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       age: age == freezed
           ? _value.age
@@ -89,13 +94,17 @@ class _$BasicProfileCopyWithImpl<$Res> implements $BasicProfileCopyWith<$Res> {
       profilePicture: profilePicture == freezed
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
-              as UserImage,
+              as UserImage?,
     ));
   }
 
   @override
-  $UserImageCopyWith<$Res> get profilePicture {
-    return $UserImageCopyWith<$Res>(_value.profilePicture, (value) {
+  $UserImageCopyWith<$Res>? get profilePicture {
+    if (_value.profilePicture == null) {
+      return null;
+    }
+
+    return $UserImageCopyWith<$Res>(_value.profilePicture!, (value) {
       return _then(_value.copyWith(profilePicture: value));
     });
   }
@@ -108,10 +117,13 @@ abstract class _$BasicProfileCopyWith<$Res>
           _BasicProfile value, $Res Function(_BasicProfile) then) =
       __$BasicProfileCopyWithImpl<$Res>;
   @override
-  $Res call({String name, int age, UserImage profilePicture});
+  $Res call(
+      {@JsonKey(name: 'name') String userName,
+      int age,
+      @JsonKey(name: 'profile_picture') UserImage? profilePicture});
 
   @override
-  $UserImageCopyWith<$Res> get profilePicture;
+  $UserImageCopyWith<$Res>? get profilePicture;
 }
 
 /// @nodoc
@@ -126,14 +138,14 @@ class __$BasicProfileCopyWithImpl<$Res> extends _$BasicProfileCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? userName = freezed,
     Object? age = freezed,
     Object? profilePicture = freezed,
   }) {
     return _then(_BasicProfile(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       age: age == freezed
           ? _value.age
@@ -142,7 +154,7 @@ class __$BasicProfileCopyWithImpl<$Res> extends _$BasicProfileCopyWithImpl<$Res>
       profilePicture: profilePicture == freezed
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
-              as UserImage,
+              as UserImage?,
     ));
   }
 }
@@ -151,21 +163,25 @@ class __$BasicProfileCopyWithImpl<$Res> extends _$BasicProfileCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BasicProfile implements _BasicProfile {
   _$_BasicProfile(
-      {required this.name, required this.age, required this.profilePicture});
+      {@JsonKey(name: 'name') required this.userName,
+      required this.age,
+      @JsonKey(name: 'profile_picture') this.profilePicture});
 
   factory _$_BasicProfile.fromJson(Map<String, dynamic> json) =>
       _$$_BasicProfileFromJson(json);
 
   @override
-  final String name;
+  @JsonKey(name: 'name')
+  final String userName;
   @override
   final int age;
   @override
-  final UserImage profilePicture;
+  @JsonKey(name: 'profile_picture')
+  final UserImage? profilePicture;
 
   @override
   String toString() {
-    return 'BasicProfile(name: $name, age: $age, profilePicture: $profilePicture)';
+    return 'BasicProfile(userName: $userName, age: $age, profilePicture: $profilePicture)';
   }
 
   @override
@@ -173,7 +189,7 @@ class _$_BasicProfile implements _BasicProfile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _BasicProfile &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.age, age) &&
             const DeepCollectionEquality()
                 .equals(other.profilePicture, profilePicture));
@@ -182,7 +198,7 @@ class _$_BasicProfile implements _BasicProfile {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(age),
       const DeepCollectionEquality().hash(profilePicture));
 
@@ -199,19 +215,22 @@ class _$_BasicProfile implements _BasicProfile {
 
 abstract class _BasicProfile implements BasicProfile {
   factory _BasicProfile(
-      {required String name,
-      required int age,
-      required UserImage profilePicture}) = _$_BasicProfile;
+          {@JsonKey(name: 'name') required String userName,
+          required int age,
+          @JsonKey(name: 'profile_picture') UserImage? profilePicture}) =
+      _$_BasicProfile;
 
   factory _BasicProfile.fromJson(Map<String, dynamic> json) =
       _$_BasicProfile.fromJson;
 
   @override
-  String get name;
+  @JsonKey(name: 'name')
+  String get userName;
   @override
   int get age;
   @override
-  UserImage get profilePicture;
+  @JsonKey(name: 'profile_picture')
+  UserImage? get profilePicture;
   @override
   @JsonKey(ignore: true)
   _$BasicProfileCopyWith<_BasicProfile> get copyWith =>
