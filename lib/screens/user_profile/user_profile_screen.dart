@@ -233,7 +233,10 @@ class UserProfileScreen extends HookConsumerWidget {
                         ],
                       ),
                     ),
-                    ...profile.images.skip(1).map((e) {
+                    ...profile.images.map((e) {
+                      if (e.position == 0) {
+                        return Container();
+                      }
                       return CustomCardWidget(
                           content: CustomCachedNetworkImage(
                         imageURL: e.url,
