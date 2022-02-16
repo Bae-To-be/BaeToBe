@@ -10,10 +10,10 @@ class Match with _$Match {
   const Match._();
 
   factory Match(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
+      {@JsonKey(name: 'id')
           required int id,
       @JsonKey(name: 'matched_user')
-          required BasicProfile basicProfile,
+          required BasicProfile matchedUser,
       @JsonKey(name: 'closed_by')
           int? closedBy,
       @JsonKey(name: 'is_closed')

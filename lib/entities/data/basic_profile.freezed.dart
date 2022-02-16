@@ -26,11 +26,13 @@ class _$BasicProfileTearOff {
       {@JsonKey(name: 'name') required String userName,
       required int age,
       @JsonKey(name: 'id') required int userId,
+      @JsonKey(name: 'summary') String? summary = '',
       @JsonKey(name: 'profile_picture') UserImage? profilePicture}) {
     return _BasicProfile(
       userName: userName,
       age: age,
       userId: userId,
+      summary: summary,
       profilePicture: profilePicture,
     );
   }
@@ -50,6 +52,8 @@ mixin _$BasicProfile {
   int get age => throw _privateConstructorUsedError;
   @JsonKey(name: 'id')
   int get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'summary')
+  String? get summary => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_picture')
   UserImage? get profilePicture => throw _privateConstructorUsedError;
 
@@ -68,6 +72,7 @@ abstract class $BasicProfileCopyWith<$Res> {
       {@JsonKey(name: 'name') String userName,
       int age,
       @JsonKey(name: 'id') int userId,
+      @JsonKey(name: 'summary') String? summary,
       @JsonKey(name: 'profile_picture') UserImage? profilePicture});
 
   $UserImageCopyWith<$Res>? get profilePicture;
@@ -86,6 +91,7 @@ class _$BasicProfileCopyWithImpl<$Res> implements $BasicProfileCopyWith<$Res> {
     Object? userName = freezed,
     Object? age = freezed,
     Object? userId = freezed,
+    Object? summary = freezed,
     Object? profilePicture = freezed,
   }) {
     return _then(_value.copyWith(
@@ -101,6 +107,10 @@ class _$BasicProfileCopyWithImpl<$Res> implements $BasicProfileCopyWith<$Res> {
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      summary: summary == freezed
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
       profilePicture: profilePicture == freezed
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
@@ -131,6 +141,7 @@ abstract class _$BasicProfileCopyWith<$Res>
       {@JsonKey(name: 'name') String userName,
       int age,
       @JsonKey(name: 'id') int userId,
+      @JsonKey(name: 'summary') String? summary,
       @JsonKey(name: 'profile_picture') UserImage? profilePicture});
 
   @override
@@ -152,6 +163,7 @@ class __$BasicProfileCopyWithImpl<$Res> extends _$BasicProfileCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? age = freezed,
     Object? userId = freezed,
+    Object? summary = freezed,
     Object? profilePicture = freezed,
   }) {
     return _then(_BasicProfile(
@@ -167,6 +179,10 @@ class __$BasicProfileCopyWithImpl<$Res> extends _$BasicProfileCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      summary: summary == freezed
+          ? _value.summary
+          : summary // ignore: cast_nullable_to_non_nullable
+              as String?,
       profilePicture: profilePicture == freezed
           ? _value.profilePicture
           : profilePicture // ignore: cast_nullable_to_non_nullable
@@ -182,6 +198,7 @@ class _$_BasicProfile implements _BasicProfile {
       {@JsonKey(name: 'name') required this.userName,
       required this.age,
       @JsonKey(name: 'id') required this.userId,
+      @JsonKey(name: 'summary') this.summary = '',
       @JsonKey(name: 'profile_picture') this.profilePicture});
 
   factory _$_BasicProfile.fromJson(Map<String, dynamic> json) =>
@@ -196,12 +213,15 @@ class _$_BasicProfile implements _BasicProfile {
   @JsonKey(name: 'id')
   final int userId;
   @override
+  @JsonKey(name: 'summary')
+  final String? summary;
+  @override
   @JsonKey(name: 'profile_picture')
   final UserImage? profilePicture;
 
   @override
   String toString() {
-    return 'BasicProfile(userName: $userName, age: $age, userId: $userId, profilePicture: $profilePicture)';
+    return 'BasicProfile(userName: $userName, age: $age, userId: $userId, summary: $summary, profilePicture: $profilePicture)';
   }
 
   @override
@@ -212,6 +232,7 @@ class _$_BasicProfile implements _BasicProfile {
             const DeepCollectionEquality().equals(other.userName, userName) &&
             const DeepCollectionEquality().equals(other.age, age) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality().equals(other.summary, summary) &&
             const DeepCollectionEquality()
                 .equals(other.profilePicture, profilePicture));
   }
@@ -222,6 +243,7 @@ class _$_BasicProfile implements _BasicProfile {
       const DeepCollectionEquality().hash(userName),
       const DeepCollectionEquality().hash(age),
       const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(summary),
       const DeepCollectionEquality().hash(profilePicture));
 
   @JsonKey(ignore: true)
@@ -240,6 +262,7 @@ abstract class _BasicProfile implements BasicProfile {
           {@JsonKey(name: 'name') required String userName,
           required int age,
           @JsonKey(name: 'id') required int userId,
+          @JsonKey(name: 'summary') String? summary,
           @JsonKey(name: 'profile_picture') UserImage? profilePicture}) =
       _$_BasicProfile;
 
@@ -254,6 +277,9 @@ abstract class _BasicProfile implements BasicProfile {
   @override
   @JsonKey(name: 'id')
   int get userId;
+  @override
+  @JsonKey(name: 'summary')
+  String? get summary;
   @override
   @JsonKey(name: 'profile_picture')
   UserImage? get profilePicture;

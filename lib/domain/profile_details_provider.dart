@@ -14,10 +14,10 @@ final profileDetailsProvider =
   final error = ref.read(errorProvider.notifier);
   // Reload user if a match is received against him or sent likes change
   ref.watch(matchesProvider.select((result) => result.value
-      ?.firstWhereOrNull((match) => match.basicProfile.userId == id)));
+      ?.firstWhereOrNull((match) => match.matchedUser.userId == id)));
   // A like can be removed using a notification, in that case this API will return no user.
-  ref.watch(likesProvider(likeDirection.sent).select((result) => result.value
-      ?.firstWhereOrNull((like) => like.basicProfile.userId == id)));
+  ref.watch(likesProvider(likeDirection.sent).select((result) =>
+      result.value?.firstWhereOrNull((like) => like.user.userId == id)));
   DetailedProfile? result;
   await error.safelyExecute(
       command: client

@@ -10,6 +10,7 @@ class BasicProfile with _$BasicProfile {
           {@JsonKey(name: 'name') required String userName,
           required int age,
           @JsonKey(name: 'id') required int userId,
+          @Default('') @JsonKey(name: 'summary') String? summary,
           @JsonKey(name: 'profile_picture') UserImage? profilePicture}) =
       _BasicProfile;
 
