@@ -1,9 +1,9 @@
 import 'package:baetobe/application/routing/router_provider.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/constants/app_constants.dart';
-import 'package:baetobe/constants/app_links.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
@@ -71,51 +71,61 @@ class LikesListing extends HookConsumerWidget {
               });
             },
             child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                  crossAxisCount: 2,
-                  mainAxisExtent: 224),
-              itemCount: likesListing.length,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () => ref.read(routerProvider.notifier).pushNamed(
-                    AppLinks.profileDetails(likesListing[index].userId)),
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _CardImage(likesListing: likesListing, index: index),
-                      Text(
-                        '${likesListing[index].userName.split(' ').first}, ${likesListing[index].age}',
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            height: 1.05),
-                        textAlign: TextAlign.center,
-                      ).padding(top: 12, horizontal: 8),
-                      Flexible(
-                        child: Text(
-                          likesListing[index].summary,
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w300,
-                              height: 1.2),
-                          textAlign: TextAlign.center,
-                          // softWrap: false,
-                          overflow: TextOverflow.fade,
-                        ).padding(top: 12, horizontal: 8),
+                physics: const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    crossAxisCount: 2,
+                    mainAxisExtent: 224),
+                itemCount: likesListing.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      ref.read(routerProvider.notifier).push(
+                            UserProfileScreenRoute(
+                                id: likesListing[index].user.userId,
+                                basicProfile: likesListing[index].user),
+                          );
+                    },
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          _CardImage(likesListing: likesListing, index: index),
+                          Hero(
+                            tag:
+                                '${likesListing[index].user.userName}${likesListing[index].user.userId}',
+                            child: Text(
+                              '${likesListing[index].user.userName.split(' ').first}, ${likesListing[index].user.age}',
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  height: 1.05),
+                              textAlign: TextAlign.center,
+                            ).padding(top: 12, horizontal: 8),
+                          ),
+                          Flexible(
+                            child: Text(
+                              likesListing[index].user.summary!,
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300,
+                                  height: 1.2),
+                              textAlign: TextAlign.center,
+                              // softWrap: false,
+                              overflow: TextOverflow.fade,
+                            ).padding(top: 12, horizontal: 8),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
           ),
         );
       },
@@ -140,27 +150,36 @@ class _CardImage extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-            child: AspectRatio(
-              aspectRatio: 1.358,
-              child: (likesListing[index].profilePicture != null)
-                  ? CachedNetworkImage(
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topCenter,
-                      imageUrl: likesListing[index].profilePicture!.url,
-                      cacheKey:
-                          likesListing[index].profilePicture!.id.toString(),
-                      placeholderFadeInDuration:
-                          const Duration(milliseconds: 500),
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => Center(
-                        child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor,
-                            value: downloadProgress.progress),
-                      ),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    )
-                  : Image.asset('assets/profile_placeholder.png'),
+            child: Hero(
+              tag: likesListing[index].user.userId,
+              child: AspectRatio(
+                aspectRatio: 1.358,
+                child: Container(
+                  child: (likesListing[index].user.profilePicture != null)
+                      ? CachedNetworkImage(
+                          fit: BoxFit.fitWidth,
+                          alignment: Alignment.topCenter,
+                          imageUrl:
+                              likesListing[index].user.profilePicture!.url,
+                          cacheKey: likesListing[index]
+                              .user
+                              .profilePicture!
+                              .url
+                              .toString(),
+                          placeholderFadeInDuration:
+                              const Duration(milliseconds: 500),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                                value: downloadProgress.progress),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        )
+                      : Image.asset('assets/profile_placeholder.png'),
+                ),
+              ),
             ),
           ),
         ),

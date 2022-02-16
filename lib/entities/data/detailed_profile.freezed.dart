@@ -33,11 +33,11 @@ class _$DetailedProfileTearOff {
       required String? bio,
       required UserHometown hometown,
       Religion? religion,
-      Preference? smoking,
-      Preference? food,
-      Preference? drinking,
-      Preference? children,
-      Preference? exercise,
+      @JsonKey(name: 'smoking_preference') required Preference? smoking,
+      @JsonKey(name: 'food_preference') required Preference? food,
+      @JsonKey(name: 'drinking_preference') required Preference? drinking,
+      @JsonKey(name: 'children_preference') required Preference? children,
+      @JsonKey(name: 'exercise_preference') required Preference? exercise,
       @JsonKey(name: 'height_in_cms') required int? heightInCms,
       @JsonKey(name: 'status') required String matchStatus,
       required Match? match,
@@ -94,10 +94,15 @@ mixin _$DetailedProfile {
   String? get bio => throw _privateConstructorUsedError;
   UserHometown get hometown => throw _privateConstructorUsedError;
   Religion? get religion => throw _privateConstructorUsedError;
+  @JsonKey(name: 'smoking_preference')
   Preference? get smoking => throw _privateConstructorUsedError;
+  @JsonKey(name: 'food_preference')
   Preference? get food => throw _privateConstructorUsedError;
+  @JsonKey(name: 'drinking_preference')
   Preference? get drinking => throw _privateConstructorUsedError;
+  @JsonKey(name: 'children_preference')
   Preference? get children => throw _privateConstructorUsedError;
+  @JsonKey(name: 'exercise_preference')
   Preference? get exercise => throw _privateConstructorUsedError;
   @JsonKey(name: 'height_in_cms')
   int? get heightInCms => throw _privateConstructorUsedError;
@@ -134,11 +139,11 @@ abstract class $DetailedProfileCopyWith<$Res> {
       String? bio,
       UserHometown hometown,
       Religion? religion,
-      Preference? smoking,
-      Preference? food,
-      Preference? drinking,
-      Preference? children,
-      Preference? exercise,
+      @JsonKey(name: 'smoking_preference') Preference? smoking,
+      @JsonKey(name: 'food_preference') Preference? food,
+      @JsonKey(name: 'drinking_preference') Preference? drinking,
+      @JsonKey(name: 'children_preference') Preference? children,
+      @JsonKey(name: 'exercise_preference') Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? heightInCms,
       @JsonKey(name: 'status') String matchStatus,
       Match? match,
@@ -392,11 +397,11 @@ abstract class _$DetailedProfileCopyWith<$Res>
       String? bio,
       UserHometown hometown,
       Religion? religion,
-      Preference? smoking,
-      Preference? food,
-      Preference? drinking,
-      Preference? children,
-      Preference? exercise,
+      @JsonKey(name: 'smoking_preference') Preference? smoking,
+      @JsonKey(name: 'food_preference') Preference? food,
+      @JsonKey(name: 'drinking_preference') Preference? drinking,
+      @JsonKey(name: 'children_preference') Preference? children,
+      @JsonKey(name: 'exercise_preference') Preference? exercise,
       @JsonKey(name: 'height_in_cms') int? heightInCms,
       @JsonKey(name: 'status') String matchStatus,
       Match? match,
@@ -572,11 +577,11 @@ class _$_DetailedProfile implements _DetailedProfile {
       required this.bio,
       required this.hometown,
       this.religion,
-      this.smoking,
-      this.food,
-      this.drinking,
-      this.children,
-      this.exercise,
+      @JsonKey(name: 'smoking_preference') required this.smoking,
+      @JsonKey(name: 'food_preference') required this.food,
+      @JsonKey(name: 'drinking_preference') required this.drinking,
+      @JsonKey(name: 'children_preference') required this.children,
+      @JsonKey(name: 'exercise_preference') required this.exercise,
       @JsonKey(name: 'height_in_cms') required this.heightInCms,
       @JsonKey(name: 'status') required this.matchStatus,
       required this.match,
@@ -611,14 +616,19 @@ class _$_DetailedProfile implements _DetailedProfile {
   @override
   final Religion? religion;
   @override
+  @JsonKey(name: 'smoking_preference')
   final Preference? smoking;
   @override
+  @JsonKey(name: 'food_preference')
   final Preference? food;
   @override
+  @JsonKey(name: 'drinking_preference')
   final Preference? drinking;
   @override
+  @JsonKey(name: 'children_preference')
   final Preference? children;
   @override
+  @JsonKey(name: 'exercise_preference')
   final Preference? exercise;
   @override
   @JsonKey(name: 'height_in_cms')
@@ -731,11 +741,11 @@ abstract class _DetailedProfile implements DetailedProfile {
       required String? bio,
       required UserHometown hometown,
       Religion? religion,
-      Preference? smoking,
-      Preference? food,
-      Preference? drinking,
-      Preference? children,
-      Preference? exercise,
+      @JsonKey(name: 'smoking_preference') required Preference? smoking,
+      @JsonKey(name: 'food_preference') required Preference? food,
+      @JsonKey(name: 'drinking_preference') required Preference? drinking,
+      @JsonKey(name: 'children_preference') required Preference? children,
+      @JsonKey(name: 'exercise_preference') required Preference? exercise,
       @JsonKey(name: 'height_in_cms') required int? heightInCms,
       @JsonKey(name: 'status') required String matchStatus,
       required Match? match,
@@ -770,14 +780,19 @@ abstract class _DetailedProfile implements DetailedProfile {
   @override
   Religion? get religion;
   @override
+  @JsonKey(name: 'smoking_preference')
   Preference? get smoking;
   @override
+  @JsonKey(name: 'food_preference')
   Preference? get food;
   @override
+  @JsonKey(name: 'drinking_preference')
   Preference? get drinking;
   @override
+  @JsonKey(name: 'children_preference')
   Preference? get children;
   @override
+  @JsonKey(name: 'exercise_preference')
   Preference? get exercise;
   @override
   @JsonKey(name: 'height_in_cms')

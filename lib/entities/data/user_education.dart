@@ -20,6 +20,10 @@ class UserEducation with _$UserEducation {
     return courseName != '' && universityName != '' && year != 0;
   }
 
+  String formatted() {
+    return '$courseName from $universityName in $year';
+  }
+
   Map<String, dynamic> submitPayload() {
     return {
       'course_name': courseName,

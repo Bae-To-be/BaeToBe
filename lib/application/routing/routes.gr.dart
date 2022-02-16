@@ -12,8 +12,9 @@
 
 import 'package:auto_route/auto_route.dart' as _i19;
 import 'package:baetobe/application/routing/auth_guard.dart' as _i36;
-import 'package:baetobe/entities/data/detailed_profile.dart' as _i38;
-import 'package:baetobe/entities/data/match.dart' as _i37;
+import 'package:baetobe/entities/data/basic_profile.dart' as _i37;
+import 'package:baetobe/entities/data/detailed_profile.dart' as _i39;
+import 'package:baetobe/entities/data/match.dart' as _i38;
 import 'package:baetobe/screens/boot/splash_screen.dart' as _i1;
 import 'package:baetobe/screens/help_article_screen.dart' as _i34;
 import 'package:baetobe/screens/home/discover_tab.dart' as _i27;
@@ -224,7 +225,8 @@ class AppRouter extends _i19.RootStackRouter {
               UserProfileScreenRouteArgs(id: pathParams.getInt('id')));
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
-          child: _i14.UserProfileScreen(key: args.key, id: args.id),
+          child: _i14.UserProfileScreen(
+              key: args.key, id: args.id, basicProfile: args.basicProfile),
           transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
           opaque: true,
           barrierDismissible: false);
@@ -764,25 +766,30 @@ class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
 /// [_i14.UserProfileScreen]
 class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
-  UserProfileScreenRoute({_i35.Key? key, required int id})
+  UserProfileScreenRoute(
+      {_i35.Key? key, required int id, _i37.BasicProfile? basicProfile})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
-            args: UserProfileScreenRouteArgs(key: key, id: id),
+            args: UserProfileScreenRouteArgs(
+                key: key, id: id, basicProfile: basicProfile),
             rawPathParams: {'id': id});
 
   static const String name = 'UserProfileScreenRoute';
 }
 
 class UserProfileScreenRouteArgs {
-  const UserProfileScreenRouteArgs({this.key, required this.id});
+  const UserProfileScreenRouteArgs(
+      {this.key, required this.id, this.basicProfile});
 
   final _i35.Key? key;
 
   final int id;
 
+  final _i37.BasicProfile? basicProfile;
+
   @override
   String toString() {
-    return 'UserProfileScreenRouteArgs{key: $key, id: $id}';
+    return 'UserProfileScreenRouteArgs{key: $key, id: $id, basicProfile: $basicProfile}';
   }
 }
 
@@ -790,7 +797,7 @@ class UserProfileScreenRouteArgs {
 /// [_i15.MessagesForMatchScreen]
 class MessagesForMatchScreenRoute
     extends _i19.PageRouteInfo<MessagesForMatchScreenRouteArgs> {
-  MessagesForMatchScreenRoute({_i35.Key? key, required _i37.Match match})
+  MessagesForMatchScreenRoute({_i35.Key? key, required _i38.Match match})
       : super(MessagesForMatchScreenRoute.name,
             path: '/matches/messages',
             args: MessagesForMatchScreenRouteArgs(key: key, match: match));
@@ -803,7 +810,7 @@ class MessagesForMatchScreenRouteArgs {
 
   final _i35.Key? key;
 
-  final _i37.Match match;
+  final _i38.Match match;
 
   @override
   String toString() {
@@ -815,7 +822,7 @@ class MessagesForMatchScreenRouteArgs {
 /// [_i16.ReportUserScreen]
 class ReportUserScreenRoute
     extends _i19.PageRouteInfo<ReportUserScreenRouteArgs> {
-  ReportUserScreenRoute({_i35.Key? key, required _i38.DetailedProfile profile})
+  ReportUserScreenRoute({_i35.Key? key, required _i39.DetailedProfile profile})
       : super(ReportUserScreenRoute.name,
             path: '/users/report',
             args: ReportUserScreenRouteArgs(key: key, profile: profile));
@@ -828,7 +835,7 @@ class ReportUserScreenRouteArgs {
 
   final _i35.Key? key;
 
-  final _i38.DetailedProfile profile;
+  final _i39.DetailedProfile profile;
 
   @override
   String toString() {

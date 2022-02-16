@@ -23,34 +23,28 @@ class _$MatchTearOff {
   const _$MatchTearOff();
 
   _Match call(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
+      {@JsonKey(name: 'id')
           required int id,
-      @JsonKey(name: 'name', readValue: Match._readUser)
-          required String userName,
+      @JsonKey(name: 'matched_user')
+          required BasicProfile matchedUser,
       @JsonKey(name: 'closed_by')
           int? closedBy,
       @JsonKey(name: 'is_closed')
           required bool isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          required int userId,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
           int unreadCount = 0,
       @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
-          required int updatedAt,
-      @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-          UserImage? profilePicture}) {
+          required int updatedAt}) {
     return _Match(
       id: id,
-      userName: userName,
+      matchedUser: matchedUser,
       closedBy: closedBy,
       isClosed: isClosed,
-      userId: userId,
       timeSinceUpdate: timeSinceUpdate,
       unreadCount: unreadCount,
       updatedAt: updatedAt,
-      profilePicture: profilePicture,
     );
   }
 
@@ -64,24 +58,20 @@ const $Match = _$MatchTearOff();
 
 /// @nodoc
 mixin _$Match {
-  @JsonKey(name: '_id', readValue: Readers.readId)
+  @JsonKey(name: 'id')
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'name', readValue: Match._readUser)
-  String get userName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'matched_user')
+  BasicProfile get matchedUser => throw _privateConstructorUsedError;
   @JsonKey(name: 'closed_by')
   int? get closedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_closed')
   bool get isClosed => throw _privateConstructorUsedError;
-  @JsonKey(name: 'id', readValue: Match._readUser)
-  int get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'time_since_update')
   String get timeSinceUpdate => throw _privateConstructorUsedError;
   @JsonKey(name: 'unread_count')
   int get unreadCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
   int get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-  UserImage? get profilePicture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -93,26 +83,15 @@ abstract class $MatchCopyWith<$Res> {
   factory $MatchCopyWith(Match value, $Res Function(Match) then) =
       _$MatchCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
-          int id,
-      @JsonKey(name: 'name', readValue: Match._readUser)
-          String userName,
-      @JsonKey(name: 'closed_by')
-          int? closedBy,
-      @JsonKey(name: 'is_closed')
-          bool isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          int userId,
-      @JsonKey(name: 'time_since_update')
-          String timeSinceUpdate,
-      @JsonKey(name: 'unread_count')
-          int unreadCount,
-      @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
-          int updatedAt,
-      @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-          UserImage? profilePicture});
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'matched_user') BasicProfile matchedUser,
+      @JsonKey(name: 'closed_by') int? closedBy,
+      @JsonKey(name: 'is_closed') bool isClosed,
+      @JsonKey(name: 'time_since_update') String timeSinceUpdate,
+      @JsonKey(name: 'unread_count') int unreadCount,
+      @JsonKey(name: 'updated_at', readValue: Readers.parseInt) int updatedAt});
 
-  $UserImageCopyWith<$Res>? get profilePicture;
+  $BasicProfileCopyWith<$Res> get matchedUser;
 }
 
 /// @nodoc
@@ -126,24 +105,22 @@ class _$MatchCopyWithImpl<$Res> implements $MatchCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? userName = freezed,
+    Object? matchedUser = freezed,
     Object? closedBy = freezed,
     Object? isClosed = freezed,
-    Object? userId = freezed,
     Object? timeSinceUpdate = freezed,
     Object? unreadCount = freezed,
     Object? updatedAt = freezed,
-    Object? profilePicture = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+      matchedUser: matchedUser == freezed
+          ? _value.matchedUser
+          : matchedUser // ignore: cast_nullable_to_non_nullable
+              as BasicProfile,
       closedBy: closedBy == freezed
           ? _value.closedBy
           : closedBy // ignore: cast_nullable_to_non_nullable
@@ -152,10 +129,6 @@ class _$MatchCopyWithImpl<$Res> implements $MatchCopyWith<$Res> {
           ? _value.isClosed
           : isClosed // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
       timeSinceUpdate: timeSinceUpdate == freezed
           ? _value.timeSinceUpdate
           : timeSinceUpdate // ignore: cast_nullable_to_non_nullable
@@ -168,21 +141,13 @@ class _$MatchCopyWithImpl<$Res> implements $MatchCopyWith<$Res> {
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int,
-      profilePicture: profilePicture == freezed
-          ? _value.profilePicture
-          : profilePicture // ignore: cast_nullable_to_non_nullable
-              as UserImage?,
     ));
   }
 
   @override
-  $UserImageCopyWith<$Res>? get profilePicture {
-    if (_value.profilePicture == null) {
-      return null;
-    }
-
-    return $UserImageCopyWith<$Res>(_value.profilePicture!, (value) {
-      return _then(_value.copyWith(profilePicture: value));
+  $BasicProfileCopyWith<$Res> get matchedUser {
+    return $BasicProfileCopyWith<$Res>(_value.matchedUser, (value) {
+      return _then(_value.copyWith(matchedUser: value));
     });
   }
 }
@@ -193,27 +158,16 @@ abstract class _$MatchCopyWith<$Res> implements $MatchCopyWith<$Res> {
       __$MatchCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
-          int id,
-      @JsonKey(name: 'name', readValue: Match._readUser)
-          String userName,
-      @JsonKey(name: 'closed_by')
-          int? closedBy,
-      @JsonKey(name: 'is_closed')
-          bool isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          int userId,
-      @JsonKey(name: 'time_since_update')
-          String timeSinceUpdate,
-      @JsonKey(name: 'unread_count')
-          int unreadCount,
-      @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
-          int updatedAt,
-      @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-          UserImage? profilePicture});
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'matched_user') BasicProfile matchedUser,
+      @JsonKey(name: 'closed_by') int? closedBy,
+      @JsonKey(name: 'is_closed') bool isClosed,
+      @JsonKey(name: 'time_since_update') String timeSinceUpdate,
+      @JsonKey(name: 'unread_count') int unreadCount,
+      @JsonKey(name: 'updated_at', readValue: Readers.parseInt) int updatedAt});
 
   @override
-  $UserImageCopyWith<$Res>? get profilePicture;
+  $BasicProfileCopyWith<$Res> get matchedUser;
 }
 
 /// @nodoc
@@ -228,24 +182,22 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? userName = freezed,
+    Object? matchedUser = freezed,
     Object? closedBy = freezed,
     Object? isClosed = freezed,
-    Object? userId = freezed,
     Object? timeSinceUpdate = freezed,
     Object? unreadCount = freezed,
     Object? updatedAt = freezed,
-    Object? profilePicture = freezed,
   }) {
     return _then(_Match(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      userName: userName == freezed
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as String,
+      matchedUser: matchedUser == freezed
+          ? _value.matchedUser
+          : matchedUser // ignore: cast_nullable_to_non_nullable
+              as BasicProfile,
       closedBy: closedBy == freezed
           ? _value.closedBy
           : closedBy // ignore: cast_nullable_to_non_nullable
@@ -254,10 +206,6 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
           ? _value.isClosed
           : isClosed // ignore: cast_nullable_to_non_nullable
               as bool,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
       timeSinceUpdate: timeSinceUpdate == freezed
           ? _value.timeSinceUpdate
           : timeSinceUpdate // ignore: cast_nullable_to_non_nullable
@@ -270,10 +218,6 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int,
-      profilePicture: profilePicture == freezed
-          ? _value.profilePicture
-          : profilePicture // ignore: cast_nullable_to_non_nullable
-              as UserImage?,
     ));
   }
 }
@@ -282,44 +226,37 @@ class __$MatchCopyWithImpl<$Res> extends _$MatchCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Match extends _Match {
   _$_Match(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
+      {@JsonKey(name: 'id')
           required this.id,
-      @JsonKey(name: 'name', readValue: Match._readUser)
-          required this.userName,
+      @JsonKey(name: 'matched_user')
+          required this.matchedUser,
       @JsonKey(name: 'closed_by')
           this.closedBy,
       @JsonKey(name: 'is_closed')
           required this.isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          required this.userId,
       @JsonKey(name: 'time_since_update')
           required this.timeSinceUpdate,
       @JsonKey(name: 'unread_count')
           this.unreadCount = 0,
       @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
-          required this.updatedAt,
-      @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-          this.profilePicture})
+          required this.updatedAt})
       : super._();
 
   factory _$_Match.fromJson(Map<String, dynamic> json) =>
       _$$_MatchFromJson(json);
 
   @override
-  @JsonKey(name: '_id', readValue: Readers.readId)
+  @JsonKey(name: 'id')
   final int id;
   @override
-  @JsonKey(name: 'name', readValue: Match._readUser)
-  final String userName;
+  @JsonKey(name: 'matched_user')
+  final BasicProfile matchedUser;
   @override
   @JsonKey(name: 'closed_by')
   final int? closedBy;
   @override
   @JsonKey(name: 'is_closed')
   final bool isClosed;
-  @override
-  @JsonKey(name: 'id', readValue: Match._readUser)
-  final int userId;
   @override
   @JsonKey(name: 'time_since_update')
   final String timeSinceUpdate;
@@ -329,13 +266,10 @@ class _$_Match extends _Match {
   @override
   @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
   final int updatedAt;
-  @override
-  @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-  final UserImage? profilePicture;
 
   @override
   String toString() {
-    return 'Match(id: $id, userName: $userName, closedBy: $closedBy, isClosed: $isClosed, userId: $userId, timeSinceUpdate: $timeSinceUpdate, unreadCount: $unreadCount, updatedAt: $updatedAt, profilePicture: $profilePicture)';
+    return 'Match(id: $id, matchedUser: $matchedUser, closedBy: $closedBy, isClosed: $isClosed, timeSinceUpdate: $timeSinceUpdate, unreadCount: $unreadCount, updatedAt: $updatedAt)';
   }
 
   @override
@@ -344,31 +278,27 @@ class _$_Match extends _Match {
         (other.runtimeType == runtimeType &&
             other is _Match &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
+            const DeepCollectionEquality()
+                .equals(other.matchedUser, matchedUser) &&
             const DeepCollectionEquality().equals(other.closedBy, closedBy) &&
             const DeepCollectionEquality().equals(other.isClosed, isClosed) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality()
                 .equals(other.timeSinceUpdate, timeSinceUpdate) &&
             const DeepCollectionEquality()
                 .equals(other.unreadCount, unreadCount) &&
-            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality()
-                .equals(other.profilePicture, profilePicture));
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(matchedUser),
       const DeepCollectionEquality().hash(closedBy),
       const DeepCollectionEquality().hash(isClosed),
-      const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(timeSinceUpdate),
       const DeepCollectionEquality().hash(unreadCount),
-      const DeepCollectionEquality().hash(updatedAt),
-      const DeepCollectionEquality().hash(profilePicture));
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -383,43 +313,36 @@ class _$_Match extends _Match {
 
 abstract class _Match extends Match {
   factory _Match(
-      {@JsonKey(name: '_id', readValue: Readers.readId)
+      {@JsonKey(name: 'id')
           required int id,
-      @JsonKey(name: 'name', readValue: Match._readUser)
-          required String userName,
+      @JsonKey(name: 'matched_user')
+          required BasicProfile matchedUser,
       @JsonKey(name: 'closed_by')
           int? closedBy,
       @JsonKey(name: 'is_closed')
           required bool isClosed,
-      @JsonKey(name: 'id', readValue: Match._readUser)
-          required int userId,
       @JsonKey(name: 'time_since_update')
           required String timeSinceUpdate,
       @JsonKey(name: 'unread_count')
           int unreadCount,
       @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
-          required int updatedAt,
-      @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-          UserImage? profilePicture}) = _$_Match;
+          required int updatedAt}) = _$_Match;
   _Match._() : super._();
 
   factory _Match.fromJson(Map<String, dynamic> json) = _$_Match.fromJson;
 
   @override
-  @JsonKey(name: '_id', readValue: Readers.readId)
+  @JsonKey(name: 'id')
   int get id;
   @override
-  @JsonKey(name: 'name', readValue: Match._readUser)
-  String get userName;
+  @JsonKey(name: 'matched_user')
+  BasicProfile get matchedUser;
   @override
   @JsonKey(name: 'closed_by')
   int? get closedBy;
   @override
   @JsonKey(name: 'is_closed')
   bool get isClosed;
-  @override
-  @JsonKey(name: 'id', readValue: Match._readUser)
-  int get userId;
   @override
   @JsonKey(name: 'time_since_update')
   String get timeSinceUpdate;
@@ -429,9 +352,6 @@ abstract class _Match extends Match {
   @override
   @JsonKey(name: 'updated_at', readValue: Readers.parseInt)
   int get updatedAt;
-  @override
-  @JsonKey(name: 'profile_picture', readValue: Match._readUser)
-  UserImage? get profilePicture;
   @override
   @JsonKey(ignore: true)
   _$MatchCopyWith<_Match> get copyWith => throw _privateConstructorUsedError;

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:baetobe/application/routing/router_provider.dart';
-import 'package:baetobe/constants/app_links.dart';
+import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/domain/chat/messages_provider.dart';
 import 'package:baetobe/domain/matches_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
@@ -62,23 +62,34 @@ class MessagesForMatchScreen extends HookConsumerWidget {
             color: Colors.white,
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.all(0),
-            avatar: GFAvatar(
-              shape: GFAvatarShape.square,
-              backgroundColor: Colors.white,
-              size: GFSize.LARGE,
-              backgroundImage: match.profilePicture != null
-                  ? CachedNetworkImageProvider(match.profilePicture!.url,
-                      cacheKey: match.profilePicture!.id.toString())
-                  : Image.asset('assets/profile_placeholder.png').image,
+            avatar: Hero(
+              tag: match.matchedUser.userId,
+              child: GFAvatar(
+                shape: GFAvatarShape.circle,
+                backgroundColor: Colors.white,
+                size: GFSize.LARGE,
+                backgroundImage: match.matchedUser.profilePicture != null
+                    ? CachedNetworkImageProvider(
+                        match.matchedUser.profilePicture!.url)
+                    : Image.asset('assets/profile_placeholder.png').image,
+              ),
             ),
             onTap: () {
-              router.pushNamed(AppLinks.profileDetails(match.userId));
+              router.push(
+                UserProfileScreenRoute(
+                  id: match.matchedUser.userId,
+                  basicProfile: match.matchedUser,
+                ),
+              );
             },
-            title: Text(match.userName,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    ?.copyWith(fontWeight: FontWeight.w500))),
+            title: Hero(
+              tag: match.matchedUser.userName,
+              child: Text(match.matchedUser.userName,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6
+                      ?.copyWith(fontWeight: FontWeight.w500)),
+            )),
         state.connectionStateVisible
             ? Container(
                 color: Colors.white,
