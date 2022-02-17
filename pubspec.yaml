@@ -51,6 +51,7 @@ dependencies:
   json_annotation: ^4.4.0
   firebase_in_app_messaging: ^0.6.0+7
   firebase_performance: ^0.8.0+5
+  image_cropper: ^1.4.1
 
 dev_dependencies:
   integration_test:
