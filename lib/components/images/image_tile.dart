@@ -22,8 +22,10 @@ class ImageTile extends HookConsumerWidget {
     final state = ref.watch(imageStateProvider(position));
 
     if (state.loading) {
-      return CircularProgressIndicator(color: Theme.of(context).primaryColor)
-          .padding(all: 24);
+      return Center(
+        child: CircularProgressIndicator(color: Theme.of(context).primaryColor)
+            .padding(all: 24),
+      );
     }
 
     if (state.url != null) {
@@ -33,7 +35,7 @@ class ImageTile extends HookConsumerWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: 9 / 16,
                 child: CachedNetworkImage(
                   imageUrl: state.url!,
                   cacheKey: state.id?.toString(),
@@ -43,9 +45,11 @@ class ImageTile extends HookConsumerWidget {
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                        value: downloadProgress.progress),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                          value: downloadProgress.progress),
+                    ),
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),

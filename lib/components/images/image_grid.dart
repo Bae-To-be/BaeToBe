@@ -10,10 +10,11 @@ class ImageGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          maxCrossAxisExtent: MediaQuery.of(context).size.width / 3),
+          childAspectRatio: 9 / 16,
+          crossAxisCount: 3),
       itemCount:
           FirebaseRemoteConfig.instance.getInt(RemoteConfigs.maxPhotoCount),
       physics: const ClampingScrollPhysics(),
