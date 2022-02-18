@@ -226,7 +226,10 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i14.UserProfileScreen(
-              key: args.key, id: args.id, basicProfile: args.basicProfile),
+              key: args.key,
+              id: args.id,
+              basicProfile: args.basicProfile,
+              showCTA: args.showCTA),
           transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
           opaque: true,
           barrierDismissible: false);
@@ -767,11 +770,14 @@ class VerificationRejectedScreenRoute extends _i19.PageRouteInfo<void> {
 class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
   UserProfileScreenRoute(
-      {_i35.Key? key, required int id, _i37.BasicProfile? basicProfile})
+      {_i35.Key? key,
+      required int id,
+      _i37.BasicProfile? basicProfile,
+      bool showCTA = false})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
             args: UserProfileScreenRouteArgs(
-                key: key, id: id, basicProfile: basicProfile),
+                key: key, id: id, basicProfile: basicProfile, showCTA: showCTA),
             rawPathParams: {'id': id});
 
   static const String name = 'UserProfileScreenRoute';
@@ -779,7 +785,7 @@ class UserProfileScreenRoute
 
 class UserProfileScreenRouteArgs {
   const UserProfileScreenRouteArgs(
-      {this.key, required this.id, this.basicProfile});
+      {this.key, required this.id, this.basicProfile, this.showCTA = false});
 
   final _i35.Key? key;
 
@@ -787,9 +793,11 @@ class UserProfileScreenRouteArgs {
 
   final _i37.BasicProfile? basicProfile;
 
+  final bool showCTA;
+
   @override
   String toString() {
-    return 'UserProfileScreenRouteArgs{key: $key, id: $id, basicProfile: $basicProfile}';
+    return 'UserProfileScreenRouteArgs{key: $key, id: $id, basicProfile: $basicProfile, showCTA: $showCTA}';
   }
 }
 

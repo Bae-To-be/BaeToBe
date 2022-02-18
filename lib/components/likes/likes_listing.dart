@@ -15,9 +15,11 @@ import 'package:styled_widget/styled_widget.dart';
 
 class LikesListing extends HookConsumerWidget {
   final LikeDirection direction;
+  final bool showCTA;
   final RefreshController controller = RefreshController();
 
-  LikesListing({Key? key, required this.direction}) : super(key: key);
+  LikesListing({Key? key, required this.direction, this.showCTA = false})
+      : super(key: key);
 
   Widget _retryView(String text, BuildContext context, WidgetRef ref) {
     return Center(
@@ -80,6 +82,7 @@ class LikesListing extends HookConsumerWidget {
                 itemCount: likesListing.length,
                 itemBuilder: (context, index) {
                   return _ListingCard(
+                      showCTA: showCTA,
                       context: context,
                       index: index,
                       likesListing: likesListing,
@@ -99,12 +102,14 @@ class _ListingCard extends StatelessWidget {
   final int index;
   final List<Like> likesListing;
   final WidgetRef ref;
+  final bool showCTA;
   const _ListingCard(
       {Key? key,
       required this.context,
       required this.index,
       required this.likesListing,
-      required this.ref})
+      required this.ref,
+      required this.showCTA})
       : super(key: key);
 
   @override
@@ -114,7 +119,8 @@ class _ListingCard extends StatelessWidget {
         ref.read(routerProvider.notifier).push(
               UserProfileScreenRoute(
                   id: likesListing[index].user.userId,
-                  basicProfile: likesListing[index].user),
+                  basicProfile: likesListing[index].user,
+                  showCTA: showCTA),
             );
       },
       child: Card(

@@ -8,8 +8,6 @@ class LikesReceivedTab extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return LikesListing(
-      direction: LikeDirection.received,
-    );
+    return LikesListing(direction: LikeDirection.received, showCTA: true);
   }
 }

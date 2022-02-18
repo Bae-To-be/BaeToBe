@@ -12,6 +12,7 @@ class FloatingCta extends HookConsumerWidget {
   final Color? color;
   final bool? loadingOverride;
   final void Function() onPressed;
+  final Color? iconColor;
 
   final Alignment alignment;
 
@@ -23,6 +24,7 @@ class FloatingCta extends HookConsumerWidget {
       required this.icon,
       this.color,
       this.onPressed = doNothing,
+      this.iconColor,
       this.alignment = Alignment.bottomRight})
       : super(key: key);
 
@@ -41,7 +43,7 @@ class FloatingCta extends HookConsumerWidget {
                 (enabled ? Theme.of(context).primaryColor : Colors.grey),
             onPressed: enabled ? onPressed : doNothing,
             child: Icon(icon ?? FontAwesomeIcons.chevronRight,
-                color: Colors.white))
+                color: iconColor ?? Colors.white))
         .alignment(Alignment.bottomRight);
   }
 }

@@ -3,10 +3,12 @@ import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/buttons/custom_text_button.dart';
+import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/custom_cached_network_image.dart';
 import 'package:baetobe/components/custom_card.dart';
 import 'package:baetobe/components/custom_chip.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
+import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
@@ -22,9 +24,13 @@ import 'package:styled_widget/styled_widget.dart';
 class UserProfileScreen extends HookConsumerWidget {
   final int id;
   final BasicProfile? basicProfile;
+  final bool showCTA;
 
   const UserProfileScreen(
-      {Key? key, @PathParam('id') required this.id, this.basicProfile})
+      {Key? key,
+      @PathParam('id') required this.id,
+      this.basicProfile,
+      this.showCTA = false})
       : super(key: key);
 
   List<Widget> workAndEducationList(
@@ -146,107 +152,128 @@ class UserProfileScreen extends HookConsumerWidget {
     final isReported = ref.watch(isReportedProvider(id));
     final isMatchClosed = ref.watch(isProfileMatchClosedProvider(id));
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
-            basicProfile != null
-                ? CustomCardWidget(
-                    padding: EdgeInsets.zero,
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Hero(
-                            tag: id,
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
-                              child: AspectRatio(
-                                aspectRatio: ImageAspectRatio.ratioX /
-                                    ImageAspectRatio.ratioY,
-                                child: Container(
-                                  child: (basicProfile!.profilePicture != null)
-                                      ? CustomCachedNetworkImage(
-                                          imageURL:
-                                              basicProfile!.profilePicture!.url)
-                                      : Image.asset(
-                                          'assets/profile_placeholder.png'),
-                                ),
-                              ),
-                            )),
-                        Hero(
-                            tag: '${basicProfile!.userName}$id',
-                            child: Text(
-                              '${basicProfile!.userName}, ${basicProfile!.age}',
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  color: themeColor),
-                            ).padding(all: 24)),
-                      ],
-                    ))
-                : Container(),
-            profileRequest.maybeWhen(
-                orElse: () => Center(
-                    child: CircularProgressIndicator(
-                            color: Theme.of(context).primaryColor)
-                        .padding(top: 32)),
-                data: (profile) {
-                  if (profile == null) {
-                    return const Center(
-                        child: CustomTextWidget(
-                      type: TextWidgetType.heading5,
-                      text: ErrorMessages.userNotFound,
-                      withRow: false,
-                    ));
-                  }
-
-                  return Column(children: [
-                    if (profile.bio != null)
-                      CustomCardWidget(
-                        content: Text(profile.bio!)
-                            .padding(horizontal: 16, top: 16, bottom: 24),
-                      ),
-                    BasicInfoChipsCard(profile: profile),
-                    CustomCardWidget(
+    return Stack(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
+              basicProfile != null
+                  ? CustomCardWidget(
+                      padding: EdgeInsets.zero,
                       content: Column(
-                        children: <Widget>[
-                          ListView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            children: ListTile.divideTiles(tiles: [
-                              ...workAndEducationList(
-                                  context,
-                                  profile.workTitle,
-                                  profile.industry,
-                                  profile.education)
-                            ], context: context)
-                                .toList(),
-                          )
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Hero(
+                              tag: id,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10)),
+                                child: AspectRatio(
+                                  aspectRatio: ImageAspectRatio.ratioX /
+                                      ImageAspectRatio.ratioY,
+                                  child: Container(
+                                    child: (basicProfile!.profilePicture !=
+                                            null)
+                                        ? CustomCachedNetworkImage(
+                                            imageURL: basicProfile!
+                                                .profilePicture!.url)
+                                        : Image.asset(
+                                            'assets/profile_placeholder.png'),
+                                  ),
+                                ),
+                              )),
+                          Hero(
+                              tag: '${basicProfile!.userName}$id',
+                              child: Text(
+                                '${basicProfile!.userName}, ${basicProfile!.age}',
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: themeColor),
+                              ).padding(all: 24)),
                         ],
-                      ),
-                    ),
-                    ...profile.images.map((e) {
-                      if (e.id == basicProfile!.profilePicture!.id) {
-                        return Container();
-                      }
-                      return CustomCardWidget(
-                          content: CustomCachedNetworkImage(
-                        imageURL: e.url,
-                        cacheKey: e.id.toString(),
+                      ))
+                  : Container(),
+              profileRequest.maybeWhen(
+                  orElse: () => Center(
+                      child: CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor)
+                          .padding(top: 32)),
+                  data: (profile) {
+                    if (profile == null) {
+                      return const Center(
+                          child: CustomTextWidget(
+                        type: TextWidgetType.heading5,
+                        text: ErrorMessages.userNotFound,
+                        withRow: false,
                       ));
-                    }),
-                    ...actions(context, isMatchClosed, isReported, ref, profile)
-                  ]);
-                })
-          ],
+                    }
+
+                    return Column(children: [
+                      if (profile.bio != null)
+                        CustomCardWidget(
+                          content: Text(profile.bio!)
+                              .padding(horizontal: 16, top: 16, bottom: 24),
+                        ),
+                      BasicInfoChipsCard(profile: profile),
+                      CustomCardWidget(
+                        content: Column(
+                          children: <Widget>[
+                            ListView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: ListTile.divideTiles(tiles: [
+                                ...workAndEducationList(
+                                    context,
+                                    profile.workTitle,
+                                    profile.industry,
+                                    profile.education)
+                              ], context: context)
+                                  .toList(),
+                            )
+                          ],
+                        ),
+                      ),
+                      ...profile.images.map((e) {
+                        if (e.id == basicProfile!.profilePicture!.id) {
+                          return Container();
+                        }
+                        return CustomCardWidget(
+                            content: CustomCachedNetworkImage(
+                          imageURL: e.url,
+                          cacheKey: e.id.toString(),
+                        ));
+                      }),
+                      ...actions(
+                          context, isMatchClosed, isReported, ref, profile)
+                    ]);
+                  })
+            ],
+          ),
         ),
       ),
-    );
+      if (showCTA)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.max,
+          children: const [
+            FloatingCta(
+                heroTag: 'UPSDislike',
+                icon: BTBCustomIcons.close,
+                color: Colors.white,
+                iconColor: themeColor),
+            FloatingCta(
+                heroTag: 'UPSLike',
+                icon: BTBCustomIcons.btbheart,
+                color: Colors.white,
+                iconColor: Colors.red),
+          ],
+        ).padding(left: 24, right: 24, bottom: 24),
+    ]);
   }
 }
 
