@@ -125,11 +125,10 @@ class MessagesNotifier extends StateNotifier<ChatState>
 
     final stopwatch = Stopwatch()..start();
     final _cable = ActionCable.Connect(
-        FirebaseRemoteConfig.instance.getString('CHAT_HOST'),
-        headers: {
-          'Authorization':
-              'Bearer ${await ref.read(authProvider.notifier).getAccessToken()}'
-        }, onConnected: () {
+        FirebaseRemoteConfig.instance.getString('CHAT_HOST') +
+            '?token=' +
+            await ref.read(authProvider.notifier).getAccessToken(),
+        onConnected: () {
       FirebaseAnalytics.instance.logEvent(
           name: 'CHAT_CONNECTION_CREATED',
           parameters: {'duration': stopwatch.elapsedMilliseconds});
