@@ -21,7 +21,7 @@ class VerificationRejectedScreen extends HookConsumerWidget {
     if (verificationInfo == null) {
       return const Center(
           child: CustomTextWidget(
-              type: textWidgetType.heading5,
+              type: TextWidgetType.heading5,
               withRow: false,
               text: ErrorMessages.couldNotLoadVerificationInfo));
     }
@@ -39,7 +39,7 @@ class VerificationRejectedScreen extends HookConsumerWidget {
     return Column(children: [
       const SizedBox(height: 32),
       const CustomTextWidget(
-              type: textWidgetType.heading5,
+              type: TextWidgetType.heading5,
               text: Headings.verificationRejected,
               withRow: false)
           .padding(top: 32, bottom: 10, horizontal: 30),
@@ -92,7 +92,7 @@ class VerificationRejectedScreen extends HookConsumerWidget {
                     boxFit: BoxFit.cover,
                     content: CustomTextWidget(
                         text: verificationInfo.rejectionReason!,
-                        type: textWidgetType.caption,
+                        type: TextWidgetType.caption,
                         withRow: false),
                   ),
           ],

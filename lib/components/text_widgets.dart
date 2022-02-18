@@ -5,7 +5,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-enum textWidgetType {
+enum TextWidgetType {
   heading1,
   heading2,
   heading3,
@@ -21,7 +21,7 @@ enum textWidgetType {
 }
 
 class CustomTextWidget extends StatelessWidget {
-  final textWidgetType type;
+  final TextWidgetType type;
   final String text;
   final bool withRow;
   final bool withFlexible;
@@ -38,32 +38,32 @@ class CustomTextWidget extends StatelessWidget {
 
   TextStyle textStyleForWidget(BuildContext context) {
     switch (type) {
-      case textWidgetType.heading1:
+      case TextWidgetType.heading1:
         return Theme.of(context).textTheme.headline1!.copyWith(color: color);
-      case textWidgetType.heading2:
+      case TextWidgetType.heading2:
         return Theme.of(context).textTheme.headline2!.copyWith(color: color);
-      case textWidgetType.heading3:
+      case TextWidgetType.heading3:
         return Theme.of(context).textTheme.headline3!.copyWith(color: color);
-      case textWidgetType.heading4:
+      case TextWidgetType.heading4:
         return Theme.of(context).textTheme.headline4!.copyWith(color: color);
-      case textWidgetType.heading5:
+      case TextWidgetType.heading5:
         return Theme.of(context).textTheme.headline5!.copyWith(color: color);
-      case textWidgetType.heading6:
+      case TextWidgetType.heading6:
         return Theme.of(context).textTheme.headline6!.copyWith(color: color);
-      case textWidgetType.caption:
+      case TextWidgetType.caption:
         return Theme.of(context).textTheme.caption!.copyWith(color: color);
-      case textWidgetType.subtitle1:
+      case TextWidgetType.subtitle1:
         return Theme.of(context)
             .textTheme
             .subtitle1!
             .copyWith(fontWeight: FontWeight.w600, color: color);
-      case textWidgetType.subtitle2:
+      case TextWidgetType.subtitle2:
         return Theme.of(context).textTheme.subtitle2!.copyWith(color: color);
-      case textWidgetType.editProfileContentTileTitle:
+      case TextWidgetType.editProfileContentTileTitle:
         return const TextStyle(fontSize: 17, fontWeight: FontWeight.w600);
-      case textWidgetType.editProfileContentTileContent:
+      case TextWidgetType.editProfileContentTileContent:
         return const TextStyle(color: Colors.grey, fontSize: 16);
-      case textWidgetType.editProfileSectionTile:
+      case TextWidgetType.editProfileSectionTile:
         return const TextStyle(
             fontWeight: FontWeight.w700, fontSize: 22, color: Colors.grey);
       default:

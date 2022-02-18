@@ -21,7 +21,7 @@ class UpdateMatchingPreferences extends HookConsumerWidget {
         ),
         CustomTextWidget(
           text: 'Distance (${state.currentRadius()} Kms)',
-          type: textWidgetType.subtitle1,
+          type: TextWidgetType.subtitle1,
         ).padding(left: 25),
         Slider(
           value: state.currentRadius(),
@@ -35,7 +35,7 @@ class UpdateMatchingPreferences extends HookConsumerWidget {
         CustomTextWidget(
           text:
               'Age  (${state.interestedInAgeLower} - ${state.interestedInAgeUpper} years)',
-          type: textWidgetType.subtitle1,
+          type: TextWidgetType.subtitle1,
         ).padding(left: 25),
         RangeSlider(
                 min: 18,

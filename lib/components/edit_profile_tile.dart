@@ -16,7 +16,7 @@ class EditProfileSectionTile extends StatelessWidget {
       children: [
         CustomTextWidget(
           text: title,
-          type: textWidgetType.editProfileSectionTile,
+          type: TextWidgetType.editProfileSectionTile,
         ),
       ],
     ).padding(top: 16, bottom: 12);
@@ -84,7 +84,7 @@ class _EditProfileContentTile extends StatelessWidget {
         Row(
           children: [
             CustomTextWidget(
-                type: textWidgetType.editProfileContentTileTitle, text: title),
+                type: TextWidgetType.editProfileContentTileTitle, text: title),
             Expanded(child: Container()),
             editable == true
                 ? Icon(

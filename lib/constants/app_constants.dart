@@ -5,6 +5,11 @@ class PlatformConstants {
   static const String ios = 'ios';
 }
 
+class ImageAspectRatio {
+  static const int ratioX = 4;
+  static const int ratioY = 5;
+}
+
 class CustomColors {
   static const int bottomNavBarInactiveColor = 0xFFACC5C7;
 }

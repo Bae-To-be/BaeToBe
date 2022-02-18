@@ -119,7 +119,8 @@ class MessagesNotifier extends StateNotifier<ChatState>
     }
 
     state = state.copyWith(
-        connection: connectionState.connecting, connectionStateVisible: true);
+        connection: ChatConnectionState.connecting,
+        connectionStateVisible: true);
     state.cable?.disconnect();
 
     final stopwatch = Stopwatch()..start();
@@ -136,7 +137,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
         return;
       }
       subscribeToChat();
-      state = state.copyWith(connection: connectionState.connected);
+      state = state.copyWith(connection: ChatConnectionState.connected);
       Timer(const Duration(milliseconds: 500), () {
         if (!mounted) {
           return;
@@ -154,7 +155,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
         debugPrint('CONNECT TO SOCKET LOST');
       }
       state = state.copyWith(
-          connection: connectionState.connectionLost,
+          connection: ChatConnectionState.connectionLost,
           connectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
@@ -172,7 +173,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
         debugPrint('CANNOT CONNECT TO SOCKET');
       }
       state = state.copyWith(
-          connection: connectionState.connectionFailed,
+          connection: ChatConnectionState.connectionFailed,
           connectionStateVisible: true);
       if (state.retryCount <
           FirebaseRemoteConfig.instance.getInt('CHAT_MAX_CONNECT_RETRY')) {
@@ -192,7 +193,7 @@ class MessagesNotifier extends StateNotifier<ChatState>
         return;
       }
       state = state.copyWith(
-          connection: connectionState.disconnected,
+          connection: ChatConnectionState.disconnected,
           connectionStateVisible: true);
     }, onMessage: (Map message) {
       if (kDebugMode) {

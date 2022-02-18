@@ -95,7 +95,7 @@ class MatchesTab extends HookConsumerWidget {
                                   matchesListing[i].unreadCount.toString()),
                               shape: GFBadgeShape.pills)
                           : CustomTextWidget(
-                              type: textWidgetType.caption,
+                              type: TextWidgetType.caption,
                               text: matchesListing[i].timeSinceUpdate),
                       avatar: UserAvatar(
                           image: matchesListing[i].matchedUser.profilePicture),

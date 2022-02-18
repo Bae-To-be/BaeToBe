@@ -82,7 +82,7 @@ class UserProfileScreen extends HookConsumerWidget {
                   .read(routerProvider.notifier)
                   .push(ReportUserScreenRoute(profile: profile)),
               text: LinkTexts.reportUser,
-              type: textWidgetType.caption),
+              type: TextWidgetType.caption),
         ],
       ));
     }
@@ -101,7 +101,7 @@ class UserProfileScreen extends HookConsumerWidget {
                   .navigate(MessagesForMatchScreenRoute(match: profile.match!));
             },
             text: LinkTexts.conversation,
-            type: textWidgetType.caption),
+            type: TextWidgetType.caption),
       ],
     ));
 
@@ -131,7 +131,7 @@ class UserProfileScreen extends HookConsumerWidget {
                           ],
                         ));
               },
-              type: textWidgetType.caption,
+              type: TextWidgetType.caption,
               text: 'Unmatch'),
         ],
       ));
@@ -166,7 +166,8 @@ class UserProfileScreen extends HookConsumerWidget {
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10)),
                               child: AspectRatio(
-                                aspectRatio: 1,
+                                aspectRatio: ImageAspectRatio.ratioX /
+                                    ImageAspectRatio.ratioY,
                                 child: Container(
                                   child: (basicProfile!.profilePicture != null)
                                       ? CustomCachedNetworkImage(
@@ -198,7 +199,7 @@ class UserProfileScreen extends HookConsumerWidget {
                   if (profile == null) {
                     return const Center(
                         child: CustomTextWidget(
-                      type: textWidgetType.heading5,
+                      type: TextWidgetType.heading5,
                       text: ErrorMessages.userNotFound,
                       withRow: false,
                     ));

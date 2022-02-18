@@ -326,6 +326,7 @@ class CustomNavigationDestination extends StatelessWidget {
           child: _ClampTextScaleFactor(
             // Don't scale labels of destinations, instead, tooltip text will
             // upscale.
+            lowerLimit: 0,
             upperLimit: 1,
             child: Text(
               label,

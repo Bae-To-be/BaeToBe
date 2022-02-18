@@ -4,16 +4,22 @@ import 'package:flutter/material.dart';
 class CustomCachedNetworkImage extends StatelessWidget {
   final String imageURL;
   final String? cacheKey;
+  final BoxFit fit;
+  final Alignment alignment;
 
   const CustomCachedNetworkImage(
-      {Key? key, required this.imageURL, this.cacheKey})
+      {Key? key,
+      required this.imageURL,
+      this.cacheKey,
+      this.fit = BoxFit.fill,
+      this.alignment = Alignment.center})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      fit: BoxFit.fitWidth,
-      alignment: Alignment.topCenter,
+      fit: fit,
+      alignment: alignment,
       imageUrl: imageURL,
       cacheKey: cacheKey ?? imageURL,
       placeholderFadeInDuration: const Duration(milliseconds: 500),

@@ -18,19 +18,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 const connectionStateToColor = {
-  connectionState.connected: Colors.green,
-  connectionState.connecting: Colors.yellow,
-  connectionState.connectionLost: Colors.red,
-  connectionState.connectionFailed: Colors.red,
-  connectionState.disconnected: Colors.red,
+  ChatConnectionState.connected: Colors.green,
+  ChatConnectionState.connecting: Colors.yellow,
+  ChatConnectionState.connectionLost: Colors.red,
+  ChatConnectionState.connectionFailed: Colors.red,
+  ChatConnectionState.disconnected: Colors.red,
 };
 
 const connectionStateToText = {
-  connectionState.connected: 'Connected',
-  connectionState.connecting: 'Connecting',
-  connectionState.connectionLost: 'Connection Lost',
-  connectionState.connectionFailed: 'Connection Failed',
-  connectionState.disconnected: 'Disconnected',
+  ChatConnectionState.connected: 'Connected',
+  ChatConnectionState.connecting: 'Connecting',
+  ChatConnectionState.connectionLost: 'Connection Lost',
+  ChatConnectionState.connectionFailed: 'Connection Failed',
+  ChatConnectionState.disconnected: 'Disconnected',
 };
 
 class MessagesForMatchScreen extends HookConsumerWidget {
@@ -145,7 +145,7 @@ class MessagesForMatchScreen extends HookConsumerWidget {
                                         user.id.toString() &&
                                     (message.metadata!['isDeleted'] != true) &&
                                     (state.connection ==
-                                        connectionState.connected)
+                                        ChatConnectionState.connected)
                                 ? ActionPane(
                                     extentRatio: 1,
                                     motion: const DrawerMotion(),

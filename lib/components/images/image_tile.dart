@@ -1,6 +1,7 @@
 import 'package:baetobe/components/bottomsheet_utils.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/text_widgets.dart';
+import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/image_state_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
@@ -22,8 +23,10 @@ class ImageTile extends HookConsumerWidget {
     final state = ref.watch(imageStateProvider(position));
 
     if (state.loading) {
-      return CircularProgressIndicator(color: Theme.of(context).primaryColor)
-          .padding(all: 24);
+      return Center(
+        child: CircularProgressIndicator(color: Theme.of(context).primaryColor)
+            .padding(all: 24),
+      );
     }
 
     if (state.url != null) {
@@ -33,19 +36,21 @@ class ImageTile extends HookConsumerWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: ImageAspectRatio.ratioX / ImageAspectRatio.ratioY,
                 child: CachedNetworkImage(
                   imageUrl: state.url!,
                   cacheKey: state.id?.toString(),
-                  fit: BoxFit.fitWidth,
+                  // fit: BoxFit.fill,
                   alignment: Alignment.topCenter,
                   placeholderFadeInDuration: const Duration(milliseconds: 500),
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircularProgressIndicator(
-                        color: Theme.of(context).primaryColor,
-                        value: downloadProgress.progress),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                          value: downloadProgress.progress),
+                    ),
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
@@ -85,7 +90,7 @@ class ImageTile extends HookConsumerWidget {
                           },
                           child: const CustomTextWidget(
                               text: ButtonTitles.camera,
-                              type: textWidgetType.heading6,
+                              type: TextWidgetType.heading6,
                               withRow: false))
                       .padding(vertical: 8),
                   const CustomDivider(),
@@ -98,7 +103,7 @@ class ImageTile extends HookConsumerWidget {
                       },
                       child: const CustomTextWidget(
                         text: ButtonTitles.gallery,
-                        type: textWidgetType.heading6,
+                        type: TextWidgetType.heading6,
                         withRow: false,
                       )).padding(vertical: 8),
                 ],

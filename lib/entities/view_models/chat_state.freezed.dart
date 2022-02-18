@@ -26,7 +26,7 @@ class _$ChatStateTearOff {
       int retryCount = 0,
       int? closedBy,
       bool matchClosed = false,
-      connectionState connection = connectionState.connecting,
+      ChatConnectionState connection = ChatConnectionState.connecting,
       bool connectionStateVisible = false,
       List<Message> messages = const <Message>[]}) {
     return _ChatState(
@@ -56,7 +56,7 @@ mixin _$ChatState {
   int get retryCount => throw _privateConstructorUsedError;
   int? get closedBy => throw _privateConstructorUsedError;
   bool get matchClosed => throw _privateConstructorUsedError;
-  connectionState get connection => throw _privateConstructorUsedError;
+  ChatConnectionState get connection => throw _privateConstructorUsedError;
   bool get connectionStateVisible => throw _privateConstructorUsedError;
   List<Message> get messages => throw _privateConstructorUsedError;
 
@@ -77,7 +77,7 @@ abstract class $ChatStateCopyWith<$Res> {
       int retryCount,
       int? closedBy,
       bool matchClosed,
-      connectionState connection,
+      ChatConnectionState connection,
       bool connectionStateVisible,
       List<Message> messages});
 }
@@ -135,7 +135,7 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
       connection: connection == freezed
           ? _value.connection
           : connection // ignore: cast_nullable_to_non_nullable
-              as connectionState,
+              as ChatConnectionState,
       connectionStateVisible: connectionStateVisible == freezed
           ? _value.connectionStateVisible
           : connectionStateVisible // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ abstract class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
       int retryCount,
       int? closedBy,
       bool matchClosed,
-      connectionState connection,
+      ChatConnectionState connection,
       bool connectionStateVisible,
       List<Message> messages});
 }
@@ -221,7 +221,7 @@ class __$ChatStateCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
       connection: connection == freezed
           ? _value.connection
           : connection // ignore: cast_nullable_to_non_nullable
-              as connectionState,
+              as ChatConnectionState,
       connectionStateVisible: connectionStateVisible == freezed
           ? _value.connectionStateVisible
           : connectionStateVisible // ignore: cast_nullable_to_non_nullable
@@ -245,7 +245,7 @@ class _$_ChatState extends _ChatState {
       this.retryCount = 0,
       this.closedBy,
       this.matchClosed = false,
-      this.connection = connectionState.connecting,
+      this.connection = ChatConnectionState.connecting,
       this.connectionStateVisible = false,
       this.messages = const <Message>[]})
       : super._();
@@ -271,7 +271,7 @@ class _$_ChatState extends _ChatState {
   final bool matchClosed;
   @JsonKey()
   @override
-  final connectionState connection;
+  final ChatConnectionState connection;
   @JsonKey()
   @override
   final bool connectionStateVisible;
@@ -337,7 +337,7 @@ abstract class _ChatState extends ChatState {
       int retryCount,
       int? closedBy,
       bool matchClosed,
-      connectionState connection,
+      ChatConnectionState connection,
       bool connectionStateVisible,
       List<Message> messages}) = _$_ChatState;
   _ChatState._() : super._();
@@ -357,7 +357,7 @@ abstract class _ChatState extends ChatState {
   @override
   bool get matchClosed;
   @override
-  connectionState get connection;
+  ChatConnectionState get connection;
   @override
   bool get connectionStateVisible;
   @override

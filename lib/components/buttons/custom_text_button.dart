@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomTextButton extends HookConsumerWidget {
   final String text;
-  final textWidgetType type;
+  final TextWidgetType type;
   final Color? color;
   final void Function() onPressed;
 
@@ -14,7 +14,7 @@ class CustomTextButton extends HookConsumerWidget {
       required this.text,
       required this.onPressed,
       this.color,
-      this.type = textWidgetType.heading6})
+      this.type = TextWidgetType.heading6})
       : super(key: key);
 
   @override

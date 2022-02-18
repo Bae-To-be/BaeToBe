@@ -298,7 +298,7 @@ class _ContentTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextWidget(
       text: text,
-      type: textWidgetType.editProfileContentTileContent,
+      type: TextWidgetType.editProfileContentTileContent,
     );
   }
 }
