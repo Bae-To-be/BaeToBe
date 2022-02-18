@@ -47,7 +47,7 @@ class MessagesForMatchScreen extends HookConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        unawaited(ref.read(matchesProvider.notifier).fetchMatches(1, true));
+        unawaited(ref.read(matchesProvider.notifier).fetchMatches(1, false));
         return true;
       },
       child: Column(children: [
