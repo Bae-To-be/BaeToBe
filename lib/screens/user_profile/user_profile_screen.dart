@@ -180,7 +180,10 @@ class UserProfileScreen extends HookConsumerWidget {
                                             null)
                                         ? CustomCachedNetworkImage(
                                             imageURL: basicProfile!
-                                                .profilePicture!.url)
+                                                .profilePicture!.url,
+                                            cacheKey: basicProfile!
+                                                .profilePicture!.id
+                                                .toString())
                                         : Image.asset(
                                             'assets/profile_placeholder.png'),
                                   ),

@@ -97,8 +97,12 @@ class MatchesTab extends HookConsumerWidget {
                           : CustomTextWidget(
                               type: TextWidgetType.caption,
                               text: matchesListing[i].timeSinceUpdate),
-                      avatar: UserAvatar(
-                          image: matchesListing[i].matchedUser.profilePicture),
+                      avatar: Hero(
+                        tag: matchesListing[i].matchedUser.userId,
+                        child: UserAvatar(
+                            image:
+                                matchesListing[i].matchedUser.profilePicture),
+                      ),
                       color: bgColor,
                       title: Text(matchesListing[i].matchedUser.userName,
                           style: Theme.of(context)

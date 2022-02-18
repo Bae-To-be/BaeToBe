@@ -70,7 +70,9 @@ class MessagesForMatchScreen extends HookConsumerWidget {
                 size: GFSize.LARGE,
                 backgroundImage: match.matchedUser.profilePicture != null
                     ? CachedNetworkImageProvider(
-                        match.matchedUser.profilePicture!.url)
+                        match.matchedUser.profilePicture!.url,
+                        cacheKey:
+                            match.matchedUser.profilePicture!.id.toString())
                     : Image.asset('assets/profile_placeholder.png').image,
               ),
             ),
