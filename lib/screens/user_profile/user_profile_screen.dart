@@ -166,7 +166,8 @@ class UserProfileScreen extends HookConsumerWidget {
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10)),
                               child: AspectRatio(
-                                aspectRatio: 1,
+                                aspectRatio: ImageAspectRatio.ratioX /
+                                    ImageAspectRatio.ratioY,
                                 child: Container(
                                   child: (basicProfile!.profilePicture != null)
                                       ? CustomCachedNetworkImage(

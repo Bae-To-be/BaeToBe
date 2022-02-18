@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/domain/error_provider.dart';
@@ -39,12 +41,12 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     if (image == null) return;
     final croppedImage = await ImageCropper.cropImage(
       sourcePath: image.path,
-      aspectRatio: const CropAspectRatio(ratioX: 9, ratioY: 16),
-      aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
+      aspectRatio: const CropAspectRatio(
+          ratioX: ImageAspectRatio.ratioX * 1.0,
+          ratioY: ImageAspectRatio.ratioY * 1.0),
       androidUiSettings: const AndroidUiSettings(
           showCropGrid: true,
           toolbarWidgetColor: themeColor,
-          activeControlsWidgetColor: themeColor,
           cropFrameColor: themeColorLight,
           cropFrameStrokeWidth: 8,
           hideBottomControls: true),
@@ -52,7 +54,7 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     if (croppedImage == null) return;
     state = state.copyWith(loading: true);
     await imagesNotifier.addImage(
-        position, croppedImage.path, 'croppedImage$position');
+        position, croppedImage.path, 'croppedImage${Random().nextInt(99999)}');
     if (mounted) {
       state = state.copyWith(loading: false);
     }

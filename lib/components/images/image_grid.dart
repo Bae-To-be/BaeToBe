@@ -13,7 +13,7 @@ class ImageGrid extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
-          childAspectRatio: 9 / 16,
+          childAspectRatio: ImageAspectRatio.ratioX / ImageAspectRatio.ratioY,
           crossAxisCount: 3),
       itemCount:
           FirebaseRemoteConfig.instance.getInt(RemoteConfigs.maxPhotoCount),
