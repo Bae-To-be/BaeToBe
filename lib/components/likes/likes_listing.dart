@@ -1,13 +1,13 @@
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
+import 'package:baetobe/components/custom_cached_network_image.dart';
 import 'package:baetobe/components/refresh_footer.dart';
 import 'package:baetobe/components/refresh_header.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -76,7 +76,7 @@ class LikesListing extends HookConsumerWidget {
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
                     crossAxisCount: 2,
-                    mainAxisExtent: 224),
+                    childAspectRatio: 4 / 7),
                 itemCount: likesListing.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
@@ -153,29 +153,17 @@ class _CardImage extends StatelessWidget {
             child: Hero(
               tag: likesListing[index].user.userId,
               child: AspectRatio(
-                aspectRatio: 1.358,
+                aspectRatio: ImageAspectRatio.ratioX / ImageAspectRatio.ratioY,
                 child: Container(
                   child: (likesListing[index].user.profilePicture != null)
-                      ? CachedNetworkImage(
-                          fit: BoxFit.fitWidth,
-                          alignment: Alignment.topCenter,
-                          imageUrl:
+                      ? CustomCachedNetworkImage(
+                          imageURL:
                               likesListing[index].user.profilePicture!.url,
                           cacheKey: likesListing[index]
                               .user
                               .profilePicture!
                               .url
                               .toString(),
-                          placeholderFadeInDuration:
-                              const Duration(milliseconds: 500),
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) => Center(
-                            child: CircularProgressIndicator(
-                                color: Theme.of(context).primaryColor,
-                                value: downloadProgress.progress),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                         )
                       : Image.asset('assets/profile_placeholder.png'),
                 ),
