@@ -79,58 +79,79 @@ class LikesListing extends HookConsumerWidget {
                     childAspectRatio: 4 / 7),
                 itemCount: likesListing.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      ref.read(routerProvider.notifier).push(
-                            UserProfileScreenRoute(
-                                id: likesListing[index].user.userId,
-                                basicProfile: likesListing[index].user),
-                          );
-                    },
-                    child: Card(
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          _CardImage(likesListing: likesListing, index: index),
-                          Hero(
-                            tag:
-                                '${likesListing[index].user.userName}${likesListing[index].user.userId}',
-                            child: Text(
-                              '${likesListing[index].user.userName.split(' ').first}, ${likesListing[index].user.age}',
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.05),
-                              textAlign: TextAlign.center,
-                            ).padding(top: 12, horizontal: 8),
-                          ),
-                          Flexible(
-                            child: Text(
-                              likesListing[index].user.summary!,
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300,
-                                  height: 1.2),
-                              textAlign: TextAlign.center,
-                              // softWrap: false,
-                              overflow: TextOverflow.fade,
-                            ).padding(top: 12, horizontal: 8),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return _ListingCard(
+                      context: context,
+                      index: index,
+                      likesListing: likesListing,
+                      ref: ref);
                 }),
           ),
         );
       },
       error: (_error, _) =>
           _retryView(ErrorMessages.somethingWentWrongTryAgain, context, ref),
+    );
+  }
+}
+
+class _ListingCard extends StatelessWidget {
+  final BuildContext context;
+  final int index;
+  final List<Like> likesListing;
+  final WidgetRef ref;
+  const _ListingCard(
+      {Key? key,
+      required this.context,
+      required this.index,
+      required this.likesListing,
+      required this.ref})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        ref.read(routerProvider.notifier).push(
+              UserProfileScreenRoute(
+                  id: likesListing[index].user.userId,
+                  basicProfile: likesListing[index].user),
+            );
+      },
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _CardImage(likesListing: likesListing, index: index),
+            Hero(
+              tag:
+                  '${likesListing[index].user.userName}${likesListing[index].user.userId}',
+              child: Text(
+                '${likesListing[index].user.userName.split(' ').first}, ${likesListing[index].user.age}',
+                style: const TextStyle(
+                    fontSize: 14, fontWeight: FontWeight.w600, height: 1.05),
+                textAlign: TextAlign.center,
+              ).padding(top: 12, horizontal: 8),
+            ),
+            Flexible(
+              child: Text(
+                likesListing[index].user.summary!,
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    height: 1.2),
+                textAlign: TextAlign.center,
+                // softWrap: false,
+                overflow: TextOverflow.fade,
+              ).padding(top: 12, horizontal: 8),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
