@@ -30,7 +30,7 @@ class UpdateBirthdayScreen extends HookConsumerWidget {
         children: [
           const SizedBox(height: 32),
           const CustomTextWidget(
-                  type: textWidgetType.heading5, text: Headings.enterBirthday)
+                  type: TextWidgetType.heading5, text: Headings.enterBirthday)
               .padding(top: 32, bottom: 36, left: 10),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,

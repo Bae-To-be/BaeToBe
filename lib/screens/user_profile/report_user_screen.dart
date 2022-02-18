@@ -41,7 +41,7 @@ class ReportUserScreen extends HookConsumerWidget {
               ),
               content: const CustomTextWidget(
                   withRow: false,
-                  type: textWidgetType.subtitle2,
+                  type: TextWidgetType.subtitle2,
                   text: InfoLabels.reportUserSuccess),
             ),
           ),
@@ -83,7 +83,7 @@ class ReportUserScreen extends HookConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomTextButton(
-                              type: textWidgetType.heading6,
+                              type: TextWidgetType.heading6,
                               color: Colors.red[300],
                               text: LinkTexts.submit,
                               onPressed: ref

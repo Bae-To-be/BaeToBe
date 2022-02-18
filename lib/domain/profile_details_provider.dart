@@ -16,7 +16,7 @@ final profileDetailsProvider =
   ref.watch(matchesProvider.select((result) => result.value
       ?.firstWhereOrNull((match) => match.matchedUser.userId == id)));
   // A like can be removed using a notification, in that case this API will return no user.
-  ref.watch(likesProvider(likeDirection.sent).select((result) =>
+  ref.watch(likesProvider(LikeDirection.sent).select((result) =>
       result.value?.firstWhereOrNull((like) => like.user.userId == id)));
   DetailedProfile? result;
   await error.safelyExecute(

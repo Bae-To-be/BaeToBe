@@ -28,7 +28,7 @@ class EducationHistoryScreen extends HookConsumerWidget {
       children: [
         const SizedBox(height: 32),
         const CustomTextWidget(
-                type: textWidgetType.heading5,
+                type: TextWidgetType.heading5,
                 text: Headings.educationBackground)
             .padding(top: 32, bottom: 20, left: 15),
         Expanded(

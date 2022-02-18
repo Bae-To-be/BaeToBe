@@ -14,7 +14,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class LikesListing extends HookConsumerWidget {
-  final likeDirection direction;
+  final LikeDirection direction;
   final RefreshController controller = RefreshController();
 
   LikesListing({Key? key, required this.direction}) : super(key: key);

@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final likesProvider = StateNotifierProvider.family<LikesNotifier,
-    AsyncValue<List<Like>>, likeDirection>((ref, direction) {
+    AsyncValue<List<Like>>, LikeDirection>((ref, direction) {
   return LikesNotifier(ref, direction);
 });
 
 const likeRouteMap = {
-  likeDirection.received: BackendRoutes.listLikesReceived,
-  likeDirection.sent: BackendRoutes.listLikesSent
+  LikeDirection.received: BackendRoutes.listLikesReceived,
+  LikeDirection.sent: BackendRoutes.listLikesSent
 };
 
 class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
@@ -20,7 +20,7 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
   int pageNumber = 0;
 
   final Ref ref;
-  final likeDirection direction;
+  final LikeDirection direction;
 
   LikesNotifier(this.ref, this.direction) : super(const AsyncValue.loading()) {
     fetchLikes(1, true).then((_) => WidgetsBinding.instance?.addObserver(this));

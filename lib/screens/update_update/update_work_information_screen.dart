@@ -65,13 +65,13 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
             children: [
               const SizedBox(height: 32),
               const CustomTextWidget(
-                      type: textWidgetType.heading5,
+                      type: TextWidgetType.heading5,
                       text: Headings.enterIndustry,
                       withRow: false)
                   .padding(top: 32, bottom: 20, left: 15),
               const IndustryField().padding(horizontal: 10),
               const CustomTextWidget(
-                      type: textWidgetType.heading5,
+                      type: TextWidgetType.heading5,
                       text: Headings.enterWorkTitle,
                       withRow: false)
                   .padding(top: 32, left: 15),
@@ -89,7 +89,7 @@ class UpdateWorkInformationScreen extends HookConsumerWidget {
                 },
               ).padding(horizontal: 15, vertical: 10),
               const CustomTextWidget(
-                      type: textWidgetType.heading5,
+                      type: TextWidgetType.heading5,
                       text: Headings.enterCompany)
                   .padding(top: 32, left: 15),
               AutoCompleteField(

@@ -89,7 +89,7 @@ class ImageTile extends HookConsumerWidget {
                           },
                           child: const CustomTextWidget(
                               text: ButtonTitles.camera,
-                              type: textWidgetType.heading6,
+                              type: TextWidgetType.heading6,
                               withRow: false))
                       .padding(vertical: 8),
                   const CustomDivider(),
@@ -102,7 +102,7 @@ class ImageTile extends HookConsumerWidget {
                       },
                       child: const CustomTextWidget(
                         text: ButtonTitles.gallery,
-                        type: textWidgetType.heading6,
+                        type: TextWidgetType.heading6,
                         withRow: false,
                       )).padding(vertical: 8),
                 ],

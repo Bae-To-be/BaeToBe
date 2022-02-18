@@ -73,7 +73,7 @@ class EducationTile extends HookConsumerWidget {
       return Column(
         children: [
           const CustomTextWidget(
-                  text: Headings.schoolName, type: textWidgetType.heading6)
+                  text: Headings.schoolName, type: TextWidgetType.heading6)
               .padding(left: 15, bottom: 10),
           AutoCompleteField(
             textController: universityController,
@@ -88,7 +88,7 @@ class EducationTile extends HookConsumerWidget {
             hintText: Placeholders.university,
           ).padding(horizontal: 15, bottom: 10),
           const CustomTextWidget(
-                  text: Headings.courseName, type: textWidgetType.heading6)
+                  text: Headings.courseName, type: TextWidgetType.heading6)
               .padding(left: 15, vertical: 10),
           AutoCompleteField(
             textController: courseController,
@@ -103,10 +103,10 @@ class EducationTile extends HookConsumerWidget {
             hintText: Placeholders.course,
           ).padding(horizontal: 15, bottom: 10),
           const CustomTextWidget(
-                  text: Headings.year, type: textWidgetType.heading6)
+                  text: Headings.year, type: TextWidgetType.heading6)
               .padding(left: 15, top: 10),
           const CustomTextWidget(
-            type: textWidgetType.caption,
+            type: TextWidgetType.caption,
             text: InfoLabels.classYearHelper,
             withRow: true,
             withFlexible: true,

@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'like.freezed.dart';
 part 'like.g.dart';
 
-enum likeDirection { sent, received }
+enum LikeDirection { sent, received }
 
 @freezed
 class Like with _$Like {

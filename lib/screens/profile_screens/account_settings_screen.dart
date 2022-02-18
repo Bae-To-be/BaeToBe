@@ -33,14 +33,14 @@ class AccountSettingsScreen extends HookConsumerWidget {
           headerWith: HeaderWith.cross,
         ),
         const CustomTextWidget(
-                type: textWidgetType.heading6, text: Headings.profile)
+                type: TextWidgetType.heading6, text: Headings.profile)
             .padding(left: 20, bottom: 10),
         const CustomDivider().padding(horizontal: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CustomTextWidget(
-                text: InfoLabels.pauseAccount, type: textWidgetType.subtitle1),
+                text: InfoLabels.pauseAccount, type: TextWidgetType.subtitle1),
             GFToggle(
               enabledTrackColor: Theme.of(context).primaryColor,
               onChanged: (val) {
@@ -56,14 +56,14 @@ class AccountSettingsScreen extends HookConsumerWidget {
           ],
         ).padding(left: 20, right: 5, vertical: 10),
         const CustomTextWidget(
-                type: textWidgetType.heading6, text: Headings.legal)
+                type: TextWidgetType.heading6, text: Headings.legal)
             .padding(left: 20, bottom: 10),
         const CustomDivider().padding(horizontal: 20),
         GFListTile(
           padding: const EdgeInsets.only(top: 10),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           title: const CustomTextWidget(
-              type: textWidgetType.subtitle1,
+              type: TextWidgetType.subtitle1,
               text: LinkTexts.termsAndConditions,
               withRow: false),
           icon: Icon(
@@ -77,7 +77,7 @@ class AccountSettingsScreen extends HookConsumerWidget {
           padding: const EdgeInsets.only(top: 15, bottom: 10),
           margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           title: const CustomTextWidget(
-              type: textWidgetType.subtitle1,
+              type: TextWidgetType.subtitle1,
               text: LinkTexts.privacyPolicy,
               withRow: false),
           icon: Icon(
@@ -88,14 +88,14 @@ class AccountSettingsScreen extends HookConsumerWidget {
               '${FirebaseRemoteConfig.instance.getString('API_HOST')}${FirebaseRemoteConfig.instance.getString('PRIVACY_POLICY')}'),
         ),
         const CustomTextWidget(
-                type: textWidgetType.heading6, text: Headings.notifications)
+                type: TextWidgetType.heading6, text: Headings.notifications)
             .padding(left: 20, bottom: 10),
         const CustomDivider().padding(horizontal: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const CustomTextWidget(
-                type: textWidgetType.subtitle1,
+                type: TextWidgetType.subtitle1,
                 text: InfoLabels.whileAppOpen,
                 withRow: false),
             Consumer(builder: (context, ref, child) {
@@ -122,7 +122,7 @@ class AccountSettingsScreen extends HookConsumerWidget {
             CustomTextButton(
               text: LinkTexts.logout,
               onPressed: ref.read(authProvider.notifier).logout,
-              type: textWidgetType.caption,
+              type: TextWidgetType.caption,
             ),
           ],
         ),
@@ -157,7 +157,7 @@ class AccountSettingsScreen extends HookConsumerWidget {
                   },
                 );
               },
-              type: textWidgetType.caption,
+              type: TextWidgetType.caption,
             ),
           ],
         ),

@@ -43,7 +43,7 @@ class UnderVerificationScreen extends HookConsumerWidget {
       const CustomTextWidget(
           text: InfoLabels.underVerificationHelper,
           withRow: false,
-          type: textWidgetType.heading6),
+          type: TextWidgetType.heading6),
       Expanded(child: Container()),
       CustomTextButton(
               text: LinkTexts.refreshStatus,

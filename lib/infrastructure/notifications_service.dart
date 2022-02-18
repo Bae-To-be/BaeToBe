@@ -168,12 +168,12 @@ class NotificationService {
             return;
           }
           ref
-              .read(likesProvider(likeDirection.received).notifier)
+              .read(likesProvider(LikeDirection.received).notifier)
               .addOrUpdateLike(Like.fromJson(jsonDecode(message.data['like'])));
           break;
         case NotificationEvents.leftSwiped:
           ref
-              .read(likesProvider(likeDirection.sent).notifier)
+              .read(likesProvider(LikeDirection.sent).notifier)
               .removeLike(int.parse(message.data['like_id']));
           break;
         case NotificationEvents.matchClosed:

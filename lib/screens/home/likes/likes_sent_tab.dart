@@ -9,7 +9,7 @@ class LikesSentTab extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LikesListing(
-      direction: likeDirection.sent,
+      direction: LikeDirection.sent,
     );
   }
 }

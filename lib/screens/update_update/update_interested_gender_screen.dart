@@ -94,7 +94,7 @@ class UpdateInterestedGenderScreen extends HookConsumerWidget {
                   children: [
                     const SizedBox(height: 32),
                     const CustomTextWidget(
-                            type: textWidgetType.heading5,
+                            type: TextWidgetType.heading5,
                             text: Headings.enterInterestedGender)
                         .padding(top: 32, bottom: 36, left: 10),
                   ],

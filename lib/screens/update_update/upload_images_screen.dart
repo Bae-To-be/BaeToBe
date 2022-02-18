@@ -34,7 +34,7 @@ class UploadImagesScreen extends HookConsumerWidget {
         children: [
           const SizedBox(height: 32),
           const CustomTextWidget(
-                  type: textWidgetType.heading5, text: Headings.addPhotos)
+                  type: TextWidgetType.heading5, text: Headings.addPhotos)
               .padding(top: 32, bottom: 10, left: 15),
           CustomTextWidget(
                   text: InfoLabels.addMinimumPhotos.replaceAll(
@@ -42,7 +42,7 @@ class UploadImagesScreen extends HookConsumerWidget {
                       FirebaseRemoteConfig.instance
                           .getInt(RemoteConfigs.minPhotoCount)
                           .toString()),
-                  type: textWidgetType.caption)
+                  type: TextWidgetType.caption)
               .padding(left: 15, bottom: 15),
           const Expanded(child: ImageGrid())
         ],

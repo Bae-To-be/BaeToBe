@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_state.freezed.dart';
 
-enum connectionState {
+enum ChatConnectionState {
   connecting,
   connected,
   connectionLost,
@@ -24,7 +24,7 @@ class ChatState with _$ChatState {
     @Default(0) int retryCount,
     int? closedBy,
     @Default(false) bool matchClosed,
-    @Default(connectionState.connecting) connectionState connection,
+    @Default(ChatConnectionState.connecting) ChatConnectionState connection,
     @Default(false) bool connectionStateVisible,
     @Default(<Message>[]) List<Message> messages,
   }) = _ChatState;
