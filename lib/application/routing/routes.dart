@@ -37,7 +37,7 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
 
 @CustomAutoRouter(
   preferRelativeImports: false,
-  transitionsBuilder: TransitionsBuilders.slideLeft,
+  transitionsBuilder: TransitionsBuilders.fadeIn,
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
     CustomRoute(
@@ -45,44 +45,50 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         path: AppLinks.splash,
         page: SplashScreen,
         transitionsBuilder: TransitionsBuilders.noTransition),
+    CustomRoute(path: AppLinks.login, page: LoginScreen),
     CustomRoute(
-        path: AppLinks.login,
-        page: LoginScreen,
-        transitionsBuilder: TransitionsBuilders.fadeIn),
-    AutoRoute(
         path: AppLinks.updateBirthday,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateBirthdayScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateGender,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateGenderScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateInterestedGenders,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateInterestedGenderScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateWorkDetails,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateWorkInformationScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateEducationHistory,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: EducationHistoryScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateLinkedInURL,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: LinkedinUrlScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updateImages,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UploadImagesScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.selfieVerification,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: SelfieVerificationScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.identityVerification,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: IdentityVerificationScreen,
         guards: [AuthGuard]),
     AutoRoute(
@@ -104,7 +110,6 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
     AutoRoute(
         path: AppLinks.reportUser, page: ReportUserScreen, guards: [AuthGuard]),
     CustomRoute(
-      transitionsBuilder: TransitionsBuilders.fadeIn,
       path: AppLinks.homePage,
       page: HomepageScreen,
       guards: [AuthGuard],
@@ -128,8 +133,9 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
     ], guards: [
       AuthGuard
     ]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.updatePreferences,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdatePreferencesScreen,
         guards: [AuthGuard]),
     AutoRoute(
@@ -144,16 +150,19 @@ import 'package:baetobe/screens/user_profile/user_profile_screen.dart';
         path: AppLinks.accountSettings,
         page: AccountSettingsScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.editHometown,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateHometownScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.editReligion,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateReligionScreen,
         guards: [AuthGuard]),
-    AutoRoute(
+    CustomRoute(
         path: AppLinks.editHeight,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
         page: UpdateHeightScreen,
         guards: [AuthGuard]),
     RedirectRoute(path: '*', redirectTo: AppLinks.login),

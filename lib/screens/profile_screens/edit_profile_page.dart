@@ -66,7 +66,10 @@ class EditProfilePage extends HookConsumerWidget {
             Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const EditProfileSectionTile(title: Headings.aboutMeLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.aboutMeLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.name,
                   content: _ContentTextWidget(_user.name),
@@ -153,8 +156,10 @@ class EditProfilePage extends HookConsumerWidget {
                     router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
-                const EditProfileSectionTile(
-                    title: Headings.workAndEducationLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.workAndEducationLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.work,
                   content: Column(
@@ -174,7 +179,10 @@ class EditProfilePage extends HookConsumerWidget {
                       children: _allEducationList(context, ref)),
                   button: false,
                 ),
-                const EditProfileSectionTile(title: Headings.lifestyleLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.lifestyleLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.food,
                   content: _ContentTextWidget(_user.food != null
