@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:baetobe/application/helper_methods.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
+import 'package:baetobe/application/theme.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
@@ -15,7 +16,6 @@ import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -66,7 +66,10 @@ class EditProfilePage extends HookConsumerWidget {
             Column(
               // mainAxisSize: MainAxisSize.min,
               children: [
-                const EditProfileSectionTile(title: Headings.aboutMeLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.aboutMeLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.name,
                   content: _ContentTextWidget(_user.name),
@@ -153,8 +156,10 @@ class EditProfilePage extends HookConsumerWidget {
                     router.navigateNamed(AppLinks.editHeight);
                   },
                 ),
-                const EditProfileSectionTile(
-                    title: Headings.workAndEducationLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.workAndEducationLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.work,
                   content: Column(
@@ -174,7 +179,10 @@ class EditProfilePage extends HookConsumerWidget {
                       children: _allEducationList(context, ref)),
                   button: false,
                 ),
-                const EditProfileSectionTile(title: Headings.lifestyleLabel),
+                const CustomTextWidget(
+                        type: TextWidgetType.heading6,
+                        text: Headings.lifestyleLabel)
+                    .padding(left: 20, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.food,
                   content: _ContentTextWidget(_user.food != null
@@ -237,10 +245,18 @@ class EditProfilePage extends HookConsumerWidget {
           children: [
             Row(
               children: [
-                Icon(FontAwesomeIcons.solidCircle,
-                    color: Theme.of(context).primaryColor, size: 10),
+                const Baseline(
+                    baseline: 10,
+                    baselineType: TextBaseline.alphabetic,
+                    child: Text(
+                      '\u{f111}   ',
+                      style: TextStyle(
+                          fontFamily: 'BTBCustomIcons',
+                          fontSize: 10,
+                          color: themeColor),
+                    )),
                 _ContentTextWidget(
-                        '  ${_user.education[i].universityName} | ${_user.education[i].year}')
+                        '${_user.education[i].universityName} | ${_user.education[i].year}')
                     .padding(bottom: 4),
               ],
             ),

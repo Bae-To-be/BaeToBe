@@ -35,4 +35,6 @@ class BTBCustomIcons {
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData close =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData solidCircle =
+      IconData(0xf111, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

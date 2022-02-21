@@ -86,7 +86,6 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i2.LoginScreen(),
-          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -206,7 +205,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i12.UnderVerificationScreen(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -214,7 +213,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i13.VerificationRejectedScreen(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -230,7 +229,7 @@ class AppRouter extends _i19.RootStackRouter {
               id: args.id,
               basicProfile: args.basicProfile,
               showCTA: args.showCTA),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -239,7 +238,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i15.MessagesForMatchScreen(key: args.key, match: args.match),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -248,7 +247,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i16.ReportUserScreen(key: args.key, profile: args.profile),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -256,7 +255,6 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i17.HomepageScreen(),
-          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -264,7 +262,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i18.EditProfilePage(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -272,7 +270,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i19.EmptyRouterPage(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -293,7 +291,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i21.UpdateMatchingPreferences(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -306,7 +304,7 @@ class AppRouter extends _i19.RootStackRouter {
           routeData: routeData,
           child: _i22.UpdateLanguagesSpokenScreen(
               key: args.key, redirectBack: args.redirectBack),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -314,7 +312,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i23.AccountSettingsScreen(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -346,7 +344,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i27.DiscoverTab(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -354,7 +352,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i28.LikesTab(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -364,7 +362,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i29.MatchesTab(key: args.key),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -372,7 +370,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i30.ProfileTab(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -380,7 +378,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i31.LikesReceivedTab(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -388,7 +386,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i32.LikesSentTab(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -396,7 +394,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: const _i33.HelpPage(),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     },
@@ -408,7 +406,7 @@ class AppRouter extends _i19.RootStackRouter {
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i34.HelpArticleScreen(key: args.key, id: args.id),
-          transitionsBuilder: _i19.TransitionsBuilders.slideLeft,
+          transitionsBuilder: _i19.TransitionsBuilders.fadeIn,
           opaque: true,
           barrierDismissible: false);
     }
