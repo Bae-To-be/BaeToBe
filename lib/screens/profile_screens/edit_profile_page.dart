@@ -16,6 +16,7 @@ import 'package:baetobe/domain/images_provider.dart';
 import 'package:baetobe/domain/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -69,7 +70,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.aboutMeLabel)
-                    .padding(left: 20, bottom: 10, top: 10),
+                    .padding(bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.name,
                   content: _ContentTextWidget(_user.name),
@@ -159,7 +160,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.workAndEducationLabel)
-                    .padding(left: 20, bottom: 10, top: 10),
+                    .padding(bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.work,
                   content: Column(
@@ -182,7 +183,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.lifestyleLabel)
-                    .padding(left: 20, bottom: 10, top: 10),
+                    .padding(bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.food,
                   content: _ContentTextWidget(_user.food != null
@@ -246,17 +247,12 @@ class EditProfilePage extends HookConsumerWidget {
             Row(
               children: [
                 const Baseline(
-                    baseline: 10,
+                    baseline: 5,
                     baselineType: TextBaseline.alphabetic,
-                    child: Text(
-                      '\u{f111}   ',
-                      style: TextStyle(
-                          fontFamily: 'BTBCustomIcons',
-                          fontSize: 10,
-                          color: themeColor),
-                    )),
+                    child: Icon(FontAwesomeIcons.solidCircle,
+                        color: themeColor, size: 10)),
                 _ContentTextWidget(
-                        '${_user.education[i].universityName} | ${_user.education[i].year}')
+                        '  ${_user.education[i].universityName} | ${_user.education[i].year}')
                     .padding(bottom: 4),
               ],
             ),
