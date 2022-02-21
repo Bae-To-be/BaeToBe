@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:baetobe/application/helper_methods.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
@@ -20,14 +21,6 @@ import 'package:styled_widget/styled_widget.dart';
 
 class EditProfilePage extends HookConsumerWidget {
   const EditProfilePage({Key? key}) : super(key: key);
-
-  String cmToFeetAndInchesAndCmString(int heightInCm) {
-    int heightInInches = (heightInCm / 2.54).round();
-    int feet = (heightInInches / 12).floor();
-    int inches = (heightInInches - (12 * feet)).floor();
-
-    return '$feet\' $inches" ($heightInCm cm)';
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -153,7 +146,7 @@ class EditProfilePage extends HookConsumerWidget {
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.height,
                   content: _ContentTextWidget(_user.height != null
-                      ? cmToFeetAndInchesAndCmString(_user.height!)
+                      ? _user.height!.cmToFeetAndInchesAndCmString()
                       : ErrorMessages.pleaseUpdatePreferences),
                   button: true,
                   callback: () {

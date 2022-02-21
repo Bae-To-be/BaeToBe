@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:baetobe/application/helper_methods.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
@@ -285,14 +286,6 @@ class BasicInfoChipsCard extends StatelessWidget {
 
   const BasicInfoChipsCard({Key? key, required this.profile}) : super(key: key);
 
-  String cmToFeetAndInchesAndCmString(int heightInCm) {
-    int heightInInches = (heightInCm / 2.54).round();
-    int feet = (heightInInches / 12).floor();
-    int inches = (heightInInches - (12 * feet)).floor();
-
-    return '$feet\' $inches" ($heightInCm cm)';
-  }
-
   @override
   Widget build(BuildContext context) {
     return CustomCardWidget(
@@ -318,7 +311,7 @@ class BasicInfoChipsCard extends StatelessWidget {
               ),
             if (profile.heightInCms != null)
               CustomChipWidget(
-                cmToFeetAndInchesAndCmString(profile.heightInCms!),
+                profile.heightInCms!.cmToFeetAndInchesAndCmString(),
                 avatar: const Icon(
                   FontAwesomeIcons.rulerHorizontal,
                   size: 16,

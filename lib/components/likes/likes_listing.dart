@@ -189,7 +189,7 @@ class _CardImage extends StatelessWidget {
                           cacheKey: likesListing[index]
                               .user
                               .profilePicture!
-                              .url
+                              .id
                               .toString(),
                         )
                       : Image.asset('assets/profile_placeholder.png'),
