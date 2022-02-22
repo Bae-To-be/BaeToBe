@@ -23,7 +23,7 @@ class EditProfileContentTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomDivider(),
+        const CustomDivider().padding(horizontal: 4),
         button == true
             ? TextButton(
                 style: TextButton.styleFrom(
@@ -60,29 +60,29 @@ class _EditProfileContentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomTextWidget(
                 type: TextWidgetType.editProfileContentTileTitle, text: title),
-            Expanded(child: Container()),
+            content.padding(top: 4),
+          ],
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             editable == true
                 ? Icon(
                     FontAwesomeIcons.chevronRight,
                     color: Theme.of(context).primaryColor,
                   )
-                : const Icon(
-                    FontAwesomeIcons.chevronRight,
-                    color: Color(0xFFF2F2F2),
-                  )
+                : Container()
           ],
-        ),
-        Row(
-          children: [
-            Expanded(child: content),
-          ],
-        ).padding(top: 4),
+        )
       ],
     );
   }

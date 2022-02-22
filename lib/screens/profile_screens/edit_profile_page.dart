@@ -3,6 +3,7 @@ import 'package:baetobe/application/helper_methods.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
+import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/edit_profile_tile.dart';
 import 'package:baetobe/components/forms/big_text_field.dart';
@@ -70,17 +71,26 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.aboutMeLabel)
-                    .padding(bottom: 10, top: 10),
+                    .padding(left: 8, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.name,
                   content: _ContentTextWidget(_user.name),
                   button: false,
                 ),
-                const EditProfileContentTile(
-                  title: EditProfileFieldLabels.bio,
-                  content: _BioTextField(),
-                  button: false,
-                ),
+                const CustomDivider().padding(horizontal: 4),
+                Column(
+                  children: [
+                    const CustomTextWidget(
+                        type: TextWidgetType.editProfileContentTileTitle,
+                        text: EditProfileFieldLabels.bio),
+                    const _BioTextField().padding(top: 4)
+                  ],
+                ).padding(horizontal: 8, vertical: 8),
+                // const EditProfileContentTile(
+                //   title: EditProfileFieldLabels.bio,
+                //   content: _BioTextField(),
+                //   button: false,
+                // ),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.age,
                   content: _ContentTextWidget(_user.age.toString()),
@@ -160,7 +170,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.workAndEducationLabel)
-                    .padding(bottom: 10, top: 10),
+                    .padding(left: 8, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.work,
                   content: Column(
@@ -183,7 +193,7 @@ class EditProfilePage extends HookConsumerWidget {
                 const CustomTextWidget(
                         type: TextWidgetType.heading6,
                         text: Headings.lifestyleLabel)
-                    .padding(bottom: 10, top: 10),
+                    .padding(left: 8, bottom: 10, top: 10),
                 EditProfileContentTile(
                   title: EditProfileFieldLabels.food,
                   content: _ContentTextWidget(_user.food != null
