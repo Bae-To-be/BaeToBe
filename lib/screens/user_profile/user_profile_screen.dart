@@ -252,7 +252,6 @@ class _PopupButtonActionMenu extends StatelessWidget {
   List<PopupMenuItem<ActionMenu>> actions(
     bool isMatchClosed,
     bool isReported,
-    WidgetRef ref,
     DetailedProfile profile,
   ) {
     List<PopupMenuItem<ActionMenu>> result = [];
@@ -285,6 +284,41 @@ class _PopupButtonActionMenu extends StatelessWidget {
     return result;
   }
 
+  void _onActionSelected(option, BuildContext context) {
+    switch (option) {
+      case ActionMenu.close:
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text(InfoLabels.warning),
+                  content: const Text(InfoLabels.closeMatchInfo),
+                  actions: [
+                    TextButton(
+                      child: const Text(LinkTexts.cancel),
+                      onPressed: () {
+                        ref.read(routerProvider.notifier).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text(LinkTexts.cont),
+                      onPressed: () => closeMatch(profile.match!.id, ref),
+                    ),
+                  ],
+                ));
+        return;
+      case ActionMenu.conversation:
+        ref
+            .read(routerProvider.notifier)
+            .navigate(MessagesForMatchScreenRoute(match: profile.match!));
+        return;
+      case ActionMenu.report:
+        ref
+            .read(routerProvider.notifier)
+            .push(ReportUserScreenRoute(profile: profile));
+        return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -299,38 +333,7 @@ class _PopupButtonActionMenu extends StatelessWidget {
         child: PopupMenuButton(
           padding: EdgeInsets.zero,
           onSelected: (option) {
-            switch (option) {
-              case ActionMenu.close:
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: const Text(InfoLabels.warning),
-                          content: const Text(InfoLabels.closeMatchInfo),
-                          actions: [
-                            TextButton(
-                              child: const Text(LinkTexts.cancel),
-                              onPressed: () {
-                                ref.read(routerProvider.notifier).pop();
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(LinkTexts.cont),
-                              onPressed: () =>
-                                  closeMatch(profile.match!.id, ref),
-                            ),
-                          ],
-                        ));
-                return;
-              case ActionMenu.conversation:
-                ref.read(routerProvider.notifier).navigate(
-                    MessagesForMatchScreenRoute(match: profile.match!));
-                return;
-              case ActionMenu.report:
-                ref
-                    .read(routerProvider.notifier)
-                    .push(ReportUserScreenRoute(profile: profile));
-                return;
-            }
+            _onActionSelected(option, context);
           },
           offset: const Offset(0, 40),
           icon: const Icon(
@@ -340,7 +343,7 @@ class _PopupButtonActionMenu extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           itemBuilder: (BuildContext context) =>
-              actions(isMatchClosed, isReported, ref, profile),
+              actions(isMatchClosed, isReported, profile),
         ),
       ),
     );
