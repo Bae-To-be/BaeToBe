@@ -3,12 +3,10 @@ import 'package:baetobe/application/helper_methods.dart';
 import 'package:baetobe/application/routing/router_provider.dart';
 import 'package:baetobe/application/routing/routes.gr.dart';
 import 'package:baetobe/application/theme.dart';
-import 'package:baetobe/components/buttons/custom_text_button.dart';
 import 'package:baetobe/components/buttons/floating_cta.dart';
 import 'package:baetobe/components/custom_cached_network_image.dart';
 import 'package:baetobe/components/custom_card.dart';
 import 'package:baetobe/components/custom_chip.dart';
-import 'package:baetobe/components/custom_header_tile.dart';
 import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
@@ -22,15 +20,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:styled_widget/styled_widget.dart';
 
+enum ActionMenu { report, close, conversation }
+
 class UserProfileScreen extends HookConsumerWidget {
   final int id;
-  final BasicProfile? basicProfile;
+  final BasicProfile basicProfile;
   final bool showCTA;
 
   const UserProfileScreen(
       {Key? key,
       @PathParam('id') required this.id,
-      this.basicProfile,
+      required this.basicProfile,
       this.showCTA = false})
       : super(key: key);
 
@@ -71,82 +71,6 @@ class UserProfileScreen extends HookConsumerWidget {
     return result;
   }
 
-  List<Widget> actions(
-    BuildContext context,
-    bool isMatchClosed,
-    bool isReported,
-    WidgetRef ref,
-    DetailedProfile profile,
-  ) {
-    List<Widget> result = [];
-
-    if (!isReported) {
-      result.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomTextButton(
-              onPressed: () => ref
-                  .read(routerProvider.notifier)
-                  .push(ReportUserScreenRoute(profile: profile)),
-              text: LinkTexts.reportUser,
-              type: TextWidgetType.caption),
-        ],
-      ));
-    }
-
-    if (profile.match == null) {
-      return result;
-    }
-
-    result.add(Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CustomTextButton(
-            onPressed: () {
-              ref
-                  .read(routerProvider.notifier)
-                  .navigate(MessagesForMatchScreenRoute(match: profile.match!));
-            },
-            text: LinkTexts.conversation,
-            type: TextWidgetType.caption),
-      ],
-    ));
-
-    if (!isMatchClosed) {
-      result.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomTextButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: const Text(InfoLabels.warning),
-                          content: const Text(InfoLabels.closeMatchInfo),
-                          actions: [
-                            TextButton(
-                              child: const Text(LinkTexts.cancel),
-                              onPressed: () {
-                                ref.read(routerProvider.notifier).pop();
-                              },
-                            ),
-                            TextButton(
-                              child: const Text(LinkTexts.cont),
-                              onPressed: () =>
-                                  closeMatch(profile.match!.id, ref),
-                            ),
-                          ],
-                        ));
-              },
-              type: TextWidgetType.caption,
-              text: 'Unmatch'),
-        ],
-      ));
-    }
-
-    return result;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileRequest = ref.watch(profileDetailsProvider(id));
@@ -155,16 +79,19 @@ class UserProfileScreen extends HookConsumerWidget {
 
     return Stack(children: [
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              const CustomHeaderTile(text: '', headerWith: HeaderWith.chevron),
-              basicProfile != null
-                  ? CustomCardWidget(
-                      padding: EdgeInsets.zero,
-                      content: Column(
+              const SizedBox(
+                height: 16,
+              ),
+              CustomCardWidget(
+                  padding: EdgeInsets.zero,
+                  content: Stack(
+                    children: [
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Hero(
@@ -177,12 +104,11 @@ class UserProfileScreen extends HookConsumerWidget {
                                   aspectRatio: ImageAspectRatio.ratioX /
                                       ImageAspectRatio.ratioY,
                                   child: Container(
-                                    child: (basicProfile!.profilePicture !=
-                                            null)
+                                    child: (basicProfile.profilePicture != null)
                                         ? CustomCachedNetworkImage(
-                                            imageURL: basicProfile!
+                                            imageURL: basicProfile
                                                 .profilePicture!.url,
-                                            cacheKey: basicProfile!
+                                            cacheKey: basicProfile
                                                 .profilePicture!.id
                                                 .toString())
                                         : Image.asset(
@@ -191,17 +117,48 @@ class UserProfileScreen extends HookConsumerWidget {
                                 ),
                               )),
                           Hero(
-                              tag: '${basicProfile!.userName}$id',
+                              tag: '${basicProfile.userName}$id',
                               child: Text(
-                                '${basicProfile!.userName}, ${basicProfile!.age}',
+                                '${basicProfile.userName}, ${basicProfile.age}',
                                 style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700,
                                     color: themeColor),
                               ).padding(all: 24)),
                         ],
-                      ))
-                  : Container(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              ref.read(routerProvider).pop();
+                            },
+                            child: Container(
+                              height: 36,
+                              width: 36,
+                              decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.8),
+                                  shape: BoxShape.circle),
+                              child: const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
+                                child: Icon(
+                                  FontAwesomeIcons.chevronLeft,
+                                  color: themeColor,
+                                ),
+                              ),
+                            ),
+                          ).padding(all: 8),
+                          profileRequest.maybeWhen(
+                              orElse: () => Container(),
+                              data: (profile) {
+                                return _PopupButtonActionMenu(
+                                    ref, profile!, isReported, isMatchClosed);
+                              })
+                        ],
+                      ),
+                    ],
+                  )),
               profileRequest.maybeWhen(
                   orElse: () => Center(
                       child: CircularProgressIndicator(
@@ -243,7 +200,7 @@ class UserProfileScreen extends HookConsumerWidget {
                         ),
                       ),
                       ...profile.images.map((e) {
-                        if (e.id == basicProfile!.profilePicture!.id) {
+                        if (e.id == basicProfile.profilePicture!.id) {
                           return Container();
                         }
                         return CustomCardWidget(
@@ -252,8 +209,9 @@ class UserProfileScreen extends HookConsumerWidget {
                           cacheKey: e.id.toString(),
                         ));
                       }),
-                      ...actions(
-                          context, isMatchClosed, isReported, ref, profile)
+                      SizedBox(
+                        height: showCTA ? 104 : 16,
+                      )
                     ]);
                   })
             ],
@@ -278,6 +236,117 @@ class UserProfileScreen extends HookConsumerWidget {
           ],
         ).padding(left: 24, right: 24, bottom: 24),
     ]);
+  }
+}
+
+class _PopupButtonActionMenu extends StatelessWidget {
+  final WidgetRef ref;
+  final DetailedProfile profile;
+  final bool isReported;
+  final bool isMatchClosed;
+  const _PopupButtonActionMenu(
+      this.ref, this.profile, this.isReported, this.isMatchClosed,
+      {Key? key})
+      : super(key: key);
+
+  List<PopupMenuItem<ActionMenu>> actions(
+    bool isMatchClosed,
+    bool isReported,
+    DetailedProfile profile,
+  ) {
+    List<PopupMenuItem<ActionMenu>> result = [];
+
+    if (!isReported) {
+      result.add(
+        const PopupMenuItem(
+            value: ActionMenu.report,
+            child: CustomTextWidget(
+                type: TextWidgetType.caption, text: LinkTexts.reportUser)),
+      );
+    }
+
+    if (profile.match == null) {
+      return result;
+    }
+
+    result.add(const PopupMenuItem(
+        value: ActionMenu.conversation,
+        child: CustomTextWidget(
+            type: TextWidgetType.caption, text: LinkTexts.conversation)));
+
+    if (!isMatchClosed) {
+      result.add(const PopupMenuItem(
+          value: ActionMenu.close,
+          child: CustomTextWidget(
+              type: TextWidgetType.caption, text: LinkTexts.unmatch)));
+    }
+
+    return result;
+  }
+
+  void _onActionSelected(option, BuildContext context) {
+    switch (option) {
+      case ActionMenu.close:
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text(InfoLabels.warning),
+                  content: const Text(InfoLabels.closeMatchInfo),
+                  actions: [
+                    TextButton(
+                      child: const Text(LinkTexts.cancel),
+                      onPressed: () {
+                        ref.read(routerProvider.notifier).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text(LinkTexts.cont),
+                      onPressed: () => closeMatch(profile.match!.id, ref),
+                    ),
+                  ],
+                ));
+        return;
+      case ActionMenu.conversation:
+        ref
+            .read(routerProvider.notifier)
+            .navigate(MessagesForMatchScreenRoute(match: profile.match!));
+        return;
+      case ActionMenu.report:
+        ref
+            .read(routerProvider.notifier)
+            .push(ReportUserScreenRoute(profile: profile));
+        return;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+      height: 36,
+      width: 36,
+      decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.80), shape: BoxShape.circle),
+      child: Baseline(
+        baseline: 27,
+        baselineType: TextBaseline.alphabetic,
+        child: PopupMenuButton(
+          padding: EdgeInsets.zero,
+          onSelected: (option) {
+            _onActionSelected(option, context);
+          },
+          offset: const Offset(0, 40),
+          icon: const Icon(
+            FontAwesomeIcons.ellipsisH,
+            color: themeColor,
+          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          itemBuilder: (BuildContext context) =>
+              actions(isMatchClosed, isReported, profile),
+        ),
+      ),
+    );
   }
 }
 

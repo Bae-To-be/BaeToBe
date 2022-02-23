@@ -218,10 +218,7 @@ class AppRouter extends _i19.RootStackRouter {
           barrierDismissible: false);
     },
     UserProfileScreenRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<UserProfileScreenRouteArgs>(
-          orElse: () =>
-              UserProfileScreenRouteArgs(id: pathParams.getInt('id')));
+      final args = routeData.argsAs<UserProfileScreenRouteArgs>();
       return _i19.CustomPage<dynamic>(
           routeData: routeData,
           child: _i14.UserProfileScreen(
@@ -770,7 +767,7 @@ class UserProfileScreenRoute
   UserProfileScreenRoute(
       {_i35.Key? key,
       required int id,
-      _i37.BasicProfile? basicProfile,
+      required _i37.BasicProfile basicProfile,
       bool showCTA = false})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
@@ -783,13 +780,16 @@ class UserProfileScreenRoute
 
 class UserProfileScreenRouteArgs {
   const UserProfileScreenRouteArgs(
-      {this.key, required this.id, this.basicProfile, this.showCTA = false});
+      {this.key,
+      required this.id,
+      required this.basicProfile,
+      this.showCTA = false});
 
   final _i35.Key? key;
 
   final int id;
 
-  final _i37.BasicProfile? basicProfile;
+  final _i37.BasicProfile basicProfile;
 
   final bool showCTA;
 

@@ -136,6 +136,7 @@ class Placeholders {
 }
 
 class LinkTexts {
+  static const String unmatch = 'Unmatch';
   static const String termsAndConditions = 'Terms and Conditions ';
   static const String privacyPolicy = 'Privacy Policy';
   static const String viewMore = 'View More';
