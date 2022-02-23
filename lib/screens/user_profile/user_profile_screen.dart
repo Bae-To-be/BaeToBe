@@ -79,11 +79,14 @@ class UserProfileScreen extends HookConsumerWidget {
 
     return Stack(children: [
       Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
+              const SizedBox(
+                height: 16,
+              ),
               CustomCardWidget(
                   padding: EdgeInsets.zero,
                   content: Stack(
@@ -207,7 +210,7 @@ class UserProfileScreen extends HookConsumerWidget {
                         ));
                       }),
                       SizedBox(
-                        height: showCTA ? 100 : 20,
+                        height: showCTA ? 104 : 16,
                       )
                     ]);
                   })
