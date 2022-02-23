@@ -321,32 +321,39 @@ class _PopupButtonActionMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-      height: 36,
-      width: 36,
-      decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.80), shape: BoxShape.circle),
-      child: Baseline(
-        baseline: 27,
-        baselineType: TextBaseline.alphabetic,
-        child: PopupMenuButton(
-          padding: EdgeInsets.zero,
-          onSelected: (option) {
-            _onActionSelected(option, context);
-          },
-          offset: const Offset(0, 40),
-          icon: const Icon(
-            FontAwesomeIcons.ellipsisH,
-            color: themeColor,
+    final List<PopupMenuItem<ActionMenu>> actionsList =
+        actions(isMatchClosed, isReported, profile);
+
+    if (actionsList.isNotEmpty) {
+      return Container(
+        margin: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+        height: 36,
+        width: 36,
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.80), shape: BoxShape.circle),
+        child: Baseline(
+          baseline: 27,
+          baselineType: TextBaseline.alphabetic,
+          child: PopupMenuButton(
+            padding: EdgeInsets.zero,
+            onSelected: (option) {
+              _onActionSelected(option, context);
+            },
+            offset: const Offset(0, 40),
+            icon: const Icon(
+              FontAwesomeIcons.ellipsisH,
+              color: themeColor,
+            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            itemBuilder: (BuildContext context) =>
+                actions(isMatchClosed, isReported, profile),
           ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          itemBuilder: (BuildContext context) =>
-              actions(isMatchClosed, isReported, profile),
         ),
-      ),
-    );
+      );
+    }
+
+    return Container();
   }
 }
 
