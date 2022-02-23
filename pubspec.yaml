@@ -2,7 +2,7 @@
 name: baetobe
 description: A dating app for working professionals
 publish_to: none
-version: 1.0.0+102
+version: 1.0.0+103
 environment:
   sdk: '>=2.16.0 <3.0.0'
 dependencies:
