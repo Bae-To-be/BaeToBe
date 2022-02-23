@@ -250,7 +250,6 @@ class _PopupButtonActionMenu extends StatelessWidget {
       : super(key: key);
 
   List<PopupMenuItem<ActionMenu>> actions(
-    BuildContext context,
     bool isMatchClosed,
     bool isReported,
     WidgetRef ref,
@@ -279,8 +278,8 @@ class _PopupButtonActionMenu extends StatelessWidget {
     if (!isMatchClosed) {
       result.add(const PopupMenuItem(
           value: ActionMenu.close,
-          child:
-              CustomTextWidget(type: TextWidgetType.caption, text: 'Unmatch')));
+          child: CustomTextWidget(
+              type: TextWidgetType.caption, text: LinkTexts.unmatch)));
     }
 
     return result;
@@ -341,7 +340,7 @@ class _PopupButtonActionMenu extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           itemBuilder: (BuildContext context) =>
-              [...actions(context, isMatchClosed, isReported, ref, profile)],
+              actions(isMatchClosed, isReported, ref, profile),
         ),
       ),
     );
