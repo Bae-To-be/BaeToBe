@@ -180,7 +180,6 @@ class UserProfileScreen extends HookConsumerWidget {
                           content: Text(profile.bio!)
                               .padding(horizontal: 16, top: 16, bottom: 24),
                         ),
-                      BasicInfoChipsCard(profile: profile),
                       CustomCardWidget(
                         content: Column(
                           children: <Widget>[
@@ -199,6 +198,7 @@ class UserProfileScreen extends HookConsumerWidget {
                           ],
                         ),
                       ),
+                      BasicInfoChipsCard(profile: profile),
                       ...profile.images.map((e) {
                         if (e.id == basicProfile.profilePicture!.id) {
                           return Container();
