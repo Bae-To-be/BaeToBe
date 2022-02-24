@@ -12,16 +12,6 @@ Future<void> swipe(String direction, int id, WidgetRef ref) async {
   final client = ref.read(networkClientProvider);
   final error = ref.read(errorProvider.notifier);
 
-  void removeLikeFromListing(int id) {
-    ref
-        .read(likesProvider(LikeDirection.received).notifier)
-        .removeLikeWithUser(id);
-  }
-
-  void updateMatches(Match match) {
-    ref.read(matchesProvider.notifier).addOrUpdateMatch(match);
-  }
-
   await error.safelyExecute(
       command: client.post(BackendRoutes.swipe,
           data: {'direction': direction, 'user_id': id}),
@@ -30,13 +20,12 @@ Future<void> swipe(String direction, int id, WidgetRef ref) async {
         final Match match = Match.fromJson(response.data['data']['match']);
 
         if (response.data['data']['match'] != null) {
-          removeLikeFromListing(match.id);
-          updateMatches(match);
-          ref.read(routerProvider).pop();
-          return Future.value(null);
+          ref.read(matchesProvider.notifier).addOrUpdateMatch(match);
         }
 
-        removeLikeFromListing(match.id);
+        ref
+            .read(likesProvider(LikeDirection.received).notifier)
+            .removeLikeWithUser(match.matchedUser.userId);
         ref.read(routerProvider).pop();
         return Future.value(null);
       });
