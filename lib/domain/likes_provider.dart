@@ -87,6 +87,15 @@ class LikesNotifier extends StateNotifier<AsyncValue<List<Like>>>
       ..add(newLike));
   }
 
+  void removeLikeWithUser(int userID) {
+    if (state is AsyncLoading) {
+      return;
+    }
+
+    state = AsyncValue.data(List.from(state.value ?? [])
+      ..removeWhere((like) => like.user.userId == userID));
+  }
+
   void removeLike(int likeId) {
     if (state is AsyncLoading) {
       return;

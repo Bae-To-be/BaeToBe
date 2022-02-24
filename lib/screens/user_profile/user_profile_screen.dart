@@ -24,14 +24,12 @@ import 'package:styled_widget/styled_widget.dart';
 enum ActionMenu { report, close, conversation }
 
 class UserProfileScreen extends HookConsumerWidget {
-  final int? likeID;
   final int id;
   final BasicProfile basicProfile;
   final bool showCTA;
 
   const UserProfileScreen(
       {Key? key,
-      this.likeID,
       @PathParam('id') required this.id,
       required this.basicProfile,
       this.showCTA = false})
@@ -235,14 +233,14 @@ class UserProfileScreen extends HookConsumerWidget {
                 children: [
                   FloatingCta(
                       onPressed: () async {
-                        await swipe('left', id, ref, likeID);
+                        await swipe('left', id, ref);
                       },
                       heroTag: 'UPSDislike',
                       icon: BTBCustomIcons.close,
                       color: Colors.white,
                       iconColor: themeColor),
                   FloatingCta(
-                      onPressed: () => swipe('right', id, ref, likeID),
+                      onPressed: () => swipe('right', id, ref),
                       heroTag: 'UPSLike',
                       icon: BTBCustomIcons.btbheart,
                       color: Colors.white,

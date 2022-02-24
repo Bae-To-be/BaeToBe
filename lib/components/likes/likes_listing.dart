@@ -119,7 +119,6 @@ class _ListingCard extends StatelessWidget {
       onTap: () {
         ref.read(routerProvider.notifier).push(
               UserProfileScreenRoute(
-                  likeID: likesListing[index].id,
                   id: likesListing[index].user.userId,
                   basicProfile: likesListing[index].user,
                   showCTA: showCTA),
