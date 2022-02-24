@@ -223,6 +223,7 @@ class AppRouter extends _i19.RootStackRouter {
           routeData: routeData,
           child: _i14.UserProfileScreen(
               key: args.key,
+              likeID: args.likeID,
               id: args.id,
               basicProfile: args.basicProfile,
               showCTA: args.showCTA),
@@ -766,13 +767,18 @@ class UserProfileScreenRoute
     extends _i19.PageRouteInfo<UserProfileScreenRouteArgs> {
   UserProfileScreenRoute(
       {_i35.Key? key,
+      int? likeID,
       required int id,
       required _i37.BasicProfile basicProfile,
       bool showCTA = false})
       : super(UserProfileScreenRoute.name,
             path: '/profile_details/:id',
             args: UserProfileScreenRouteArgs(
-                key: key, id: id, basicProfile: basicProfile, showCTA: showCTA),
+                key: key,
+                likeID: likeID,
+                id: id,
+                basicProfile: basicProfile,
+                showCTA: showCTA),
             rawPathParams: {'id': id});
 
   static const String name = 'UserProfileScreenRoute';
@@ -781,11 +787,14 @@ class UserProfileScreenRoute
 class UserProfileScreenRouteArgs {
   const UserProfileScreenRouteArgs(
       {this.key,
+      this.likeID,
       required this.id,
       required this.basicProfile,
       this.showCTA = false});
 
   final _i35.Key? key;
+
+  final int? likeID;
 
   final int id;
 
@@ -795,7 +804,7 @@ class UserProfileScreenRouteArgs {
 
   @override
   String toString() {
-    return 'UserProfileScreenRouteArgs{key: $key, id: $id, basicProfile: $basicProfile, showCTA: $showCTA}';
+    return 'UserProfileScreenRouteArgs{key: $key, likeID: $likeID, id: $id, basicProfile: $basicProfile, showCTA: $showCTA}';
   }
 }
 

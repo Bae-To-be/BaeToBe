@@ -12,6 +12,7 @@ import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
+import 'package:baetobe/domain/swipe_provider.dart';
 import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:baetobe/entities/data/user_education.dart';
@@ -23,12 +24,14 @@ import 'package:styled_widget/styled_widget.dart';
 enum ActionMenu { report, close, conversation }
 
 class UserProfileScreen extends HookConsumerWidget {
+  final int? likeID;
   final int id;
   final BasicProfile basicProfile;
   final bool showCTA;
 
   const UserProfileScreen(
       {Key? key,
+      this.likeID,
       @PathParam('id') required this.id,
       required this.basicProfile,
       this.showCTA = false})
@@ -219,22 +222,34 @@ class UserProfileScreen extends HookConsumerWidget {
         ),
       ),
       if (showCTA)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          children: const [
-            FloatingCta(
-                heroTag: 'UPSDislike',
-                icon: BTBCustomIcons.close,
-                color: Colors.white,
-                iconColor: themeColor),
-            FloatingCta(
-                heroTag: 'UPSLike',
-                icon: BTBCustomIcons.btbheart,
-                color: Colors.white,
-                iconColor: Colors.red),
-          ],
-        ).padding(left: 24, right: 24, bottom: 24),
+        profileRequest.maybeWhen(
+            orElse: () => Container(),
+            data: (profile) {
+              if (profile!.matchStatus == 'matched') {
+                return Container();
+              }
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FloatingCta(
+                      onPressed: () async {
+                        await swipe('left', id, ref, likeID);
+                      },
+                      heroTag: 'UPSDislike',
+                      icon: BTBCustomIcons.close,
+                      color: Colors.white,
+                      iconColor: themeColor),
+                  FloatingCta(
+                      onPressed: () => swipe('right', id, ref, likeID),
+                      heroTag: 'UPSLike',
+                      icon: BTBCustomIcons.btbheart,
+                      color: Colors.white,
+                      iconColor: Colors.red),
+                ],
+              ).padding(left: 24, right: 24, bottom: 24);
+            }),
     ]);
   }
 }
