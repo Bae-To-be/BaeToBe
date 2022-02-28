@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  appinio_swiper:
+    dependency: "direct main"
+    description:
+      path: appinio_swiper
+      relative: true
+    source: path
+    version: "1.0.2"
   archive:
     dependency: transitive
     description:
