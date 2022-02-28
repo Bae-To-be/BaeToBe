@@ -54,6 +54,7 @@ dependencies:
   image_cropper: ^1.4.1
   appinio_swiper:
     path: appinio_swiper
+  lottie: ^1.2.2
 
 dev_dependencies:
   integration_test:
@@ -85,6 +86,7 @@ flutter:
   - assets/
   - assets/launcher/
   - assets/splash_logo/
+  - assets/animations/
   fonts:
   - family: BTBCustomIcons
     fonts:

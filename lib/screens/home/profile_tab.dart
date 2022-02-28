@@ -140,7 +140,7 @@ class ProfileTab extends HookConsumerWidget {
                             color: Theme.of(context).primaryColor,
                           ).padding(right: 10),
                           const Text(
-                            'FAQs',
+                            Headings.faqs,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,

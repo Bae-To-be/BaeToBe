@@ -9,8 +9,8 @@ import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:baetobe/domain/report_reasons_provider.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class ReportUserScreen extends HookConsumerWidget {
@@ -29,20 +29,21 @@ class ReportUserScreen extends HookConsumerWidget {
           const CustomHeaderTile(
             text: LinkTexts.reportUser,
             headerWith: HeaderWith.chevron,
+            bottomPadding: 0,
           ),
-          SizedBox(height: MediaQuery.of(context).size.width / 10),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 2,
-            child: GFCard(
-              boxFit: BoxFit.cover,
-              showImage: true,
-              image: Image.asset(
-                'assets/salute.gif',
+          Expanded(
+            child: Card(
+              child: Column(
+                children: [
+                  Lottie.asset(
+                    'assets/animations/success.json',
+                  ),
+                  const CustomTextWidget(
+                      withRow: false,
+                      type: TextWidgetType.subtitle2,
+                      text: InfoLabels.reportUserSuccess),
+                ],
               ),
-              content: const CustomTextWidget(
-                  withRow: false,
-                  type: TextWidgetType.subtitle2,
-                  text: InfoLabels.reportUserSuccess),
             ),
           ),
         ],

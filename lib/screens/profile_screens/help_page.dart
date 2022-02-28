@@ -7,6 +7,7 @@ import 'package:baetobe/entities/data/article.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 
 class HelpPage extends HookConsumerWidget {
   const HelpPage({Key? key}) : super(key: key);
@@ -51,9 +52,8 @@ class ArticleListings extends HookConsumerWidget {
               );
             }),
       ),
-      orElse: () => Center(
-          child:
-              CircularProgressIndicator(color: Theme.of(context).primaryColor)),
+      orElse: () => Expanded(
+          child: Lottie.asset('assets/animations/loading_hand_offwhite.json')),
     );
   }
 }

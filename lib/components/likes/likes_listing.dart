@@ -11,6 +11,7 @@ import 'package:baetobe/entities/data/like.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -36,9 +37,8 @@ class LikesListing extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final likes = ref.watch(likesProvider(direction));
     return likes.when(
-      loading: () => Center(
-          child:
-              CircularProgressIndicator(color: Theme.of(context).primaryColor)),
+      loading: () => Expanded(
+          child: Lottie.asset('assets/animations/loading_hand_offwhite.json')),
       data: (likesListing) {
         if (likesListing.isEmpty) {
           return _retryView(ErrorMessages.noLikesFound, context, ref);

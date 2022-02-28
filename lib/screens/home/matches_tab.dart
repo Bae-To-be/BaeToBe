@@ -13,6 +13,7 @@ import 'package:baetobe/domain/matches_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:styled_widget/styled_widget.dart';
 
@@ -41,9 +42,7 @@ class MatchesTab extends HookConsumerWidget {
         ),
         matches.when(
           loading: () => Expanded(
-            child: Center(
-                child: CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor)),
+            child: Lottie.asset('assets/animations/loading_hand_offwhite.json'),
           ),
           data: (matchesListing) {
             if (matchesListing.isEmpty) {

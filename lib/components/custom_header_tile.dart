@@ -12,10 +12,15 @@ class CustomHeaderTile extends HookConsumerWidget {
   final String text;
   final Color? color;
   final HeaderWith headerWith;
+  final double bottomPadding;
   // final bool? withCross;
   // final bool? withChevron;
   const CustomHeaderTile(
-      {Key? key, required this.text, this.color, required this.headerWith})
+      {Key? key,
+      required this.text,
+      this.color,
+      required this.headerWith,
+      this.bottomPadding = 10})
       : super(key: key);
 
   Widget _header(String text, Color? color, HeaderWith headerWith) {
@@ -34,7 +39,7 @@ class CustomHeaderTile extends HookConsumerWidget {
     return Column(
       children: [
         _header(text, color, headerWith),
-        CustomDivider(color: color).padding(bottom: 10),
+        CustomDivider(color: color).padding(bottom: bottomPadding),
       ],
     );
   }
