@@ -233,14 +233,18 @@ class UserProfileScreen extends HookConsumerWidget {
                 children: [
                   FloatingCta(
                       onPressed: () async {
-                        await swipe(Swipe.left, id, ref);
+                        await swipe(Swipe.left, id, ref, context);
+                        await ref.read(routerProvider).pop();
                       },
                       heroTag: 'UPSDislike',
                       icon: BTBCustomIcons.close,
                       color: Colors.white,
                       iconColor: themeColor),
                   FloatingCta(
-                      onPressed: () => swipe(Swipe.right, id, ref),
+                      onPressed: () async {
+                        await swipe(Swipe.right, id, ref, context);
+                        await ref.read(routerProvider).pop();
+                      },
                       heroTag: 'UPSLike',
                       icon: BTBCustomIcons.btbheart,
                       color: Colors.white,

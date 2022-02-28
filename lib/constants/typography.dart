@@ -83,6 +83,9 @@ class EditProfileFieldLabels {
 }
 
 class InfoLabels {
+  static const String itsAMatch = "It's a match!";
+  static const String matchDialogContent =
+      'You can go ahead start a conversation!';
   static const String age = 'Your age will be displayed on your profile';
   static const String selectIndustry = 'Select your industry';
   static const String selectYear = 'Select year';
@@ -136,6 +139,8 @@ class Placeholders {
 }
 
 class LinkTexts {
+  static const String maybeLater = 'Maybe Later';
+  static const String startConversation = 'Go to conversation';
   static const String unmatch = 'Unmatch';
   static const String termsAndConditions = 'Terms and Conditions ';
   static const String privacyPolicy = 'Privacy Policy';
