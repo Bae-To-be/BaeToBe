@@ -19,6 +19,11 @@ class LoginProviders {
   static const String google = 'google';
 }
 
+class Swipe {
+  static const String left = 'left';
+  static const String right = 'right';
+}
+
 class RemoteConfigs {
   static const String googleClientId = 'GOOGLE_CLIENT_ID';
   static const String debugNavEnabled = 'SHOW_DEBUG_NAV';

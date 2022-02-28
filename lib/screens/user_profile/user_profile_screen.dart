@@ -11,6 +11,7 @@ import 'package:baetobe/components/custom_icons.dart';
 import 'package:baetobe/components/text_widgets.dart';
 import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
+import 'package:baetobe/domain/perform_swipe.dart';
 import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
@@ -219,22 +220,37 @@ class UserProfileScreen extends HookConsumerWidget {
         ),
       ),
       if (showCTA)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          children: const [
-            FloatingCta(
-                heroTag: 'UPSDislike',
-                icon: BTBCustomIcons.close,
-                color: Colors.white,
-                iconColor: themeColor),
-            FloatingCta(
-                heroTag: 'UPSLike',
-                icon: BTBCustomIcons.btbheart,
-                color: Colors.white,
-                iconColor: Colors.red),
-          ],
-        ).padding(left: 24, right: 24, bottom: 24),
+        profileRequest.maybeWhen(
+            orElse: () => Container(),
+            data: (profile) {
+              if (profile!.matchStatus == 'matched') {
+                return Container();
+              }
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FloatingCta(
+                      onPressed: () async {
+                        await swipe(Swipe.left, id, ref, context);
+                        await ref.read(routerProvider).pop();
+                      },
+                      heroTag: 'UPSDislike',
+                      icon: BTBCustomIcons.close,
+                      color: Colors.white,
+                      iconColor: themeColor),
+                  FloatingCta(
+                      onPressed: () {
+                        swipe(Swipe.right, id, ref, context);
+                      },
+                      heroTag: 'UPSLike',
+                      icon: BTBCustomIcons.btbheart,
+                      color: Colors.white,
+                      iconColor: Colors.red),
+                ],
+              ).padding(left: 24, right: 24, bottom: 24);
+            }),
     ]);
   }
 }

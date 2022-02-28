@@ -44,7 +44,7 @@ class LikesListing extends HookConsumerWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SmartRefresher(
             enablePullDown: true,
             enablePullUp: true,
@@ -73,6 +73,7 @@ class LikesListing extends HookConsumerWidget {
               });
             },
             child: GridView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 24),
                 physics: const BouncingScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 8,
