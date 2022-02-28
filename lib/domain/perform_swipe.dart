@@ -11,7 +11,7 @@ import 'package:baetobe/infrastructure/network_client_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-Future<bool> swipe(
+Future<void> swipe(
     String direction, int id, WidgetRef ref, BuildContext context) async {
   final client = ref.read(networkClientProvider);
   final error = ref.read(errorProvider.notifier);
@@ -60,5 +60,4 @@ Future<bool> swipe(
         }
         return Future.value(null);
       });
-  return isMatchSuccess;
 }
