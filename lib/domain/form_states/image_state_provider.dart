@@ -41,9 +41,9 @@ class ImageStateNotifier extends StateNotifier<ImageFormState> {
     if (image == null) return;
     final croppedImage = await ImageCropper.cropImage(
       sourcePath: image.path,
-      aspectRatio: const CropAspectRatio(
-          ratioX: ImageAspectRatio.ratioX * 1.0,
-          ratioY: ImageAspectRatio.ratioY * 1.0),
+      aspectRatio: CropAspectRatio(
+          ratioX: FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_X') * 1.0,
+          ratioY: FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_Y') * 1.0),
       androidUiSettings: const AndroidUiSettings(
           showCropGrid: true,
           toolbarWidgetColor: themeColor,

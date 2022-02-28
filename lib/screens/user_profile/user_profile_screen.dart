@@ -16,6 +16,7 @@ import 'package:baetobe/domain/profile_details_provider.dart';
 import 'package:baetobe/entities/data/basic_profile.dart';
 import 'package:baetobe/entities/data/detailed_profile.dart';
 import 'package:baetobe/entities/data/user_education.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -102,8 +103,10 @@ class UserProfileScreen extends HookConsumerWidget {
                                     topLeft: Radius.circular(10),
                                     topRight: Radius.circular(10)),
                                 child: AspectRatio(
-                                  aspectRatio: ImageAspectRatio.ratioX /
-                                      ImageAspectRatio.ratioY,
+                                  aspectRatio: FirebaseRemoteConfig.instance
+                                          .getInt('ASPECT_RATIO_X') /
+                                      FirebaseRemoteConfig.instance
+                                          .getInt('ASPECT_RATIO_Y'),
                                   child: Container(
                                     child: (basicProfile.profilePicture != null)
                                         ? CustomCachedNetworkImage(

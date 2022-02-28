@@ -1,12 +1,12 @@
 import 'package:baetobe/components/bottomsheet_utils.dart';
 import 'package:baetobe/components/custom_divider.dart';
 import 'package:baetobe/components/text_widgets.dart';
-import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/form_states/image_state_provider.dart';
 import 'package:baetobe/domain/images_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,7 +36,9 @@ class ImageTile extends HookConsumerWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: AspectRatio(
-                aspectRatio: ImageAspectRatio.ratioX / ImageAspectRatio.ratioY,
+                aspectRatio:
+                    FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_X') /
+                        FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_Y'),
                 child: CachedNetworkImage(
                   imageUrl: state.url!,
                   cacheKey: state.id?.toString(),

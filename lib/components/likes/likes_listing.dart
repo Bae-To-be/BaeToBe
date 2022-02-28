@@ -8,6 +8,7 @@ import 'package:baetobe/constants/app_constants.dart';
 import 'package:baetobe/constants/typography.dart';
 import 'package:baetobe/domain/likes_provider.dart';
 import 'package:baetobe/entities/data/like.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -181,7 +182,9 @@ class _CardImage extends StatelessWidget {
             child: Hero(
               tag: likesListing[index].user.userId,
               child: AspectRatio(
-                aspectRatio: ImageAspectRatio.ratioX / ImageAspectRatio.ratioY,
+                aspectRatio:
+                    FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_X') /
+                        FirebaseRemoteConfig.instance.getInt('ASPECT_RATIO_Y'),
                 child: Container(
                   child: (likesListing[index].user.profilePicture != null)
                       ? CustomCachedNetworkImage(
