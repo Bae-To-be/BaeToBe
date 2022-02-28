@@ -232,9 +232,9 @@ class UserProfileScreen extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   FloatingCta(
-                      onPressed: () async {
-                        await swipe(Swipe.left, id, ref, context);
-                        await ref.read(routerProvider).pop();
+                      onPressed: () {
+                        swipe(Swipe.left, id, ref, context,
+                            () => ref.read(routerProvider.notifier).pop());
                       },
                       heroTag: 'UPSDislike',
                       icon: BTBCustomIcons.close,
@@ -242,7 +242,8 @@ class UserProfileScreen extends HookConsumerWidget {
                       iconColor: themeColor),
                   FloatingCta(
                       onPressed: () {
-                        swipe(Swipe.right, id, ref, context);
+                        swipe(Swipe.right, id, ref, context,
+                            () => ref.read(routerProvider.notifier).pop());
                       },
                       heroTag: 'UPSLike',
                       icon: BTBCustomIcons.btbheart,
